@@ -1,0 +1,8 @@
+<levelDescriptions>
+	<level index="1">
+		<file filename="../assets/Levels/Templates.pbelevel" />
+		<group name="TemplatesData"/>
+		<file filename="../assets/Levels/Level1.pbelevel" />
+		<group name="Level1Data" />
+	</level>
+</levelDescriptions>
