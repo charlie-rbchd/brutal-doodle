@@ -1,4 +1,5 @@
 <things version="1">
+	
 	<template name="invaderTemplate">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -11,6 +12,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
+		
 		<component type="com.pblabs.animation.AnimatorComponent" name="FrameAnimation">
 			<animations childType="com.pblabs.animation.Animator">
 				<idle type="">
@@ -24,162 +26,167 @@
 			<defaultAnimation>idle</defaultAnimation>
 			<reference>@Render.spriteIndex</reference>
 		</component>
+		
+		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions"></component>
+		
 		<component type="com.brutaldoodle.components.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>
+			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
 			<maxXmov>6</maxXmov>
 			<maxYmov>6</maxYmov>
-		</component>		
-	</template>
+		</component>
 		
+	</template>
+	
 	
 	<!--Basic Invader-->
-		<entity name="basicInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Basic.png"/>
-			</component>
-		</entity>
+	<entity name="basicInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Basic.png"/>
+		</component>
+	</entity>
 
-	  <template name="basicInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="basicInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="basicInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
    
 	  
 	<!--Juggernaut-->
-		<entity name="juggernautInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Juggernaut.png"/>
-			</component>
-		</entity>
+	<entity name="juggernautInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Juggernaut.png"/>
+		</component>
+	</entity>
 
-	  <template name="juggernautInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="juggernautInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="juggernautInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
 	  
 	
 	<!--Cyborg-->
-		<entity name="cyborgInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Cyborg.png"/>
-			</component>
-		</entity>
+	<entity name="cyborgInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Cyborg.png"/>
+		</component>
+	</entity>
 
-	  <template name="cyborgInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="cyborgInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="cyborgInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
 	  
 	  
 	<!--Beamer-->
-		<entity name="beamerInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Beamer.png"/>
-			</component>
-		</entity>
+	<entity name="beamerInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Beamer.png"/>
+		</component>
+	</entity>
 
-	  <template name="beamerInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="beamerInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="beamerInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
 	  
 	  
 	<!--Butterfly-->
-		<entity name="butterflyInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Butterfly.png"/>
-			</component>
-		</entity>
+	<entity name="butterflyInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Butterfly.png"/>
+		</component>
+	</entity>
 
-	  <template name="butterflyInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="butterflyInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="butterflyInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
 	  
 	  
 	<!--Cannibal-->
-		<entity name="cannibalInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Cannibal.png"/>
-			</component>
-		</entity>
+	<entity name="cannibalInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Cannibal.png"/>
+		</component>
+	</entity>
 
-	  <template name="cannibalInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="cannibalInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="cannibalInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
 	  
 	  
 	<!--Warper-->
-		<entity name="warperInvaderSpriteSheet">
-			<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-				<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-					<xCount>9</xCount>
-					<yCount>4</yCount>
-				</divider>
-				<image filename="../assets/Images/Warper.png"/>
-			</component>
-		</entity>
+	<entity name="warperInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Warper.png"/>
+		</component>
+	</entity>
 
-	  <template name="warperInvader" template="invaderTemplate">		
-	    <component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+	<template name="warperInvader" template="invaderTemplate">		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="warperInvaderSpriteSheet"/>
 		</component>
-	  </template>
+	</template>
 	  
 	  
-	 <group name="TemplatesData">
+	<group name="TemplatesData">
 		<objectReference name="basicInvaderSpriteSheet"/>
 		<objectReference name="juggernautInvaderSpriteSheet"/>
 		<objectReference name="cyborgInvaderSpriteSheet"/>
@@ -188,6 +195,5 @@
 		<objectReference name="cannibalInvaderSpriteSheet"/>
 		<objectReference name="warperInvaderSpriteSheet"/>
 	</group>
-	  
-
+	
 </things>

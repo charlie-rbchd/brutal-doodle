@@ -1,10 +1,12 @@
 package
 {
+	import com.brutaldoodle.components.BoundingBoxComponent;
 	import com.brutaldoodle.components.CanonController;
 	import com.brutaldoodle.components.EnemyMobilityComponent;
 	import com.brutaldoodle.components.TankController;
 	import com.brutaldoodle.events.TankEvent;
 	import com.pblabs.animation.AnimatorComponent;
+	import com.pblabs.components.basic.HealthComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.core.LevelEvent;
 	import com.pblabs.engine.core.LevelManager;
@@ -24,6 +26,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	[SWF(width="960", height="680", frameRate="30")]
 	public class Main extends Sprite
@@ -38,6 +41,7 @@ package
 			PBE.registerType(com.pblabs.animation.AnimatorComponent);
 			PBE.registerType(com.pblabs.sound.BackgroundMusicComponent);
 			PBE.registerType(com.brutaldoodle.components.EnemyMobilityComponent);
+			PBE.registerType(com.brutaldoodle.components.BoundingBoxComponent);
 
 			PBE.startup(this);
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
@@ -52,17 +56,31 @@ package
 			
 			PBE.mainStage.addEventListener(MouseEvent.CLICK, clickHandler);
 		}
-		
+	 
 		private function levelLoaded(e:LevelEvent):void {
 			var baseX:int = -(stage.stageWidth/2) + 30;
 			var baseY:int = -(stage.stageHeight/2) + 35;
+			var currentX:int, currentY:int;
 			var position:SimpleSpatialComponent;
+			var collisions:BoundingBoxComponent;
 			
-			for(var i:int=0; i<40; ++i){
-				position = PBE.nameManager.lookupComponentByName("ennemi"+(i+1), "Spatial") as SimpleSpatialComponent;
-				position.x = baseX + (50+INVADERS_SPACING) * (i%INVADERS_PER_ROW);
-				position.y = baseY + (50+INVADERS_SPACING) * (Math.floor(i/INVADERS_PER_ROW));
-			}			
+			for (var i:int=0; i<40; ++i) {
+				position = PBE.nameManager.lookupComponentByName("Ennemi"+(i+1), "Spatial") as SimpleSpatialComponent;
+				collisions = PBE.nameManager.lookupComponentByName("Ennemi"+(i+1), "Collisions") as BoundingBoxComponent;
+				
+				currentX = (50+INVADERS_SPACING) * (i%INVADERS_PER_ROW);
+				currentY = (50+INVADERS_SPACING) * (Math.floor(i/INVADERS_PER_ROW));
+				
+				position.x = baseX + currentX;
+				position.y = baseY + currentY;
+				
+				collisions.zone = new Rectangle(
+					position.x - INVADERS_SPACING,
+					position.y - INVADERS_SPACING,
+					position.size.x + INVADERS_SPACING,
+					position.size.y + INVADERS_SPACING
+				);
+			}
 		}
 		
 		private function clickHandler(event:MouseEvent):void
@@ -73,16 +91,6 @@ package
 			
 			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);
 			LevelManager.instance.addEventListener(LevelEvent.LEVEL_LOADED_EVENT, levelLoaded);
-			
-			/*
-			var results:Array = new Array();
-			var worldPoint:Point = PBE.scene.transformScreenToWorld(new Point(event.stageX, event.stageY));
-			PBE.spatialManager.getObjectsUnderPoint(worldPoint, results);
-			
-			for (var i:int=0; i < results.length; ++i) {
-				Logger.print(this, (results[i] as SimpleSpatialComponent).owner.name);
-			}
-			*/
 		}
 				
 		private function createScene():void {
@@ -185,6 +193,11 @@ package
 			animator.animations["Move_Alternate"] = moveAnimation_Alternate;
 			
 			hero.addComponent(animator, "Animator");
+			
+			
+			// health
+			var health:HealthComponent = new HealthComponent();
+			hero.addComponent(health, "Health");
 			
 			
 			hero.initialize("Tank");
