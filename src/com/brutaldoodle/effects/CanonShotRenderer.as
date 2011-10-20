@@ -1,7 +1,7 @@
 package com.brutaldoodle.effects
 {
 	import com.brutaldoodle.components.CanonController;
-	import com.brutaldoodle.components.TankController;
+	import com.brutaldoodle.components.PlayerController;
 	import com.brutaldoodle.rendering.FlintBitmapRenderer;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.rendering2D.SpriteRenderer;
@@ -25,7 +25,7 @@ package com.brutaldoodle.effects
 		override public function addEmitters():void
 		{
 			var _canonPosition:Point = (PBE.nameManager.lookupComponentByName("Canon", "Render") as SpriteRenderer).position;
-			var _emitLocation:PointZone = new PointZone( new Point(_canonPosition.x, _canonPosition.y + (TankController.state == TankController.STATE_NORMAL ? CanonController.NORMAL_OFFSET : CanonController.ALTERNATE_OFFSET) - 13) );
+			var _emitLocation:PointZone = new PointZone( new Point(_canonPosition.x, _canonPosition.y + (PlayerController.state == PlayerController.STATE_NORMAL ? CanonController.NORMAL_OFFSET : CanonController.ALTERNATE_OFFSET) - 13) );
 			
 			_bullet = new Bullet();
 			initializeEmitter(_bullet, _emitLocation);

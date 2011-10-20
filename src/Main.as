@@ -3,7 +3,7 @@ package
 	import com.brutaldoodle.components.BoundingBoxComponent;
 	import com.brutaldoodle.components.CanonController;
 	import com.brutaldoodle.components.EnemyMobilityComponent;
-	import com.brutaldoodle.components.TankController;
+	import com.brutaldoodle.components.PlayerController;
 	import com.brutaldoodle.events.TankEvent;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.components.basic.HealthComponent;
@@ -62,24 +62,26 @@ package
 			var baseY:int = -(stage.stageHeight/2) + 35;
 			var currentX:int, currentY:int;
 			var position:SimpleSpatialComponent;
-			var collisions:BoundingBoxComponent;
+			var boundingBox:BoundingBoxComponent;
 			
-			for (var i:int=0; i<40; ++i) {
-				position = PBE.nameManager.lookupComponentByName("Ennemi"+(i+1), "Spatial") as SimpleSpatialComponent;
-				collisions = PBE.nameManager.lookupComponentByName("Ennemi"+(i+1), "Collisions") as BoundingBoxComponent;
+			for (var i:int=0; i < 40; ++i) {
+				position = PBE.nameManager.lookupComponentByName("Enemy"+(i+1), "Spatial") as SimpleSpatialComponent;
+				boundingBox = PBE.nameManager.lookupComponentByName("Enemy"+(i+1), "Collisions") as BoundingBoxComponent;
 				
-				currentX = (50+INVADERS_SPACING) * (i%INVADERS_PER_ROW);
-				currentY = (50+INVADERS_SPACING) * (Math.floor(i/INVADERS_PER_ROW));
+				currentX = (position.size.x + INVADERS_SPACING) * (i%INVADERS_PER_ROW);
+				currentY = (position.size.y + INVADERS_SPACING) * (Math.floor(i/INVADERS_PER_ROW));
 				
 				position.x = baseX + currentX;
 				position.y = baseY + currentY;
-				
-				collisions.zone = new Rectangle(
-					position.x - INVADERS_SPACING,
-					position.y - INVADERS_SPACING,
-					position.size.x + INVADERS_SPACING,
-					position.size.y + INVADERS_SPACING
+
+				boundingBox.zone = new Rectangle(
+					position.x - position.size.x/2,
+					position.y - position.size.y/2,
+					position.size.x,
+					position.size.y
 				);
+				
+				boundingBox.registerForCollisions(BoundingBoxComponent.TYPE_ENEMY);
 			}
 		}
 		
@@ -130,13 +132,6 @@ package
 			spatial.spatialManager = PBE.spatialManager;
 			
 			hero.addComponent(spatial, "Spatial");
-			
-			// keyboard input
-			var input:TankController = new TankController();
-			input.positionProperty = new PropertyReference("@Spatial.position");
-			input.sizeProperty = new PropertyReference("@Spatial.size");
-			
-			hero.addComponent(input, "Input");
 			
 			// spritesheet dividers
 			var normalDivider:CellCountDivider = new CellCountDivider();
@@ -194,13 +189,32 @@ package
 			
 			hero.addComponent(animator, "Animator");
 			
+			// collisions
+			var boundingBox:BoundingBoxComponent = new BoundingBoxComponent();
+			boundingBox.zone = new Rectangle(
+				spatial.position.x - spatial.size.x/2,
+				spatial.position.x - spatial.size.y/2,
+				spatial.size.x,
+				spatial.size.y
+			);
+			
+			boundingBox.registerForCollisions(BoundingBoxComponent.TYPE_PLAYER);
+			hero.addComponent(boundingBox, "Collisions");
 			
 			// health
 			var health:HealthComponent = new HealthComponent();
 			hero.addComponent(health, "Health");
 			
+			// keyboard input
+			var input:PlayerController = new PlayerController();
+			input.positionProperty = new PropertyReference("@Spatial.position");
+			input.sizeProperty = new PropertyReference("@Spatial.size");
+			input.boundingBoxProperty = new PropertyReference("@Collisions.zone");
 			
-			hero.initialize("Tank");
+			hero.addComponent(input, "Input");
+			
+			
+			hero.initialize("Player");
 		}
 		
 		private function createCanon():void {
@@ -216,7 +230,7 @@ package
 			var renderer:SpriteRenderer = new SpriteRenderer();
 			renderer.fileName = "../assets/Images/Canon.png";
 			renderer.layerIndex = 5;
-			renderer.positionProperty = new PropertyReference("#Tank.Spatial.position");
+			renderer.positionProperty = new PropertyReference("#Player.Spatial.position");
 			renderer.positionOffset = new Point(0, -18);
 			
 			canon.addComponent(renderer, "Render");

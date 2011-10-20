@@ -36,96 +36,96 @@
 		</component>
 	</entity>
 	
-	<entity name="Ennemi1" template="basicInvader"></entity>	
-	<entity name="Ennemi2" template="cyborgInvader"></entity>	
-	<entity name="Ennemi3" template="cannibalInvader"></entity>	
-	<entity name="Ennemi4" template="cyborgInvader"></entity>	
-	<entity name="Ennemi5" template="basicInvader"></entity>	
-	<entity name="Ennemi6" template="basicInvader"></entity>	
-	<entity name="Ennemi7" template="cyborgInvader"></entity>	
-	<entity name="Ennemi8" template="cannibalInvader"></entity>
-	<entity name="Ennemi9" template="cyborgInvader"></entity>	
-	<entity name="Ennemi10" template="basicInvader"></entity>
+	<entity name="Enemy1" template="basicInvader"></entity>	
+	<entity name="Enemy2" template="cyborgInvader"></entity>	
+	<entity name="Enemy3" template="cannibalInvader"></entity>	
+	<entity name="Enemy4" template="cyborgInvader"></entity>	
+	<entity name="Enemy5" template="basicInvader"></entity>	
+	<entity name="Enemy6" template="basicInvader"></entity>	
+	<entity name="Enemy7" template="cyborgInvader"></entity>	
+	<entity name="Enemy8" template="cannibalInvader"></entity>
+	<entity name="Enemy9" template="cyborgInvader"></entity>	
+	<entity name="Enemy10" template="basicInvader"></entity>
 	
-	<entity name="Ennemi11" template="butterflyInvader"></entity>	
-	<entity name="Ennemi12" template="basicInvader"></entity>	
-	<entity name="Ennemi13" template="cannibalInvader"></entity>	
-	<entity name="Ennemi14" template="warperInvader"></entity>	
-	<entity name="Ennemi15" template="butterflyInvader"></entity>	
-	<entity name="Ennemi16" template="butterflyInvader"></entity>	
-	<entity name="Ennemi17" template="warperInvader"></entity>	
-	<entity name="Ennemi18" template="cannibalInvader"></entity>	
-	<entity name="Ennemi19" template="basicInvader"></entity>	
-	<entity name="Ennemi20" template="butterflyInvader"></entity>
+	<entity name="Enemy11" template="butterflyInvader"></entity>	
+	<entity name="Enemy12" template="basicInvader"></entity>	
+	<entity name="Enemy13" template="cannibalInvader"></entity>	
+	<entity name="Enemy14" template="warperInvader"></entity>	
+	<entity name="Enemy15" template="butterflyInvader"></entity>	
+	<entity name="Enemy16" template="butterflyInvader"></entity>	
+	<entity name="Enemy17" template="warperInvader"></entity>	
+	<entity name="Enemy18" template="cannibalInvader"></entity>	
+	<entity name="Enemy19" template="basicInvader"></entity>	
+	<entity name="Enemy20" template="butterflyInvader"></entity>
 	
-	<entity name="Ennemi21" template="juggernautInvader"></entity>	
-	<entity name="Ennemi22" template="warperInvader"></entity>	
-	<entity name="Ennemi23" template="cannibalInvader"></entity>	
-	<entity name="Ennemi24" template="juggernautInvader"></entity>	
-	<entity name="Ennemi25" template="basicInvader"></entity>	
-	<entity name="Ennemi26" template="basicInvader"></entity>	
-	<entity name="Ennemi27" template="juggernautInvader"></entity>
-	<entity name="Ennemi28" template="cannibalInvader"></entity>
-	<entity name="Ennemi29" template="warperInvader"></entity>
-	<entity name="Ennemi30" template="juggernautInvader"></entity>
+	<entity name="Enemy21" template="juggernautInvader"></entity>	
+	<entity name="Enemy22" template="warperInvader"></entity>	
+	<entity name="Enemy23" template="cannibalInvader"></entity>	
+	<entity name="Enemy24" template="juggernautInvader"></entity>	
+	<entity name="Enemy25" template="basicInvader"></entity>	
+	<entity name="Enemy26" template="basicInvader"></entity>	
+	<entity name="Enemy27" template="juggernautInvader"></entity>
+	<entity name="Enemy28" template="cannibalInvader"></entity>
+	<entity name="Enemy29" template="warperInvader"></entity>
+	<entity name="Enemy30" template="juggernautInvader"></entity>
 	
-	<entity name="Ennemi31" template="beamerInvader"></entity>
-	<entity name="Ennemi32" template="juggernautInvader"></entity>
-	<entity name="Ennemi33" template="juggernautInvader"></entity>
-	<entity name="Ennemi34" template="beamerInvader"></entity>
-	<entity name="Ennemi35" template="juggernautInvader"></entity>
-	<entity name="Ennemi36" template="juggernautInvader"></entity>
-	<entity name="Ennemi37" template="beamerInvader"></entity>
-	<entity name="Ennemi38" template="juggernautInvader"></entity>
-	<entity name="Ennemi39" template="juggernautInvader"></entity>
-	<entity name="Ennemi40" template="beamerInvader"></entity>
+	<entity name="Enemy31" template="beamerInvader"></entity>
+	<entity name="Enemy32" template="juggernautInvader"></entity>
+	<entity name="Enemy33" template="juggernautInvader"></entity>
+	<entity name="Enemy34" template="beamerInvader"></entity>
+	<entity name="Enemy35" template="juggernautInvader"></entity>
+	<entity name="Enemy36" template="juggernautInvader"></entity>
+	<entity name="Enemy37" template="beamerInvader"></entity>
+	<entity name="Enemy38" template="juggernautInvader"></entity>
+	<entity name="Enemy39" template="juggernautInvader"></entity>
+	<entity name="Enemy40" template="beamerInvader"></entity>
 	
-	<group name="Ennemis">
-		<objectReference name="Ennemi1"/>
-		<objectReference name="Ennemi2"/>
-		<objectReference name="Ennemi3"/>
-		<objectReference name="Ennemi4"/>
-		<objectReference name="Ennemi5"/>
-		<objectReference name="Ennemi6"/>
-		<objectReference name="Ennemi7"/>
-		<objectReference name="Ennemi8"/>
-		<objectReference name="Ennemi9"/>
-		<objectReference name="Ennemi10"/>
-		<objectReference name="Ennemi11"/>
-		<objectReference name="Ennemi12"/>		
-		<objectReference name="Ennemi13"/>		
-		<objectReference name="Ennemi14"/>		
-		<objectReference name="Ennemi15"/>		
-		<objectReference name="Ennemi16"/>		
-		<objectReference name="Ennemi17"/>		
-		<objectReference name="Ennemi18"/>		
-		<objectReference name="Ennemi19"/>		
-		<objectReference name="Ennemi20"/>		
-		<objectReference name="Ennemi21"/>		
-		<objectReference name="Ennemi22"/>		
-		<objectReference name="Ennemi23"/>		
-		<objectReference name="Ennemi24"/>		
-		<objectReference name="Ennemi25"/>		
-		<objectReference name="Ennemi26"/>		
-		<objectReference name="Ennemi27"/>		
-		<objectReference name="Ennemi28"/>		
-		<objectReference name="Ennemi29"/>		
-		<objectReference name="Ennemi30"/>		
-		<objectReference name="Ennemi31"/>		
-		<objectReference name="Ennemi32"/>		
-		<objectReference name="Ennemi33"/>		
-		<objectReference name="Ennemi34"/>		
-		<objectReference name="Ennemi35"/>		
-		<objectReference name="Ennemi36"/>		
-		<objectReference name="Ennemi37"/>		
-		<objectReference name="Ennemi38"/>
-		<objectReference name="Ennemi39"/>
-		<objectReference name="Ennemi40"/>
+	<group name="Enemies">
+		<objectReference name="Enemy1"/>
+		<objectReference name="Enemy2"/>
+		<objectReference name="Enemy3"/>
+		<objectReference name="Enemy4"/>
+		<objectReference name="Enemy5"/>
+		<objectReference name="Enemy6"/>
+		<objectReference name="Enemy7"/>
+		<objectReference name="Enemy8"/>
+		<objectReference name="Enemy9"/>
+		<objectReference name="Enemy10"/>
+		<objectReference name="Enemy11"/>
+		<objectReference name="Enemy12"/>		
+		<objectReference name="Enemy13"/>		
+		<objectReference name="Enemy14"/>		
+		<objectReference name="Enemy15"/>		
+		<objectReference name="Enemy16"/>		
+		<objectReference name="Enemy17"/>		
+		<objectReference name="Enemy18"/>		
+		<objectReference name="Enemy19"/>		
+		<objectReference name="Enemy20"/>		
+		<objectReference name="Enemy21"/>		
+		<objectReference name="Enemy22"/>		
+		<objectReference name="Enemy23"/>		
+		<objectReference name="Enemy24"/>		
+		<objectReference name="Enemy25"/>		
+		<objectReference name="Enemy26"/>		
+		<objectReference name="Enemy27"/>		
+		<objectReference name="Enemy28"/>		
+		<objectReference name="Enemy29"/>		
+		<objectReference name="Enemy30"/>		
+		<objectReference name="Enemy31"/>		
+		<objectReference name="Enemy32"/>		
+		<objectReference name="Enemy33"/>		
+		<objectReference name="Enemy34"/>		
+		<objectReference name="Enemy35"/>		
+		<objectReference name="Enemy36"/>		
+		<objectReference name="Enemy37"/>		
+		<objectReference name="Enemy38"/>
+		<objectReference name="Enemy39"/>
+		<objectReference name="Enemy40"/>
 	</group>
 	
 	<group name="Level1Data">
-		<!--objectReference name="Background"/-->
+		<objectReference name="Background"/>
 		<objectReference name="BackgroundMusic"/>
-		<groupReference name="Ennemis"/>	
+		<groupReference name="Enemies"/>	
 	</group>
 </things>

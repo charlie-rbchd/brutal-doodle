@@ -38,7 +38,7 @@ package com.brutaldoodle.components
 		{
 			super.onTick(deltaTime);
 			
-			var _offset:Number = TankController.state == TankController.STATE_NORMAL ? CanonController.NORMAL_OFFSET : CanonController.ALTERNATE_OFFSET;
+			var _offset:Number = PlayerController.state == PlayerController.STATE_NORMAL ? CanonController.NORMAL_OFFSET : CanonController.ALTERNATE_OFFSET;
 			
 			owner.setProperty(canonOffset, new Point(0, _offset));
 			

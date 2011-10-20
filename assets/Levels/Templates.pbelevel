@@ -32,8 +32,6 @@
 		<component type="com.brutaldoodle.components.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
-			<maxXmov>6</maxXmov>
-			<maxYmov>6</maxYmov>
 		</component>
 		
 	</template>

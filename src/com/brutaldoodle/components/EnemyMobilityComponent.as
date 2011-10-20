@@ -9,14 +9,17 @@ package com.brutaldoodle.components
 	
 	public class EnemyMobilityComponent extends TickedComponent
 	{
-		public var maxXmov:uint;
-		public var maxYmov:uint;
+		private const LATERAL_DISPLACEMENT:uint = 30;
+		private const VERTICAL_DISPLACEMENT:uint = 60;
+		private const MAX_X_MOV:uint = 12;
+		private const MAX_Y_MOV:uint = 6;
+		
+		public static var moveSpeed:uint = 1;
+		public var positionProperty:PropertyReference;
+		public var boundingBoxProperty:PropertyReference;
 		
 		private var _currentXmov:uint;
 		private var _currentYmov:uint;
-		
-		public var positionProperty:PropertyReference;
-		public var boundingBoxProperty:PropertyReference;
 		private var _currentIterationCompleted:Boolean;
 		
 		public function EnemyMobilityComponent()
@@ -30,29 +33,28 @@ package com.brutaldoodle.components
 		{
 			super.onTick(deltaTime);
 			
-			
-			if (Math.floor(PBE.processManager.virtualTime/1000) % 4 == 2) {
+			if (Math.floor(PBE.processManager.virtualTime/1000*moveSpeed) % 4 == 2) {
 				if (!_currentIterationCompleted) {
 					var _position:Point = owner.getProperty(positionProperty);
 					var _boundingBox:Rectangle = owner.getProperty(boundingBoxProperty) as Rectangle;
 					
-					if (_currentXmov == maxXmov) {
+					if (_currentXmov == MAX_X_MOV) {
 						_currentYmov++;
 						
-						if (_currentYmov != maxYmov) {
+						if (_currentYmov != MAX_Y_MOV) {
 							_currentXmov = 0;
-							_position.y += 60;
-							_boundingBox.top += 60;
-							_boundingBox.bottom += 60;
+							_position.y += VERTICAL_DISPLACEMENT;
+							_boundingBox.top += VERTICAL_DISPLACEMENT;
+							_boundingBox.bottom += VERTICAL_DISPLACEMENT;
 						} else {
 							owner.destroy();
 							return;
 						}
 					} else {
 						_currentXmov++;
-						_position.x += _currentYmov%2 == 0 ? 60 : -60;
-						_boundingBox.left += _currentYmov%2 == 0 ? 60 : -60;
-						_boundingBox.right += _currentYmov%2 == 0 ? 60 : -60;
+						_position.x += !(_currentYmov & 1) ? LATERAL_DISPLACEMENT : -LATERAL_DISPLACEMENT;
+						_boundingBox.left += !(_currentYmov & 1) ? LATERAL_DISPLACEMENT : -LATERAL_DISPLACEMENT;
+						_boundingBox.right += !(_currentYmov & 1) ? LATERAL_DISPLACEMENT : -LATERAL_DISPLACEMENT;
 					}
 					
 					owner.setProperty(positionProperty, _position);

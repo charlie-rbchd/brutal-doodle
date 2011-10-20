@@ -8,29 +8,57 @@ package com.brutaldoodle.components
 	
 	public class BoundingBoxComponent extends EntityComponent
 	{
-		private static var _boundingBoxes:Array = new Array();
+		public static const TYPE_PLAYER:String = "player";
+		public static const TYPE_ENEMY:String = "enemy";
+		public static const TYPE_ALLY:String = "ally";
+		public static const TYPE_NEUTRAL:String = "neutral";
 		
-		private var _zone:Rectangle;
+		private static var _boundingBoxes:Object = {
+			player: null,
+			enemy: new Vector.<RectangleZone>(),
+			ally: new Vector.<RectangleZone>(),
+			neutral: new Vector.<RectangleZone>()
+		};
+		
 		private var _boundingBox:RectangleZone;
 		
 		public function BoundingBoxComponent()
 		{
 			super();
-			_zone = new Rectangle();
 			_boundingBox = new RectangleZone();
-			_boundingBoxes.push(_boundingBox);
+		}
+		
+		public function registerForCollisions (type:String):void {
+			switch (type) {
+				case "player":
+					_boundingBoxes.player = _boundingBox;
+					break;
+				case "enemy":
+				case "ally":
+				case "neutral":
+					_boundingBoxes[type].push(_boundingBox);
+					break;
+				default:
+					throw new Error("Le type de bounding box doit être définit par une des constantes de classe.");
+			}
 		}
 		
 		public function set zone (value:Rectangle):void {
-			_boundingBox.top = _zone.top = value.top;
-			_boundingBox.left = _zone.left = value.left;
-			_boundingBox.bottom = _zone.bottom = value.bottom;
-			_boundingBox.right = _zone.right = value.right;
+			_boundingBox.top = value.top;
+			_boundingBox.left = value.left;
+			_boundingBox.bottom = value.bottom;
+			_boundingBox.right = value.right;
 		}
 		
-		public function get zone ():Rectangle { return _zone; }
-		public function get boundingBox ():RectangleZone { return _boundingBox; }
+		public function get zone ():Rectangle {
+			return new Rectangle(
+				_boundingBox.left,
+				_boundingBox.top,
+				_boundingBox.right - _boundingBox.left,
+				_boundingBox.bottom - _boundingBox.top
+			);
+		}
 		
-		public static function get boundingBoxes ():Array { return _boundingBoxes; }
+		public static function get boundingBoxes ():Object { return _boundingBoxes; }
 	}
 }
