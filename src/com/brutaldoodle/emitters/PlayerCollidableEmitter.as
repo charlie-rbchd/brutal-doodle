@@ -2,8 +2,6 @@ package com.brutaldoodle.emitters
 {
 	import com.brutaldoodle.components.BoundingBoxComponent;
 	
-	import flash.events.Event;
-	
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.twoD.actions.CollisionZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;

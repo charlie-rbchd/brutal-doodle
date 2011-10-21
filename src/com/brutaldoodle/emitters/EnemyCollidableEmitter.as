@@ -5,7 +5,6 @@ package com.brutaldoodle.emitters
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.twoD.actions.CollisionZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.zones.RectangleZone;
 	
 	public class EnemyCollidableEmitter extends Emitter2D
 	{
@@ -13,10 +12,11 @@ package com.brutaldoodle.emitters
 		{
 			super();
 			
-			var enemies:Vector.<RectangleZone> = BoundingBoxComponent.boundingBoxes.enemy;
+			var enemies:Vector.<BoundingBoxComponent> = BoundingBoxComponent.boundingBoxes.enemy;
 			
 			for (var i:int = 0; i < enemies.length; ++i) {
-				addAction( new CollisionZone(enemies[i], 0) );
+				if (enemies[i] != null)
+					addAction( new CollisionZone(enemies[i], 0) );
 			}
 			
 			this.addEventListener(ParticleEvent.ZONE_COLLISION, onCollide);
@@ -24,8 +24,10 @@ package com.brutaldoodle.emitters
 		
 		protected function onCollide(event:ParticleEvent):void
 		{
+			
 			event.particle.isDead = true;
-		}		
+			(event.otherObject as BoundingBoxComponent).owner.destroy();
+		}
 		
 	}
 }
