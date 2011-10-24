@@ -5,7 +5,6 @@ package com.brutaldoodle.events
 	public class TankEvent extends Event
 	{
 		public static const UPDATE_ANIMATION:String = "updateAnimation";
-		public static const SHOOT:String = "shoot";
 		
 		public function TankEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

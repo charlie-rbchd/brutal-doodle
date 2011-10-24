@@ -10,18 +10,6 @@ package com.brutaldoodle.components
 	
 	public class BoundingBoxComponent extends EntityComponent implements Zone2D
 	{
-		public static const TYPE_PLAYER:String = "player";
-		public static const TYPE_ENEMY:String = "enemy";
-		public static const TYPE_ALLY:String = "ally";
-		public static const TYPE_NEUTRAL:String = "neutral";
-		
-		private static var _boundingBoxes:Object = {
-			player: null,
-			enemy: new Vector.<BoundingBoxComponent>(),
-			ally: new Vector.<BoundingBoxComponent>(),
-			neutral: new Vector.<BoundingBoxComponent>()
-		};
-		
 		private var _left:Number;
 		private var _top:Number;
 		private var _right:Number;
@@ -30,21 +18,6 @@ package com.brutaldoodle.components
 		public function BoundingBoxComponent()
 		{
 			super();
-		}
-		
-		public function registerForCollisions (type:String):void {
-			switch (type) {
-				case TYPE_PLAYER:
-					_boundingBoxes.player = this;
-					break;
-				case TYPE_ENEMY:
-				case TYPE_ALLY:
-				case TYPE_NEUTRAL:
-					_boundingBoxes[type].push(this);
-					break;
-				default:
-					throw new Error("Le type de bounding box doit être définit par une des constantes de classe.");
-			}
 		}
 		
 		public function set zone (value:Rectangle):void {
@@ -62,9 +35,6 @@ package com.brutaldoodle.components
 			);
 		}
 		
-		public static function get boundingBoxes ():Object { return _boundingBoxes; }
-		
-		
 		// Zone2D Implementation, this code is for most parts the same as Flint's RectangleZone source code
 		// An implementation of Zone2D is provided in order to directly use this component for collisions
 		public function contains(x:Number, y:Number):Boolean
@@ -72,12 +42,12 @@ package com.brutaldoodle.components
 			return x >= _left && x <= _right && y >= _top && y <= _bottom;
 		}
 		
-		public function getArea():Number
+		public function getArea ():Number
 		{
 			return (_right - _left) * (_bottom - _top);
 		}
 		
-		public function getLocation():Point
+		public function getLocation ():Point
 		{
 			return new Point(
 				_left + Math.random() * (_right - _left),
@@ -85,34 +55,34 @@ package com.brutaldoodle.components
 			);
 		}
 		
-		public function collideParticle(particle:Particle2D, bounce:Number=1):Boolean
+		public function collideParticle (particle:Particle2D, bounce:Number=1):Boolean
 		{
 			var position:Number;
 			var previousPosition:Number;
 			var intersect:Number;
 			var collision:Boolean = false;
 			
-			if ( particle.velX > 0 )
+			if (particle.velX > 0)
 			{
 				position = particle.x + particle.collisionRadius;
 				previousPosition = particle.previousX + particle.collisionRadius;
-				if( previousPosition < _left && position >= _left )
+				
+				if (previousPosition < _left && position >= _left)
 				{
-					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _left - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
-					{
+					intersect = particle.previousY + (particle.y - particle.previousY) * (_left - previousPosition) / (position - previousPosition);
+					
+					if (intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius) {
 						particle.velX = -particle.velX * bounce;
-						particle.x += 2 * ( _left - position );
+						particle.x += 2 * (_left - position);
 						collision = true;
 					}
 				}
-				else if( previousPosition <= _right && position > _right )
+				else if (previousPosition <= _right && position > _right)
 				{
-					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _right - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
-					{
+					intersect = particle.previousY + (particle.y - particle.previousY) * (_right - previousPosition) / (position - previousPosition);
+					if (intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius) {
 						particle.velX = -particle.velX * bounce;
-						particle.x += 2 * ( _right - position );
+						particle.x += 2 * (_right - position);
 						collision = true;
 					}
 				}
@@ -121,74 +91,70 @@ package com.brutaldoodle.components
 			{
 				position = particle.x - particle.collisionRadius;
 				previousPosition = particle.previousX - particle.collisionRadius;
-				if( previousPosition > _right && position <= _right )
+				
+				if (previousPosition > _right && position <= _right)
 				{
-					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _right - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
-					{
+					intersect = particle.previousY + (particle.y - particle.previousY) * (_right - previousPosition) / (position - previousPosition);
+					if (intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius) {
 						particle.velX = -particle.velX * bounce;
-						particle.x += 2 * ( _right - position );
+						particle.x += 2 * (_right - position);
 						collision = true;
 					}
 				}
-				else if( previousPosition >= _left && position < _left )
+				else if (previousPosition >= _left && position < _left)
 				{
-					intersect = particle.previousY + ( particle.y - particle.previousY ) * ( _left - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius )
-					{
+					intersect = particle.previousY + (particle.y - particle.previousY) * (_left - previousPosition) / (position - previousPosition);
+					if (intersect >= _top - particle.collisionRadius && intersect <= _bottom + particle.collisionRadius) {
 						particle.velX = -particle.velX * bounce;
-						particle.x += 2 * ( _left - position );
+						particle.x += 2 * (_left - position);
 						collision = true;
 					}
 				}
 			}
 			
-			if ( particle.velY > 0 )
+			if (particle.velY > 0)
 			{
 				position = particle.y + particle.collisionRadius;
 				previousPosition = particle.previousY + particle.collisionRadius;
-				if( previousPosition < _top && position >= _top )
+				if (previousPosition < _top && position >= _top)
 				{
-					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _top - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
-					{
+					intersect = particle.previousX + (particle.x - particle.previousX) * (_top - previousPosition) / (position - previousPosition);
+					if (intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius) {
 						particle.velY = -particle.velY * bounce;
-						particle.y += 2 * ( _top - position );
+						particle.y += 2 * (_top - position);
 						collision = true;
 					}
 				}
-				else if( previousPosition <= _bottom && position > _bottom )
+				else if (previousPosition <= _bottom && position > _bottom)
 				{
-					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _bottom - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
-					{
+					intersect = particle.previousX + (particle.x - particle.previousX) * (_bottom - previousPosition) / (position - previousPosition);
+					if (intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius) {
 						particle.velY = -particle.velY * bounce;
-						particle.y += 2 * ( _bottom - position );
+						particle.y += 2 * (_bottom - position);
 						collision = true;
 					}
 				}
 			}
-			else if ( particle.velY < 0 )
+			else if (particle.velY < 0)
 			{
 				position = particle.y - particle.collisionRadius;
 				previousPosition = particle.previousY - particle.collisionRadius;
-				if( previousPosition > _bottom && position <= _bottom )
+				
+				if (previousPosition > _bottom && position <= _bottom)
 				{
-					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _bottom - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
-					{
+					intersect = particle.previousX + (particle.x - particle.previousX) * (_bottom - previousPosition) / (position - previousPosition);
+					if (intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius) {
 						particle.velY = -particle.velY * bounce;
-						particle.y += 2 * ( _bottom - position );
+						particle.y += 2 * (_bottom - position);
 						collision = true;
 					}
 				}
-				else if( previousPosition >= _top && position < _top )
+				else if (previousPosition >= _top && position < _top)
 				{
-					intersect = particle.previousX + ( particle.x - particle.previousX ) * ( _top - previousPosition ) / ( position - previousPosition );
-					if( intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius )
-					{
+					intersect = particle.previousX + (particle.x - particle.previousX) * (_top - previousPosition) / (position - previousPosition);
+					if (intersect >= _left - particle.collisionRadius && intersect <= _right + particle.collisionRadius) {
 						particle.velY = -particle.velY * bounce;
-						particle.y += 2 * ( _top - position );
+						particle.y += 2 * (_top - position);
 						collision = true;
 					}
 				}

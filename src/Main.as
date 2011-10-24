@@ -1,5 +1,7 @@
 package
 {
+	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.collisions.CollisionType;
 	import com.brutaldoodle.components.BoundingBoxComponent;
 	import com.brutaldoodle.components.CanonController;
 	import com.brutaldoodle.components.EnemyMobilityComponent;
@@ -46,6 +48,8 @@ package
 			PBE.startup(this);
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
 			
+			CollisionManager.instance.initialize();
+			
 			_mainMenuElements = new PBGroup();
 			
 			createScene();
@@ -81,7 +85,7 @@ package
 					position.size.y
 				);
 				
-				boundingBox.registerForCollisions(BoundingBoxComponent.TYPE_ENEMY);
+				CollisionManager.instance.registerForCollisions(boundingBox, CollisionType.ENEMY);
 			}
 		}
 		
@@ -198,7 +202,7 @@ package
 				spatial.size.y
 			);
 			
-			boundingBox.registerForCollisions(BoundingBoxComponent.TYPE_PLAYER);
+			CollisionManager.instance.registerForCollisions(boundingBox, CollisionType.PLAYER);
 			hero.addComponent(boundingBox, "Collisions");
 			
 			// health
