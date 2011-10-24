@@ -1,12 +1,10 @@
 package com.brutaldoodle.collisions
 {
-	import com.brutaldoodle.events.CollisionEvent;
-	import com.pblabs.engine.debug.Logger;
+	import com.brutaldoodle.components.BoundingBoxComponent;
 	
 	import flash.events.EventDispatcher;
+	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
-	
-	import mx.utils.ObjectUtil;
 	
 	import org.flintparticles.twoD.zones.Zone2D;
 
@@ -49,14 +47,9 @@ package com.brutaldoodle.collisions
 			var index:int = zones.indexOf(zone);
 			
 			if (index != -1) {
-				dispatchEvent(new CollisionEvent(CollisionEvent.ZONE_UNREGISTERED, zones[index]));
+				(zone as BoundingBoxComponent).zone = new Rectangle(-Infinity, -Infinity, -Infinity, -Infinity);
 				zones.splice(index, 1);
 			}
-			
-			// TO DO:  Fix the multiple-not-yet-collided-bullets bug (the hitbox is still there for other on-screen bullets after its been collided)
-			// HOW TO: Dispatch a custom event here (CollisionEvent.ZONE_UNREGISTERED or something like that)
-			//		   Listen to that event in the Emitter (CollisionManager.instance.addEventListener( blah, blah, ... )
-			//		   remove the collision from the actions vector inside the emitter, the collision zone would be accessible via event.zone
 		}
 		
 		public function getCollidableObjectsByType (type:String):Vector.<Zone2D> {

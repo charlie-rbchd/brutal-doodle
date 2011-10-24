@@ -18,16 +18,21 @@ package com.brutaldoodle.emitters
 			var players:Vector.<Zone2D> = CollisionManager.instance.getCollidableObjectsByType(CollisionType.PLAYER);
 			
 			for (var i:int = 0; i < players.length; ++i) {
-				if (players[i] != null)
+				if (players[i] != null) {
 					addAction( new CollisionZone(players[i], 0) );
+				}
 			}
 			
-			this.addEventListener(ParticleEvent.ZONE_COLLISION, onCollide);
+			addEventListener(ParticleEvent.ZONE_COLLISION, onCollide);
 		}
 		
 		protected function onCollide(event:ParticleEvent):void
 		{
-			event.particle.isDead = true;
+			if (event.otherObject != null) {
+				(event.otherObject as BoundingBoxComponent).owner.destroy();
+				event.particle.isDead = true;
+				CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+			}
 		}
 	}
 }
