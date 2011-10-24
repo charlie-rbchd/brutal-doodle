@@ -22,6 +22,7 @@ package com.brutaldoodle.emitters
 				
 				var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
 				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
+				health.damage(_damageAmount * health.damageMagnitude);
 				
 				if (health.isDead) {
 					PBE.lookup("Canon").destroy();
