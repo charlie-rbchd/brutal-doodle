@@ -47,7 +47,7 @@ package com.brutaldoodle.collisions
 			var index:int = zones.indexOf(zone);
 			
 			if (index != -1) {
-				(zone as BoundingBoxComponent).zone = new Rectangle(-Infinity, -Infinity, -Infinity, -Infinity);
+				(zone as BoundingBoxComponent).zone = new Rectangle(-Infinity, -Infinity, -Infinity, -Infinity); // Because we all like minus infinity...
 				zones.splice(index, 1);
 			}
 		}

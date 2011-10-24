@@ -2,6 +2,7 @@ package com.brutaldoodle.effects
 {
 	import com.brutaldoodle.emitters.EnemyCollidableEmitter;
 	
+	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.Blast;
@@ -19,7 +20,11 @@ package com.brutaldoodle.effects
 			
 			counter = new Blast(1);
 			
-			addInitializer( new SharedImage( new Dot(3, 0x444444) ) );
+			var bullet:Sprite = new Sprite();
+			bullet.addChild( new Dot(3, 0x222222) );
+			bullet.addChild( new Dot(2, 0xDDDDDD) );
+			
+			addInitializer( new SharedImage( bullet ) );
 			addInitializer( new Velocity( new PointZone( new Point(0, -150) ) ) );
 			
 			addAction( new Move() );

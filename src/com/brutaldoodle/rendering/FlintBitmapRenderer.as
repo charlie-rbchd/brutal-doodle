@@ -17,11 +17,12 @@ package com.brutaldoodle.rendering
 	{
 		protected var _renderer:BitmapRenderer;
 		private var _emptyEmitters:uint;
+		private var _counterCompletedEmitters:uint;
 		
 		private var _width:Number;
 		private var _height:Number;
 		
-		protected var _emitters:Array;
+		protected var _emitters:Vector.<Emitter2D>;
 		
 		public function FlintBitmapRenderer(width:Number=960, height:Number=680)
 		{
@@ -29,7 +30,8 @@ package com.brutaldoodle.rendering
 			_width = width;
 			_height = height;
 			_emptyEmitters = 0;
-			_emitters = new Array();
+			_counterCompletedEmitters = 0;
+			_emitters = new Vector.<Emitter2D>();
 			_renderer = new BitmapRenderer( new Rectangle(-_width/2, -_height/2, _width, _height) );
 		}
 		
@@ -37,7 +39,8 @@ package com.brutaldoodle.rendering
 		{
 			for (var i:int=0; i < _emitters.length; i++) {
 				_renderer.addEmitter(_emitters[i]);
-				(_emitters[i] as Emitter2D).addEventListener("emitterEmpty", destroyOwner, false, 0, true);
+				_emitters[i].addEventListener(EmitterEvent.EMITTER_EMPTY, destroyOwner, false, 0, true);
+				_emitters[i].addEventListener(EmitterEvent.COUNTER_COMPLETE, destroyOwner, false, 0, true);
 			}
 			
 			this.displayObject = _renderer;
@@ -45,8 +48,9 @@ package com.brutaldoodle.rendering
 		
 		protected function initializeEmitter(emitter:Emitter2D, position:Zone2D=null):void {
 			emitter.addAction( new DeathZone( new RectangleZone(-_width/2, -_height/2, _width, _height), true) );
-			if (position != null)
+			if (position != null) {
 				emitter.addInitializer( new Position( position ) );
+			}
 			
 			_emitters.push(emitter);
 			emitter.start();
@@ -54,11 +58,21 @@ package com.brutaldoodle.rendering
 		
 		private function destroyOwner(event:EmitterEvent):void
 		{
-			(event.target as Emitter2D).removeEventListener("emitterEmpty", destroyOwner);
-			_emptyEmitters++;
+			var emitter:Emitter2D = event.target as Emitter2D;
 			
-			if (_emptyEmitters == _emitters.length)
+			switch (event.type) {
+				case EmitterEvent.EMITTER_EMPTY:
+					emitter.removeEventListener(EmitterEvent.EMITTER_EMPTY, destroyOwner);
+					_emptyEmitters++;
+					break;
+				case EmitterEvent.COUNTER_COMPLETE:
+					emitter.removeEventListener(EmitterEvent.COUNTER_COMPLETE, destroyOwner);
+					_counterCompletedEmitters++;
+			}
+			
+			if (_emptyEmitters == _emitters.length && _counterCompletedEmitters == _emitters.length) {
 				owner.destroy();
+			}
 		}
 		
 		public function get sprite ():Sprite { return _renderer as Sprite; }
