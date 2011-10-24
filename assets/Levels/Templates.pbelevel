@@ -13,25 +13,55 @@
 			<spatialManager componentReference="MainScene"/>
 		</component>
 		
-		<component type="com.pblabs.animation.AnimatorComponent" name="FrameAnimation">
+		<component type="com.pblabs.animation.AnimatorComponent" name="Animator">
 			<animations childType="com.pblabs.animation.Animator">
-				<idle type="">
+				<notInjured>
 					<animationType>LOOP_ANIMATION</animationType>
 					<duration>4</duration>
 					<repeatCount>-1</repeatCount>
 					<startValue type="int">0</startValue>
 					<targetValue type="int">9</targetValue>
-				</idle>
+				</notInjured>
+				
+				<barelyInjured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">10</startValue>
+					<targetValue type="int">18</targetValue>
+				</barelyInjured>
+				
+				<injured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">19</startValue>
+					<targetValue type="int">27</targetValue>
+				</injured>
+				
+				<badlyInjured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">28</startValue>
+					<targetValue type="int">36</targetValue>
+				</badlyInjured>
 			</animations>
-			<defaultAnimation>idle</defaultAnimation>
+			<defaultAnimation>notInjured</defaultAnimation>
 			<reference>@Render.spriteIndex</reference>
 		</component>
 		
 		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions"></component>
 		
 		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
-			<damageMagnitude>1.0</damageMagnitude>
+			<damageModifier>
+				<normal>0.25</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
 		</component>
+		
+		<component type="com.brutaldoodle.components.ChangeStateOnDamaged" name="StateChanger"></component>
 		
 		<component type="com.brutaldoodle.components.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>

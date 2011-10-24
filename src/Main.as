@@ -4,6 +4,7 @@ package
 	import com.brutaldoodle.collisions.CollisionType;
 	import com.brutaldoodle.components.BoundingBoxComponent;
 	import com.brutaldoodle.components.CanonController;
+	import com.brutaldoodle.components.ChangeStateOnDamaged;
 	import com.brutaldoodle.components.EnemyMobilityComponent;
 	import com.brutaldoodle.components.PlayerController;
 	import com.brutaldoodle.events.TankEvent;
@@ -44,7 +45,8 @@ package
 			PBE.registerType(com.pblabs.sound.BackgroundMusicComponent);
 			PBE.registerType(com.brutaldoodle.components.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.BoundingBoxComponent);
-
+			PBE.registerType(com.brutaldoodle.components.ChangeStateOnDamaged);
+			
 			PBE.startup(this);
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
 			
