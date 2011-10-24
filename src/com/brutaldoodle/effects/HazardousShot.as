@@ -1,5 +1,7 @@
 package com.brutaldoodle.effects
 {
+	import com.brutaldoodle.emitters.PlayerCollidableEmitter;
+	
 	import org.flintparticles.common.counters.Blast;
 	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.ColorInit;
@@ -7,11 +9,10 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.actions.BoundingBox;
 	import org.flintparticles.twoD.actions.GravityWell;
 	import org.flintparticles.twoD.actions.Move;
-	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.Position;
 	import org.flintparticles.twoD.zones.RectangleZone;
 	
-	public class HazardousShot extends Emitter2D
+	public class HazardousShot extends PlayerCollidableEmitter
 	{
 		private var _posX:Number = 200;
 		private var _posY:Number = 200;

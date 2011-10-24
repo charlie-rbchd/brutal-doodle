@@ -15,7 +15,7 @@ package com.brutaldoodle.rendering
 	
 	public class FlintBitmapRenderer extends DisplayObjectRenderer
 	{
-		private var _renderer:BitmapRenderer;
+		protected var _renderer:BitmapRenderer;
 		private var _emptyEmitters:uint;
 		
 		private var _width:Number;

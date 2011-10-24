@@ -29,7 +29,9 @@
 		
 		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions"></component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health"></component>
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageMagnitude>1.0</damageMagnitude>
+		</component>
 		
 		<component type="com.brutaldoodle.components.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>

@@ -1,6 +1,6 @@
 package com.brutaldoodle.components
 {
-	import com.brutaldoodle.effects.CanonShotRenderer;
+	import com.brutaldoodle.rendering.CanonShotRenderer;
 	import com.pblabs.animation.AnimationEvent;
 	import com.pblabs.animation.Animator;
 	import com.pblabs.animation.AnimatorType;

@@ -3,35 +3,29 @@ package com.brutaldoodle.emitters
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.collisions.CollisionType;
 	import com.brutaldoodle.components.BoundingBoxComponent;
+	import com.pblabs.components.basic.HealthComponent;
+	import com.pblabs.engine.entity.IEntity;
 	
 	import org.flintparticles.common.events.ParticleEvent;
-	import org.flintparticles.twoD.actions.CollisionZone;
-	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.zones.Zone2D;
 	
-	public class EnemyCollidableEmitter extends Emitter2D
+	public class EnemyCollidableEmitter extends CollidableEmitter
 	{
 		public function EnemyCollidableEmitter()
 		{
 			super();
-			
-			var enemies:Vector.<Zone2D> = CollisionManager.instance.getCollidableObjectsByType(CollisionType.ENEMY);
-			
-			for (var i:int = 0; i < enemies.length; ++i) {
-				if (enemies[i] != null) {
-					addAction( new CollisionZone(enemies[i], 0) );
-				}	
-			}
-			
-			addEventListener(ParticleEvent.ZONE_COLLISION, onCollide);
 		}
 		
-		protected function onCollide(event:ParticleEvent):void
-		{
+		protected override function onCollide (event:ParticleEvent):void {
 			if (event.otherObject != null) {
-				(event.otherObject as BoundingBoxComponent).owner.destroy();
 				event.particle.isDead = true;
-				CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+				
+				var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
+				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
+				health.damage(_damageAmount * health.damageMagnitude);
+				
+				if (health.isDead) {
+					CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+				}
 			}
 		}
 	}

@@ -197,9 +197,9 @@ package
 			var boundingBox:BoundingBoxComponent = new BoundingBoxComponent();
 			boundingBox.zone = new Rectangle(
 				spatial.position.x - spatial.size.x/2,
-				spatial.position.x - spatial.size.y/2,
+				spatial.position.y,
 				spatial.size.x,
-				spatial.size.y
+				spatial.size.y + spatial.size.y/2
 			);
 			
 			CollisionManager.instance.registerForCollisions(boundingBox, CollisionType.PLAYER);
