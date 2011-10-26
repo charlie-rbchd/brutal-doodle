@@ -27,7 +27,7 @@
 					<animationType>LOOP_ANIMATION</animationType>
 					<duration>4</duration>
 					<repeatCount>-1</repeatCount>
-					<startValue type="int">10</startValue>
+					<startValue type="int">9</startValue>
 					<targetValue type="int">18</targetValue>
 				</barelyInjured>
 				
@@ -35,7 +35,7 @@
 					<animationType>LOOP_ANIMATION</animationType>
 					<duration>4</duration>
 					<repeatCount>-1</repeatCount>
-					<startValue type="int">19</startValue>
+					<startValue type="int">18</startValue>
 					<targetValue type="int">27</targetValue>
 				</injured>
 				
@@ -43,7 +43,7 @@
 					<animationType>LOOP_ANIMATION</animationType>
 					<duration>4</duration>
 					<repeatCount>-1</repeatCount>
-					<startValue type="int">28</startValue>
+					<startValue type="int">27</startValue>
 					<targetValue type="int">36</targetValue>
 				</badlyInjured>
 			</animations>
