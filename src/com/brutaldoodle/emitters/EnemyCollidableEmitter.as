@@ -16,17 +16,18 @@ package com.brutaldoodle.emitters
 		}
 		
 		protected override function onCollide (event:ParticleEvent):void {
-			if (event.otherObject != null) {
-				event.particle.isDead = true;
-				var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
+			super.onCollide(event);
+			event.particle.isDead = true;
+			
+			var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
+			
+			if (owner != null) {
+				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
 				
-				if (owner != null) {
-					var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
-					health.damage(_damageAmount, "normal");
-					
-					if (health.isDead) {
-						CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
-					}
+				health.damage(_damageAmount, "normal");
+				
+				if (health.isDead) {
+					CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
 				}
 			}
 		}

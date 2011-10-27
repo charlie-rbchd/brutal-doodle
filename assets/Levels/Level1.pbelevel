@@ -12,6 +12,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
+		
 		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
@@ -23,16 +24,6 @@
 	<entity name="BackgroundMusic">
 		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
 			<musicUrl>../assets/Sounds/stage1.mp3</musicUrl>
-		</component>
-	</entity>
-	
-	<entity name="normalPlayerSpriteSheet">
-		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="NormalSpriteSheet">
-			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-				<xCount>8</xCount>
-				<yCount>1</yCount>
-			</divider>
-			<image filename="../assets/Images/Basic.png"/>
 		</component>
 	</entity>
 	

@@ -16,6 +16,7 @@ package com.brutaldoodle.components
 	public class CanonController extends TickedComponent
 	{	
 		public static var reloadSpeed:Number;
+		
 		public var canonOffset:PropertyReference;
 		public var positionProperty:PropertyReference;
 		

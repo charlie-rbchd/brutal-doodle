@@ -27,6 +27,7 @@ package
 	import com.pblabs.sound.BackgroundMusicComponent;
 	
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -34,10 +35,11 @@ package
 	[SWF(width="960", height="680", frameRate="30")]
 	public class Main extends Sprite
 	{
+		private const NUM_MENU_ELEMENTS:int = 4;
+		private const PATH_MENU_ELEMENTS:String = "../assets/Images/Button";
+		
 		private const INVADERS_SPACING:int = 10;
 		private const INVADERS_PER_ROW:int = 10;
-		
-		private var _mainMenuElements:PBGroup;
 		
 		public function Main()
 		{
@@ -46,31 +48,45 @@ package
 			PBE.registerType(com.brutaldoodle.components.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.BoundingBoxComponent);
 			PBE.registerType(com.brutaldoodle.components.ChangeStateOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.LoadLevelOnCollision);
 			
 			PBE.startup(this);
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
 			
 			CollisionManager.instance.initialize();
 			
-			_mainMenuElements = new PBGroup();
-			
 			createScene();
-			createBackground();
 			createTank();
 			createCanon();
-			createMenu();
 			
-			PBE.mainStage.addEventListener(MouseEvent.CLICK, clickHandler);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
+			LevelManager.instance.addEventListener(LevelEvent.LEVEL_LOADED_EVENT, mainMenuLoaded);
 		}
-	 
-		private function levelLoaded(e:LevelEvent):void {
-			var baseX:int = -(stage.stageWidth/2) + 30;
-			var baseY:int = -(stage.stageHeight/2) + 35;
-			var currentX:int, currentY:int;
-			var position:SimpleSpatialComponent;
-			var boundingBox:BoundingBoxComponent;
+		
+		private function mainMenuLoaded(event:LevelEvent):void
+		{
+			LevelManager.instance.removeEventListener(LevelEvent.LEVEL_LOADED_EVENT, mainMenuLoaded);
 			
-			for (var i:int=0; i < 40; ++i) {
+			var numButtons:int = (PBE.nameManager.lookup("Button1") as IEntity).owningGroup.length,
+				boundingBox:BoundingBoxComponent;
+			
+			for (var i:int = 0; i < numButtons; ++i) {
+				boundingBox = PBE.nameManager.lookupComponentByName("Button"+(i+1), "Collisions") as BoundingBoxComponent;
+				CollisionManager.instance.registerForCollisions(boundingBox, CollisionType.ENEMY);
+			}
+			
+			LevelManager.instance.addEventListener(LevelEvent.LEVEL_LOADED_EVENT, levelLoaded);
+		}
+		
+		private function levelLoaded(event:LevelEvent):void {
+			var numEnemies:int = (PBE.nameManager.lookup("Enemy1") as IEntity).owningGroup.length,
+				baseX:int = -(stage.stageWidth/2) + 30,
+				baseY:int = -(stage.stageHeight/2) + 35,
+				currentX:int, currentY:int,
+				position:SimpleSpatialComponent,
+				boundingBox:BoundingBoxComponent;
+			
+			for (var i:int = 0; i < numEnemies; ++i) {
 				position = PBE.nameManager.lookupComponentByName("Enemy"+(i+1), "Spatial") as SimpleSpatialComponent;
 				boundingBox = PBE.nameManager.lookupComponentByName("Enemy"+(i+1), "Collisions") as BoundingBoxComponent;
 				
@@ -90,42 +106,12 @@ package
 				CollisionManager.instance.registerForCollisions(boundingBox, CollisionType.ENEMY);
 			}
 		}
-		
-		private function clickHandler(event:MouseEvent):void
-		{
-			PBE.mainStage.removeEventListener(MouseEvent.CLICK, clickHandler);
-			
-			_mainMenuElements.destroy();
-			
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);
-			LevelManager.instance.addEventListener(LevelEvent.LEVEL_LOADED_EVENT, levelLoaded);
-		}
 				
 		private function createScene():void {
 			var sceneView:SceneView = new SceneView();
 			sceneView.width = stage.stageWidth;
 			sceneView.height = stage.stageHeight;
 			PBE.initializeScene(sceneView, "MainScene");
-		}
-		
-		private function createBackground():void {
-			var background:IEntity = PBE.allocateEntity();
-			
-			var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
-			spatial.position = new Point(0,0);
-			
-			background.addComponent(spatial, "Spatial");
-			
-			var renderer:SpriteRenderer = new SpriteRenderer();
-			renderer.fileName = "../assets/Images/background_menu.jpg";
-			renderer.positionProperty = new PropertyReference("@Spatial.position");
-			renderer.layerIndex = 1;
-			renderer.scene = PBE.scene;
-			
-			background.addComponent(renderer, "Renderer");
-			
-			background.owningGroup = _mainMenuElements;
-			background.initialize("MenuBackground");
 		}
 		
 		private function createTank():void {
@@ -250,68 +236,6 @@ package
 			
 			
 			canon.initialize("Canon");
-		}
-		
-		private function createMenu():void {
-			for (var i:int=0; i < 4; i++)
-				createMenuElement("../assets/Images/Button"+ i +".png", i, 220, 105, 30, 20);
-		}
-		
-		private function createMenuElement(pFilePath:String, elementIndex:int, width:int, height:int, horizontalSpacing:int, verticalSpacing:int):void {
-			var element:IEntity = PBE.allocateEntity();
-			
-			// spatial component
-			var spatial	:SimpleSpatialComponent = new SimpleSpatialComponent();
-			spatial.size = new Point(width, height);
-			spatial.position = new Point(-480+width/2+width*elementIndex+horizontalSpacing*elementIndex, -340+height/2+verticalSpacing);
-			
-			element.addComponent(spatial, "Spatial");
-			
-			// spritesheet
-			var divider:CellCountDivider = new CellCountDivider();
-			divider.xCount = 2;
-			divider.yCount = 1;
-			
-			var elementSpriteSheet:SpriteSheetComponent = new SpriteSheetComponent();
-			elementSpriteSheet.imageFilename = pFilePath;
-			elementSpriteSheet.divider = divider;
-			
-			//rendering
-			var renderer:SpriteSheetRenderer = new SpriteSheetRenderer();
-			renderer.positionProperty = new PropertyReference("@Spatial.position");
-			renderer.spriteSheet = elementSpriteSheet;
-			renderer.spriteIndex = 0;
-			renderer.layerIndex = 10;
-			renderer.scene = PBE.scene;
-			
-			element.addComponent(renderer, "Renderer");
-			
-			//controller
-			var animator:AnimationController = new AnimationController();
-			animator.spriteSheetReference = new PropertyReference("@Renderer.spriteSheet");
-			animator.currentFrameReference = new PropertyReference("@Renderer.spriteIndex");
-			animator.defaultAnimation = "Normal";
-			
-			// Button's normal state display
-			var normalState:AnimationControllerInfo = new AnimationControllerInfo;
-			normalState.frameRate = 0;
-			normalState.loop = false;
-			normalState.spriteSheet = elementSpriteSheet;
-			animator.animations["Normal"] = normalState;
-			
-			// Button's hover state display
-			var hoverState:AnimationControllerInfo = new AnimationControllerInfo;
-			hoverState.maxFrameDelay = 1000;
-			hoverState.frameRate = 5;
-			hoverState.loop = true;
-			hoverState.spriteSheet = elementSpriteSheet;
-			animator.animations["Hover"] = hoverState;
-			
-			element.addComponent(animator, "Animator");
-			
-			
-			element.owningGroup = _mainMenuElements;
-			element.initialize("MenuButton" + elementIndex);
 		}
 	}
 }

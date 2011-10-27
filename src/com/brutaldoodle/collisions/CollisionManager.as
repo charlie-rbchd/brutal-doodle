@@ -1,6 +1,7 @@
 package com.brutaldoodle.collisions
 {
 	import com.brutaldoodle.components.BoundingBoxComponent;
+	import com.brutaldoodle.events.CollisionEvent;
 	
 	import flash.events.EventDispatcher;
 	import flash.geom.Rectangle;
@@ -38,8 +39,15 @@ package com.brutaldoodle.collisions
 			_zones[CollisionType.ALLY]		= _allies;
 		}
 		
+		public function reset ():void {
+			for each (var zonesVector:Vector.<Zone2D> in _zones) {
+				zonesVector = new Vector.<Zone2D>();
+			}
+		}
+		
 		public function registerForCollisions (zone:Zone2D, type:String):void {
 			_zones[type].push(zone);
+			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_REGISTERED));
 		}
 		
 		public function stopCollisionsWith (zone:Zone2D, type:String):void {
@@ -50,6 +58,8 @@ package com.brutaldoodle.collisions
 				(zone as BoundingBoxComponent).zone = new Rectangle(-Infinity, -Infinity, -Infinity, -Infinity); // Because we all like minus infinity...
 				zones.splice(index, 1);
 			}
+			
+			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_UNREGISTERED));
 		}
 		
 		public function getCollidableObjectsByType (type:String):Vector.<Zone2D> {

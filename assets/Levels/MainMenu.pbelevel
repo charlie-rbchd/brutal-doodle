@@ -1,0 +1,219 @@
+<things version="1">
+
+	<entity name="Background">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/background_menu.jpg</fileName>
+			<zIndex>-1</zIndex>
+		</component>
+	</entity>
+	
+	<entity name="BackgroundMusic">
+		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
+			<musicUrl>../assets/Sounds/menu.mp3</musicUrl>
+		</component>
+	</entity>
+	
+	<template name="buttonTemplate">
+		<component type="com.pblabs.animation.AnimatorComponent" name="Animator">
+			<animations childType="com.pblabs.animation.Animator">
+				<idle>
+					<animationType>NO_ANIMATION</animationType>
+					<duration>0</duration>
+					<repeatCount>0</repeatCount>
+					<startValue type="int">0</startValue>
+					<targetValue type="int">0</targetValue>
+				</idle>
+				
+				<hover>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>1</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">0</startValue>
+					<targetValue type="int">2</targetValue>
+				</hover>
+			</animations>
+			<defaultAnimation>idle</defaultAnimation>
+			<reference>@Render.spriteIndex</reference>
+		</component>
+	</template>
+	
+	<!--Button1-->
+	<entity name="idleButton1SpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>2</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/Button1.png"/>
+		</component>
+	</entity>
+	
+	<entity name="Button1" template="buttonTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position>
+				<x>-370</x>
+				<y>-210</y>
+			</position>
+			<size>
+				<x>220</x>
+				<y>105</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<layerIndex>7</layerIndex>
+			<spriteSheet componentReference="idleButton1SpriteSheet"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+			<zone>
+				<x>-480</x>
+				<y>-262.5</y>
+				<width>220</width>
+				<height>105</height>
+			</zone>
+		</component>
+		
+		<component type="com.brutaldoodle.components.LoadLevelOnCollision" name="Loader">
+			<level>1</level>
+		</component>
+	</entity>
+	
+	<!--Button2-->
+	<entity name="idleButton2SpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>2</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/Button2.png"/>
+		</component>
+	</entity>
+	
+	<entity name="Button2" template="buttonTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-120</x>
+				<y>-210</y>
+			</position>
+			<size type="">
+				<x>220</x>
+				<y>105</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<layerIndex>7</layerIndex>
+			<spriteSheet componentReference="idleButton2SpriteSheet"/>
+		</component>
+	</entity>
+	
+	<!--Button3-->
+	<entity name="idleButton3SpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>2</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/Button3.png"/>
+		</component>
+	</entity>
+	
+	<entity name="Button3" template="buttonTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>120</x>
+				<y>-210</y>
+			</position>
+			<size type="">
+				<x>220</x>
+				<y>105</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<layerIndex>7</layerIndex>
+			<spriteSheet componentReference="idleButton3SpriteSheet"/>
+		</component>
+	</entity>
+	
+	<!--Button4-->
+	<entity name="idleButton4SpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>2</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/Button4.png"/>
+		</component>
+	</entity>
+	
+	<entity name="Button4" template="buttonTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>370</x>
+				<y>-210</y>
+			</position>
+			<size type="">
+				<x>220</x>
+				<y>105</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<layerIndex>7</layerIndex>
+			<spriteSheet componentReference="idleButton4SpriteSheet"/>
+		</component>
+	</entity>
+	
+	<group name="SpriteSheets">
+		<objectReference name="idleButton1SpriteSheet"/>
+		<objectReference name="idleButton2SpriteSheet"/>
+		<objectReference name="idleButton3SpriteSheet"/>
+		<objectReference name="idleButton4SpriteSheet"/>
+	</group>
+	
+	<group name="Buttons">
+		<objectReference name="Button1"/>
+		<objectReference name="Button2"/>
+		<objectReference name="Button3"/>
+		<objectReference name="Button4"/>
+	</group>
+	
+	<group name="MainMenuData">
+		<objectReference name="Background"/>
+		<objectReference name="BackgroundMusic"/>
+		<groupReference name="SpriteSheets"/>
+		<groupReference name="Buttons"/>	
+	</group>
+</things>

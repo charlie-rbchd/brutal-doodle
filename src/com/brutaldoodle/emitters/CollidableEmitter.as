@@ -1,6 +1,8 @@
 package com.brutaldoodle.emitters
 {
 	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.components.BoundingBoxComponent;
+	import com.brutaldoodle.events.CollisionEvent;
 	
 	import flash.utils.getQualifiedSuperclassName;
 	
@@ -33,6 +35,7 @@ package com.brutaldoodle.emitters
 		
 		protected function onCollide (event:ParticleEvent):void
 		{
+			CollisionManager.instance.dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_OCCURED));
 		}
 		
 		public function get damageAmount ():Number { return _damageAmount; }
