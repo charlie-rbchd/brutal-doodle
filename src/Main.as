@@ -13,7 +13,6 @@ package
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.core.LevelEvent;
 	import com.pblabs.engine.core.LevelManager;
-	import com.pblabs.engine.core.PBGroup;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
 	import com.pblabs.rendering2D.AnimationController;
@@ -27,8 +26,6 @@ package
 	import com.pblabs.sound.BackgroundMusicComponent;
 	
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
@@ -66,7 +63,7 @@ package
 		private function mainMenuLoaded(event:LevelEvent):void
 		{
 			LevelManager.instance.removeEventListener(LevelEvent.LEVEL_LOADED_EVENT, mainMenuLoaded);
-			
+			//TO MODIFY
 			var numButtons:int = (PBE.nameManager.lookup("Button1") as IEntity).owningGroup.length,
 				boundingBox:BoundingBoxComponent;
 			
@@ -80,29 +77,12 @@ package
 		
 		private function levelLoaded(event:LevelEvent):void {
 			var numEnemies:int = (PBE.nameManager.lookup("Enemy1") as IEntity).owningGroup.length,
-				baseX:int = -(stage.stageWidth/2) + 30,
-				baseY:int = -(stage.stageHeight/2) + 35,
-				currentX:int, currentY:int,
-				position:SimpleSpatialComponent,
 				boundingBox:BoundingBoxComponent;
 			
 			for (var i:int = 0; i < numEnemies; ++i) {
-				position = PBE.nameManager.lookupComponentByName("Enemy"+(i+1), "Spatial") as SimpleSpatialComponent;
 				boundingBox = PBE.nameManager.lookupComponentByName("Enemy"+(i+1), "Collisions") as BoundingBoxComponent;
 				
-				currentX = (position.size.x + INVADERS_SPACING) * (i%INVADERS_PER_ROW);
-				currentY = (position.size.y + INVADERS_SPACING) * (Math.floor(i/INVADERS_PER_ROW));
-				
-				position.x = baseX + currentX;
-				position.y = baseY + currentY;
-
-				boundingBox.zone = new Rectangle(
-					position.x - position.size.x/2,
-					position.y - position.size.y/2,
-					position.size.x,
-					position.size.y
-				);
-				
+				//A CHANGER DE PLACE
 				CollisionManager.instance.registerForCollisions(boundingBox, CollisionType.ENEMY);
 			}
 		}

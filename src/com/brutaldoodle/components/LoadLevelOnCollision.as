@@ -29,6 +29,9 @@ package com.brutaldoodle.components
 		
 		protected function loadLevel(event:CollisionEvent):void
 		{
+			//WE NEED TO FIX THE HIT BOX OF THE BUTTON
+			//LevelManager.instance.unloadCurrentLevel();
+			//CollisionManager.instance.reset();
 			LevelManager.instance.loadLevel(level, true);
 		}
 	}

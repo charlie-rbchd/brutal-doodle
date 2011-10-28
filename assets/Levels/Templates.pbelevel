@@ -1,17 +1,6 @@
 <things version="1">
 	
 	<template name="invaderTemplate">
-		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
-			<position type="">
-				<x>0</x>
-				<y>0</y>
-			</position>
-			<size type="">
-				<x>50</x>
-				<y>50</y>
-			</size>
-			<spatialManager componentReference="MainScene"/>
-		</component>
 		
 		<component type="com.pblabs.animation.AnimatorComponent" name="Animator">
 			<animations childType="com.pblabs.animation.Animator">
@@ -51,7 +40,7 @@
 			<reference>@Render.spriteIndex</reference>
 		</component>
 		
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions"></component>
+		
 		
 		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
 			<damageModifier>
