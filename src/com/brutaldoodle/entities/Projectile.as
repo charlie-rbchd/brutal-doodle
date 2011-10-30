@@ -7,7 +7,7 @@ package com.brutaldoodle.entities
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
 	import flash.geom.Point;
-
+	
 	public class Projectile
 	{
 		private var __this:IEntity;

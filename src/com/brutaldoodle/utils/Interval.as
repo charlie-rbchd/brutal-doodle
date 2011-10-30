@@ -5,7 +5,7 @@ package com.brutaldoodle.utils
 		public var minTime:Number;
 		public var maxTime:Number;
 		
-		public function Interval(min:Number=0, max:Number=0)
+		public function Interval(min:Number=0, max:Number=1000)
 		{
 			minTime = min;
 			maxTime = max;
