@@ -90,6 +90,7 @@
 				<width>220</width>
 				<height>105</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 		
 		<component type="com.brutaldoodle.components.LoadLevelOnCollision" name="Loader">

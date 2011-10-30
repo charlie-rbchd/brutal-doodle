@@ -4,6 +4,9 @@ package com.brutaldoodle.rendering
 	import com.brutaldoodle.effects.SimpleShot;
 	import com.brutaldoodle.rendering.FlintBitmapRenderer;
 	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.debug.Logger;
+	import com.pblabs.engine.entity.IEntity;
+	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	import com.pblabs.rendering2D.SpriteRenderer;
 	
 	import flash.geom.Point;
@@ -23,7 +26,10 @@ package com.brutaldoodle.rendering
 		
 		override public function addEmitters():void
 		{
-			var _emitLocation:PointZone = new PointZone(new Point(0,-300));	
+			var render:FlintBitmapRenderer = owner.lookupComponentByName("Render") as FlintBitmapRenderer;
+			var spatial:SimpleSpatialComponent = (render.trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent);
+			
+			var _emitLocation:PointZone = new PointZone(spatial.position);
 			
 			_simpleShot = new SimpleShot();
 			initializeEmitter(_simpleShot, _emitLocation);

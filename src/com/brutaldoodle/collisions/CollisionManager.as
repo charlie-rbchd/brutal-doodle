@@ -39,11 +39,13 @@ package com.brutaldoodle.collisions
 			_zones[CollisionType.ALLY]		= _allies;
 		}
 		
+		/* not working...
 		public function reset ():void {
 			for each (var zonesVector:Vector.<Zone2D> in _zones) {
 				zonesVector = new Vector.<Zone2D>();
 			}
 		}
+		*/
 		
 		public function registerForCollisions (zone:Zone2D, type:String):void {
 			_zones[type].push(zone);

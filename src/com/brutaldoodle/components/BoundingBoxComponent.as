@@ -1,7 +1,6 @@
 package com.brutaldoodle.components
 {
 	import com.brutaldoodle.collisions.CollisionManager;
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.EntityComponent;
 	
 	import flash.geom.Point;
@@ -16,7 +15,7 @@ package com.brutaldoodle.components
 		private var _top:Number;
 		private var _right:Number;
 		private var _bottom:Number;
-		public var collisionType:String;
+		private var _collisionType:String;
 		
 		public function BoundingBoxComponent()
 		{
@@ -39,8 +38,13 @@ package com.brutaldoodle.components
 			);
 		}
 		
-		override protected function onAdd():void{
-			//CollisionManager.instance.registerForCollisions(this, _collisionType);
+		public function set collisionType (type:String):void {
+			_collisionType = type;
+			CollisionManager.instance.registerForCollisions(this, _collisionType);
+		}
+		
+		public function get collisionType ():String {
+			return _collisionType;
 		}
 		
 		// Zone2D Implementation, this code is for most parts the same as Flint's RectangleZone source code

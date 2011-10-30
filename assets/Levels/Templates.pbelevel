@@ -40,8 +40,6 @@
 			<reference>@Render.spriteIndex</reference>
 		</component>
 		
-		
-		
 		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>0.25</normal>
@@ -56,7 +54,6 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
 		</component>
-		
 	</template>
 	
 	
@@ -74,13 +71,21 @@
 	<template name="basicInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="basicInvaderSpriteSheet"/>
 		</component>
+		
+		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>4000</minTime>
+				<maxTime>10000</maxTime>
+			</timeBetweenThinks>
+		</component>
 	</template>
-   
-	  
+	
+	
 	<!--Juggernaut-->
 	<entity name="juggernautInvaderSpriteSheet">
 		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
@@ -95,6 +100,7 @@
 	<template name="juggernautInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="juggernautInvaderSpriteSheet"/>
@@ -116,6 +122,7 @@
 	<template name="cyborgInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="cyborgInvaderSpriteSheet"/>
@@ -137,6 +144,7 @@
 	<template name="beamerInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="beamerInvaderSpriteSheet"/>
@@ -158,6 +166,7 @@
 	<template name="butterflyInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="butterflyInvaderSpriteSheet"/>
@@ -179,6 +188,7 @@
 	<template name="cannibalInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="cannibalInvaderSpriteSheet"/>
@@ -200,6 +210,7 @@
 	<template name="warperInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="warperInvaderSpriteSheet"/>

@@ -48,6 +48,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy2" template="cyborgInvader">
@@ -69,6 +70,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy3" template="cannibalInvader">
@@ -90,6 +92,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy4" template="cyborgInvader">
@@ -111,6 +114,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy5" template="basicInvader">
@@ -132,6 +136,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy6" template="basicInvader">
@@ -153,6 +158,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy7" template="cyborgInvader">
@@ -174,6 +180,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy8" template="cannibalInvader">
@@ -195,6 +202,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy9" template="cyborgInvader">
@@ -216,6 +224,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy10" template="basicInvader">
@@ -237,6 +246,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							FIRST ROW	END												-->
@@ -262,6 +272,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy12" template="basicInvader">
@@ -283,6 +294,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy13" template="cannibalInvader">
@@ -304,6 +316,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy14" template="warperInvader">
@@ -325,6 +338,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy15" template="butterflyInvader">
@@ -346,6 +360,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy16" template="butterflyInvader">
@@ -367,6 +382,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy17" template="warperInvader">
@@ -388,6 +404,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy18" template="cannibalInvader">
@@ -409,6 +426,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy19" template="basicInvader">
@@ -430,6 +448,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy20" template="butterflyInvader">
@@ -451,6 +470,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							SECOND ROW	END												-->
@@ -476,6 +496,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy22" template="warperInvader">
@@ -497,6 +518,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy23" template="cannibalInvader">
@@ -518,6 +540,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy24" template="juggernautInvader">
@@ -539,6 +562,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy25" template="basicInvader">
@@ -560,6 +584,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy26" template="basicInvader">
@@ -581,6 +606,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy27" template="juggernautInvader">
@@ -602,6 +628,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy28" template="cannibalInvader">
@@ -623,6 +650,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy29" template="warperInvader">
@@ -644,6 +672,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy30" template="juggernautInvader">
@@ -665,6 +694,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							THIRD ROW	END												-->
@@ -690,6 +720,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy32" template="juggernautInvader">
@@ -711,6 +742,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy33" template="juggernautInvader">
@@ -732,6 +764,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy34" template="beamerInvader">
@@ -753,6 +786,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy35" template="juggernautInvader">
@@ -774,6 +808,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy36" template="juggernautInvader">
@@ -795,6 +830,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy37" template="beamerInvader">
@@ -816,6 +852,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy38" template="juggernautInvader">
@@ -837,6 +874,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy39" template="juggernautInvader">
@@ -858,6 +896,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy40" template="beamerInvader">
@@ -879,6 +918,7 @@
 				<width>50</width>
 				<height>50</height>
 			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							FOURTH ROW	END												-->

@@ -1,5 +1,6 @@
 package com.brutaldoodle.components
 {
+	import com.brutaldoodle.entities.Projectile;
 	import com.brutaldoodle.rendering.CanonShotRenderer;
 	import com.pblabs.animation.AnimationEvent;
 	import com.pblabs.animation.Animator;
@@ -56,19 +57,7 @@ package com.brutaldoodle.components
 			else
 			{
 				if (PBE.isKeyDown(InputKey.SPACE)) {
-					var projectile:IEntity = PBE.allocateEntity();
-					projectile.initialize();
-					
-					var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
-					spatial.position = new Point(0, 0);
-					projectile.addComponent(spatial, "Spatial");
-					
-					var renderer:CanonShotRenderer = new CanonShotRenderer();
-					renderer.scene = PBE.scene;
-					renderer.layerIndex = 1;
-					renderer.positionProperty = new PropertyReference("@Spatial.position");
-					renderer.addEmitters();
-					projectile.addComponent(renderer, "Render");
+					var p:Projectile = new Projectile(CanonShotRenderer, owner);
 					
 					// shoot
 					_shootAnimation.start(0, 26, 0.05, AnimatorType.PLAY_ANIMATION_ONCE);

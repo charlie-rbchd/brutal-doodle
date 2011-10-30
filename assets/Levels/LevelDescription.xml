@@ -1,11 +1,18 @@
 <levelDescriptions>
 	<level index="0">
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
 		<file filename="../assets/Levels/MainMenu.pbelevel"/>
 		<group name="MainMenuData"/>
 	</level>
 	<level index="1">
 		<file filename="../assets/Levels/Templates.pbelevel"/>
 		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
 		<file filename="../assets/Levels/Level1.pbelevel"/>
 		<group name="Level1Data"/>
 	</level>

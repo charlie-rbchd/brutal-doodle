@@ -1,6 +1,7 @@
 package com.brutaldoodle.components
 {
 	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.collisions.CollisionType;
 	import com.brutaldoodle.events.CollisionEvent;
 	import com.pblabs.engine.core.LevelManager;
 	import com.pblabs.engine.entity.EntityComponent;
@@ -23,15 +24,13 @@ package com.brutaldoodle.components
 		override protected function onRemove():void
 		{
 			super.onRemove();
+			CollisionManager.instance.stopCollisionsWith(owner.lookupComponentByName("Collisions") as BoundingBoxComponent, CollisionType.ENEMY);
 			CollisionManager.instance.removeEventListener(CollisionEvent.COLLISION_OCCURED, loadLevel);
 		}
 		
 		
-		protected function loadLevel(event:CollisionEvent):void
+		private function loadLevel(event:CollisionEvent):void
 		{
-			//WE NEED TO FIX THE HIT BOX OF THE BUTTON
-			//LevelManager.instance.unloadCurrentLevel();
-			//CollisionManager.instance.reset();
 			LevelManager.instance.loadLevel(level, true);
 		}
 	}

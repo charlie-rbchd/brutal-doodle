@@ -1,5 +1,6 @@
 package com.brutaldoodle.rendering
 {
+	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.DisplayObjectRenderer;
 	
 	import flash.display.Sprite;
@@ -23,6 +24,8 @@ package com.brutaldoodle.rendering
 		private var _height:Number;
 		
 		protected var _emitters:Vector.<Emitter2D>;
+		
+		public var trueOwner:IEntity;
 		
 		public function FlintBitmapRenderer(width:Number=960, height:Number=680)
 		{

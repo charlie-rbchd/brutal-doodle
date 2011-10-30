@@ -18,17 +18,17 @@ package com.brutaldoodle.emitters
 		
 		protected override function onCollide (event:ParticleEvent):void {
 			super.onCollide(event);
-			
 			event.particle.isDead = true;
+			
 			var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
 			
 			if (owner != null) {
 				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
-				health.damage(_damageAmount * health.damageMagnitude);
+				health.damage(_damageAmount);
 				
 				if (health.isDead) {
 					PBE.lookup("Canon").destroy();
-					CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+					CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.PLAYER);
 				}
 			}
 		}
