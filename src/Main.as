@@ -4,6 +4,7 @@ package
 	import com.brutaldoodle.components.BoundingBoxComponent;
 	import com.brutaldoodle.components.CanonController;
 	import com.brutaldoodle.components.ChangeStateOnDamaged;
+	import com.brutaldoodle.components.DropBloodOnBeingHit;
 	import com.brutaldoodle.components.EnemyMobilityComponent;
 	import com.brutaldoodle.components.PlayerController;
 	import com.brutaldoodle.components.ai.NormalShotAI;
@@ -39,15 +40,16 @@ package
 			PBE.registerType(com.brutaldoodle.components.ChangeStateOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.LoadLevelOnCollision);
 			PBE.registerType(com.brutaldoodle.components.EnemyMobilityComponent);
+			PBE.registerType(com.brutaldoodle.components.DropBloodOnBeingHit);
+			
+			// start the factory!
+			PBE.startup(this);
 			
 			// resources are collected directly from the files instead of being embedded in the .swf
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
 			
 			// empty vectors are created to hold the many hitboxes it will contain later on
 			CollisionManager.instance.initialize();
-			
-			// start the factory!
-			PBE.startup(this);
 			
 			// creates the scene on which PBE can draw display objects
 			createScene();

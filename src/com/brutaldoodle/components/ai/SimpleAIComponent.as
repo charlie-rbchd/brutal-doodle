@@ -7,23 +7,28 @@ package com.brutaldoodle.components.ai
 	public class SimpleAIComponent extends EntityComponent
 	{
 		public var timeBetweenThinks:Interval;
-		
+		public var isThinking:Boolean;
 		
 		public function SimpleAIComponent()
 		{
 			super();
+			isThinking = true;
 		}
 		
 		override protected function onAdd():void
 		{
 			super.onAdd();
 			
-			PBE.processManager.schedule(timeBetweenThinks.getTime(), owner, think);
+			if (isThinking) {
+				PBE.processManager.schedule(timeBetweenThinks.getTime(), owner, think);
+			}
 		}
 		
 		protected function think():void
 		{
-			PBE.processManager.schedule(timeBetweenThinks.getTime(), owner, think);
+			if (isThinking) {
+				PBE.processManager.schedule(timeBetweenThinks.getTime(), owner, think);
+			}
 		}
 	}
 }

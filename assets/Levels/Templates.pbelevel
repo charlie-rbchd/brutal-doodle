@@ -50,6 +50,8 @@
 		
 		<component type="com.brutaldoodle.components.ChangeStateOnDamaged" name="StateChanger"></component>
 		
+		<component type="com.brutaldoodle.components.DropBloodOnBeingHit" name="Bleed"></component>
+		
 		<component type="com.brutaldoodle.components.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
