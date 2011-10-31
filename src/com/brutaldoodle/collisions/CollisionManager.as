@@ -1,6 +1,6 @@
 package com.brutaldoodle.collisions
 {
-	import com.brutaldoodle.components.BoundingBoxComponent;
+	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.events.CollisionEvent;
 	
 	import flash.events.EventDispatcher;

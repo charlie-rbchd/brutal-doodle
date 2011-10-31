@@ -1,5 +1,4 @@
 <things version="1">
-
 	<entity name="Background">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -41,7 +40,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-475</x>
 				<y>-330</y>
@@ -63,7 +62,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-415</x>
 				<y>-330</y>
@@ -85,7 +84,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-355</x>
 				<y>-330</y>
@@ -107,7 +106,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-295</x>
 				<y>-330</y>
@@ -129,7 +128,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-235</x>
 				<y>-330</y>
@@ -151,7 +150,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-175</x>
 				<y>-330</y>
@@ -173,7 +172,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-115</x>
 				<y>-330</y>
@@ -195,7 +194,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-55</x>
 				<y>-330</y>
@@ -217,7 +216,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>5</x>
 				<y>-330</y>
@@ -239,7 +238,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>65</x>
 				<y>-330</y>
@@ -265,7 +264,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-475</x>
 				<y>-245</y>
@@ -287,7 +286,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-415</x>
 				<y>-245</y>
@@ -309,7 +308,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-355</x>
 				<y>-245</y>
@@ -331,7 +330,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-295</x>
 				<y>-245</y>
@@ -353,7 +352,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-235</x>
 				<y>-245</y>
@@ -375,7 +374,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-175</x>
 				<y>-245</y>
@@ -397,7 +396,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-115</x>
 				<y>-245</y>
@@ -419,7 +418,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-55</x>
 				<y>-245</y>
@@ -441,7 +440,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>5</x>
 				<y>-245</y>
@@ -463,7 +462,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>65</x>
 				<y>-245</y>
@@ -489,7 +488,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-475</x>
 				<y>-185</y>
@@ -511,7 +510,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-415</x>
 				<y>-185</y>
@@ -533,7 +532,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-355</x>
 				<y>-185</y>
@@ -555,7 +554,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-295</x>
 				<y>-185</y>
@@ -577,7 +576,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-235</x>
 				<y>-185</y>
@@ -599,7 +598,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-175</x>
 				<y>-185</y>
@@ -621,7 +620,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-115</x>
 				<y>-185</y>
@@ -643,7 +642,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-55</x>
 				<y>-185</y>
@@ -665,7 +664,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>5</x>
 				<y>-185</y>
@@ -687,7 +686,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>65</x>
 				<y>-185</y>
@@ -713,7 +712,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-475</x>
 				<y>-125</y>
@@ -735,7 +734,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-415</x>
 				<y>-125</y>
@@ -757,7 +756,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-355</x>
 				<y>-125</y>
@@ -779,7 +778,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-295</x>
 				<y>-125</y>
@@ -801,7 +800,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-235</x>
 				<y>-125</y>
@@ -823,7 +822,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-175</x>
 				<y>-125</y>
@@ -845,7 +844,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-115</x>
 				<y>-125</y>
@@ -867,7 +866,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-55</x>
 				<y>-125</y>
@@ -889,7 +888,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>5</x>
 				<y>-125</y>
@@ -911,7 +910,7 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>65</x>
 				<y>-125</y>

@@ -1,7 +1,7 @@
 package com.brutaldoodle.rendering
 {
-	import com.brutaldoodle.components.CanonController;
-	import com.brutaldoodle.components.PlayerController;
+	import com.brutaldoodle.components.controllers.CanonController;
+	import com.brutaldoodle.components.controllers.PlayerController;
 	import com.brutaldoodle.effects.Bullet;
 	import com.brutaldoodle.effects.Smoke;
 	import com.pblabs.engine.PBE;

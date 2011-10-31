@@ -1,12 +1,12 @@
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
-	import com.brutaldoodle.components.BoundingBoxComponent;
-	import com.brutaldoodle.components.CanonController;
-	import com.brutaldoodle.components.ChangeStateOnDamaged;
-	import com.brutaldoodle.components.DropBloodOnDamaged;
-	import com.brutaldoodle.components.EnemyMobilityComponent;
-	import com.brutaldoodle.components.PlayerController;
+	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
+	import com.brutaldoodle.components.controllers.CanonController;
+	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
+	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
+	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
+	import com.brutaldoodle.components.controllers.PlayerController;
 	import com.brutaldoodle.components.ai.NormalShotAI;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
@@ -34,14 +34,14 @@ package
 			PBE.registerType(com.pblabs.rendering2D.spritesheet.CellCountDivider);
 			
 			PBE.registerType(com.brutaldoodle.components.ai.NormalShotAI);
-			PBE.registerType(com.brutaldoodle.components.CanonController);
-			PBE.registerType(com.brutaldoodle.components.PlayerController);
-			PBE.registerType(com.brutaldoodle.components.BoundingBoxComponent);
-			PBE.registerType(com.brutaldoodle.components.ChangeStateOnDamaged);
-			PBE.registerType(com.brutaldoodle.components.LoadLevelOnCollision);
-			PBE.registerType(com.brutaldoodle.components.EnemyMobilityComponent);
-			PBE.registerType(com.brutaldoodle.components.DropBloodOnDamaged);
-			PBE.registerType(com.brutaldoodle.components.DisplayTextOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
+			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
+			PBE.registerType(com.brutaldoodle.components.collisions.BoundingBoxComponent);
+			PBE.registerType(com.brutaldoodle.components.collisions.ChangeStateOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnCollision);
+			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
+			PBE.registerType(com.brutaldoodle.components.collisions.DropBloodOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTextOnDamaged);
 			
 			// start the factory!
 			PBE.startup(this);
@@ -56,7 +56,7 @@ package
 			createScene();
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage

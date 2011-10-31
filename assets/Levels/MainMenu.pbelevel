@@ -83,7 +83,7 @@
 			<spriteSheet componentReference="idleButton1SpriteSheet"/>
 		</component>
 		
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-480</x>
 				<y>-262.5</y>
@@ -93,7 +93,7 @@
 			<collisionType>enemy</collisionType>
 		</component>
 		
-		<component type="com.brutaldoodle.components.LoadLevelOnCollision" name="Loader">
+		<component type="com.brutaldoodle.components.collisions.LoadLevelOnCollision" name="Loader">
 			<level>1</level>
 		</component>
 	</entity>

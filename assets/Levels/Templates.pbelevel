@@ -48,11 +48,11 @@
 			</damageModifier>
 		</component>
 		
-		<component type="com.brutaldoodle.components.ChangeStateOnDamaged" name="StateChanger"></component>
+		<component type="com.brutaldoodle.components.collisions.ChangeStateOnDamaged" name="StateChanger"></component>
 		
-		<component type="com.brutaldoodle.components.DropBloodOnDamaged" name="Bleed"></component>
+		<component type="com.brutaldoodle.components.collisions.DropBloodOnDamaged" name="Bleed"></component>
 		
-		<component type="com.brutaldoodle.components.EnemyMobilityComponent" name="Move">
+		<component type="com.brutaldoodle.components.ai.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
 		</component>

@@ -73,7 +73,7 @@
 			<defaultAnimation>Idle_Normal</defaultAnimation>
 		</component>
 		
-		<component type="com.brutaldoodle.components.BoundingBoxComponent" name="Collisions">
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-50</x>
 				<y>240</y>
@@ -85,9 +85,12 @@
 		
 		<component type="com.pblabs.components.basic.HealthComponent" name="Health"></component>
 		
-		<component type="com.brutaldoodle.components.DisplayTextOnDamaged" name="DamageText"></component>
+		<component type="com.brutaldoodle.components.collisions.DisplayTextOnDamaged" name="DamageText">
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+		</component>
 		
-		<component type="com.brutaldoodle.components.PlayerController" name="Input">
+		<component type="com.brutaldoodle.components.controllers.PlayerController" name="Input">
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
@@ -114,7 +117,7 @@
 			<scene componentReference="MainScene"/>
 		</component>
 		
-		<component type="com.brutaldoodle.components.CanonController" name="Input">
+		<component type="com.brutaldoodle.components.controllers.CanonController" name="Input">
 			<canonOffset>@Render.positionOffset</canonOffset>
 			<positionProperty>@Render.position</positionProperty>
 		</component>

@@ -2,7 +2,7 @@ package com.brutaldoodle.emitters
 {
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.collisions.CollisionType;
-	import com.brutaldoodle.components.BoundingBoxComponent;
+	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.pblabs.components.basic.HealthComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.IEntity;
