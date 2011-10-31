@@ -1,7 +1,6 @@
 package com.brutaldoodle.emitters
 {
 	import com.brutaldoodle.collisions.CollisionManager;
-	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.events.CollisionEvent;
 	
 	import flash.utils.getQualifiedSuperclassName;

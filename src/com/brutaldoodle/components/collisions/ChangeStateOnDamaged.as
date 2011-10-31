@@ -1,4 +1,4 @@
-package com.brutaldoodle.components.collisions
+	package com.brutaldoodle.components.collisions
 {
 	import com.pblabs.animation.AnimationEvent;
 	import com.pblabs.animation.Animator;

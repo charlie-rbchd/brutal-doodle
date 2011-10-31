@@ -31,7 +31,7 @@ package com.brutaldoodle.effects
 			counter = new Blast(5);
 			
 			addInitializer( new SharedImage( new Dot( 3 ) ) );
-			addInitializer( new ColorInit(0xffff0000, 0xff820303) );
+			addInitializer( new ColorInit(0xff00ff00, 0xff038203) );
 			addInitializer( new Position( new RectangleZone(-20, 10, 20, 30 ) ) );
 			addInitializer( new ScaleAllInit( 0.5, 1.5 ) );
 			addInitializer( new Velocity(new DiscSectorZone( new Point(0,0), 200, 150, Maths.asRadians(80), Maths.asRadians(100) ) ) );

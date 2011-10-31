@@ -18,6 +18,8 @@ package com.brutaldoodle.effects
 		{
 			super();
 			
+			_damageAmount = 25;
+			
 			counter = new Blast(1);
 			
 			var bullet:Sprite = new Sprite();
@@ -25,7 +27,7 @@ package com.brutaldoodle.effects
 			bullet.addChild( new Dot(2, 0xDDDDDD) );
 			
 			addInitializer( new SharedImage( bullet ) );
-			addInitializer( new Velocity( new PointZone( new Point(0, -150) ) ) );
+			addInitializer( new Velocity( new PointZone( new Point(0, -250) ) ) );
 			
 			addAction( new Move() );
 		}

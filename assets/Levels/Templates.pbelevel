@@ -1,7 +1,5 @@
 <things version="1">
-	
 	<template name="invaderTemplate">
-		
 		<component type="com.pblabs.animation.AnimatorComponent" name="Animator">
 			<animations childType="com.pblabs.animation.Animator">
 				<notInjured>
@@ -40,14 +38,6 @@
 			<reference>@Render.spriteIndex</reference>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
-			<damageModifier>
-				<normal>0.25</normal>
-				<oneShotKill>Infinity</oneShotKill>
-				<noDamage>0</noDamage>
-			</damageModifier>
-		</component>
-		
 		<component type="com.brutaldoodle.components.collisions.ChangeStateOnDamaged" name="StateChanger"></component>
 		
 		<component type="com.brutaldoodle.components.collisions.DropBloodOnDamaged" name="Bleed"></component>
@@ -79,6 +69,14 @@
 			<spriteSheet componentReference="basicInvaderSpriteSheet"/>
 		</component>
 		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
+		</component>
+		
 		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
 			<timeBetweenThinks>
 				<minTime>4000</minTime>
@@ -98,6 +96,7 @@
 			<image filename="../assets/Images/Juggernaut.png"/>
 		</component>
 	</entity>
+	
 
 	<template name="juggernautInvader" template="invaderTemplate">		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
@@ -106,6 +105,14 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="juggernautInvaderSpriteSheet"/>
+		</component>
+		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>0.75</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
 		</component>
 	</template>
 	  
@@ -129,6 +136,14 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="cyborgInvaderSpriteSheet"/>
 		</component>
+		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
+		</component>
 	</template>
 	  
 	  
@@ -150,6 +165,14 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="beamerInvaderSpriteSheet"/>
+		</component>
+		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1.50</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
 		</component>
 	</template>
 	  
@@ -173,6 +196,14 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="butterflyInvaderSpriteSheet"/>
 		</component>
+		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1.50</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
+		</component>
 	</template>
 	  
 	  
@@ -194,6 +225,14 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="cannibalInvaderSpriteSheet"/>
+		</component>
+		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
 		</component>
 	</template>
 	  
@@ -217,6 +256,14 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<spriteSheet componentReference="warperInvaderSpriteSheet"/>
 		</component>
+		
+		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
+		</component>
 	</template>
 	  
 	  
@@ -229,5 +276,4 @@
 		<objectReference name="cannibalInvaderSpriteSheet"/>
 		<objectReference name="warperInvaderSpriteSheet"/>
 	</group>
-	
 </things>

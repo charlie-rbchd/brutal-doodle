@@ -1,13 +1,13 @@
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
+	import com.brutaldoodle.components.ai.NormalShotAI;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
-	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
-	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
+	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.controllers.PlayerController;
-	import com.brutaldoodle.components.ai.NormalShotAI;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.core.LevelManager;

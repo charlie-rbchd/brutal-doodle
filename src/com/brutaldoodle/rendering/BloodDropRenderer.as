@@ -3,7 +3,6 @@ package com.brutaldoodle.rendering
 	import com.brutaldoodle.effects.Blood;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
-	import flash.filters.BlurFilter;
 	import flash.filters.ColorMatrixFilter;
 	
 	import org.flintparticles.twoD.emitters.Emitter2D;

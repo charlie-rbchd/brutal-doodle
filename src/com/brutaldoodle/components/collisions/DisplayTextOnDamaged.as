@@ -1,5 +1,6 @@
 package com.brutaldoodle.components.collisions
 {
+	import com.brutaldoodle.components.animations.MoveUpAndFadeComponent;
 	import com.pblabs.components.basic.HealthEvent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.EntityComponent;
@@ -11,7 +12,6 @@ package com.brutaldoodle.components.collisions
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import com.brutaldoodle.components.animations.MoveUpAndFadeComponent;
 	
 	public class DisplayTextOnDamaged extends EntityComponent
 	{

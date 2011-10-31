@@ -8,15 +8,13 @@ package com.brutaldoodle.components.controllers
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.core.InputKey;
-	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
-	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
 	import flash.geom.Point;
 	
 	public class CanonController extends TickedComponent
 	{	
-		public static var reloadSpeed:Number;
+		public static var reloadSpeed:Number = 0.2;
 		
 		public var canonOffset:PropertyReference;
 		public var positionProperty:PropertyReference;
@@ -30,8 +28,6 @@ package com.brutaldoodle.components.controllers
 		public function CanonController()
 		{
 			super();
-			CanonController.reloadSpeed = 1;
-			
 			_shootAnimation = new Animator();
 			_reloadAnimation = new Animator();
 		}

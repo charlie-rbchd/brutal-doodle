@@ -1,5 +1,4 @@
 <things version="1">
-
 	<entity name="Background">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
