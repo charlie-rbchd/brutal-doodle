@@ -3,6 +3,7 @@ package
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.NormalShotAI;
+	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
@@ -42,6 +43,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.collisions.DropBloodOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTextOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			
 			// start the factory!
 			PBE.startup(this);

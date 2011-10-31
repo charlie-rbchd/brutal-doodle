@@ -7,13 +7,9 @@ package com.brutaldoodle.effects
 	import org.flintparticles.common.counters.Blast;
 	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.ColorInit;
-	import org.flintparticles.common.initializers.ColorsInit;
 	import org.flintparticles.common.initializers.SharedImage;
 	import org.flintparticles.common.utils.Maths;
-	import org.flintparticles.twoD.actions.Accelerate;
-	import org.flintparticles.twoD.actions.Friction;
 	import org.flintparticles.twoD.actions.Move;
-	import org.flintparticles.twoD.activities.FollowMouse;
 	import org.flintparticles.twoD.initializers.Position;
 	import org.flintparticles.twoD.initializers.ScaleAllInit;
 	import org.flintparticles.twoD.initializers.Velocity;

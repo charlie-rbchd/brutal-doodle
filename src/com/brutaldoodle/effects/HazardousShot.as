@@ -7,34 +7,30 @@ package com.brutaldoodle.effects
 	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.ColorInit;
 	import org.flintparticles.common.initializers.SharedImage;
-	
-	import org.flintparticles.twoD.actions.BoundingBox;
 	import org.flintparticles.twoD.actions.GravityWell;
-	import org.flintparticles.twoD.actions.MutualGravity;
 	import org.flintparticles.twoD.actions.Move;
 	import org.flintparticles.twoD.initializers.Position;
 	import org.flintparticles.twoD.zones.RectangleZone;
-	import org.flintparticles.twoD.actions.Accelerate;
 	
 	public class HazardousShot extends PlayerCollidableEmitter
 	{
-		private var _posX:Number = 0;
-		private var _posY:Number = -300;
+		//private var _posX:Number = 0;
+		//private var _posY:Number = -300;
 		
 		public function HazardousShot()
 		{
 			super();
 			
-			counter = new Blast( 10 );
+			counter = new Blast(10);
 			
-			addInitializer( new SharedImage( new Dot( 1 ) ) );
-			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new RectangleZone( -25, -25, 25, 25 ) ) );
-			addAction( new GravityWell(100,_posX,_posY,50 ) );
+			addInitializer( new SharedImage( new Dot(1) ) );
+			addInitializer( new ColorInit(0xFFFF00FF, 0xFF00FFFF) );
+			addInitializer( new Position( new RectangleZone(-25, -25, 25, 25) ) );
+			addAction( new GravityWell(100, 0, 300, 50) );
 		
 			addAction( new Move() );
 		}
-		
+		/*
 		public function set posX(pX:Number):void {
 			_posX = pX;
 			//_posX = (this.actions[0] as GravityWell).x = (this.actions[1] as GravityWell).x = (this.actions[2] as GravityWell).x  = pX;
@@ -47,5 +43,6 @@ package com.brutaldoodle.effects
 		
 		public function get posX():Number { return _posX; }
 		public function get posY():Number { return _posY; }
+		*/
 	}
 }

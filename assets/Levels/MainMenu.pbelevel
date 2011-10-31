@@ -16,13 +16,35 @@
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<fileName>../assets/Images/background_menu.jpg</fileName>
-			<zIndex>-1</zIndex>
+			<layerIndex>1</layerIndex>
 		</component>
 	</entity>
 	
 	<entity name="BackgroundMusic">
 		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
 			<musicUrl>../assets/Sounds/menu.mp3</musicUrl>
+		</component>
+	</entity>
+	
+	<entity name="Logo">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>-70</y>
+			</position>
+			<size type="">
+				<x>348</x>
+				<y>150</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<layerIndex>2</layerIndex>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<fileName>../assets/Images/logo.png</fileName>
 		</component>
 	</entity>
 	
@@ -39,7 +61,7 @@
 				
 				<hover>
 					<animationType>LOOP_ANIMATION</animationType>
-					<duration>1</duration>
+					<duration>0.5</duration>
 					<repeatCount>-1</repeatCount>
 					<startValue type="int">0</startValue>
 					<targetValue type="int">2</targetValue>
@@ -47,6 +69,11 @@
 			</animations>
 			<defaultAnimation>idle</defaultAnimation>
 			<reference>@Render.spriteIndex</reference>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer" name="StateChange">
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
 		</component>
 	</template>
 	
@@ -213,6 +240,7 @@
 	<group name="MainMenuData">
 		<objectReference name="Background"/>
 		<objectReference name="BackgroundMusic"/>
+		<objectReference name="Logo"/>
 		<groupReference name="SpriteSheets"/>
 		<groupReference name="Buttons"/>	
 	</group>
