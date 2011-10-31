@@ -85,6 +85,8 @@
 		
 		<component type="com.pblabs.components.basic.HealthComponent" name="Health"></component>
 		
+		<component type="com.brutaldoodle.components.DisplayTextOnDamaged" name="DamageText"></component>
+		
 		<component type="com.brutaldoodle.components.PlayerController" name="Input">
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>

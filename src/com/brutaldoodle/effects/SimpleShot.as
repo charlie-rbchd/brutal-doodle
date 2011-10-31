@@ -17,7 +17,7 @@ package com.brutaldoodle.effects
 		{
 			super();
 			
-			_damageAmount = 25;
+			_damageAmount = 10;
 			
 			counter = new Blast(1);
 			

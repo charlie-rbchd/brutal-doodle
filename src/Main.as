@@ -4,7 +4,7 @@ package
 	import com.brutaldoodle.components.BoundingBoxComponent;
 	import com.brutaldoodle.components.CanonController;
 	import com.brutaldoodle.components.ChangeStateOnDamaged;
-	import com.brutaldoodle.components.DropBloodOnBeingHit;
+	import com.brutaldoodle.components.DropBloodOnDamaged;
 	import com.brutaldoodle.components.EnemyMobilityComponent;
 	import com.brutaldoodle.components.PlayerController;
 	import com.brutaldoodle.components.ai.NormalShotAI;
@@ -40,7 +40,8 @@ package
 			PBE.registerType(com.brutaldoodle.components.ChangeStateOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.LoadLevelOnCollision);
 			PBE.registerType(com.brutaldoodle.components.EnemyMobilityComponent);
-			PBE.registerType(com.brutaldoodle.components.DropBloodOnBeingHit);
+			PBE.registerType(com.brutaldoodle.components.DropBloodOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.DisplayTextOnDamaged);
 			
 			// start the factory!
 			PBE.startup(this);
@@ -55,7 +56,7 @@ package
 			createScene();
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage
