@@ -24,7 +24,7 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
-		protected function onDamaged (event:HealthEvent):void {
+		private function onDamaged (event:HealthEvent):void {
 			var p:Projectile = new Projectile(BloodDropRenderer, owner);
 		}
 	}

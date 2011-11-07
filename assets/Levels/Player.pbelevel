@@ -78,7 +78,7 @@
 				<x>-50</x>
 				<y>240</y>
 				<width>100</width>
-				<height>82.5</height>
+				<height>55</height>
 			</zone>
 			<collisionType>player</collisionType>
 		</component>

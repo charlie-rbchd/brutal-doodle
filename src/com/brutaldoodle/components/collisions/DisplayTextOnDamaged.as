@@ -35,8 +35,11 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
-		protected function onDamaged (event:HealthEvent):void
+		private function onDamaged (event:HealthEvent):void
 		{
+			var damageDone:Number = event.delta;
+			if (damageDone == 0) return;
+			
 			var position:Point = owner.getProperty(positionProperty);
 			var size:Point = owner.getProperty(sizeProperty);
 			
@@ -48,12 +51,11 @@ package com.brutaldoodle.components.collisions
 			spatial.size = new Point(25, 25);
 			
 			label.addComponent(spatial, "Spatial");
-			
+					
 			var textformat:TextFormat = new TextFormat("Arial", 10, 0xffffff);
-			
 			var text:TextField = new TextField();
 			text.defaultTextFormat = textformat;
-			text.text = String(event.delta);
+			text.text = String(damageDone);
 			text.width = 25;
 			text.height = 25;
 			
@@ -64,7 +66,6 @@ package com.brutaldoodle.components.collisions
 			render.scene = PBE.scene;
 			
 			label.addComponent(render, "Render");
-			
 			
 			var tween:MoveUpAndFadeComponent = new MoveUpAndFadeComponent();
 			tween.positionProperty = new PropertyReference("@Spatial.position");

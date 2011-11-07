@@ -2,6 +2,7 @@ package com.brutaldoodle.rendering
 {
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.DisplayObjectRenderer;
+	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
@@ -11,6 +12,7 @@ package com.brutaldoodle.rendering
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.Position;
 	import org.flintparticles.twoD.renderers.BitmapRenderer;
+	import org.flintparticles.twoD.zones.PointZone;
 	import org.flintparticles.twoD.zones.RectangleZone;
 	import org.flintparticles.twoD.zones.Zone2D;
 	
@@ -51,10 +53,17 @@ package com.brutaldoodle.rendering
 		
 		protected function initializeEmitter(emitter:Emitter2D, position:Zone2D=null):void {
 			emitter.addAction( new DeathZone( new RectangleZone(-_width/2, -_height/2, _width, _height), true) );
+			
+			var _emitLocation:Zone2D;
 			if (position != null) {
-				emitter.addInitializer( new Position( position ) );
+				_emitLocation = position;
+			} else if (trueOwner != null) {
+				_emitLocation = new PointZone( (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position );
+			} else {
+				return;
 			}
 			
+			emitter.addInitializer( new Position( _emitLocation ));
 			_emitters.push(emitter);
 			emitter.start();
 		}

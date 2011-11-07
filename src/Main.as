@@ -7,6 +7,8 @@ package
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
+	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
+	import com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged;
 	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.controllers.PlayerController;
 	import com.pblabs.animation.AnimatorComponent;
@@ -16,6 +18,7 @@ package
 	import com.pblabs.rendering2D.AnimationControllerInfo;
 	import com.pblabs.rendering2D.SpriteSheetRenderer;
 	import com.pblabs.rendering2D.spritesheet.CellCountDivider;
+	import com.pblabs.rendering2D.ui.PBLabel;
 	import com.pblabs.rendering2D.ui.SceneView;
 	import com.pblabs.sound.BackgroundMusicComponent;
 	
@@ -33,6 +36,7 @@ package
 			PBE.registerType(com.pblabs.rendering2D.AnimationController);
 			PBE.registerType(com.pblabs.rendering2D.AnimationControllerInfo);
 			PBE.registerType(com.pblabs.rendering2D.spritesheet.CellCountDivider);
+			PBE.registerType(com.pblabs.rendering2D.ui.PBLabel);
 			
 			PBE.registerType(com.brutaldoodle.components.ai.NormalShotAI);
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
@@ -44,6 +48,8 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.DropBloodOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTextOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
+			PBE.registerType(com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.collisions.DropCoinOnDeath);
 			
 			// start the factory!
 			PBE.startup(this);
@@ -58,7 +64,7 @@ package
 			createScene();
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage

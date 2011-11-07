@@ -42,6 +42,8 @@
 		
 		<component type="com.brutaldoodle.components.collisions.DropBloodOnDamaged" name="Bleed"></component>
 		
+		<component type="com.brutaldoodle.components.collisions.DropCoinOnDeath" name="Coin"></component>
+		
 		<component type="com.brutaldoodle.components.ai.EnemyMobilityComponent" name="Move">
 			<positionProperty>@Spatial.position</positionProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
@@ -79,8 +81,8 @@
 		
 		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
 			<timeBetweenThinks>
-				<minTime>4000</minTime>
-				<maxTime>10000</maxTime>
+				<minTime>6000</minTime>
+				<maxTime>12000</maxTime>
 			</timeBetweenThinks>
 		</component>
 	</template>
@@ -113,6 +115,13 @@
 				<oneShotKill>Infinity</oneShotKill>
 				<noDamage>0</noDamage>
 			</damageModifier>
+		</component>
+		
+		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>10000</minTime>
+				<maxTime>18000</maxTime>
+			</timeBetweenThinks>
 		</component>
 	</template>
 	  

@@ -32,20 +32,16 @@ package com.brutaldoodle.collisions
 			_allies = new Vector.<Zone2D>();
 			_neutrals = new Vector.<Zone2D>();
 			
-			_zones = new Dictionary();
+			_zones = new Dictionary(true);
 			_zones[CollisionType.NEUTRAL]	= _neutrals;
 			_zones[CollisionType.PLAYER]	= _players;
 			_zones[CollisionType.ENEMY]		= _enemies;
 			_zones[CollisionType.ALLY]		= _allies;
 		}
 		
-		/* not working...
 		public function reset ():void {
-			for each (var zonesVector:Vector.<Zone2D> in _zones) {
-				zonesVector = new Vector.<Zone2D>();
-			}
+			initialize();
 		}
-		*/
 		
 		public function registerForCollisions (zone:Zone2D, type:String):void {
 			_zones[type].push(zone);

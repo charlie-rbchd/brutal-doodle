@@ -2,14 +2,12 @@ package com.brutaldoodle.rendering
 {
 	
 	import com.brutaldoodle.effects.SimpleShot;
-	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
-	import org.flintparticles.twoD.zones.PointZone;
+	import org.flintparticles.twoD.emitters.Emitter2D;
 	
 	public class SimpleShotRenderer extends FlintBitmapRenderer
 	{
-		
-		private var _simpleShot:SimpleShot;
+		private var _simpleShot:Emitter2D;
 		
 		public function SimpleShotRenderer()
 		{
@@ -18,17 +16,10 @@ package com.brutaldoodle.rendering
 		
 		override public function addEmitters():void
 		{
-			var render:FlintBitmapRenderer = owner.lookupComponentByName("Render") as FlintBitmapRenderer;
+			_simpleShot = new SimpleShot();
+			initializeEmitter(_simpleShot);
 			
-			if (render.trueOwner != null) {
-				var spatial:SimpleSpatialComponent = (render.trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent);
-				var _emitLocation:PointZone = new PointZone(spatial.position);
-				
-				_simpleShot = new SimpleShot();
-				initializeEmitter(_simpleShot, _emitLocation);
-				
-				super.addEmitters();
-			}
+			super.addEmitters();
 		}
 	}
 }

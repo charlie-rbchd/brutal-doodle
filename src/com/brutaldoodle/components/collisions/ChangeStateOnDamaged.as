@@ -55,7 +55,7 @@
 			_currentAnimation.addEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 		}
 		
-		protected function onRepeat(event:AnimationEvent):void
+		private function onRepeat(event:AnimationEvent):void
 		{
 			_currentAnimation.removeEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 			_currentAnimation.start(_currentAnimation.targetValue - 9, _currentAnimation.targetValue, 4, AnimatorType.LOOP_ANIMATION, -1);

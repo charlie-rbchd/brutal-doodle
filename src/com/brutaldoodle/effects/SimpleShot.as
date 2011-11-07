@@ -23,7 +23,6 @@ package com.brutaldoodle.effects
 			
 			addInitializer( new SharedImage( new Dot( 3 ) ) );
 			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addInitializer( new Position( new RectangleZone( 0, 0, 0, 0 ) ) );
 			addAction( new Accelerate( 0, 100 ) );
 			addAction( new Move() );
 		}

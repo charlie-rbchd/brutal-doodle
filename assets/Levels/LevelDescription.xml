@@ -14,6 +14,9 @@
 		<file filename="../assets/Levels/Player.pbelevel"/>
 		<group name="PlayerData"/>
 		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
 		<file filename="../assets/Levels/Level1.pbelevel"/>
 		<group name="Level1Data"/>
 	</level>

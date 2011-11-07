@@ -31,6 +31,7 @@ package com.brutaldoodle.components.collisions
 		
 		private function loadLevel(event:CollisionEvent):void
 		{
+			CollisionManager.instance.reset();
 			LevelManager.instance.loadLevel(level, true);
 		}
 	}

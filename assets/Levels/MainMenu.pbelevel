@@ -15,7 +15,7 @@
 		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
-			<fileName>../assets/Images/background_menu.jpg</fileName>
+			<fileName>../assets/Images/BackgroundMenu.jpg</fileName>
 			<layerIndex>1</layerIndex>
 		</component>
 	</entity>

@@ -17,10 +17,8 @@ package com.brutaldoodle.rendering
 		
 		override public function addEmitters():void
 		{
-			var _emitLocation:PointZone = new PointZone(new Point(0, -300));	
-			
 			_hazardousShot = new HazardousShot();
-			initializeEmitter(_hazardousShot, _emitLocation);
+			initializeEmitter(_hazardousShot);
 			
 			super.addEmitters();
 		}
