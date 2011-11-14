@@ -24,6 +24,7 @@ package com.brutaldoodle.emitters
 			_damageAmount = 100;
 			_actionOnCollision = CollidableEmitter.DEAL_DAMAGE;
 			
+			// The name of the unit type is retrieved from the child classes name
 			var unitName:String = getQualifiedSuperclassName(this).replace(/.*::(.*)CollidableEmitter/, "$1").toLowerCase();
 			var units:Vector.<Zone2D> = CollisionManager.instance.getCollidableObjectsByType(unitName);
 			

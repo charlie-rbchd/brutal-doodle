@@ -173,6 +173,60 @@
 		</component>
 	</entity>
 	
+	<entity name="GameOverScreen">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/GameOver.png</fileName>
+			<layerIndex>20</layerIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.LoadLevelOnKeypress" name="LoadLevel">
+			<level>0</level>
+			<alphaProperty>@Render.alpha</alphaProperty>
+		</component>
+	</entity>
+	
+	<entity name="VictoryScreen">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Victory.png</fileName>
+			<layerIndex>20</layerIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.LoadLevelOnKeypress" name="LoadLevel">
+			<level>-1</level>
+			<alphaProperty>@Render.alpha</alphaProperty>
+		</component>
+	</entity>
+	
 	<group name="Hearts">
 		<objectReference name="Heart1"/>
 		<objectReference name="Heart2"/>
@@ -185,6 +239,8 @@
 		<objectReference name="HealthBar"/>
 		<objectReference name="Coin"/>
 		<objectReference name="AmountOfCoins"/>
+		<objectReference name="GameOverScreen"/>
+		<objectReference name="VictoryScreen"/>
 		<groupReference name="Hearts"/>
 	</group>
 </things>

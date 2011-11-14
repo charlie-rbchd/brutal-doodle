@@ -2,8 +2,8 @@ package com.brutaldoodle.emitters
 {
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.collisions.CollisionType;
+	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
-	import com.pblabs.components.basic.HealthComponent;
 	import com.pblabs.engine.entity.IEntity;
 	
 	import org.flintparticles.common.events.ParticleEvent;

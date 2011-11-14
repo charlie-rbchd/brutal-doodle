@@ -4,6 +4,7 @@ package com.brutaldoodle.components.ai
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
+	import com.pblabs.rendering2D.SpriteRenderer;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -38,6 +39,7 @@ package com.brutaldoodle.components.ai
 			
 			if (_gameOver) {
 				owner.destroy();
+				(PBE.lookupComponentByName("GameOverScreen", "Render") as SpriteRenderer).alpha = 1;
 				return;
 			}
 			
@@ -131,7 +133,8 @@ package com.brutaldoodle.components.ai
 				}
 				
 			} else {
-				// last enemy died!	
+				var victoryScreen:SpriteRenderer = PBE.lookupComponentByName("VictoryScreen", "Render") as SpriteRenderer;
+				if (victoryScreen != null) victoryScreen.alpha = 1;
 			}
 		}
 	}

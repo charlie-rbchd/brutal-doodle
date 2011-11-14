@@ -71,7 +71,7 @@
 			<spriteSheet componentReference="basicInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>1</normal>
 				<oneShotKill>Infinity</oneShotKill>
@@ -109,7 +109,7 @@
 			<spriteSheet componentReference="juggernautInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>0.75</normal>
 				<oneShotKill>Infinity</oneShotKill>
@@ -146,7 +146,7 @@
 			<spriteSheet componentReference="cyborgInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>1</normal>
 				<oneShotKill>Infinity</oneShotKill>
@@ -176,7 +176,7 @@
 			<spriteSheet componentReference="beamerInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>1.50</normal>
 				<oneShotKill>Infinity</oneShotKill>
@@ -206,7 +206,7 @@
 			<spriteSheet componentReference="butterflyInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>1.50</normal>
 				<oneShotKill>Infinity</oneShotKill>
@@ -236,7 +236,7 @@
 			<spriteSheet componentReference="cannibalInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>1</normal>
 				<oneShotKill>Infinity</oneShotKill>
@@ -266,7 +266,7 @@
 			<spriteSheet componentReference="warperInvaderSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<damageModifier>
 				<normal>1</normal>
 				<oneShotKill>Infinity</oneShotKill>

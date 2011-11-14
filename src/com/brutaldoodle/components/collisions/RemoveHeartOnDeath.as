@@ -1,18 +1,15 @@
 package com.brutaldoodle.components.collisions
 {
-	import com.pblabs.components.basic.HealthComponent;
+	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.collisions.CollisionType;
+	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.pblabs.components.basic.HealthEvent;
 	import com.pblabs.engine.PBE;
-	import com.pblabs.engine.components.GroupManagerComponent;
 	import com.pblabs.engine.core.LevelEvent;
-	import com.pblabs.engine.core.LevelManager;
-	import com.pblabs.engine.core.PBGroup;
-	import com.pblabs.engine.debug.Logger;
+	import com.pblabs.engine.core.TemplateManager;
 	import com.pblabs.engine.entity.EntityComponent;
 	import com.pblabs.engine.entity.IEntity;
-	import com.pblabs.engine.mxml.GroupReference;
-	
-	import flash.events.Event;
+	import com.pblabs.rendering2D.SpriteRenderer;
 	
 	public class RemoveHeartOnDeath extends EntityComponent
 	{
@@ -33,6 +30,7 @@ package com.brutaldoodle.components.collisions
 		
 		private function registerHearts(event:LevelEvent):void
 		{
+			PBE.levelManager.removeEventListener(LevelEvent.LEVEL_LOADED_EVENT, registerHearts);
 			var heart:IEntity, i:int = 1;
 			
 			while (heart = PBE.lookup("Heart"+i) as IEntity) {
@@ -49,15 +47,17 @@ package com.brutaldoodle.components.collisions
 		
 		private function removeHeart (event:HealthEvent):void {
 			var length:int = _hearts.length
-			if(length){
+			if (length) {
 				_hearts[length-1].destroy();
 				_hearts.pop();
 				var healthComponent:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
-				healthComponent.health = healthComponent.maxHealth;
-				Logger.print(this, String(healthComponent.isDead));
-				//healthComponent.
+				healthComponent.heal(healthComponent.maxHealth);
+			} else {
+				CollisionManager.instance.stopCollisionsWith(owner.lookupComponentByName("Collisions") as BoundingBoxComponent, CollisionType.PLAYER);
+				owner.destroy();
+				PBE.lookup("Canon").destroy();
+				(PBE.lookupComponentByName("GameOverScreen", "Render") as SpriteRenderer).alpha = 1;
 			}
-			
 		}
 	}
 }

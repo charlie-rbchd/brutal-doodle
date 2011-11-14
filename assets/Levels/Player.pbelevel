@@ -83,7 +83,7 @@
 			<collisionType>player</collisionType>
 		</component>
 		
-		<component type="com.pblabs.components.basic.HealthComponent" name="Health">
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<destroyOnDeath>false</destroyOnDeath>
 		</component>
 		
