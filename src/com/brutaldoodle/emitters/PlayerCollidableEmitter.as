@@ -8,6 +8,9 @@ package com.brutaldoodle.emitters
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
+	import com.pblabs.rendering2D.DisplayObjectRenderer;
+	
+	import flash.text.TextField;
 	
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.twoD.particles.Particle2D;
@@ -23,21 +26,32 @@ package com.brutaldoodle.emitters
 			super.onCollide(event);
 			event.particle.isDead = true;
 			
-			if (_damageAmount == 0) {
-				// update the amount of coins if its a coin that collided with the player
-			}
-			
-			var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
-			
-			if (owner != null) {
-				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
-				health.damage(_damageAmount);
+			switch(_actionOnCollision){
 				
-				if (health.isDead) {
-					PBE.lookup("Canon").destroy();
-					CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.PLAYER);
-				}
+				case CollidableEmitter.UPDATE_MONEY_COUNT:
+					var coins:TextField = (PBE.lookupComponentByName("AmountOfCoins", "Render") as DisplayObjectRenderer).displayObject as TextField;
+					coins.text = String(int(coins.text)+_damageAmount);
+					
+					break;
+				case CollidableEmitter.DEAL_DAMAGE:				
+					var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
+					
+					if (owner != null) {
+						var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
+						health.damage(_damageAmount);
+						/*
+						if (health.isDead) {
+							PBE.lookup("Canon").destroy();
+							CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.PLAYER);
+						}
+						*/
+					}
+					break;
+				default:
+					throw new Error("maudit attarder(jpense que jo yer mad)");
+			
 			}
+			
 		}
 	}
 }

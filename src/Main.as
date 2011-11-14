@@ -13,6 +13,7 @@ package
 	import com.brutaldoodle.components.controllers.PlayerController;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.components.GroupManagerComponent;
 	import com.pblabs.engine.core.LevelManager;
 	import com.pblabs.rendering2D.AnimationController;
 	import com.pblabs.rendering2D.AnimationControllerInfo;
@@ -37,6 +38,7 @@ package
 			PBE.registerType(com.pblabs.rendering2D.AnimationControllerInfo);
 			PBE.registerType(com.pblabs.rendering2D.spritesheet.CellCountDivider);
 			PBE.registerType(com.pblabs.rendering2D.ui.PBLabel);
+			PBE.registerType(com.pblabs.engine.components.GroupManagerComponent);
 			
 			PBE.registerType(com.brutaldoodle.components.ai.NormalShotAI);
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
@@ -50,6 +52,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.DropCoinOnDeath);
+			PBE.registerType(com.brutaldoodle.components.collisions.RemoveHeartOnDeath);
 			
 			// start the factory!
 			PBE.startup(this);

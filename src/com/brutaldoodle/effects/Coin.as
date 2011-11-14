@@ -1,5 +1,6 @@
 package com.brutaldoodle.effects
 {
+	import com.brutaldoodle.emitters.CollidableEmitter;
 	import com.brutaldoodle.emitters.PlayerCollidableEmitter;
 	
 	import flash.display.Bitmap;
@@ -23,15 +24,16 @@ package com.brutaldoodle.effects
 		{
 			super();
 			
-			_damageAmount = 0;
+			_damageAmount = 12;
+			_actionOnCollision = CollidableEmitter.UPDATE_MONEY_COUNT;
 			
 			counter = new Blast(1);
 			
 			var coin:Bitmap = new CoinAsset();
 			
-			addInitializer( new CollisionRadiusInit(coin.height) );
+			addInitializer( new CollisionRadiusInit(coin.height-2) );
 			addInitializer( new SharedImage( coin ) );
-			addInitializer( new Velocity( new PointZone( new Point(0, 75) ) ) );
+			addInitializer( new Velocity( new PointZone( new Point(0, 85) ) ) );
 			addInitializer( new Position( new PointZone( new Point(coin.width/2, 0) ) ) );
 			addAction( new Move() );
 		}

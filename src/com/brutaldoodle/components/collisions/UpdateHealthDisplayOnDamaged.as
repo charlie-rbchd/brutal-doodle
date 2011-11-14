@@ -2,6 +2,7 @@ package com.brutaldoodle.components.collisions
 {
 	import com.pblabs.components.basic.HealthEvent;
 	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.EntityComponent;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
@@ -24,7 +25,15 @@ package com.brutaldoodle.components.collisions
 		{
 			super.onAdd();
 			(PBE.lookup("Player") as IEntity).eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
+			(PBE.lookup("Player") as IEntity).eventDispatcher.addEventListener(HealthEvent.HEALED, onHealed);
 			_baseSizeX = (owner.getProperty(sizeProperty) as Point).x;
+		}
+		
+		private function onHealed(event:HealthEvent):void
+		{
+			
+			//TO-DO
+			Logger.print(this, "HEALED");
 		}
 		
 		override protected function onRemove():void

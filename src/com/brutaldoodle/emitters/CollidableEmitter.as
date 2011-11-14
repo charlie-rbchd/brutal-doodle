@@ -12,13 +12,17 @@ package com.brutaldoodle.emitters
 	
 	public class CollidableEmitter extends Emitter2D
 	{
+		public static const DEAL_DAMAGE:String = "dealDamage";
+		public static const UPDATE_MONEY_COUNT:String = "updateMoneyCount";
 		protected var _damageAmount:Number;
+		protected var _actionOnCollision:String;
 		
 		public function CollidableEmitter()
 		{
 			super();
 			
 			_damageAmount = 100;
+			_actionOnCollision = CollidableEmitter.DEAL_DAMAGE;
 			
 			var unitName:String = getQualifiedSuperclassName(this).replace(/.*::(.*)CollidableEmitter/, "$1").toLowerCase();
 			var units:Vector.<Zone2D> = CollisionManager.instance.getCollidableObjectsByType(unitName);
