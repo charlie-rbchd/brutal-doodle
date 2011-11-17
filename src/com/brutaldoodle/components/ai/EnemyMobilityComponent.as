@@ -131,7 +131,6 @@ package com.brutaldoodle.components.ai
 						_bottomEnemy = currentOwner;
 					}
 				}
-				
 			} else {
 				var victoryScreen:SpriteRenderer = PBE.lookupComponentByName("VictoryScreen", "Render") as SpriteRenderer;
 				if (victoryScreen != null) victoryScreen.alpha = 1;

@@ -275,7 +275,6 @@
 		</component>
 	</template>
 	  
-	  
 	<group name="TemplatesData">
 		<objectReference name="basicInvaderSpriteSheet"/>
 		<objectReference name="juggernautInvaderSpriteSheet"/>

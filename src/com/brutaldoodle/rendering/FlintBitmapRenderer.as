@@ -46,7 +46,7 @@ package com.brutaldoodle.rendering
 			else return;
 			
 			emitter.addInitializer( new Position( _emitLocation ));
-			//emitter.addAction( new DeathZone(ParticleManager.instance.sceneBoundaries, true) );
+			emitter.addAction( new DeathZone(ParticleManager.instance.sceneBoundaries, true) );
 			_emitters.push(emitter);
 		}
 		

@@ -1,7 +1,6 @@
 package com.brutaldoodle.rendering
 {
 	import com.pblabs.engine.PBE;
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
 	import com.pblabs.rendering2D.DisplayObjectRenderer;

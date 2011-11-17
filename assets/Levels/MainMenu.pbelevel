@@ -29,12 +29,12 @@
 	<entity name="Logo">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
-				<x>0</x>
-				<y>-70</y>
+				<x>350</x>
+				<y>290</y>
 			</position>
 			<size type="">
-				<x>348</x>
-				<y>150</y>
+				<x>232</x>
+				<y>100</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
@@ -77,22 +77,22 @@
 		</component>
 	</template>
 	
-	<!--Button1-->
-	<entity name="idleButton1SpriteSheet">
+	<!--Button Tutoriel-->
+	<entity name="idleButtonTutorielSpriteSheet">
 		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
 			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
 				<xCount>2</xCount>
 				<yCount>1</yCount>
 			</divider>
-			<image filename="../assets/Images/Button1.png"/>
+			<image filename="../assets/Images/ButtonTutoriel.png"/>
 		</component>
 	</entity>
 	
-	<entity name="Button1" template="buttonTemplate">
+	<entity name="ButtonTutoriel" template="buttonTemplate">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position>
-				<x>-370</x>
-				<y>-210</y>
+				<x>-250</x>
+				<y>-185</y>
 			</position>
 			<size>
 				<x>220</x>
@@ -106,13 +106,13 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<layerIndex>7</layerIndex>
-			<spriteSheet componentReference="idleButton1SpriteSheet"/>
+			<spriteSheet componentReference="idleButtonTutorielSpriteSheet"/>
 		</component>
 		
 		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
-				<x>-480</x>
-				<y>-262.5</y>
+				<x>-360</x>
+				<y>-237.5</y>
 				<width>220</width>
 				<height>105</height>
 			</zone>
@@ -124,22 +124,22 @@
 		</component>
 	</entity>
 	
-	<!--Button2-->
-	<entity name="idleButton2SpriteSheet">
+	<!-- Button Debuter -->
+	<entity name="idleButtonDebuterSpriteSheet">
 		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
 			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
 				<xCount>2</xCount>
 				<yCount>1</yCount>
 			</divider>
-			<image filename="../assets/Images/Button2.png"/>
+			<image filename="../assets/Images/ButtonDebuter.png"/>
 		</component>
 	</entity>
 	
-	<entity name="Button2" template="buttonTemplate">
+	<entity name="ButtonDebuter" template="buttonTemplate">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
-				<x>-120</x>
-				<y>-210</y>
+				<x>0</x>
+				<y>-185</y>
 			</position>
 			<size type="">
 				<x>220</x>
@@ -153,26 +153,40 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<layerIndex>7</layerIndex>
-			<spriteSheet componentReference="idleButton2SpriteSheet"/>
+			<spriteSheet componentReference="idleButtonDebuterSpriteSheet"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<zone>
+				<x>-110</x>
+				<y>-237.5</y>
+				<width>220</width>
+				<height>105</height>
+			</zone>
+			<collisionType>enemy</collisionType>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.LoadLevelOnCollision" name="Loader">
+			<level>4</level>
 		</component>
 	</entity>
 	
-	<!--Button3-->
-	<entity name="idleButton3SpriteSheet">
+	<!-- Button Reglages -->
+	<entity name="idleButtonReglagesSpriteSheet">
 		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
 			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
 				<xCount>2</xCount>
 				<yCount>1</yCount>
 			</divider>
-			<image filename="../assets/Images/Button3.png"/>
+			<image filename="../assets/Images/ButtonReglages.png"/>
 		</component>
 	</entity>
 	
-	<entity name="Button3" template="buttonTemplate">
+	<entity name="ButtonReglages" template="buttonTemplate">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
-				<x>120</x>
-				<y>-210</y>
+				<x>250</x>
+				<y>-185</y>
 			</position>
 			<size type="">
 				<x>220</x>
@@ -186,55 +200,30 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<layerIndex>7</layerIndex>
-			<spriteSheet componentReference="idleButton3SpriteSheet"/>
-		</component>
-	</entity>
-	
-	<!--Button4-->
-	<entity name="idleButton4SpriteSheet">
-		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
-			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-				<xCount>2</xCount>
-				<yCount>1</yCount>
-			</divider>
-			<image filename="../assets/Images/Button4.png"/>
-		</component>
-	</entity>
-	
-	<entity name="Button4" template="buttonTemplate">
-		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
-			<position type="">
-				<x>370</x>
-				<y>-210</y>
-			</position>
-			<size type="">
-				<x>220</x>
-				<y>105</y>
-			</size>
-			<spatialManager componentReference="MainScene"/>
+			<spriteSheet componentReference="idleButtonReglagesSpriteSheet"/>
 		</component>
 		
-		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
-			<scene componentReference="MainScene"/>
-			<positionProperty>@Spatial.position</positionProperty>
-			<sizeProperty>@Spatial.size</sizeProperty>
-			<layerIndex>7</layerIndex>
-			<spriteSheet componentReference="idleButton4SpriteSheet"/>
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<zone>
+				<x>140</x>
+				<y>-237.5</y>
+				<width>220</width>
+				<height>105</height>
+			</zone>
+			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	
 	<group name="SpriteSheets">
-		<objectReference name="idleButton1SpriteSheet"/>
-		<objectReference name="idleButton2SpriteSheet"/>
-		<objectReference name="idleButton3SpriteSheet"/>
-		<objectReference name="idleButton4SpriteSheet"/>
+		<objectReference name="idleButtonTutorielSpriteSheet"/>
+		<objectReference name="idleButtonDebuterSpriteSheet"/>
+		<objectReference name="idleButtonReglagesSpriteSheet"/>
 	</group>
 	
 	<group name="Buttons">
-		<objectReference name="Button1"/>
-		<objectReference name="Button2"/>
-		<objectReference name="Button3"/>
-		<objectReference name="Button4"/>
+		<objectReference name="ButtonTutoriel"/>
+		<objectReference name="ButtonDebuter"/>
+		<objectReference name="ButtonReglages"/>
 	</group>
 	
 	<group name="MainMenuData">

@@ -67,9 +67,7 @@ package com.brutaldoodle.components.basic
 			
 			// Apply damage modifiers depending on the damageType param
 			if(damageType && damageModifier.hasOwnProperty(damageType))
-			{
 				amount *= damageModifier[damageType];
-			}
 			
 			// Apply the damage.
 			health -= amount;

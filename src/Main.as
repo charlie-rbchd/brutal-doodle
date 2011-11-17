@@ -6,7 +6,9 @@ package
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
 	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
+	import com.brutaldoodle.components.collisions.ChangeLevelOnArrow;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
+	import com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
 	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
 	import com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged;
@@ -28,7 +30,7 @@ package
 	
 	import flash.display.Sprite;
 	
-	[SWF(width="960", height="680", frameRate="30")]
+	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
 		public function Main()
@@ -55,6 +57,9 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.DropCoinOnDeath);
 			PBE.registerType(com.brutaldoodle.components.collisions.RemoveHeartOnDeath);
+			PBE.registerType(com.brutaldoodle.components.collisions.ChangeLevelOnArrow);
+			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged);
+			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnDeath);
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.basic.HealthComponent);
 			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
@@ -68,12 +73,12 @@ package
 			// creates the scene on which PBE can draw display objects
 			createScene();
 			
-			// singletons are initialized
+			// singletons are initialized : one for collisions mangement, one for particles management
 			ParticleManager.instance.initialize(stage.stageWidth, stage.stageHeight);
 			CollisionManager.instance.initialize();
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 3);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage

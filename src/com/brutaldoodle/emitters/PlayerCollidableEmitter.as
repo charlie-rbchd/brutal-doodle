@@ -23,15 +23,20 @@ package com.brutaldoodle.emitters
 			
 			switch (_actionOnCollision) {
 				case CollidableEmitter.UPDATE_MONEY_COUNT:
-					var coins:TextField = (PBE.lookupComponentByName("AmountOfCoins", "Render") as DisplayObjectRenderer).displayObject as TextField;
-					coins.text = String(int(coins.text)+_damageAmount);
+					var coinRenderer:DisplayObjectRenderer = PBE.lookupComponentByName("AmountOfCoins", "Render") as DisplayObjectRenderer;
+					if (coinRenderer != null) {
+						var coins:TextField = coinRenderer.displayObject as TextField;
+						coins.text = String(int(coins.text)+_damageAmount);
+					}
 					break;
 				case CollidableEmitter.DEAL_DAMAGE:				
 					var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
 					
 					if (owner != null) {
 						var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
-						health.damage(_damageAmount);
+						if (health != null) {
+							health.damage(_damageAmount);
+						}
 					}
 					break;
 				default:
