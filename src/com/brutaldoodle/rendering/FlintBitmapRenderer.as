@@ -1,78 +1,56 @@
 package com.brutaldoodle.rendering
 {
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
-	import com.pblabs.rendering2D.DisplayObjectRenderer;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
-	import flash.display.Sprite;
-	import flash.geom.Rectangle;
-	
-	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.twoD.actions.DeathZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.Position;
-	import org.flintparticles.twoD.renderers.BitmapRenderer;
 	import org.flintparticles.twoD.zones.PointZone;
-	import org.flintparticles.twoD.zones.RectangleZone;
 	import org.flintparticles.twoD.zones.Zone2D;
 	
-	public class FlintBitmapRenderer extends DisplayObjectRenderer
+	public class FlintBitmapRenderer
 	{
-		protected var _renderer:BitmapRenderer;
-		private var _emptyEmitters:uint;
-		private var _counterCompletedEmitters:uint;
-		
-		private var _width:Number;
-		private var _height:Number;
-		
 		protected var _emitters:Vector.<Emitter2D>;
+		
+		private var _counterCompletedEmitters:uint;
+		private var _emptyEmitters:uint;
 		
 		public var trueOwner:IEntity;
 		
-		public function FlintBitmapRenderer(width:Number=960, height:Number=680)
+		public function FlintBitmapRenderer()
 		{
 			super();
-			_width = width;
-			_height = height;
 			_emptyEmitters = 0;
 			_counterCompletedEmitters = 0;
 			_emitters = new Vector.<Emitter2D>();
-			_renderer = new BitmapRenderer( new Rectangle(-_width/2, -_height/2, _width, _height) );
-			_renderer.smoothing = false;
 		}
 		
 		public function addEmitters():void
 		{
 			for (var i:int=0; i < _emitters.length; i++) {
-				_renderer.addEmitter(_emitters[i]);
+				ParticleManager.instance.registerEmitter(_emitters[i]);
 				_emitters[i].addEventListener(EmitterEvent.EMITTER_EMPTY, destroyOwner, false, 0, true);
 				_emitters[i].addEventListener(EmitterEvent.COUNTER_COMPLETE, destroyOwner, false, 0, true);
 			}
-			
-			this.displayObject = _renderer;
 		}
 		
 		protected function initializeEmitter(emitter:Emitter2D, position:Zone2D=null):void {
-			emitter.addAction( new DeathZone( new RectangleZone(-_width/2, -_height/2, _width, _height), true) );
-			
 			var _emitLocation:Zone2D;
-			if (position != null) {
+			
+			if (position != null)
 				_emitLocation = position;
-			} else if (trueOwner != null) {
+			else if (trueOwner != null)
 				_emitLocation = new PointZone( (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position );
-			} else {
-				return;
-			}
+			else return;
 			
 			emitter.addInitializer( new Position( _emitLocation ));
+			//emitter.addAction( new DeathZone(ParticleManager.instance.sceneBoundaries, true) );
 			_emitters.push(emitter);
-			emitter.start();
 		}
 		
-		private function destroyOwner(event:EmitterEvent):void
-		{
+		private function destroyOwner(event:EmitterEvent):void {
 			var emitter:Emitter2D = event.target as Emitter2D;
 			
 			switch (event.type) {
@@ -85,19 +63,14 @@ package com.brutaldoodle.rendering
 					_counterCompletedEmitters++;
 			}
 			
+			if (emitter.counter.complete && !emitter.particles.length) {
+				ParticleManager.instance.removeEmitter(emitter);
+			}
+			
 			if (_emptyEmitters == _emitters.length && _counterCompletedEmitters == _emitters.length) {
-				emitter.killAllParticles();
-				emitter.stop();
 				_emitters = new Vector.<Emitter2D>();
-				
-				_renderer = null;
-				this.displayObject = null;
 				trueOwner = null;
-				
-				owner.destroy();
 			}
 		}
-		
-		public function get sprite ():Sprite { return _renderer as Sprite; }
 	}
 }

@@ -31,7 +31,7 @@ package com.brutaldoodle.effects
 			
 			var coin:Bitmap = new CoinAsset();
 			
-			addInitializer( new CollisionRadiusInit(coin.height) );
+			addInitializer( new CollisionRadiusInit(21) );
 			addInitializer( new SharedImage( coin ) );
 			addInitializer( new Velocity( new PointZone( new Point(0, 85) ) ) );
 			addInitializer( new Position( new PointZone( new Point(coin.width/2, 0) ) ) );

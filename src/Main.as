@@ -13,6 +13,7 @@ package
 	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.controllers.LoadLevelOnKeypress;
 	import com.brutaldoodle.components.controllers.PlayerController;
+	import com.brutaldoodle.rendering.ParticleManager;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.GroupManagerComponent;
@@ -64,11 +65,12 @@ package
 			// resources are collected directly from the files instead of being embedded in the .swf
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
 			
-			// empty vectors are created to hold the many hitboxes it will contain later on
-			CollisionManager.instance.initialize();
-			
 			// creates the scene on which PBE can draw display objects
 			createScene();
+			
+			// singletons are initialized
+			ParticleManager.instance.initialize(stage.stageWidth, stage.stageHeight);
+			CollisionManager.instance.initialize();
 			
 			// loads the main menu
 			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 1);

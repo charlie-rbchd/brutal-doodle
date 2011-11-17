@@ -17,10 +17,8 @@ package com.brutaldoodle.rendering
 		
 		override public function addEmitters():void
 		{
-			var render:FlintBitmapRenderer = owner.lookupComponentByName("Render") as FlintBitmapRenderer;
-			
-			if (render.trueOwner != null) {
-				var spatial:SimpleSpatialComponent = (render.trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent);
+			if (trueOwner != null) {
+				var spatial:SimpleSpatialComponent = (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent);
 				var _emitLocation:PointZone = new PointZone(spatial.position);
 				
 				_coin = new Coin();

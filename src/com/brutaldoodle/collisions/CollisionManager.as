@@ -33,10 +33,10 @@ package com.brutaldoodle.collisions
 			_neutrals = new Vector.<Zone2D>();
 			
 			_zones = new Dictionary(true);
-			_zones[CollisionType.NEUTRAL]	= _neutrals;
-			_zones[CollisionType.PLAYER]	= _players;
-			_zones[CollisionType.ENEMY]		= _enemies;
-			_zones[CollisionType.ALLY]		= _allies;
+			_zones[CollisionType.NEUTRAL] = _neutrals;
+			_zones[CollisionType.PLAYER] = _players;
+			_zones[CollisionType.ENEMY]	= _enemies;
+			_zones[CollisionType.ALLY] = _allies;
 		}
 		
 		public function reset ():void {
