@@ -1,0 +1,311 @@
+<things version="1">
+	<entity name="Background">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/BackgroundMenu.jpg</fileName>
+			<layerIndex>1</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="BackgroundMusic">
+		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
+			<musicUrl>../assets/Sounds/boss.mp3</musicUrl>
+		</component>
+	</entity>
+	
+	<!-- Label -->
+	<entity name="LabelStandard">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-200</x>
+				<y>-250</y>
+			</position>
+			<size type="">
+				<x>155</x>
+				<y>75</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/LabelStandard.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+
+	<entity name="LabelJuggernaut">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>200</x>
+				<y>-250</y>
+			</position>
+			<size type="">
+				<x>183</x>
+				<y>84</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/LabelJuggernaut.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+
+	<entity name="ArrowStandard">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-130</x>
+				<y>-180</y>
+			</position>
+			<size type="">
+				<x>75</x>
+				<y>40</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Arrow.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+
+	<entity name="ArrowJuggernaut">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>130</x>
+				<y>-180</y>
+			</position>
+			<size type="">
+				<x>75</x>
+				<y>40</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Arrow.png</fileName>
+			<scale>
+				<x>-1</x>
+				<y>1</y>
+			</scale>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="LabelMoreLife">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>390</x>
+				<y>-320</y>
+			</position>
+			<size type="">
+				<x>133</x>
+				<y>28</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/LabelMoreLife.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="ArrowMoreLife">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>280</x>
+				<y>-320</y>
+			</position>
+			<size type="">
+				<x>75</x>
+				<y>40</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Arrow.png</fileName>
+			<layerIndex>2</layerIndex>
+			<scale>
+				<x>1</x>
+				<y>-1</y>
+			</scale>
+		</component>
+	</entity>
+	
+	<entity name="TutoEnemy">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>330</x>
+				<y>50</y>
+			</position>
+			<size type="">
+				<x>280</x>
+				<y>291</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/TutoEnnemis.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="TutoPlayer">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-330</x>
+				<y>50</y>
+			</position>
+			<size type="">
+				<x>280</x>
+				<y>291</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/TutoJouabilite.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="BasicEnemy" template="tutoBasicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-50</x>
+				<y>-175</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<zone>
+				<x>-75</x>
+				<y>-175</y>
+				<width>50</width>
+				<height>50</height>
+			</zone>
+			<collisionType>enemy</collisionType>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged" name="Text">
+			<filePath>../assets/Images/LabelAcide.png</filePath>
+			<filePathArrow type="">../assets/Images/Arrow.png</filePathArrow>
+			<position type="">
+				<x>0</x>
+				<y>-100</y>
+			</position>
+			<size type="">
+				<x>352</x>
+				<y>32</y>
+			</size>
+			<sizeArrow type="">
+				<x>75</x>
+				<y>40</y>
+			</sizeArrow>
+		</component>
+	</entity>
+
+	<entity name="JuggernautEnemy" template="tutoJuggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>50</x>
+				<y>-175</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<zone>
+				<x>25</x>
+				<y>-175</y>
+				<width>50</width>
+				<height>50</height>
+			</zone>
+			<collisionType>enemy</collisionType>
+		</component>
+		<component type="com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged" name="Text">
+			<filePath>../assets/Images/LabelAcide.png</filePath>
+			<filePathArrow type="">../assets/Images/Arrow.png</filePathArrow>
+			<position type="">
+				<x>0</x>
+				<y>-100</y>
+			</position>
+			<size type="">
+				<x>352</x>
+				<y>32</y>
+			</size>
+			<sizeArrow type="">
+				<x>75</x>
+				<y>40</y>
+			</sizeArrow>
+		</component>
+	</entity>	
+	
+	<group name="Labels">
+		<objectReference name="LabelStandard"/>
+		<objectReference name="LabelJuggernaut"/>
+		<objectReference name="LabelMoreLife"/>
+	</group>
+	
+	<group name="Arrows">
+		<objectReference name="ArrowStandard"/>
+		<objectReference name="ArrowJuggernaut"/>
+		<objectReference name="ArrowMoreLife"/>
+	</group>
+	
+	<group name="Tutorials">
+		<objectReference name="TutoEnemy"/>
+		<objectReference name="TutoPlayer"/>
+	</group>
+	
+	<group name="Tuto2Data">
+		<objectReference name="Background"/>
+		<objectReference name="BackgroundMusic"/>
+		<objectReference name="BasicEnemy"/>
+		<objectReference name="JuggernautEnemy"/>
+		<groupReference name="Tutorials"/>
+		<groupReference name="Labels"/>
+		<groupReference name="Arrows"/>
+	</group>	
+</things>

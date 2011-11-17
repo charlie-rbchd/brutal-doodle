@@ -1,0 +1,128 @@
+<things version="1">
+	<template name="tutoInvaderTemplate">
+		<component type="com.pblabs.animation.AnimatorComponent" name="Animator">
+			<animations childType="com.pblabs.animation.Animator">
+				<notInjured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">0</startValue>
+					<targetValue type="int">9</targetValue>
+				</notInjured>
+				
+				<barelyInjured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">9</startValue>
+					<targetValue type="int">18</targetValue>
+				</barelyInjured>
+				
+				<injured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">18</startValue>
+					<targetValue type="int">27</targetValue>
+				</injured>
+				
+				<badlyInjured>
+					<animationType>LOOP_ANIMATION</animationType>
+					<duration>4</duration>
+					<repeatCount>-1</repeatCount>
+					<startValue type="int">27</startValue>
+					<targetValue type="int">36</targetValue>
+				</badlyInjured>
+			</animations>
+			<defaultAnimation>notInjured</defaultAnimation>
+			<reference>@Render.spriteIndex</reference>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.ChangeStateOnDamaged" name="StateChanger"></component>
+
+		<component type="com.brutaldoodle.components.collisions.DropBloodOnDamaged" name="Bleed"></component>
+		
+		<component type="com.brutaldoodle.components.collisions.DropCoinOnDeath" name="Coin"></component>
+		
+		<component type="com.brutaldoodle.components.collisions.LoadLevelOnDeath" name="LevelLoader">
+			<level>0</level>
+		</component>
+	</template>
+	
+	<!--Tuto Basic Invader-->
+	<entity name="basicInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Basic.png"/>
+		</component>
+	</entity>
+	
+	<template name="tutoBasicInvader" template="tutoInvaderTemplate">			
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<spriteSheet componentReference="basicInvaderSpriteSheet"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>1</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
+		</component>
+
+		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>6000</minTime>
+				<maxTime>12000</maxTime>
+			</timeBetweenThinks>
+		</component>
+	</template>
+	
+	<!--TutoJuggernaut-->
+	<entity name="juggernautInvaderSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>4</yCount>
+			</divider>
+			<image filename="../assets/Images/Juggernaut.png"/>
+		</component>
+	</entity>
+	
+	<template name="tutoJuggernautInvader" template="tutoInvaderTemplate">						
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<layerIndex>5</layerIndex>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<spriteSheet componentReference="juggernautInvaderSpriteSheet"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
+			<damageModifier>
+				<normal>0.75</normal>
+				<oneShotKill>Infinity</oneShotKill>
+				<noDamage>0</noDamage>
+			</damageModifier>
+		</component>
+
+		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>6000</minTime>
+				<maxTime>12000</maxTime>
+			</timeBetweenThinks>
+		</component>
+	</template>
+	  
+	<group name="TutoTemplatesData">
+		<objectReference name="basicInvaderSpriteSheet"/>
+		<objectReference name="juggernautInvaderSpriteSheet"/>
+	</group>
+</things>
