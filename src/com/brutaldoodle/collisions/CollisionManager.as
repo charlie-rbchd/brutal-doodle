@@ -45,7 +45,7 @@ package com.brutaldoodle.collisions
 		
 		public function registerForCollisions (zone:Zone2D, type:String):void {
 			_zones[type].push(zone);
-			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_REGISTERED));
+			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_REGISTERED, zone));
 		}
 		
 		public function stopCollisionsWith (zone:Zone2D, type:String):void {
@@ -57,7 +57,7 @@ package com.brutaldoodle.collisions
 				zones.splice(index, 1);
 			}
 			
-			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_UNREGISTERED));
+			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_UNREGISTERED, zone));
 		}
 		
 		public function getCollidableObjectsByType (type:String):Vector.<Zone2D> {

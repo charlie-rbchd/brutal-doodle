@@ -39,7 +39,7 @@ package com.brutaldoodle.emitters
 		
 		protected function onCollide (event:ParticleEvent):void
 		{
-			CollisionManager.instance.dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_OCCURED));
+			CollisionManager.instance.dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_OCCURED, event.otherObject));
 		}
 		
 		public function get damageAmount ():Number { return _damageAmount; }

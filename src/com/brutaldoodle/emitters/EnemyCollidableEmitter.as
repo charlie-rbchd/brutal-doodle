@@ -23,11 +23,12 @@ package com.brutaldoodle.emitters
 			
 			if (owner != null) {
 				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
-				
-				health.damage(_damageAmount, "normal");
-				
-				if (health.isDead) {
-					CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+				if (health != null) {
+					health.damage(_damageAmount, "normal");
+					
+					if (health.isDead) {
+						CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+					}
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 package com.brutaldoodle.rendering
 {
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.DisplayObjectRenderer;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
@@ -7,6 +8,7 @@ package com.brutaldoodle.rendering
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
 	
+	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.common.events.EmitterEvent;
 	import org.flintparticles.twoD.actions.DeathZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;
@@ -38,6 +40,7 @@ package com.brutaldoodle.rendering
 			_counterCompletedEmitters = 0;
 			_emitters = new Vector.<Emitter2D>();
 			_renderer = new BitmapRenderer( new Rectangle(-_width/2, -_height/2, _width, _height) );
+			_renderer.smoothing = false;
 		}
 		
 		public function addEmitters():void
@@ -83,6 +86,14 @@ package com.brutaldoodle.rendering
 			}
 			
 			if (_emptyEmitters == _emitters.length && _counterCompletedEmitters == _emitters.length) {
+				emitter.killAllParticles();
+				emitter.stop();
+				_emitters = new Vector.<Emitter2D>();
+				
+				_renderer = null;
+				this.displayObject = null;
+				trueOwner = null;
+				
 				owner.destroy();
 			}
 		}

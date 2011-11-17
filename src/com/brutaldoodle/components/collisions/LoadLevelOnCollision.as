@@ -31,8 +31,10 @@ package com.brutaldoodle.components.collisions
 		
 		private function loadLevel(event:CollisionEvent):void
 		{
-			CollisionManager.instance.reset();
-			LevelManager.instance.loadLevel(level, true);
+			if (event.zone == owner.lookupComponentByName("Collisions")) {
+				CollisionManager.instance.reset();
+				LevelManager.instance.loadLevel(level, true);
+			}
 		}
 	}
 }
