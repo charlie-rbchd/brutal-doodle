@@ -44,7 +44,7 @@
 			<layerIndex>2</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
-			<fileName>../assets/Images/logo.png</fileName>
+			<fileName>../assets/Images/Logo.png</fileName>
 		</component>
 	</entity>
 	
