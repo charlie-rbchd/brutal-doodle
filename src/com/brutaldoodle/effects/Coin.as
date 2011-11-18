@@ -16,6 +16,7 @@ package com.brutaldoodle.effects
 	
 	public class Coin extends PlayerCollidableEmitter
 	{
+		//embed the image of the particle
 		[Embed(source="assets/Images/Coin.png")]
 		private var CoinAsset:Class;
 		
@@ -23,12 +24,16 @@ package com.brutaldoodle.effects
 			super();
 			
 			_damageAmount = 12;
+			//Tell to the collision manager that this particle is money
 			_actionOnCollision = CollidableEmitter.UPDATE_MONEY_COUNT;
 			
+			//Generate one particle
 			counter = new Blast(1);
 			
+			//give the image to the particle
 			var coin:Bitmap = new CoinAsset();
 			
+			//give a radius for the collision with the boundingBox
 			addInitializer( new CollisionRadiusInit(30) );
 			addInitializer( new SharedImage( coin ) );
 			addInitializer( new Velocity( new PointZone( new Point(0, 85) ) ) );

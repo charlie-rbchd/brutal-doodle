@@ -11,6 +11,7 @@ package com.brutaldoodle.rendering
 		}
 		
 		override public function addEmitters():void {
+			//Start an emitter for any shot made by a butterfly (not yet implemented)
 			_hazardousShot = new HazardousShot();
 			initializeEmitter(_hazardousShot);
 			super.addEmitters();

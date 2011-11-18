@@ -13,6 +13,8 @@ package com.brutaldoodle.rendering
 		}
 		
 		override public function addEmitters():void {
+			//Was there for a nice blur effect but we worked on some class and this cannot work for now
+			//might try to reimplement this later on in the project
 			/*
 			_renderer.addFilter(new ColorMatrixFilter([
 				1, 0, 0, 0, 0, 0,
@@ -22,6 +24,7 @@ package com.brutaldoodle.rendering
 			]));
 			*/
 			
+			//Start an emitter anytime and invader his damaged
 			_blood = new Blood();
 			initializeEmitter(_blood);
 			super.addEmitters();

@@ -79,7 +79,7 @@ package
 			CollisionManager.instance.initialize();
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 5);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage

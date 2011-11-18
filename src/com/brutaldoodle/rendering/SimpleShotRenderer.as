@@ -14,6 +14,7 @@ package com.brutaldoodle.rendering
 		}
 		
 		override public function addEmitters():void {
+			//Start an emitter for any shot made by a basic invader
 			_simpleShot = new SimpleShot();
 			initializeEmitter(_simpleShot);
 			super.addEmitters();

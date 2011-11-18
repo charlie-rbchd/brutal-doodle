@@ -19,8 +19,11 @@ package com.brutaldoodle.effects
 			
 			_damageAmount = 25;
 			
+			//Generate one particle
 			counter = new Blast(1);
 			
+			//Make the withe dot in the black dot image for the particle
+			//so it's visible on any background
 			var bullet:Sprite = new Sprite();
 			bullet.addChild( new Dot(3, 0x222222) );
 			bullet.addChild( new Dot(2, 0xDDDDDD) );

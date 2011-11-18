@@ -19,16 +19,22 @@ package com.brutaldoodle.effects
 	public class Smoke extends Emitter2D
 	{
 		public function Smoke() {
+			//emmit one particle each 0.5 second (15 times)
 			counter = new TimePeriod(15, 0.5);
 			
 			addInitializer( new Lifetime( 2, 3 ) );
+			
+			//Generate the particle in a discSector (between a minimal angle and a maximal angle)
 			addInitializer( new Velocity( new DiscSectorZone(new Point(0, 0), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7) ) );
 			addInitializer( new SharedImage( new RadialDot(6) ) );
+			
+			//Give the particle a color between those 4
 			addInitializer( new ColorsInit( new Array(0x444444, 0x666666, 0x888888, 0xAAAAAA, 0xCCCCCC) ) );
 			
 			addAction( new Age(Quadratic.easeOut) );
 			addAction( new Move() );
 			addAction( new Fade(0.25, 0) );
+			//move hazardously instead of moving straight forward
 			addAction( new RandomDrift(15, 15) );
 		}
 	}

@@ -16,9 +16,11 @@ package com.brutaldoodle.effects
 			
 			_damageAmount = 10;
 			
+			//Generate one particle
 			counter = new Blast(1);
 			
 			addInitializer( new SharedImage( new Dot( 3 ) ) );
+			//Give the particle a color between those 2
 			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
 			addAction( new Accelerate( 0, 100 ) );
 			addAction( new Move() );

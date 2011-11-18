@@ -21,16 +21,16 @@
 			super.onAdd();
 			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 			_animator = owner.lookupComponentByName("Animator") as AnimatorComponent;
-			_currentState = "notInjured";
+			_currentState = "notInjured"; // default state that is displayed
 		}
 		
-		// 
 		private function onDamaged (event:HealthEvent):void {
 			var remainingLife:Number = event.amount;
 			if (remainingLife > 75) return;
 			
 			var startFrame:Number = _currentAnimation.currentValue + 9;
 			
+			// the display of a sprite is modified accordingly to its remaining life
 			if (remainingLife <= 25)
 			{
 				_currentState = "badlyInjured";
@@ -45,10 +45,12 @@
 			}
 			
 			_animator.play(_currentState, startFrame);
+			// the duration is adjusted in order to maintain a fluid transition between animation states
 			_currentAnimation.duration = (_currentAnimation.duration / 9) * (9 - startFrame % 9);
 			_currentAnimation.addEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 		}
 		
+		// reset the duration so that the next animation plays normally
 		private function onRepeat(event:AnimationEvent):void {
 			_currentAnimation.removeEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 			_currentAnimation.start(_currentAnimation.targetValue - 9, _currentAnimation.targetValue, 4, AnimatorType.LOOP_ANIMATION, -1);
