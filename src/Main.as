@@ -19,7 +19,9 @@ package
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.GroupManagerComponent;
+	import com.pblabs.engine.core.LevelEvent;
 	import com.pblabs.engine.core.LevelManager;
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.rendering2D.AnimationController;
 	import com.pblabs.rendering2D.AnimationControllerInfo;
 	import com.pblabs.rendering2D.SpriteSheetRenderer;
@@ -33,8 +35,7 @@ package
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
-		public function Main()
-		{
+		public function Main() {
 			// these types need to be registered in order to use them in pbelevel files
 			PBE.registerType(com.pblabs.engine.components.GroupManagerComponent);
 			PBE.registerType(com.pblabs.animation.AnimatorComponent);
@@ -78,7 +79,7 @@ package
 			CollisionManager.instance.initialize();
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 3);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 5);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage

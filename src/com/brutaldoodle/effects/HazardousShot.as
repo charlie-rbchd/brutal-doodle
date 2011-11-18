@@ -17,8 +17,7 @@ package com.brutaldoodle.effects
 		//private var _posX:Number = 0;
 		//private var _posY:Number = -300;
 		
-		public function HazardousShot()
-		{
+		public function HazardousShot() {
 			super();
 			
 			counter = new Blast(10);

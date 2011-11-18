@@ -17,8 +17,7 @@ package com.brutaldoodle.emitters
 		protected var _damageAmount:Number;
 		protected var _actionOnCollision:String;
 		
-		public function CollidableEmitter()
-		{
+		public function CollidableEmitter() {
 			super();
 			
 			_damageAmount = 100;
@@ -37,8 +36,7 @@ package com.brutaldoodle.emitters
 			addEventListener(ParticleEvent.ZONE_COLLISION, onCollide);
 		}
 		
-		protected function onCollide (event:ParticleEvent):void
-		{
+		protected function onCollide (event:ParticleEvent):void {
 			CollisionManager.instance.dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_OCCURED, event.otherObject));
 		}
 		

@@ -12,9 +12,7 @@ package com.brutaldoodle.components.collisions
 	import flash.geom.Point;
 	import flash.utils.Timer;
 	
-	//create a visual warning for the user to that acid is going to drop from the ennemy
-	public class DisplayTutorialOnDamaged extends EntityComponent
-	{
+	public class DisplayTutorialOnDamaged extends EntityComponent {
 		public var filePath:String;
 		public var filePathArrow:String;
 		public var position:Point;
@@ -28,25 +26,20 @@ package com.brutaldoodle.components.collisions
 		private static var arrowImage:IEntity = PBE.allocateEntity();
 		private static var arrowImage2:IEntity = PBE.allocateEntity();
 		
-		public function DisplayTutorialOnDamaged()
-		{
+		public function DisplayTutorialOnDamaged() {
 			super();
 		}
 		
-		override protected function onAdd():void
-		{	
+		override protected function onAdd():void {	
 			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
-		override protected function onRemove():void
-		{
+		override protected function onRemove():void {
 			owner.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
-		private function onDamaged (event:HealthEvent):void
-		{
-			if(DisplayTutorialOnDamaged.firstInstance == true)
-			{	
+		private function onDamaged (event:HealthEvent):void {
+			if(DisplayTutorialOnDamaged.firstInstance == true) {	
 				//text(warning)
 				var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 				spatial.spatialManager = PBE.spatialManager;
@@ -112,12 +105,10 @@ package com.brutaldoodle.components.collisions
 				DisplayTutorialOnDamaged.firstInstance = false;
 				DisplayTutorialOnDamaged.timerDestroy.addEventListener(TimerEvent.TIMER_COMPLETE,destroyDisplay);
 				DisplayTutorialOnDamaged.timerDestroy.start();
-				
 			}
 		}
 		
-		private function destroyDisplay(pEvt:TimerEvent):void
-		{
+		private function destroyDisplay(pEvt:TimerEvent):void {
 			DisplayTutorialOnDamaged.textImage.destroy();
 			DisplayTutorialOnDamaged.arrowImage.destroy();
 			DisplayTutorialOnDamaged.arrowImage2.destroy();

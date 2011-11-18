@@ -7,23 +7,21 @@ package com.brutaldoodle.components.collisions
 	
 	public class DropBloodOnDamaged extends EntityComponent
 	{
-		public function DropBloodOnDamaged()
-		{
+		public function DropBloodOnDamaged() {
 			super();
 		}
 		
-		override protected function onAdd():void
-		{
+		override protected function onAdd():void {
 			super.onAdd();
 			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
-		override protected function onRemove():void
-		{
+		override protected function onRemove():void {
 			super.onRemove();
 			owner.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
+		// drop blood when the owner is damaged, there's not much to it...
 		private function onDamaged (event:HealthEvent):void {
 			var p:Projectile = new Projectile(BloodDropRenderer, owner);
 		}

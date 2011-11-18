@@ -5,15 +5,12 @@ package com.brutaldoodle.components.ai
 
 	public class NormalShotAI extends SimpleAIComponent
 	{
-		public function NormalShotAI()
-		{
+		public function NormalShotAI() {
 			super();
 		}
 		
-		override protected function think():void
-		{
+		override protected function think():void {
 			super.think();
-			
 			// shot a projectile rendered by SimpleShotRenderer
 			var p:Projectile = new Projectile(SimpleShotRenderer, owner);
 		}	

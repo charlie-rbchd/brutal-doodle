@@ -263,6 +263,35 @@
 		</component>
 	</entity>
 	
+	<entity name="Arrow">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>230</x>
+				<y>250</y>
+			</position>
+			<size type="">
+				<x>120</x>
+				<y>83</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/ArrowBig.png</fileName>
+			<alpha>0.5</alpha>
+			<layerIndex>4</layerIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.ChangeLevelOnArrow" name="AlphaChange">
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<orientation>right</orientation>
+		</component>
+	</entity>
+	
 	<group name="SpriteSheets">
 		<objectReference name="idleShopKeeperSpriteSheet"/>
 		<objectReference name="numbersSpriteSheet"/>
@@ -287,6 +316,7 @@
 		<objectReference name="Background"/>
 		<objectReference name="Curtains"/>
 		<objectReference name="ShopKeeper"/>
+		<objectReference name="Arrow"/>
 		<groupReference name="SpriteSheets"/>
 		<groupReference name="Upgrades"/>
 		<groupReference name="UpgradeNumbers"/>

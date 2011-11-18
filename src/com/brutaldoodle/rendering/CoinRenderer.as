@@ -10,13 +10,11 @@ package com.brutaldoodle.rendering
 	{
 		private var _coin:Emitter2D;
 		
-		public function CoinRenderer()
-		{
+		public function CoinRenderer() {
 			super();
 		}
 		
-		override public function addEmitters():void
-		{
+		override public function addEmitters():void {
 			if (trueOwner != null) {
 				var spatial:SimpleSpatialComponent = (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent);
 				var _emitLocation:PointZone = new PointZone(spatial.position);

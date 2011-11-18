@@ -14,8 +14,7 @@ package com.brutaldoodle.effects
 	
 	public class Bullet extends EnemyCollidableEmitter
 	{
-		public function Bullet()
-		{
+		public function Bullet() {
 			super();
 			
 			_damageAmount = 25;

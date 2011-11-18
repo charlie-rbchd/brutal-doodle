@@ -12,8 +12,7 @@ package com.brutaldoodle.emitters
 	
 	public class PlayerCollidableEmitter extends CollidableEmitter
 	{
-		public function PlayerCollidableEmitter()
-		{
+		public function PlayerCollidableEmitter() {
 			super();
 		}
 		

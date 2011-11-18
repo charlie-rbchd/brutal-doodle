@@ -31,14 +31,8 @@
 		<group name="Tuto2Data"/>
 	</level>
 	
-	<!-- Shop -->
+	<!-- Level 1 -->
 	<level index="3">
-		<file filename="../assets/Levels/Shop.pbelevel"/>
-		<group name="ShopData"/>
-	</level>
-	
-	<!-- Levels -->
-	<level index="4">
 		<file filename="../assets/Levels/Templates.pbelevel"/>
 		<group name="TemplatesData"/>
 		
@@ -50,5 +44,29 @@
 		
 		<file filename="../assets/Levels/Level1.pbelevel"/>
 		<group name="Level1Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="4">
+		<file filename="../assets/Levels/TutoPlayer.pbelevel"/>
+		<group name="TutoPlayerData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 2 -->
+	<level index="5">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level2.pbelevel"/>
+		<group name="Level2Data"/>
 	</level>
 </levelDescriptions>

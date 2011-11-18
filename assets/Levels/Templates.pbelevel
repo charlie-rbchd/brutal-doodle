@@ -116,13 +116,14 @@
 				<noDamage>0</noDamage>
 			</damageModifier>
 		</component>
-		
+		<!--
 		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
 			<timeBetweenThinks>
 				<minTime>10000</minTime>
 				<maxTime>18000</maxTime>
 			</timeBetweenThinks>
 		</component>
+		-->
 	</template>
 	  
 	

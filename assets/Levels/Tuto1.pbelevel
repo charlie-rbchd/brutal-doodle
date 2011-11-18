@@ -76,6 +76,7 @@
 			<rotation>180</rotation>
 			<layerIndex>4</layerIndex>
 		</component>
+		
 		<component type="com.brutaldoodle.components.collisions.ChangeLevelOnArrow" name="AlphaChange">
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
@@ -105,6 +106,7 @@
 			<rotation>270</rotation>
 			<layerIndex>4</layerIndex>
 		</component>
+		
 		<component type="com.brutaldoodle.components.collisions.ChangeLevelOnArrow" name="AlphaChange">
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>

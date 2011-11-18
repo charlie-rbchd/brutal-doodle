@@ -5,8 +5,7 @@ package com.brutaldoodle.entities
 	
 	public class Projectile
 	{
-		public function Projectile(RendererClass:Class, owner:IEntity)
-		{
+		public function Projectile(RendererClass:Class, owner:IEntity) {
 			var renderer:FlintBitmapRenderer = new RendererClass();
 			renderer.trueOwner = owner;
 			renderer.addEmitters();

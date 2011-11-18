@@ -19,16 +19,14 @@ package com.brutaldoodle.rendering
 		
 		public var trueOwner:IEntity;
 		
-		public function FlintBitmapRenderer()
-		{
+		public function FlintBitmapRenderer() {
 			super();
 			_emptyEmitters = 0;
 			_counterCompletedEmitters = 0;
 			_emitters = new Vector.<Emitter2D>();
 		}
 		
-		public function addEmitters():void
-		{
+		public function addEmitters():void {
 			for (var i:int=0; i < _emitters.length; i++) {
 				ParticleManager.instance.registerEmitter(_emitters[i]);
 				_emitters[i].addEventListener(EmitterEvent.EMITTER_EMPTY, destroyOwner, false, 0, true);

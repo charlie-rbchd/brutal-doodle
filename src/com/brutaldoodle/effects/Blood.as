@@ -6,14 +6,11 @@ package com.brutaldoodle.effects
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.Blast;
-	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.ColorInit;
 	import org.flintparticles.common.initializers.SharedImage;
 	import org.flintparticles.common.utils.Maths;
 	import org.flintparticles.twoD.actions.Move;
-	import org.flintparticles.twoD.actions.RotateToDirection;
 	import org.flintparticles.twoD.initializers.Position;
-	import org.flintparticles.twoD.initializers.Rotation;
 	import org.flintparticles.twoD.initializers.ScaleAllInit;
 	import org.flintparticles.twoD.initializers.Velocity;
 	import org.flintparticles.twoD.zones.DiscSectorZone;
@@ -24,8 +21,7 @@ package com.brutaldoodle.effects
 		[Embed(source="assets/Images/Blood.png")]
 		private var BloodAsset:Class;
 		
-		public function Blood()
-		{
+		public function Blood() {
 			super();
 			
 			_damageAmount = 3;

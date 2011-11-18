@@ -9,8 +9,7 @@ package com.brutaldoodle.components.ai
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	public class EnemyMobilityComponent extends TickedComponent
-	{
+	public class EnemyMobilityComponent extends TickedComponent {
 		private const LATERAL_DISPLACEMENT:uint = 30;
 		private const VERTICAL_DISPLACEMENT:uint = 60;
 		
@@ -27,14 +26,12 @@ package com.brutaldoodle.components.ai
 		public var positionProperty:PropertyReference;
 		public var boundingBoxProperty:PropertyReference;
 		
-		public function EnemyMobilityComponent()
-		{
+		public function EnemyMobilityComponent() {
 			super();
 			_currentIterationComplete = false;
 		}
 		
-		override public function onTick(deltaTime:Number):void
-		{
+		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
 			if (_gameOver) {
@@ -85,15 +82,13 @@ package com.brutaldoodle.components.ai
 			}
 		}
 		
-		override protected function onAdd():void
-		{
+		override protected function onAdd():void {
 			super.onAdd();
 			_enemies.push(owner);
 			findEdgeEnemies();
 		}
 		
-		override protected function onRemove():void
-		{
+		override protected function onRemove():void {
 			super.onRemove();
 			_enemies.splice(_enemies.indexOf(owner), 1);
 			if (!_gameOver) findEdgeEnemies();
@@ -105,7 +100,8 @@ package com.brutaldoodle.components.ai
 			_rightEnemy = null;
 			_bottomEnemy = null;
 			
-			if (_enemies.length != 0) {
+			if (_enemies.length != 0)
+			{
 				var leftX:int = -1;
 				var rightX:int = -1;
 				var bottomY:int = -1;
@@ -131,7 +127,9 @@ package com.brutaldoodle.components.ai
 						_bottomEnemy = currentOwner;
 					}
 				}
-			} else {
+			}
+			else
+			{
 				var victoryScreen:SpriteRenderer = PBE.lookupComponentByName("VictoryScreen", "Render") as SpriteRenderer;
 				if (victoryScreen != null) victoryScreen.alpha = 1;
 			}

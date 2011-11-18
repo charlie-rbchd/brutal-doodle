@@ -10,8 +10,7 @@ package com.brutaldoodle.emitters
 	
 	public class EnemyCollidableEmitter extends CollidableEmitter
 	{
-		public function EnemyCollidableEmitter()
-		{
+		public function EnemyCollidableEmitter() {
 			super();
 		}
 		

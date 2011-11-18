@@ -13,18 +13,17 @@ package com.brutaldoodle.components.basic
 		private var _health:Number;
 		private var _lastDamageOriginator:IEntity;
 		
-		public function HealthComponent()
-		{
+		public function HealthComponent() {
 			super();
 			maxHealth = 100;
 			destroyOnDeath = true;
 			damageModifier = new Array();
 		}
 		
-		override protected function onAdd():void
-		{
+		override protected function onAdd():void {
 			super.onAdd();
 			_health = maxHealth;
+			// used to process actions of the damaging object
 			_lastDamageOriginator = null;
 		}
 		
@@ -33,8 +32,8 @@ package com.brutaldoodle.components.basic
 		}
 		
 		public function set health (value:Number):void {
-			if (value < 0) value = 0;
-			if (value > maxHealth) value = maxHealth;
+			if (value < 0) value = 0; // negative health would make no sense...
+			if (value > maxHealth) value = maxHealth; // can't go over maxHealth
 			
 			var previousHealth:Number = _health;
 			_health = value;
@@ -44,7 +43,7 @@ package com.brutaldoodle.components.basic
 				ev = new HealthEvent(HealthEvent.DAMAGED, value - previousHealth, value, _lastDamageOriginator);
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
-			if (value == 0) { // Owner just died... R.I.P.
+			if (value == 0) { // Owner just died...
 				ev = new HealthEvent(HealthEvent.DIED, value - previousHealth, value, _lastDamageOriginator);
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
@@ -57,7 +56,7 @@ package com.brutaldoodle.components.basic
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
 			
-			// Destruction handling (terminator just passed by...)
+			// Destruction handling
 			if (destroyOnDeath && _health == 0) owner.destroy();
 		}
 		

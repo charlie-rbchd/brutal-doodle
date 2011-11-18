@@ -7,8 +7,6 @@ package com.brutaldoodle.collisions
 		public static const ALLY:String = "ally";
 		public static const NEUTRAL:String = "neutral";
 		
-		public function CollisionType()
-		{
-		}
+		public function CollisionType() {}
 	}
 }

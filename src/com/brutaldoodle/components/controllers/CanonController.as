@@ -12,8 +12,7 @@ package com.brutaldoodle.components.controllers
 	
 	import flash.geom.Point;
 	
-	public class CanonController extends TickedComponent
-	{	
+	public class CanonController extends TickedComponent {	
 		public static var reloadSpeed:Number = 0.2;
 		
 		public var canonOffset:PropertyReference;
@@ -25,15 +24,13 @@ package com.brutaldoodle.components.controllers
 		private var _shootAnimation:Animator;
 		private var _reloadAnimation:Animator;
 		
-		public function CanonController()
-		{
+		public function CanonController() {
 			super();
 			_shootAnimation = new Animator();
 			_reloadAnimation = new Animator();
 		}
 		
-		override public function onTick(deltaTime:Number):void
-		{
+		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
 			var _offset:Number = PlayerController.state == PlayerController.STATE_NORMAL ? CanonController.NORMAL_OFFSET : CanonController.ALTERNATE_OFFSET;
@@ -74,8 +71,7 @@ package com.brutaldoodle.components.controllers
 			}
 		}
 		
-		private function shootAnimation_done(event:AnimationEvent):void
-		{
+		private function shootAnimation_done(event:AnimationEvent):void {
 			_shootAnimation.removeEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimation_done);
 			_reloadAnimation.start(26, 0, CanonController.reloadSpeed, AnimatorType.PLAY_ANIMATION_ONCE);
 		}

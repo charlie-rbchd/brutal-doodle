@@ -9,20 +9,18 @@ package com.brutaldoodle.components.collisions
 	import org.flintparticles.twoD.particles.Particle2D;
 	import org.flintparticles.twoD.zones.Zone2D;
 	
-	public class BoundingBoxComponent extends EntityComponent implements Zone2D
-	{
+	public class BoundingBoxComponent extends EntityComponent implements Zone2D {
 		private var _left:Number;
 		private var _top:Number;
 		private var _right:Number;
 		private var _bottom:Number;
 		private var _collisionType:String;
 		
-		public function BoundingBoxComponent()
-		{
+		public function BoundingBoxComponent() {
 			super();
 		}
 		
-		
+		// set the position of the bounding box directly from a rectangle
 		public function set zone (value:Rectangle):void {
 			_top = value.top;
 			_left = value.left;
@@ -47,28 +45,26 @@ package com.brutaldoodle.components.collisions
 			return _collisionType;
 		}
 		
+		// ************************************************************************************************
 		// Zone2D Implementation, this code is for most parts the same as Flint's RectangleZone source code
 		// An implementation of Zone2D is provided in order to directly use this component for collisions
-		public function contains(x:Number, y:Number):Boolean
-		{
+		// ************************************************************************************************
+		public function contains(x:Number, y:Number):Boolean {
 			return x >= _left && x <= _right && y >= _top && y <= _bottom;
 		}
 		
-		public function getArea ():Number
-		{
+		public function getArea ():Number {
 			return (_right - _left) * (_bottom - _top);
 		}
 		
-		public function getLocation ():Point
-		{
+		public function getLocation ():Point {
 			return new Point(
 				_left + Math.random() * (_right - _left),
 				_top + Math.random() * (_bottom - _top)
 			);
 		}
 		
-		public function collideParticle (particle:Particle2D, bounce:Number=1):Boolean
-		{
+		public function collideParticle (particle:Particle2D, bounce:Number=1):Boolean {
 			var position:Number;
 			var previousPosition:Number;
 			var intersect:Number;
@@ -174,5 +170,9 @@ package com.brutaldoodle.components.collisions
 			
 			return collision;
 		}
+		// ************************************************************************************************
+		// ...
+		// End of copy pasta
+		// ************************************************************************************************
 	}
 }

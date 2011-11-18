@@ -167,7 +167,7 @@
 		</component>
 		
 		<component type="com.brutaldoodle.components.collisions.LoadLevelOnCollision" name="Loader">
-			<level>4</level>
+			<level>3</level>
 		</component>
 	</entity>
 	

@@ -13,27 +13,21 @@
 		private var _currentAnimation:Animator;
 		private var _animator:AnimatorComponent;
 		
-		public function ChangeStateOnDamaged()
-		{
+		public function ChangeStateOnDamaged() {
 			super();
 		}
 		
-		override protected function onAdd():void
-		{
+		override protected function onAdd():void {
 			super.onAdd();
 			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 			_animator = owner.lookupComponentByName("Animator") as AnimatorComponent;
 			_currentState = "notInjured";
 		}
 		
-		
+		// 
 		private function onDamaged (event:HealthEvent):void {
 			var remainingLife:Number = event.amount;
-			
-			if (remainingLife > 75)
-			{
-				return;
-			}
+			if (remainingLife > 75) return;
 			
 			var startFrame:Number = _currentAnimation.currentValue + 9;
 			
@@ -55,8 +49,7 @@
 			_currentAnimation.addEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 		}
 		
-		private function onRepeat(event:AnimationEvent):void
-		{
+		private function onRepeat(event:AnimationEvent):void {
 			_currentAnimation.removeEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 			_currentAnimation.start(_currentAnimation.targetValue - 9, _currentAnimation.targetValue, 4, AnimatorType.LOOP_ANIMATION, -1);
 		}

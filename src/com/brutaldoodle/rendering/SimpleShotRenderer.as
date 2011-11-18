@@ -9,16 +9,13 @@ package com.brutaldoodle.rendering
 	{
 		private var _simpleShot:Emitter2D;
 		
-		public function SimpleShotRenderer()
-		{
+		public function SimpleShotRenderer() {
 			super();
 		}
 		
-		override public function addEmitters():void
-		{
+		override public function addEmitters():void {
 			_simpleShot = new SimpleShot();
 			initializeEmitter(_simpleShot);
-			
 			super.addEmitters();
 		}
 	}

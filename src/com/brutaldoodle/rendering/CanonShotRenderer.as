@@ -19,13 +19,11 @@ package com.brutaldoodle.rendering
 		private var _bullet:Emitter2D;
 		private var _smoke:Emitter2D;
 		
-		public function CanonShotRenderer()
-		{
+		public function CanonShotRenderer() {
 			super();
 		}
 		
-		override public function addEmitters():void
-		{
+		override public function addEmitters():void {
 			var _canon:IEntity = 		PBE.nameManager.lookup("Canon");
 			var _canonSize:Point = 		(_canon.lookupComponentByName("Spatial") as SimpleSpatialComponent).size;
 			var _canonPosition:Point = 	(_canon.lookupComponentByName("Render") as SpriteRenderer).position;

@@ -9,8 +9,7 @@ package com.brutaldoodle.components.controllers
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
-	public class PlayerController extends TickedComponent
-	{
+	public class PlayerController extends TickedComponent {
 		public static const STATE_NORMAL:String = "normalState";
 		public static const STATE_ALTERNATE:String = "alternateState";
 		
@@ -23,8 +22,7 @@ package com.brutaldoodle.components.controllers
 		private static var _state:String;
 		private var _isIdle:Boolean;
 		
-		public function PlayerController()
-		{
+		public function PlayerController() {
 			super();
 			PlayerController.moveSpeed = 10;
 			
@@ -32,8 +30,7 @@ package com.brutaldoodle.components.controllers
 			_isIdle = true;
 		}
 		
-		override public function onTick(deltaTime:Number):void
-		{
+		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
 			var _position:Point = owner.getProperty(positionProperty);

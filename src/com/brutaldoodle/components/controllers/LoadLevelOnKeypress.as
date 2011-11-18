@@ -1,5 +1,6 @@
 package com.brutaldoodle.components.controllers
 {
+	import com.brutaldoodle.ui.Generique;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.PropertyReference;
@@ -12,14 +13,12 @@ package com.brutaldoodle.components.controllers
 		private var _actionDone:Boolean;
 		private var _delayCompleted:Boolean;
 		
-		public function LoadLevelOnKeypress()
-		{
+		public function LoadLevelOnKeypress() {
 			super();
 			_actionDone = _delayCompleted = false;
 		}
 		
-		override public function onTick(deltaTime:Number):void
-		{
+		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
 			var alpha:Number = owner.getProperty(alphaProperty);
@@ -29,10 +28,15 @@ package com.brutaldoodle.components.controllers
 			}
 			
 			if (_delayCompleted && PBE.isAnyKeyDown()) {
-				if (level == -1)
-					PBE.levelManager.loadLevel(PBE.levelManager.currentLevel + 1, true);
-				else
-					PBE.levelManager.loadLevel(level, true);
+				// if the last level is completed
+				if (PBE.levelManager.currentLevel == PBE.levelManager.levelCount - 1) {
+					PBE.mainStage.addChild(new Generique());
+				} else {
+					if (level == -1)
+						PBE.levelManager.loadLevel(PBE.levelManager.currentLevel + 1, true);
+					else
+						PBE.levelManager.loadLevel(level, true);
+				}
 			}
 		}
 	}

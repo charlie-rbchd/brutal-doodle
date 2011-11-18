@@ -6,8 +6,7 @@ package com.brutaldoodle.events
 	{
 		public static const UPDATE_ANIMATION:String = "updateAnimation";
 		
-		public function TankEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
-		{
+		public function TankEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) {
 			super(type, bubbles, cancelable);
 		}
 	}

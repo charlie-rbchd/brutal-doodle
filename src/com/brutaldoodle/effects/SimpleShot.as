@@ -8,13 +8,10 @@ package com.brutaldoodle.effects
 	import org.flintparticles.common.initializers.SharedImage;
 	import org.flintparticles.twoD.actions.Accelerate;
 	import org.flintparticles.twoD.actions.Move;
-	import org.flintparticles.twoD.initializers.Position;
-	import org.flintparticles.twoD.zones.RectangleZone;
 	
 	public class SimpleShot extends PlayerCollidableEmitter
 	{
-		public function SimpleShot()
-		{
+		public function SimpleShot() {
 			super();
 			
 			_damageAmount = 10;

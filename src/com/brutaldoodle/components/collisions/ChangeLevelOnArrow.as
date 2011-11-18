@@ -1,5 +1,6 @@
 package com.brutaldoodle.components.collisions
 {
+	import com.brutaldoodle.collisions.CollisionManager;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.core.LevelManager;
@@ -8,22 +9,24 @@ package com.brutaldoodle.components.collisions
 	
 	import flash.geom.Point;
 	
-	public class ChangeLevelOnArrow extends TickedComponent
-	{
-		public static var activated:Array = new Array();
+	public class ChangeLevelOnArrow extends TickedComponent {
+		private static var _arrows:Vector.<String> = new Vector.<String>();
 		
 		public var positionProperty:PropertyReference;
 		public var sizeProperty:PropertyReference;
 		public var alphaProperty:PropertyReference;
 		public var orientation:String;
 		
-		public function ChangeLevelOnArrow()
-		{
+		public function ChangeLevelOnArrow() {
 			super();
 		}
 		
-		override public function onTick(deltaTime:Number):void
-		{
+		override protected function onAdd():void {
+			super.onAdd();
+			_arrows.push(orientation);
+		}
+		
+		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
 			var spatial:SimpleSpatialComponent = PBE.lookupComponentByName("Player", "Spatial") as SimpleSpatialComponent;
@@ -32,43 +35,40 @@ package com.brutaldoodle.components.collisions
 			
 			var position:Point = owner.getProperty(positionProperty);
 			var size:Point = owner.getProperty(sizeProperty);
-			var alpha:Number = owner.getProperty(alphaProperty);
 			
 			if (orientation == "right")
 			{
-				if (tankPosition.x + tankSize.x >= position.x)
-				{
-					alpha = 1;
-					ChangeLevelOnArrow.activated[orientation] = true;
+				if (tankPosition.x + tankSize.x >= position.x) {
+					removeArrow();
 				}
 			}
-			else if (orientation == "left") 
+			else if (orientation == "left")
 			{
-				if (tankPosition.x - tankSize.x <= position.x)
-				{
-					alpha = 1;
-					ChangeLevelOnArrow.activated[orientation] = true;
+				if (tankPosition.x - tankSize.x <= position.x) {
+					removeArrow();
 				}
 			}
-			else if (orientation == "top") 
+			else if (orientation == "top")
 			{
-				if (tankPosition.y - tankSize.y <= position.y)
-				{
-					if (tankPosition.x <= position.x + 10 && tankPosition.x >= position.x - 10)
-					{	
-						alpha = 1;
-						ChangeLevelOnArrow.activated[orientation] = true;
-					}
+				if (tankPosition.y - tankSize.y <= position.y && tankPosition.x <= position.x + 10 && tankPosition.x >= position.x - 10) {
+						removeArrow();
 				}
 			}
-			
-			owner.setProperty(alphaProperty, alpha);
-			
-			if (ChangeLevelOnArrow.activated["right"] == true
-			 && ChangeLevelOnArrow.activated["left"]  == true
-			 && ChangeLevelOnArrow.activated["top"]   == true)
-			{
+
+			if (!_arrows.length) {
 				LevelManager.instance.loadLevel(LevelManager.instance.currentLevel + 1, true);
+				CollisionManager.instance.reset();	
+			}
+		}
+		
+		private function removeArrow():void {
+			var index:int = _arrows.indexOf(orientation);
+			
+			if (index != -1) {
+				var alpha:Number = owner.getProperty(alphaProperty);
+				alpha = 1;
+				_arrows.splice(index, 1);
+				owner.setProperty(alphaProperty, alpha);
 			}
 		}
 	}

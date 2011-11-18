@@ -18,8 +18,7 @@ package com.brutaldoodle.effects
 	
 	public class Smoke extends Emitter2D
 	{
-		public function Smoke()
-		{
+		public function Smoke() {
 			counter = new TimePeriod(15, 0.5);
 			
 			addInitializer( new Lifetime( 2, 3 ) );

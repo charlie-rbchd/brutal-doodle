@@ -12,8 +12,7 @@ package com.brutaldoodle.events
 		
 		private var _zone:Zone2D;
 		
-		public function CollisionEvent(type:String, zone:Zone2D, bubbles:Boolean=false, cancelable:Boolean=false)
-		{
+		public function CollisionEvent(type:String, zone:Zone2D, bubbles:Boolean=false, cancelable:Boolean=false) {
 			super(type, bubbles, cancelable);
 			_zone = zone;
 		}
