@@ -1,9 +1,11 @@
 package com.brutaldoodle.rendering
 {
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
 	import org.flintparticles.common.events.EmitterEvent;
+	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.twoD.actions.DeathZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.initializers.Position;
@@ -34,6 +36,7 @@ package com.brutaldoodle.rendering
 				// listeners used for cleaning references when the emitters are done emitting particles
 				_emitters[i].addEventListener(EmitterEvent.EMITTER_EMPTY, destroyOwner, false, 0, true);
 				_emitters[i].addEventListener(EmitterEvent.COUNTER_COMPLETE, destroyOwner, false, 0, true);
+				_emitters[i].addEventListener(ParticleEvent.PARTICLE_DEAD, removeParticle, true, 0, true);
 			}
 		}
 		
@@ -78,6 +81,10 @@ package com.brutaldoodle.rendering
 				_emitters = new Vector.<Emitter2D>();
 				trueOwner = null;
 			}
+		}
+		
+		private function removeParticle(event:ParticleEvent):void {
+			Emitter2D.defaultParticleFactory.disposeParticle(event.particle);
 		}
 	}
 }

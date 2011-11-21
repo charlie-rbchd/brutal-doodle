@@ -1,7 +1,9 @@
 package com.brutaldoodle.emitters
 {
 	import com.brutaldoodle.components.basic.HealthComponent;
+	import com.brutaldoodle.components.basic.MoneyComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
+	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.DisplayObjectRenderer;
@@ -18,14 +20,13 @@ package com.brutaldoodle.emitters
 		
 		protected override function onCollide (event:ParticleEvent):void {
 			super.onCollide(event);
-			event.particle.isDead = true;
 			
 			switch (_actionOnCollision) {
 				case CollidableEmitter.UPDATE_MONEY_COUNT:
-					var coinRenderer:DisplayObjectRenderer = PBE.lookupComponentByName("AmountOfCoins", "Render") as DisplayObjectRenderer;
-					if (coinRenderer != null) {
-						var coins:TextField = coinRenderer.displayObject as TextField;
-						coins.text = String(int(coins.text)+_damageAmount);
+					var money:MoneyComponent = PBE.lookupComponentByName("AmountOfCoins", "Money") as MoneyComponent;
+					
+					if (money != null) {
+						money.addCoins(_damageAmount);
 					}
 					break;
 				case CollidableEmitter.DEAL_DAMAGE:				

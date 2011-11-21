@@ -14,10 +14,12 @@ package com.brutaldoodle.effects
 	
 	public class Bullet extends EnemyCollidableEmitter
 	{
+		public static var damage:Number;
+		
 		public function Bullet() {
 			super();
 			
-			_damageAmount = 25;
+			_damageAmount = Bullet.damage;
 			
 			//Generate one particle
 			counter = new Blast(1);

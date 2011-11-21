@@ -1,6 +1,7 @@
 package com.brutaldoodle.components.controllers
 {
 	import com.brutaldoodle.events.TankEvent;
+	import com.brutaldoodle.rendering.ParticleManager;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.core.InputKey;
@@ -10,22 +11,22 @@ package com.brutaldoodle.components.controllers
 	import flash.geom.Rectangle;
 
 	public class PlayerController extends TickedComponent {
+		public static var moveSpeed:Number;
+		
 		public static const STATE_NORMAL:String = "normalState";
 		public static const STATE_ALTERNATE:String = "alternateState";
 		
-		public static var moveSpeed:Number;
 		public var positionProperty:PropertyReference;
 		public var sizeProperty:PropertyReference;
 		public var boundingBoxProperty:PropertyReference;
 		public var currentAnimation:String;
 		
 		private static var _state:String;
+		
 		private var _isIdle:Boolean;
 		
 		public function PlayerController() {
 			super();
-			PlayerController.moveSpeed = 10;
-			
 			_state = PlayerController.STATE_NORMAL;
 			_isIdle = true;
 		}

@@ -8,6 +8,7 @@ package com.brutaldoodle.emitters
 	import org.flintparticles.common.events.ParticleEvent;
 	import org.flintparticles.twoD.actions.CollisionZone;
 	import org.flintparticles.twoD.emitters.Emitter2D;
+	import org.flintparticles.twoD.particles.ParticleCreator2D;
 	import org.flintparticles.twoD.zones.Zone2D;
 	
 	public class CollidableEmitter extends Emitter2D
@@ -38,6 +39,7 @@ package com.brutaldoodle.emitters
 		
 		protected function onCollide (event:ParticleEvent):void {
 			CollisionManager.instance.dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_OCCURED, event.otherObject));
+			event.particle.isDead = true;
 		}
 		
 		public function get damageAmount ():Number { return _damageAmount; }

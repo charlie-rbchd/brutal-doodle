@@ -12,6 +12,7 @@ package com.brutaldoodle.components.collisions
 	
 	public class RemoveHeartOnDeath extends EntityComponent
 	{
+		public static var life:int;
 		private var _hearts:Vector.<IEntity>;
 		
 		public function RemoveHeartOnDeath() {
@@ -30,8 +31,12 @@ package com.brutaldoodle.components.collisions
 			PBE.levelManager.removeEventListener(LevelEvent.LEVEL_LOADED_EVENT, registerHearts);
 			var heart:IEntity, i:int = 1;
 			
-			while (heart = PBE.lookup("Heart"+i) as IEntity) {
-				_hearts.push(heart);
+			while ( heart = PBE.lookup("Heart"+i) as IEntity ) {
+				if (i <= RemoveHeartOnDeath.life)
+					_hearts.push(heart);
+				else
+					heart.destroy();
+				
 				i++;
 			}
 		}
@@ -48,7 +53,7 @@ package com.brutaldoodle.components.collisions
 				// remove a heart if there's one or more remaining
 				_hearts[length-1].destroy();
 				_hearts.pop();
-				
+				RemoveHeartOnDeath.life--;
 				// heal the player to max life once a heart has been removed
 				var healthComponent:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
 				healthComponent.heal(healthComponent.maxHealth);

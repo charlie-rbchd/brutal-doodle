@@ -1,6 +1,7 @@
 package com.brutaldoodle.rendering
 {
 	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
 	import com.pblabs.rendering2D.DisplayObjectRenderer;
@@ -9,6 +10,7 @@ package com.brutaldoodle.rendering
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
+	import org.flintparticles.common.emitters.Emitter;
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	import org.flintparticles.twoD.renderers.BitmapRenderer;
 	import org.flintparticles.twoD.zones.RectangleZone;
@@ -68,6 +70,25 @@ package com.brutaldoodle.rendering
 			emitter.killAllParticles(); // just in case there's some remaining particles that block garbage collecting
 			emitter.stop();
 			_renderer.removeEmitter(emitter);
+		}
+		
+		public function pause():void {
+			for (var i:int = 0; i < _renderer.emitters.length; i++) {
+				_renderer.emitters[i].pause();
+			}
+		}
+		
+		public function resume():void {
+			for (var i:int = 0; i < _renderer.emitters.length; i++) {
+				_renderer.emitters[i].resume();
+			}
+		}
+		
+		public function removeAllParticles():void {
+			for (var i:int = 0; i < _renderer.emitters.length; i++) {
+				var emitter:Emitter = _renderer.emitters[i];
+				emitter.killAllParticles();
+			}
 		}
 		
 		public function get sceneBoundaries():RectangleZone {

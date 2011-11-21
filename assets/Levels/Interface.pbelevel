@@ -75,7 +75,6 @@
 			<fileName>../assets/Images/Heart.png</fileName>
 			<layerIndex>11</layerIndex>
 		</component>
-		<component type="com.pblabs.engine.components.GroupManagerComponent" name="Hearts"></component>
 	</template>
 	
 	<entity name="Heart1" template="HeartTemplate">
@@ -165,11 +164,14 @@
 					<size>18</size>
 					<color>0xffffff</color>
 				</defaultTextFormat>
-				<text>0</text>
 				<width>200</width>
 				<height>25</height>
 			</displayObject>
 			<layerIndex>11</layerIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.MoneyComponent" name="Money">
+			<textProperty>@Render.displayObject</textProperty>
 		</component>
 	</entity>
 	

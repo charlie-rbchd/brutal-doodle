@@ -13,7 +13,7 @@ package com.brutaldoodle.components.controllers
 	import flash.geom.Point;
 	
 	public class CanonController extends TickedComponent {	
-		public static var reloadSpeed:Number = 0.2;
+		public static var reloadSpeed:Number;
 		
 		public var canonOffset:PropertyReference;
 		public var positionProperty:PropertyReference;

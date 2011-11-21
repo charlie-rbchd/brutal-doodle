@@ -70,6 +70,7 @@ package com.brutaldoodle.components.collisions
 			var intersect:Number;
 			var collision:Boolean = false;
 			
+			if (particle == null) return collision;
 			if (particle.velX > 0)
 			{
 				position = particle.x + particle.collisionRadius;

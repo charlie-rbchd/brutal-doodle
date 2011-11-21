@@ -16,7 +16,6 @@ package com.brutaldoodle.emitters
 		
 		protected override function onCollide (event:ParticleEvent):void {
 			super.onCollide(event);
-			event.particle.isDead = true;
 			
 			var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
 			

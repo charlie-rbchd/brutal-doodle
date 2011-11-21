@@ -56,8 +56,7 @@ package com.brutaldoodle.components.collisions
 			}
 
 			if (!_arrows.length) {
-				LevelManager.instance.loadLevel(LevelManager.instance.currentLevel + 1, true);
-				CollisionManager.instance.reset();	
+				Main.resetEverythingAndLoadLevel(LevelManager.instance.currentLevel + 1);
 			}
 		}
 		

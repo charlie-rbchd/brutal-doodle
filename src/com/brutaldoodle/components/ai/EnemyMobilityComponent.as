@@ -10,6 +10,11 @@ package com.brutaldoodle.components.ai
 	import flash.geom.Rectangle;
 	
 	public class EnemyMobilityComponent extends TickedComponent {
+		public static var moveSpeed:uint;
+		
+		public var positionProperty:PropertyReference;
+		public var boundingBoxProperty:PropertyReference;
+		
 		private const LATERAL_DISPLACEMENT:uint = 30;
 		private const VERTICAL_DISPLACEMENT:uint = 60;
 		
@@ -20,11 +25,8 @@ package com.brutaldoodle.components.ai
 		private static var _gameOver:Boolean = false;
 		private static var _moveDown:Boolean = false;
 		private static var _direction:int = 1;
-		public static var moveSpeed:uint = 1;
 		
 		private var _currentIterationComplete:Boolean;
-		public var positionProperty:PropertyReference;
-		public var boundingBoxProperty:PropertyReference;
 		
 		public function EnemyMobilityComponent() {
 			super();

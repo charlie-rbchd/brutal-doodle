@@ -1,8 +1,10 @@
 package com.brutaldoodle.components.controllers
 {
+	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.ui.Generique;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
+	import com.pblabs.engine.core.LevelManager;
 	import com.pblabs.engine.entity.PropertyReference;
 	
 	public class LoadLevelOnKeypress extends TickedComponent
@@ -12,10 +14,11 @@ package com.brutaldoodle.components.controllers
 		
 		private var _actionDone:Boolean;
 		private var _delayCompleted:Boolean;
+		private var _creditsPlaying:Boolean;
 		
 		public function LoadLevelOnKeypress() {
 			super();
-			_actionDone = _delayCompleted = false;
+			_actionDone = _delayCompleted = _creditsPlaying = false;
 		}
 		
 		override public function onTick(deltaTime:Number):void {
@@ -30,12 +33,19 @@ package com.brutaldoodle.components.controllers
 			if (_delayCompleted && PBE.isAnyKeyDown()) {
 				// if the last level is completed
 				if (PBE.levelManager.currentLevel == PBE.levelManager.levelCount - 1) {
-					PBE.mainStage.addChild(new Generique());
+					if (!_creditsPlaying) {
+						PBE.mainStage.addChild(new Generique());
+						_creditsPlaying = true;
+					} else {
+						Main.resetEverythingAndReloadGame();
+					}
 				} else {
 					if (level == -1)
-						PBE.levelManager.loadLevel(PBE.levelManager.currentLevel + 1, true);
+						Main.resetEverythingAndLoadLevel(PBE.levelManager.currentLevel + 1);
+					else if (level == 0)
+						Main.resetEverythingAndReloadGame();
 					else
-						PBE.levelManager.loadLevel(level, true);
+						Main.resetEverythingAndLoadLevel(level);
 				}
 			}
 		}
