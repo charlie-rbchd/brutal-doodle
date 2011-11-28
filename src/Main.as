@@ -4,6 +4,7 @@ package
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.NormalShotAI;
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
+	import com.brutaldoodle.components.animations.WiggleObjectComponent;
 	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
@@ -67,6 +68,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnDeath);
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
+			PBE.registerType(com.brutaldoodle.components.animations.WiggleObjectComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.HealthComponent);
 			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
 			PBE.registerType(com.brutaldoodle.components.basic.MoneyComponent);

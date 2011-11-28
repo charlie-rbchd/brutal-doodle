@@ -122,6 +122,12 @@
 		<component type="com.brutaldoodle.components.collisions.LoadLevelOnCollision" name="Loader">
 			<level>1</level>
 		</component>
+		
+		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
+			<positionProperty>@Spatial.position</positionProperty>
+			<moveSpeed>-0.2</moveSpeed>
+			<tickRate>20</tickRate>
+		</component>
 	</entity>
 	
 	<!-- Button Debuter -->
@@ -169,6 +175,12 @@
 		<component type="com.brutaldoodle.components.collisions.LoadLevelOnCollision" name="Loader">
 			<level>3</level>
 		</component>
+		
+		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
+			<positionProperty>@Spatial.position</positionProperty>
+			<moveSpeed>0.2</moveSpeed>
+			<tickRate>20</tickRate>
+		</component>
 	</entity>
 	
 	<!-- Button Reglages -->
@@ -211,6 +223,12 @@
 				<height>105</height>
 			</zone>
 			<collisionType>enemy</collisionType>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
+			<positionProperty>@Spatial.position</positionProperty>
+			<moveSpeed>-0.2</moveSpeed>
+			<tickRate>20</tickRate>
 		</component>
 	</entity>
 	
