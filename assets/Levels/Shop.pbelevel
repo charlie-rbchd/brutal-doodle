@@ -282,6 +282,7 @@
 			<fileName>../assets/Images/ArrowBig.png</fileName>
 			<alpha>0.5</alpha>
 			<layerIndex>4</layerIndex>
+			<mouseEnabled>true</mouseEnabled>
 		</component>
 		
 		<component type="com.brutaldoodle.components.collisions.ChangeLevelOnArrow" name="AlphaChange">

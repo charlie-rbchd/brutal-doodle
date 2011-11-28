@@ -56,7 +56,7 @@ package com.brutaldoodle.components.controllers
 					_shootAnimation.start(0, 26, 0.05, AnimatorType.PLAY_ANIMATION_ONCE);
 					_shootAnimation.addEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimation_done);
 				}
-				
+				/*
 				if (PBE.isKeyDown(InputKey.Z)) {
 					// ability 1
 				}
@@ -68,6 +68,7 @@ package com.brutaldoodle.components.controllers
 				if (PBE.isKeyDown(InputKey.C)) {
 					// ability 3
 				}
+				*/
 			}
 		}
 		

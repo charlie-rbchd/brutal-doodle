@@ -52,7 +52,7 @@ package com.brutaldoodle.components.collisions
 			label.addComponent(spatial, "Spatial");
 			
 			// Arial is a pretty nice font!
-			var textformat:TextFormat = new TextFormat("Arial", 10, 0xffffff);
+			var textformat:TextFormat = new TextFormat("Arial", 12, 0xffffff);
 			var text:TextField = new TextField();
 			text.defaultTextFormat = textformat;
 			text.text = String(damageDone);

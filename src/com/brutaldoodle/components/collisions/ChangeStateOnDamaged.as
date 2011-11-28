@@ -9,6 +9,11 @@
 	
 	public class ChangeStateOnDamaged extends EntityComponent
 	{
+		public static const STATE_NOT_INJURED:String = "notInjured";
+		public static const STATE_BARELY_INJURED:String = "barelyInjured";
+		public static const STATE_INJURED:String = "injured";
+		public static const STATE_BADLY_INJURED:String = "badlyInjured";
+		
 		private var __currentState:String;
 		private var _currentAnimation:Animator;
 		private var _animator:AnimatorComponent;
@@ -21,7 +26,7 @@
 			super.onAdd();
 			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 			_animator = owner.lookupComponentByName("Animator") as AnimatorComponent;
-			_currentState = "notInjured"; // default state that is displayed
+			_currentState = STATE_NOT_INJURED; // default state that is displayed
 		}
 		
 		private function onDamaged (event:HealthEvent):void {
@@ -33,15 +38,15 @@
 			// the display of a sprite is modified accordingly to its remaining life
 			if (remainingLife <= 25)
 			{
-				_currentState = "badlyInjured";
+				_currentState = STATE_BADLY_INJURED;
 			}
 			else if (remainingLife <= 50)
 			{
-				_currentState = "injured";
+				_currentState = STATE_INJURED;
 			}
 			else if (remainingLife <= 75)
 			{
-				_currentState = "barelyInjured";
+				_currentState = STATE_BARELY_INJURED;
 			}
 			
 			_animator.play(_currentState, startFrame);

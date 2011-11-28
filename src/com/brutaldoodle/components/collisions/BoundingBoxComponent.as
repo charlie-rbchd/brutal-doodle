@@ -29,11 +29,7 @@ package com.brutaldoodle.components.collisions
 		}
 		
 		public function get zone ():Rectangle {
-			return new Rectangle(
-				_left, _top,
-				_right - _left,
-				_bottom - _top
-			);
+			return new Rectangle(_left, _top, _right - _left, _bottom - _top);
 		}
 		
 		public function set collisionType (type:String):void {

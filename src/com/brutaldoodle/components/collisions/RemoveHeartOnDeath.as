@@ -13,7 +13,7 @@ package com.brutaldoodle.components.collisions
 	public class RemoveHeartOnDeath extends EntityComponent
 	{
 		public static var life:int;
-		private var _hearts:Vector.<IEntity>;
+		private static var _hearts:Vector.<IEntity>;
 		
 		public function RemoveHeartOnDeath() {
 			super();
@@ -21,7 +21,7 @@ package com.brutaldoodle.components.collisions
 		
 		override protected function onAdd():void {
 			super.onAdd();
-			_hearts = new Vector.<IEntity>;
+			_hearts = new Vector.<IEntity>();
 			PBE.levelManager.addEventListener(LevelEvent.LEVEL_LOADED_EVENT, registerHearts);
 			owner.eventDispatcher.addEventListener(HealthEvent.DIED, removeHeart);
 		}
@@ -32,11 +32,11 @@ package com.brutaldoodle.components.collisions
 			var heart:IEntity, i:int = 1;
 			
 			while ( heart = PBE.lookup("Heart"+i) as IEntity ) {
-				if (i <= RemoveHeartOnDeath.life)
+				if (i <= RemoveHeartOnDeath.life) {
 					_hearts.push(heart);
-				else
+				} else {
 					heart.destroy();
-				
+				}
 				i++;
 			}
 		}

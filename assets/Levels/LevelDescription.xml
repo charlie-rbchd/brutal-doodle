@@ -48,11 +48,11 @@
 	
 	<!-- Shop -->
 	<level index="4">
-		<file filename="../assets/Levels/TutoPlayer.pbelevel"/>
-		<group name="TutoPlayerData"/>
-		
 		<file filename="../assets/Levels/Shop.pbelevel"/>
 		<group name="ShopData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
 	</level>
 	
 	<!-- Level 2 -->

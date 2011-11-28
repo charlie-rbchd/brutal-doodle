@@ -83,7 +83,8 @@ package com.brutaldoodle.components.controllers
 			// re-position the bounding box used for particle collisions
 			_boundingBox.left = _position.x - _size.x/2;
 			_boundingBox.right = _position.x + _size.x/2;
-			_boundingBox.top = _position.y + (PlayerController.state == PlayerController.STATE_ALTERNATE ? -_size.y/2 : 0);
+			_boundingBox.top = _position.y - _size.y/2;
+			_boundingBox.bottom = _position.y + _size.y/2;
 			
 			owner.setProperty(positionProperty, _position);
 			owner.setProperty(boundingBoxProperty, _boundingBox);

@@ -9,6 +9,7 @@ package com.brutaldoodle.components.collisions
 	public class LoadLevelOnCollision extends EntityComponent
 	{
 		public var level:int = 0;
+		private var _collisions:BoundingBoxComponent;
 		
 		public function LoadLevelOnCollision() {
 			super();
@@ -17,11 +18,12 @@ package com.brutaldoodle.components.collisions
 		override protected function onAdd():void {
 			super.onAdd();
 			CollisionManager.instance.addEventListener(CollisionEvent.COLLISION_OCCURED, loadLevel);
+			_collisions = owner.lookupComponentByName("Collisions") as BoundingBoxComponent;
 		}
 		
 		override protected function onRemove():void {
 			super.onRemove();
-			CollisionManager.instance.stopCollisionsWith(owner.lookupComponentByName("Collisions") as BoundingBoxComponent, CollisionType.ENEMY);
+			CollisionManager.instance.stopCollisionsWith(_collisions, CollisionType.ENEMY);
 			CollisionManager.instance.removeEventListener(CollisionEvent.COLLISION_OCCURED, loadLevel);
 		}
 		
@@ -29,7 +31,7 @@ package com.brutaldoodle.components.collisions
 		// used to load a level when an object collide with a menu element
 		private function loadLevel(event:CollisionEvent):void {
 			if (owner != null) {
-				if (event.zone == owner.lookupComponentByName("Collisions")) {
+				if (event.zone == _collisions) {
 					Main.resetEverythingAndLoadLevel(level);
 				}
 			}

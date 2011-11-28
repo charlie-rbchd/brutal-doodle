@@ -47,6 +47,23 @@
 		<component type="com.brutaldoodle.components.collisions.LoadLevelOnDeath" name="LevelLoader">
 			<level>0</level>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged" name="Text">
+			<textFilePath>../assets/Images/LabelAcide.png</textFilePath>
+			<arrowFilePath>../assets/Images/Arrow.png</arrowFilePath>
+			<position type="">
+				<x>0</x>
+				<y>-100</y>
+			</position>
+			<textSize type="">
+				<x>352</x>
+				<y>32</y>
+			</textSize>
+			<arrowSize type="">
+				<x>75</x>
+				<y>40</y>
+			</arrowSize>
+		</component>
 	</template>
 	
 	<!--Tuto Basic Invader-->
@@ -111,13 +128,6 @@
 				<oneShotKill>Infinity</oneShotKill>
 				<noDamage>0</noDamage>
 			</damageModifier>
-		</component>
-
-		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
-			<timeBetweenThinks>
-				<minTime>6000</minTime>
-				<maxTime>12000</maxTime>
-			</timeBetweenThinks>
 		</component>
 	</template>
 	  

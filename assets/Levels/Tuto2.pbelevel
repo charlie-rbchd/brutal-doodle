@@ -224,23 +224,6 @@
 			</zone>
 			<collisionType>enemy</collisionType>
 		</component>
-		
-		<component type="com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged" name="Text">
-			<filePath>../assets/Images/LabelAcide.png</filePath>
-			<filePathArrow type="">../assets/Images/Arrow.png</filePathArrow>
-			<position type="">
-				<x>0</x>
-				<y>-100</y>
-			</position>
-			<size type="">
-				<x>352</x>
-				<y>32</y>
-			</size>
-			<sizeArrow type="">
-				<x>75</x>
-				<y>40</y>
-			</sizeArrow>
-		</component>
 	</entity>
 
 	<entity name="JuggernautEnemy" template="tutoJuggernautInvader">
@@ -263,22 +246,6 @@
 				<height>50</height>
 			</zone>
 			<collisionType>enemy</collisionType>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged" name="Text">
-			<filePath>../assets/Images/LabelAcide.png</filePath>
-			<filePathArrow type="">../assets/Images/Arrow.png</filePathArrow>
-			<position type="">
-				<x>0</x>
-				<y>-100</y>
-			</position>
-			<size type="">
-				<x>352</x>
-				<y>32</y>
-			</size>
-			<sizeArrow type="">
-				<x>75</x>
-				<y>40</y>
-			</sizeArrow>
 		</component>
 	</entity>	
 	

@@ -24,15 +24,19 @@ package com.brutaldoodle.components.collisions
 		override protected function onAdd():void {
 			super.onAdd();
 			_player = PBE.lookup("Player") as IEntity;
-			_player.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
-			_player.eventDispatcher.addEventListener(HealthEvent.RESURRECTED, onResurrected);
-			_baseSizeX = (owner.getProperty(sizeProperty) as Point).x;
+			if (_player != null) {
+				_player.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
+				_player.eventDispatcher.addEventListener(HealthEvent.RESURRECTED, onResurrected);
+				_baseSizeX = (owner.getProperty(sizeProperty) as Point).x;
+			}
 		}
 		
 		override protected function onRemove():void {
 			super.onRemove();
-			_player.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
-			_player.eventDispatcher.removeEventListener(HealthEvent.RESURRECTED, onResurrected);
+			if (_player != null) {
+				_player.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
+				_player.eventDispatcher.removeEventListener(HealthEvent.RESURRECTED, onResurrected);
+			}
 		}
 		
 		// remove the proper amount of health inflicted to the player from the health bar
