@@ -1,9 +1,11 @@
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.NormalShotAI;
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
+	import com.brutaldoodle.components.animations.CircularMotionComponent;
 	import com.brutaldoodle.components.animations.WiggleObjectComponent;
 	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
@@ -13,12 +15,14 @@ package
 	import com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
 	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
+	import com.brutaldoodle.components.collisions.FadeInDisplayOnCollision;
 	import com.brutaldoodle.components.collisions.RemoveHeartOnDeath;
 	import com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged;
 	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.controllers.LoadLevelOnKeypress;
 	import com.brutaldoodle.components.controllers.PlayerController;
 	import com.brutaldoodle.effects.Bullet;
+	import com.brutaldoodle.entities.Countdown;
 	import com.brutaldoodle.rendering.ParticleManager;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.engine.PBE;
@@ -53,9 +57,13 @@ package
 			PBE.registerType(com.pblabs.rendering2D.ui.PBLabel);
 			
 			PBE.registerType(com.brutaldoodle.components.ai.NormalShotAI);
+			PBE.registerType(com.brutaldoodle.components.ai.CannibalAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
+			
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
+			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
+			
 			PBE.registerType(com.brutaldoodle.components.collisions.BoundingBoxComponent);
 			PBE.registerType(com.brutaldoodle.components.collisions.ChangeStateOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnCollision);
@@ -67,10 +75,12 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.ChangeLevelOnArrow);
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnDeath);
+			PBE.registerType(com.brutaldoodle.components.collisions.FadeInDisplayOnCollision);
+			
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.animations.WiggleObjectComponent);
+			PBE.registerType(com.brutaldoodle.components.animations.CircularMotionComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.HealthComponent);
-			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
 			PBE.registerType(com.brutaldoodle.components.basic.MoneyComponent);
 			
 			// start the factory!
@@ -94,7 +104,7 @@ package
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 5);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage
@@ -138,10 +148,11 @@ package
 			}
 		}
 		
-		public static function resetEverythingAndLoadLevel(level:int):void {
+		public static function resetEverythingAndLoadLevel(level:int, countdown:Boolean=false):void {
 			ParticleManager.instance.removeAllParticles();
 			CollisionManager.instance.reset();
 			LevelManager.instance.loadLevel(level, true);
+			if (countdown) var cd:Countdown = new Countdown();
 		}
 		
 		public static function get running():Boolean { return _running; }

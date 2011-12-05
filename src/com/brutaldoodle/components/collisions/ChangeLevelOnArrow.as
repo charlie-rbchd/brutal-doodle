@@ -10,6 +10,8 @@ package com.brutaldoodle.components.collisions
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 	
 	public class ChangeLevelOnArrow extends TickedComponent {
 		public static const ORIENTATION_RIGHT:String = "right";
@@ -96,10 +98,21 @@ package com.brutaldoodle.components.collisions
 		}
 		
 		private function onHover(event:MouseEvent):void {
-			owner.setProperty(alphaProperty, event.type == MouseEvent.MOUSE_OVER ? 1 : 0.5);
+			switch (event.type) {
+				case MouseEvent.MOUSE_OVER:
+					owner.setProperty(alphaProperty, 1);
+					Mouse.cursor = MouseCursor.BUTTON;
+					break;
+				case MouseEvent.MOUSE_OUT:
+					owner.setProperty(alphaProperty, 0.5);
+					Mouse.cursor = MouseCursor.AUTO;
+					break;
+				default:
+			}
 		}
 		
 		private function removeArrow(event:MouseEvent=null):void {
+			Mouse.cursor = MouseCursor.AUTO;
 			var index:int = _arrows.indexOf(orientation);
 			
 			if (index != -1) {

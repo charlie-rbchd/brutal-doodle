@@ -25,7 +25,7 @@ package com.brutaldoodle.components.collisions
 			super.onRemove();
 			units.splice(units.indexOf(owner), 1);
 			if (!units.length) {
-				Main.resetEverythingAndLoadLevel(level);
+				Main.resetEverythingAndLoadLevel(level, true);
 			}
 		}
 	}

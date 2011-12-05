@@ -14,6 +14,7 @@ package com.brutaldoodle.components.controllers
 	
 	public class CanonController extends TickedComponent {	
 		public static var reloadSpeed:Number;
+		public static var shootPermission:Boolean = true;
 		
 		public var canonOffset:PropertyReference;
 		public var positionProperty:PropertyReference;
@@ -49,26 +50,28 @@ package com.brutaldoodle.components.controllers
 			}
 			else
 			{
-				if (PBE.isKeyDown(InputKey.SPACE)) {
-					var p:Projectile = new Projectile(CanonShotRenderer, owner);
-					
-					// shoot
-					_shootAnimation.start(0, 26, 0.05, AnimatorType.PLAY_ANIMATION_ONCE);
-					_shootAnimation.addEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimation_done);
-				}
-				/*
-				if (PBE.isKeyDown(InputKey.Z)) {
+				if (shootPermission) {
+					if (PBE.isKeyDown(InputKey.SPACE)) {
+						var p:Projectile = new Projectile(CanonShotRenderer, owner);
+						
+						// shoot
+						_shootAnimation.start(0, 26, 0.05, AnimatorType.PLAY_ANIMATION_ONCE);
+						_shootAnimation.addEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimation_done);
+					}
+					/*
+					if (PBE.isKeyDown(InputKey.Z)) {
 					// ability 1
-				}
-				
-				if (PBE.isKeyDown(InputKey.X)) {
+					}
+					
+					if (PBE.isKeyDown(InputKey.X)) {
 					// ability 2
-				}
-				
-				if (PBE.isKeyDown(InputKey.C)) {
+					}
+					
+					if (PBE.isKeyDown(InputKey.C)) {
 					// ability 3
+					}
+					*/
 				}
-				*/
 			}
 		}
 		

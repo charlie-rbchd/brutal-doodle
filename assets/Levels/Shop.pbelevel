@@ -267,7 +267,7 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>230</x>
-				<y>250</y>
+				<y>225</y>
 			</position>
 			<size type="">
 				<x>120</x>

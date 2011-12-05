@@ -20,6 +20,95 @@
 		</component>
 	</entity>
 	
+	<entity name="Hill">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Montagnes.png</fileName>
+			<layerIndex>2</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="Sun">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/sun.png</fileName>
+			<layerIndex>1</layerIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.CircularMotionComponent" name="CircularMotion">
+			<positionProperty>@Spatial.position</positionProperty>
+			<ellipse>
+				<center>
+					<x>0</x>
+					<y>0</y>
+				</center>
+				<width>600</width>
+				<height>300</height>
+			</ellipse>
+			<timeOffset>6</timeOffset>
+		</component>
+	</entity>
+	
+	<entity name="Moon">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/moon.png</fileName>
+			<layerIndex>1</layerIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.CircularMotionComponent" name="CircularMotion">
+			<positionProperty>@Spatial.position</positionProperty>
+			<ellipse>
+				<center>
+					<x>0</x>
+					<y>0</y>
+				</center>
+				<width>600</width>
+				<height>300</height>
+			</ellipse>
+			<timeOffset>18</timeOffset>
+		</component>
+	</entity>
+		
 	<entity name="BackgroundMusic">
 		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
 			<musicUrl>../assets/Sounds/menu.mp3</musicUrl>
@@ -41,7 +130,7 @@
 		
 		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
 			<scene componentReference="MainScene"/>
-			<layerIndex>2</layerIndex>
+			<layerIndex>3</layerIndex>
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/Logo.png</fileName>
@@ -92,7 +181,7 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position>
 				<x>-250</x>
-				<y>-185</y>
+				<y>-235</y>
 			</position>
 			<size>
 				<x>220</x>
@@ -112,7 +201,7 @@
 		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-360</x>
-				<y>-237.5</y>
+				<y>-287.5</y>
 				<width>220</width>
 				<height>105</height>
 			</zone>
@@ -125,7 +214,7 @@
 		
 		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
 			<positionProperty>@Spatial.position</positionProperty>
-			<moveSpeed>-0.2</moveSpeed>
+			<moveSpeed>0.2</moveSpeed>
 			<tickRate>20</tickRate>
 		</component>
 	</entity>
@@ -145,7 +234,7 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>0</x>
-				<y>-185</y>
+				<y>-235</y>
 			</position>
 			<size type="">
 				<x>220</x>
@@ -165,7 +254,7 @@
 		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>-110</x>
-				<y>-237.5</y>
+				<y>-287.5</y>
 				<width>220</width>
 				<height>105</height>
 			</zone>
@@ -179,7 +268,7 @@
 		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
 			<positionProperty>@Spatial.position</positionProperty>
 			<moveSpeed>0.2</moveSpeed>
-			<tickRate>20</tickRate>
+			<tickRate>19</tickRate>
 		</component>
 	</entity>
 	
@@ -198,7 +287,7 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>250</x>
-				<y>-185</y>
+				<y>-235</y>
 			</position>
 			<size type="">
 				<x>220</x>
@@ -218,7 +307,7 @@
 		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
 			<zone>
 				<x>140</x>
-				<y>-237.5</y>
+				<y>-287.5</y>
 				<width>220</width>
 				<height>105</height>
 			</zone>
@@ -228,7 +317,34 @@
 		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
 			<positionProperty>@Spatial.position</positionProperty>
 			<moveSpeed>-0.2</moveSpeed>
-			<tickRate>20</tickRate>
+			<tickRate>21</tickRate>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.FadeInDisplayOnCollision" name="FadeIn">
+			<entityName>OptionPanel</entityName>
+			<alphaRate>0.05</alphaRate>
+		</component>
+	</entity>
+	
+	<entity name="OptionPanel">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>250</x>
+				<y>40</y>
+			</position>
+			<size type="">
+				<x>282</x>
+				<y>291</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Settings.png</fileName>
+			<layerIndex>4</layerIndex>
+			<alpha>0</alpha>
 		</component>
 	</entity>
 	
@@ -244,11 +360,24 @@
 		<objectReference name="ButtonReglages"/>
 	</group>
 	
+	<group name="Options">
+		<objectReference name="OptionPanel"/>
+		
+	</group>
+	
+	<group name="DayNight">
+		<objectReference name="Hill"/>
+		<objectReference name="Sun"/>
+		<objectReference name="Moon"/>
+	</group>
+	
 	<group name="MainMenuData">
 		<objectReference name="Background"/>
 		<objectReference name="BackgroundMusic"/>
 		<objectReference name="Logo"/>
 		<groupReference name="SpriteSheets"/>
 		<groupReference name="Buttons"/>	
+		<groupReference name="Options"/>
+		<groupReference name="DayNight"/>
 	</group>
 </things>
