@@ -1,6 +1,7 @@
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.components.ai.BeamerAIComponent;
 	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.NormalShotAI;
@@ -59,6 +60,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.ai.NormalShotAI);
 			PBE.registerType(com.brutaldoodle.components.ai.CannibalAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
+			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
 			
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
@@ -140,11 +142,12 @@ package
 			if (reload) {
 				ParticleManager.instance.removeAllParticles();
 				CollisionManager.instance.reset();
-				LevelManager.instance.loadLevel(0, true);
 				
 				while (PBE.mainStage.numChildren > 1) {
 					PBE.mainStage.removeChildAt(0);
 				}
+				
+				LevelManager.instance.loadLevel(0, true);
 			}
 		}
 		

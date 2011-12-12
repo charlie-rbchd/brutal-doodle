@@ -184,6 +184,13 @@
 				<noDamage>0</noDamage>
 			</damageModifier>
 		</component>
+
+		<component type="com.brutaldoodle.components.ai.BeamerAIComponent" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>6000</minTime>
+				<maxTime>12000</maxTime>
+			</timeBetweenThinks>
+		</component>
 	</template>
 	  
 	  
