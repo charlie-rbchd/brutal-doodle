@@ -45,7 +45,7 @@ package com.brutaldoodle.components.collisions
 			var size:Point = owner.getProperty(sizeProperty);
 			
 			var previousSizeX:Number = size.x;
-			size.x = _baseSizeX * event.amount/100;
+			size.x = _baseSizeX * event.amount/1000;
 			// the bar need to be repositionned because PBE's register point is at the center of objects
 			position.x -= (previousSizeX - size.x)/2;
 			

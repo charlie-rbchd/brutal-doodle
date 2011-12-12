@@ -25,7 +25,7 @@ package com.brutaldoodle.effects
 		public function Blood() {
 			super();
 			
-			_damageAmount = 3;
+			_damageAmount = 5;
 			
 			//Generate 5 particle instantly
 			counter = new Blast(5);

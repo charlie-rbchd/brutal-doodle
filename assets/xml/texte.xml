@@ -1,7 +1,7 @@
 <texte>
 	<presentation id="0">
 		<nom>Maxime Basque</nom>
-		<role>Bro</role>
+		<role>Bro / Directeur en Utilisabilité</role>
 		<img>../assets/Images/basque.png</img>
 	</presentation>
 	<presentation id="1">
@@ -11,7 +11,7 @@
 	</presentation>
 	<presentation id="2">
 		<nom>Simon Garnier</nom>
-		<role>Assistant à la programmation</role>
+		<role>Assistant à la Programmation</role>
 		<img>../assets/Images/simon.png</img>
 	</presentation>
 	<presentation id="3">
@@ -21,7 +21,7 @@
 	</presentation>
 	<presentation id="4">
 		<nom>Maxime St-Louis-Fortier</nom>
-		<role>Directeur Technique</role>
+		<role>Chargé de Projet / Homme à Tout Faire</role>
 		<img>../assets/Images/max.png</img>
 	</presentation>
 </texte>

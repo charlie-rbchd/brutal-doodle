@@ -9,6 +9,7 @@ package com.brutaldoodle.components.ai
 		{
 			super();
 		}
+		
 		override protected function think():void {
 			super.think();
 			// shot a projectile rendered by SimpleShotRenderer

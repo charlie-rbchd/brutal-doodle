@@ -30,10 +30,10 @@ package com.brutaldoodle.effects
 		{
 			super();
 			
-			_damageAmount = 1;
+			_damageAmount = 10;
 			
 			//Start a TimePeriod emitter
-			counter = new TimePeriod(100,0.5);
+			counter = new TimePeriod(100, 0.5);
 			
 			//set the visual
 			addInitializer( new SharedImage(new RadialDot(20,0xf2797c,"screen") ) );

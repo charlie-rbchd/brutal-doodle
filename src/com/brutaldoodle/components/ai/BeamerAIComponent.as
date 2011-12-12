@@ -3,6 +3,7 @@ package com.brutaldoodle.components.ai
 	import com.brutaldoodle.components.animations.TurnToRedComponent;
 	import com.brutaldoodle.entities.Projectile;
 	import com.brutaldoodle.rendering.BeamRenderer;
+	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.debug.Logger;
 	
 	import flash.events.Event;
@@ -22,16 +23,15 @@ package com.brutaldoodle.components.ai
 			//make the invader turn red
 			var filter:TurnToRedComponent = new TurnToRedComponent();
 			filter.rate = 0.016;
-			if(owner != null)
-				owner.addComponent(filter,"TurnRed");
+			if (owner != null) {
+				owner.addComponent(filter, "TurnRed");
+			}
 			
-			//create a timer of about the same time it take for the invader to turn red(about one second)
-			var timer:Timer = new Timer(1000, 2);
-			timer.addEventListener(TimerEvent.TIMER_COMPLETE, makeBeam);
-			timer.start();
+			// wait for the invader to turn red (about two seconds)
+			PBE.processManager.schedule(2000, this, createBeam);
 		}	
 		
-		private function makeBeam(pEvt:TimerEvent):void{
+		private function createBeam():void {
 			// shot a projectile rendered by SimpleShotRenderer
 			var p:Projectile = new Projectile(BeamRenderer, owner);
 		}

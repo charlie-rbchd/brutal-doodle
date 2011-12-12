@@ -9,16 +9,18 @@ package com.brutaldoodle.components.animations
 	{
 		public var positionProperty:PropertyReference;
 		public var alphaProperty:PropertyReference;
+		public var delta:Number;
 		
 		public function MoveUpAndFadeComponent() {
 			super();
+			delta = 0.05;
 		}
 		
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
 			var alpha:Number = owner.getProperty(alphaProperty);
-			alpha -= 0.05; // modify the alpha until its pretty much invisible
+			alpha -= delta; // modify the alpha until its pretty much invisible
 			
 			// delete the object if it turned invisible
 			if (alpha <= 0.05) {

@@ -36,6 +36,10 @@ package com.brutaldoodle.components.controllers
 					if (!_creditsPlaying) {
 						PBE.mainStage.addChild(new Generique());
 						_creditsPlaying = true;
+						_delayCompleted = false;
+						PBE.processManager.schedule(1000, this, function():void {
+							_delayCompleted = true;
+						});
 					} else {
 						Main.resetEverythingAndReloadGame();
 					}

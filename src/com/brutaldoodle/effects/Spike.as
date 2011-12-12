@@ -24,7 +24,7 @@ package com.brutaldoodle.effects
 		{
 			super();
 			
-			_damageAmount = 15;
+			_damageAmount = 1;
 			
 			//This var is set to a random value of -1 or 1;
 			var direction:int = Math.floor(Math.random() * 2) ? 1 : -1;

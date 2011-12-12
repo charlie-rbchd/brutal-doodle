@@ -68,6 +68,27 @@
 		</component>
 	</template>
 	
+	<entity name="platesSpriteSheet">	
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>9</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/Plates.png"/>
+		</component>
+	</entity>
+	
+	<template name="Plates">
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<rotationProperty>@Spatial.rotation</rotationProperty>
+			<layerIndex>3</layerIndex>
+			<spriteSheet componentReference="platesSpriteSheet"/>
+		</component>
+	</template>
+	
 	<entity name="SpeedUpgrade">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -105,6 +126,20 @@
 		</component>
 	</entity>
 	
+	<entity name="SpeedUpgradePlate" template="Plates">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-240</x>
+				<y>-64</y>
+			</position>
+			<size type="">
+				<x>71</x>
+				<y>30</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
 	<entity name="DamageUpgrade">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -125,6 +160,10 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/DamageUpgrade.png</fileName>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStatsOnClick">
+			<statToUpdate>DAMAGE</statToUpdate>
+		</component>
 	</entity>
 	
 	<entity name="DamageUpgradeNumber" template="Numbers">
@@ -138,6 +177,20 @@
 				<y>23</y>
 			</size>
 			<rotation>-37</rotation>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="DamageUpgradePlate" template="Plates">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-237</x>
+				<y>97</y>
+			</position>
+			<size type="">
+				<x>71</x>
+				<y>30</y>
+			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
 	</entity>
@@ -179,6 +232,21 @@
 		</component>
 	</entity>
 	
+	<entity name="LifeUpgradePlate" template="Plates">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>212</x>
+				<y>1</y>
+			</position>
+			<size type="">
+				<x>71</x>
+				<y>30</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	
 	<entity name="FireRateUpgrade">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -212,6 +280,20 @@
 				<y>23</y>
 			</size>
 			<rotation>-33</rotation>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="FireRateUpgradePlate" template="Plates">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-90</x>
+				<y>-64</y>
+			</position>
+			<size type="">
+				<x>71</x>
+				<y>30</y>
+			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
 	</entity>
@@ -296,6 +378,7 @@
 	<group name="SpriteSheets">
 		<objectReference name="idleShopKeeperSpriteSheet"/>
 		<objectReference name="numbersSpriteSheet"/>
+		<objectReference name="platesSpriteSheet"/>
 	</group>
 	
 	<group name="Upgrades">
@@ -312,6 +395,13 @@
 		<objectReference name="FireRateUpgradeNumber"/>
 	</group>
 	
+	<group name="UpgradePlates">
+		<objectReference name="SpeedUpgradePlate"/>
+		<objectReference name="DamageUpgradePlate"/>
+		<objectReference name="LifeUpgradePlate"/>
+		<objectReference name="FireRateUpgradePlate"/>
+	</group>
+	
 	<group name="ShopData">
 		<objectReference name="BackgroundMusic"/>
 		<objectReference name="Background"/>
@@ -321,5 +411,6 @@
 		<groupReference name="SpriteSheets"/>
 		<groupReference name="Upgrades"/>
 		<groupReference name="UpgradeNumbers"/>
+		<groupReference name="UpgradePlates"/>
 	</group>
 </things>

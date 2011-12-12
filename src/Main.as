@@ -2,6 +2,7 @@ package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.components.ai.BeamerAIComponent;
+	import com.brutaldoodle.components.ai.ButterflyAIComponent;
 	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.NormalShotAI;
@@ -19,6 +20,7 @@ package
 	import com.brutaldoodle.components.collisions.FadeInDisplayOnCollision;
 	import com.brutaldoodle.components.collisions.RemoveHeartOnDeath;
 	import com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged;
+	import com.brutaldoodle.components.collisions.UpdateStatsOnClick;
 	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.controllers.LoadLevelOnKeypress;
 	import com.brutaldoodle.components.controllers.PlayerController;
@@ -61,6 +63,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.ai.CannibalAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
+			PBE.registerType(com.brutaldoodle.components.ai.ButterflyAIComponent);
 			
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
@@ -78,6 +81,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnDeath);
 			PBE.registerType(com.brutaldoodle.components.collisions.FadeInDisplayOnCollision);
+			PBE.registerType(com.brutaldoodle.components.collisions.UpdateStatsOnClick);
 			
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.animations.WiggleObjectComponent);
@@ -106,7 +110,7 @@ package
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 5);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 4);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage
@@ -142,11 +146,11 @@ package
 			if (reload) {
 				ParticleManager.instance.removeAllParticles();
 				CollisionManager.instance.reset();
-				
+
 				while (PBE.mainStage.numChildren > 1) {
-					PBE.mainStage.removeChildAt(0);
+					PBE.mainStage.removeChildAt(PBE.mainStage.numChildren - 1);
 				}
-				
+
 				LevelManager.instance.loadLevel(0, true);
 			}
 		}

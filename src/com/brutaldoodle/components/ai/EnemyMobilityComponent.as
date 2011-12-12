@@ -31,6 +31,7 @@ package com.brutaldoodle.components.ai
 		public function EnemyMobilityComponent() {
 			super();
 			_currentIterationComplete = false;
+			updatePriority = 100;
 		}
 		
 		override public function onTick(deltaTime:Number):void {
@@ -93,6 +94,7 @@ package com.brutaldoodle.components.ai
 		override protected function onRemove():void {
 			super.onRemove();
 			_enemies.splice(_enemies.indexOf(owner), 1);
+			if (_enemies.length % 7 == 0) moveSpeed++;
 			if (!_gameOver) findEdgeEnemies();
 		}
 		
