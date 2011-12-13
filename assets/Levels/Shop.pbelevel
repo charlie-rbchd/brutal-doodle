@@ -109,6 +109,10 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/SpeedUpgrade.png</fileName>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>speed</upgradedStat>
+		</component>
 	</entity>
 	
 	<entity name="SpeedUpgradeNumber" template="Numbers">
@@ -161,8 +165,8 @@
 			<fileName>../assets/Images/DamageUpgrade.png</fileName>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStatsOnClick">
-			<statToUpdate>DAMAGE</statToUpdate>
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>damage</upgradedStat>
 		</component>
 	</entity>
 	
@@ -215,6 +219,10 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/LifeUpgrade.png</fileName>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>life</upgradedStat>
+		</component>
 	</entity>
 	
 	<entity name="LifeUpgradeNumber" template="Numbers">
@@ -266,6 +274,10 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/FireRateUpgrade.png</fileName>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>firerate</upgradedStat>
 		</component>
 	</entity>
 	

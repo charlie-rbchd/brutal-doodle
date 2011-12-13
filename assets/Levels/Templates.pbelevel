@@ -124,6 +124,8 @@
 			</timeBetweenThinks>
 		</component>
 		-->
+		<component type="com.brutaldoodle.components.basic.WarpableComponent" name="Warpable">
+		</component>
 	</template>
 	  
 	
@@ -221,13 +223,6 @@
 				<noDamage>0</noDamage>
 			</damageModifier>
 		</component>
-		
-		<component type="com.brutaldoodle.components.ai.ButterflyAIComponent" name="Intelligence">
-			<timeBetweenThinks>
-				<minTime>8000</minTime>
-				<maxTime>12000</maxTime>
-			</timeBetweenThinks>
-		</component>
 	</template>
 	  
 	  
@@ -261,8 +256,8 @@
 
 		<component type="com.brutaldoodle.components.ai.CannibalAIComponent" name="Intelligence">
 			<timeBetweenThinks>
-				<minTime>4000</minTime>
-				<maxTime>8000</maxTime>
+				<minTime>6000</minTime>
+				<maxTime>12000</maxTime>
 			</timeBetweenThinks>
 		</component>
 	</template>
@@ -294,6 +289,15 @@
 				<oneShotKill>Infinity</oneShotKill>
 				<noDamage>0</noDamage>
 			</damageModifier>
+		</component>
+		
+		<component type="com.brutaldoodle.components.ai.WarperAIComponent" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>6000</minTime>
+				<maxTime>12000</maxTime>
+			</timeBetweenThinks>
+			<positionProperty>@Spatial.position</positionProperty>
+			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
 		</component>
 	</template>
 	  

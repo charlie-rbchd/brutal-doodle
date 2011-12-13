@@ -6,6 +6,7 @@ package
 	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.NormalShotAI;
+	import com.brutaldoodle.components.ai.WarperAIComponent;
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
 	import com.brutaldoodle.components.animations.CircularMotionComponent;
 	import com.brutaldoodle.components.animations.WiggleObjectComponent;
@@ -64,6 +65,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.ButterflyAIComponent);
+			PBE.registerType(com.brutaldoodle.components.ai.WarperAIComponent);
 			
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);

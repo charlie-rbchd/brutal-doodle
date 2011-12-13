@@ -1,14 +1,9 @@
 package com.brutaldoodle.components.ai
 {
-	import com.brutaldoodle.components.animations.TurnToRedComponent;
+	import com.brutaldoodle.components.animations.TurnToColorComponent;
 	import com.brutaldoodle.entities.Projectile;
 	import com.brutaldoodle.rendering.BeamRenderer;
 	import com.pblabs.engine.PBE;
-	import com.pblabs.engine.debug.Logger;
-	
-	import flash.events.Event;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	
 	public class BeamerAIComponent extends SimpleAIComponent
 	{
@@ -21,7 +16,8 @@ package com.brutaldoodle.components.ai
 			super.think();
 			
 			//make the invader turn red
-			var filter:TurnToRedComponent = new TurnToRedComponent();
+			var filter:TurnToColorComponent = new TurnToColorComponent();
+			filter.color = TurnToColorComponent.COLOR_RED;
 			filter.rate = 0.016;
 			if (owner != null) {
 				owner.addComponent(filter, "TurnRed");
