@@ -138,7 +138,7 @@ package
 		}
 		
 		public static function resetEverythingAndReloadGame(reload:Boolean=true):void {
-			MoneyComponent.coins = 0;
+			MoneyComponent.coins = 1000;
 			PlayerController.moveSpeed = 10;
 			EnemyMobilityComponent.moveSpeed = 1;
 			CanonController.reloadSpeed = 0.2;

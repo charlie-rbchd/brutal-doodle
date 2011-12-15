@@ -109,10 +109,6 @@
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/SpeedUpgrade.png</fileName>
 		</component>
-		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
-			<upgradedStat>speed</upgradedStat>
-		</component>
 	</entity>
 	
 	<entity name="SpeedUpgradeNumber" template="Numbers">
@@ -142,6 +138,11 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>speed</upgradedStat>
+			<numberIndexProperty>#SpeedUpgradeNumber.Render.spriteIndex</numberIndexProperty>
+		</component>
 	</entity>
 	
 	<entity name="DamageUpgrade">
@@ -163,10 +164,6 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/DamageUpgrade.png</fileName>
-		</component>
-		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
-			<upgradedStat>damage</upgradedStat>
 		</component>
 	</entity>
 	
@@ -197,6 +194,11 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>damage</upgradedStat>
+			<numberIndexProperty>#DamageUpgradeNumber.Render.spriteIndex</numberIndexProperty>
+		</component>
 	</entity>
 	
 	<entity name="LifeUpgrade">
@@ -218,10 +220,6 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/LifeUpgrade.png</fileName>
-		</component>
-		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
-			<upgradedStat>life</upgradedStat>
 		</component>
 	</entity>
 	
@@ -252,6 +250,11 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>life</upgradedStat>
+			<numberIndexProperty>#LifeUpgradeNumber.Render.spriteIndex</numberIndexProperty>
+		</component>
 	</entity>
 	
 	
@@ -274,10 +277,6 @@
 			<positionProperty>@Spatial.position</positionProperty>
 			<sizeProperty>@Spatial.size</sizeProperty>
 			<fileName>../assets/Images/FireRateUpgrade.png</fileName>
-		</component>
-		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
-			<upgradedStat>firerate</upgradedStat>
 		</component>
 	</entity>
 	
@@ -307,6 +306,11 @@
 				<y>30</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+			<upgradedStat>firerate</upgradedStat>
+			<numberIndexProperty>#FireRateUpgradeNumber.Render.spriteIndex</numberIndexProperty>
 		</component>
 	</entity>
 	

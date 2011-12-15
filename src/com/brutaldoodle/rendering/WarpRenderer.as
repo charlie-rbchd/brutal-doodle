@@ -20,12 +20,14 @@ package com.brutaldoodle.rendering
 		override public function addEmitters():void
 		{
 			// Start an emitter for creating an effect when the warper is about to warp
-			var _position:Point = (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position
+			if (trueOwner != null) {
+				var _position:Point = (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position
 				
-			_warp = new Warp();
-			_warp.addAction( new GravityWell( 400, _position.x, _position.y ) );
-			this.initializeEmitter(_warp);
-			super.addEmitters();
+				_warp = new Warp();
+				_warp.addAction( new GravityWell( 400, _position.x, _position.y ) );
+				this.initializeEmitter(_warp);
+				super.addEmitters();
+			}
 		}
 	}
 }

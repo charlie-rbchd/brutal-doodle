@@ -223,6 +223,13 @@
 				<noDamage>0</noDamage>
 			</damageModifier>
 		</component>
+		
+		<component type="com.brutaldoodle.components.ai.ButterflyAIComponent" name="Intelligence">
+			<timeBetweenThinks>
+				<minTime>8000</minTime>
+				<maxTime>12000</maxTime>
+			</timeBetweenThinks>
+		</component>
 	</template>
 	  
 	  

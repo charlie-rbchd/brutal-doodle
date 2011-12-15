@@ -1,30 +1,48 @@
 package com.brutaldoodle.components.collisions
 {
+	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
+	import com.brutaldoodle.components.basic.MoneyComponent;
+	import com.brutaldoodle.components.controllers.CanonController;
+	import com.brutaldoodle.components.controllers.PlayerController;
+	import com.brutaldoodle.effects.Bullet;
+	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.debug.Logger;
-	import com.pblabs.rendering2D.SpriteRenderer;
+	import com.pblabs.engine.entity.PropertyReference;
+	import com.pblabs.rendering2D.SpriteSheetRenderer;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
+	import flash.utils.Dictionary;
 	
 	public class UpdateStatsOnClick extends TickedComponent
 	{	
+		private static var _statsStatus:Dictionary = new Dictionary();
+		private static var _money:MoneyComponent;
+		private static const UPGRADE_COSTS:Array = new Array(100, 150, 200, 250, 300, 400, 500, 750, 999);
+		private static const MAX_UPGRADE_COUNT:int = 8;
+		
 		public var upgradedStat:String;
+		public var numberIndexProperty:PropertyReference;
 		private var _displayObject:Sprite;
-		private var _renderer:SpriteRenderer;
+		private var _renderer:SpriteSheetRenderer;
 		
 		public function UpdateStatsOnClick() {
 			super();
+			if (_money == null) {
+				_money = PBE.lookupComponentByName("AmountOfCoins", "Money") as MoneyComponent;
+			}
 		}
 		
 		override protected function onAdd():void {
 			super.onAdd();
-			_renderer = owner.lookupComponentByName("Render") as SpriteRenderer;
+			if (!_statsStatus[upgradedStat]) _statsStatus[upgradedStat] = 0;
+			_renderer = owner.lookupComponentByName("Render") as SpriteSheetRenderer;
 		}
 		
-		override protected function onRemove():void{
+		override protected function onRemove():void {
 			super.onRemove();
 			with (_displayObject) {
 				removeEventListener(MouseEvent.CLICK, updateStats);
@@ -35,9 +53,10 @@ package com.brutaldoodle.components.collisions
 		
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
-			if (_renderer.loaded) {
+			if (_renderer.bitmapData != null) {
 				_displayObject = _renderer.displayObject as Sprite;
 				with (_displayObject) {
+					mouseEnabled = true;
 					addEventListener(MouseEvent.CLICK, updateStats);
 					addEventListener(MouseEvent.MOUSE_OVER, onHover);
 					addEventListener(MouseEvent.MOUSE_OUT, onHover);
@@ -47,35 +66,47 @@ package com.brutaldoodle.components.collisions
 		}
 		
 		private function updateStats (event:MouseEvent):void {
-			Logger.print(this, "CLICK EVENT");
+			if (_statsStatus[upgradedStat] >= MAX_UPGRADE_COUNT) {
+				Logger.print(this, "MAXIMUM UPGRADE !!!");
+				return;
+			}
+			
+			var cost:int = UPGRADE_COSTS[_statsStatus[upgradedStat]];
+			if (MoneyComponent.coins - cost < 0) {
+				Logger.print(this, "NUFF NUFF MINERALS !!!");
+				return;
+			}
+			
 			switch (upgradedStat) {
 				case "speed":
-					Logger.print(this, "SPEED UPGRADED");
+					PlayerController.moveSpeed += 1; // 18 move speed at max level
 					break;
 				case "damage":
-					Logger.print(this, "DAMAGE UPGRADED");
+					Bullet.damage += 6.25; // 75 damage at max level
 					break;
 				case "life":
-					Logger.print(this, "LIFE UPGRADED");
+					RemoveHeartOnDeath.life += 1; // 8-11 life at max level
 					break;
 				case "firerate":
-					Logger.print(this, "FIRERATE UPGRADED");
+					CanonController.reloadSpeed -= 0.01; // 0.1 reload speed at max level
 					break;
 				default:
 					throw new Error();
 			}
+			
+			_statsStatus[upgradedStat] += 1;
+			_renderer.spriteIndex = _statsStatus[upgradedStat];
+			owner.setProperty(numberIndexProperty, _statsStatus[upgradedStat]);
+			_money.removeCoins(cost);
 		}
 		
 		private function onHover (event:MouseEvent):void {
-			Logger.print(this, "SOME EVENT FIRED!");
 			switch (event.type) {
 				case MouseEvent.MOUSE_OVER:
 					Mouse.cursor = MouseCursor.BUTTON;
-					Logger.print(this, "MOUSE OVER");
 					break;
 				case MouseEvent.MOUSE_OUT:
 					Mouse.cursor = MouseCursor.AUTO;
-					Logger.print(this, "MOUSE OUT");
 					break;
 				default:
 					throw new Error();
