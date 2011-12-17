@@ -34,7 +34,7 @@ package com.brutaldoodle.effects
 			var coin:Bitmap = new CoinAsset();
 			
 			//give a radius for the collision with the boundingBox
-			addInitializer( new CollisionRadiusInit(30) );
+			addInitializer( new CollisionRadiusInit(21) );
 			addInitializer( new SharedImage( coin ) );
 			addInitializer( new Velocity( new PointZone( new Point(0, 85) ) ) );
 			addInitializer( new Position( new PointZone( new Point(coin.width/2, 0) ) ) );

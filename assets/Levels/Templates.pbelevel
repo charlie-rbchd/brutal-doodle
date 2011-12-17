@@ -38,6 +38,10 @@
 			<reference>@Render.spriteIndex</reference>
 		</component>
 		
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<collisionType>enemy</collisionType>
+		</component>
+		
 		<component type="com.brutaldoodle.components.collisions.ChangeStateOnDamaged" name="StateChanger"></component>
 		
 		<component type="com.brutaldoodle.components.collisions.DropBloodOnDamaged" name="Bleed"></component>
@@ -45,6 +49,7 @@
 		<component type="com.brutaldoodle.components.collisions.DropCoinOnDeath" name="Coin"></component>
 		
 		<component type="com.brutaldoodle.components.ai.EnemyMobilityComponent" name="Move">
+			<sizeProperty>@Spatial.size</sizeProperty>
 			<positionProperty>@Spatial.position</positionProperty>
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
 		</component>
@@ -140,7 +145,7 @@
 		</component>
 	</entity>
 
-	<template name="cyborgInvader" template="invaderTemplate">		
+	<template name="cyborgInvader" template="invaderTemplate">
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<layerIndex>5</layerIndex>
@@ -150,12 +155,15 @@
 		</component>
 		
 		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
+			<destroyOnDeath>false</destroyOnDeath>
 			<damageModifier>
 				<normal>1</normal>
 				<oneShotKill>Infinity</oneShotKill>
 				<noDamage>0</noDamage>
 			</damageModifier>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.DestroyOnAllDead" name="Chains"></component>
 	</template>
 	  
 	  

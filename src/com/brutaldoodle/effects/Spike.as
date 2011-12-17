@@ -3,11 +3,9 @@ package com.brutaldoodle.effects
 	import com.brutaldoodle.emitters.EnemyCollidableEmitter;
 	
 	import flash.display.Bitmap;
-	import flash.display.Sprite;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.Blast;
-	import org.flintparticles.common.displayObjects.Dot;
 	import org.flintparticles.common.initializers.CollisionRadiusInit;
 	import org.flintparticles.common.initializers.SharedImage;
 	import org.flintparticles.twoD.actions.Move;
@@ -26,21 +24,19 @@ package com.brutaldoodle.effects
 			
 			_damageAmount = 1;
 			
-			//This var is set to a random value of -1 or 1;
-			var direction:int = Math.floor(Math.random() * 2) ? 1 : -1;
-			
 			//give the image to the particle
 			var spike:Bitmap = new SpikeAsset();
 			addInitializer( new SharedImage( spike ) );
 			
-			//set the radius for collision
-			addInitializer( new CollisionRadiusInit(20) );
-			
 			//Generate one particle
 			counter = new Blast(1);
 			
+			addInitializer( new CollisionRadiusInit(0.01) );
+			
+			//This var is set to a random value of -1 or 1;
+			var direction:int = Math.floor(Math.random() * 2) ? 1 : -1;
 			//position and velocity of the particle. 
-			addInitializer( new Velocity( new PointZone( new Point(direction * 20, 0) ) ) );
+			addInitializer( new Velocity( new PointZone( new Point(direction * 10, 0) ) ) );
 			//We want to spawn the particle on the good side to avoid collision with the owner.
 			addInitializer( new Position( new PointZone( new Point(direction * 30, 0) ) ) );
 			

@@ -1,10 +1,12 @@
 package com.brutaldoodle.components.collisions
 {
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
+	import com.brutaldoodle.components.basic.HeartComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
 	import com.brutaldoodle.components.controllers.CanonController;
 	import com.brutaldoodle.components.controllers.PlayerController;
 	import com.brutaldoodle.effects.Bullet;
+	import com.brutaldoodle.entities.Dialog;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.debug.Logger;
@@ -13,6 +15,7 @@ package com.brutaldoodle.components.collisions
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
 	import flash.utils.Dictionary;
@@ -66,14 +69,9 @@ package com.brutaldoodle.components.collisions
 		}
 		
 		private function updateStats (event:MouseEvent):void {
-			if (_statsStatus[upgradedStat] >= MAX_UPGRADE_COUNT) {
-				Logger.print(this, "MAXIMUM UPGRADE !!!");
-				return;
-			}
-			
 			var cost:int = UPGRADE_COSTS[_statsStatus[upgradedStat]];
 			if (MoneyComponent.coins - cost < 0) {
-				Logger.print(this, "NUFF NUFF MINERALS !!!");
+				var dialog:Dialog = new Dialog("../assets/Images/NotEnoughMoney.png", new Point(118, 155), new Point(360, 110));
 				return;
 			}
 			
@@ -85,13 +83,17 @@ package com.brutaldoodle.components.collisions
 					Bullet.damage += 6.25; // 75 damage at max level
 					break;
 				case "life":
-					RemoveHeartOnDeath.life += 1; // 8-11 life at max level
+					HeartComponent.addHeart(); // 9-12 life at max level
 					break;
 				case "firerate":
 					CanonController.reloadSpeed -= 0.01; // 0.1 reload speed at max level
 					break;
 				default:
 					throw new Error();
+			}
+			
+			if (_statsStatus[upgradedStat] >= MAX_UPGRADE_COUNT) {
+				_displayObject.mouseEnabled = false;
 			}
 			
 			_statsStatus[upgradedStat] += 1;

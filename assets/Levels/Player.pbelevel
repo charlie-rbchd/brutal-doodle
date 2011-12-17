@@ -32,6 +32,10 @@
 			<spatialManager componentReference="MainScene"/>
 		</component>
 		
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<collisionType>player</collisionType>
+		</component>
+		
 		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
 			<positionProperty>@Spatial.position</positionProperty>
 			<spriteSheet componentReference="normalSpriteSheet"/>
@@ -73,22 +77,12 @@
 			<defaultAnimation>Idle_Normal</defaultAnimation>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-50</x>
-				<y>240</y>
-				<width>100</width>
-				<height>55</height>
-			</zone>
-			<collisionType>player</collisionType>
-		</component>
-		
 		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<destroyOnDeath>false</destroyOnDeath>
 			<maxHealth>1000</maxHealth>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.RemoveHeartOnDeath" name="UpdateHearts"></component>
+		<component type="com.brutaldoodle.components.basic.HeartComponent" name="Hearts"></component>
 		
 		<component type="com.brutaldoodle.components.collisions.DisplayTextOnDamaged" name="DamageText">
 			<positionProperty>@Spatial.position</positionProperty>

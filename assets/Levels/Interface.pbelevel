@@ -119,6 +119,132 @@
 		</component>
 	</entity>
 	
+	<entity name="Heart4" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-385</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart5" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-360</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart6" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-335</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart7" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-310</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart8" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-285</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart9" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-260</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart10" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-235</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart11" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-210</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart12" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-185</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
 	<entity name="Coin">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -233,6 +359,15 @@
 		<objectReference name="Heart1"/>
 		<objectReference name="Heart2"/>
 		<objectReference name="Heart3"/>
+		<objectReference name="Heart4"/>
+		<objectReference name="Heart5"/>
+		<objectReference name="Heart6"/>
+		<objectReference name="Heart7"/>
+		<objectReference name="Heart8"/>
+		<objectReference name="Heart9"/>
+		<objectReference name="Heart10"/>
+		<objectReference name="Heart11"/>
+		<objectReference name="Heart12"/>
 	</group>
 	
 	<group name="InterfaceData">

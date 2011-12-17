@@ -11,15 +11,16 @@ package
 	import com.brutaldoodle.components.animations.CircularMotionComponent;
 	import com.brutaldoodle.components.animations.WiggleObjectComponent;
 	import com.brutaldoodle.components.basic.HealthComponent;
+	import com.brutaldoodle.components.basic.HeartComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.components.collisions.ChangeLevelOnArrow;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
+	import com.brutaldoodle.components.collisions.DestroyOnAllDead;
 	import com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
 	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
 	import com.brutaldoodle.components.collisions.FadeInDisplayOnCollision;
-	import com.brutaldoodle.components.collisions.RemoveHeartOnDeath;
 	import com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged;
 	import com.brutaldoodle.components.collisions.UpdateStatsOnClick;
 	import com.brutaldoodle.components.controllers.CanonController;
@@ -78,18 +79,20 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTextOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.DropCoinOnDeath);
-			PBE.registerType(com.brutaldoodle.components.collisions.RemoveHeartOnDeath);
 			PBE.registerType(com.brutaldoodle.components.collisions.ChangeLevelOnArrow);
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnDeath);
 			PBE.registerType(com.brutaldoodle.components.collisions.FadeInDisplayOnCollision);
 			PBE.registerType(com.brutaldoodle.components.collisions.UpdateStatsOnClick);
+			PBE.registerType(com.brutaldoodle.components.collisions.DestroyOnAllDead);
 			
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.animations.WiggleObjectComponent);
 			PBE.registerType(com.brutaldoodle.components.animations.CircularMotionComponent);
+			
 			PBE.registerType(com.brutaldoodle.components.basic.HealthComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.MoneyComponent);
+			PBE.registerType(com.brutaldoodle.components.basic.HeartComponent);
 			
 			// start the factory!
 			PBE.startup(this);
@@ -112,7 +115,7 @@ package
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 4);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 5);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage
@@ -138,11 +141,11 @@ package
 		}
 		
 		public static function resetEverythingAndReloadGame(reload:Boolean=true):void {
-			MoneyComponent.coins = 1000;
+			MoneyComponent.coins = 5000;
 			PlayerController.moveSpeed = 10;
 			EnemyMobilityComponent.moveSpeed = 1;
 			CanonController.reloadSpeed = 0.2;
-			RemoveHeartOnDeath.life = 3;
+			HeartComponent.life = 3;
 			Bullet.damage = 25;
 			
 			if (reload) {

@@ -44,9 +44,9 @@ package com.brutaldoodle.components.ai
 		
 		private function warpIt():void {
 			//use the getRandomValue() method(who consider priority set in the WarpableComponent) to decide wich ennemy to target
-			var warpableUnit:IEntity = WarpableComponent.isWarpablePriority.getRandomValue();
+			var warpableUnit:IEntity = WarpableComponent.priorityWeights.getRandomValue();
 			
-			if (warpableUnit != null && owner != null) {
+			if (warpableUnit && owner) {
 				//get the position and bounding Box where the warper is going to warp to
 				var spatial:SimpleSpatialComponent = warpableUnit.lookupComponentByName("Spatial")as SimpleSpatialComponent;
 				var boundingBox:BoundingBoxComponent = warpableUnit.lookupComponentByName("Collisions")as BoundingBoxComponent;

@@ -40,15 +40,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-475</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy2" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -61,15 +52,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-415</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy3" template="juggernautInvader">
@@ -84,15 +66,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-355</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy4" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -105,15 +78,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-295</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy5" template="basicInvader">
@@ -128,15 +92,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-235</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy6" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -149,15 +104,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-175</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy7" template="juggernautInvader">
@@ -172,15 +118,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-115</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy8" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -193,15 +130,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-55</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy9" template="basicInvader">
@@ -216,15 +144,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>5</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy10" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -237,15 +156,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>65</x>
-				<y>-330</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							FIRST ROW	END												-->
@@ -264,15 +174,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-475</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy12" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -285,15 +186,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-415</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy13" template="basicInvader">
@@ -308,15 +200,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-355</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy14" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -329,15 +212,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-295</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy15" template="juggernautInvader">
@@ -352,15 +226,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-235</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy16" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -373,15 +238,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-175</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy17" template="basicInvader">
@@ -396,15 +252,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-115</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy18" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -417,15 +264,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-55</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy19" template="juggernautInvader">
@@ -440,15 +278,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>5</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy20" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -461,15 +290,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>65</x>
-				<y>-245</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							SECOND ROW	END												-->
@@ -488,15 +308,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-475</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy22" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -509,15 +320,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-415</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy23" template="juggernautInvader">
@@ -532,15 +334,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-355</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy24" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -553,15 +346,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-295</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy25" template="basicInvader">
@@ -576,15 +360,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-235</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>	
 	<entity name="Enemy26" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -597,15 +372,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-175</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>	
 	<entity name="Enemy27" template="juggernautInvader">
@@ -620,15 +386,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-115</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>
 	<entity name="Enemy28" template="juggernautInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -641,15 +398,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>-55</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<entity name="Enemy29" template="basicInvader">
@@ -664,15 +412,6 @@
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>5</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
-		</component>
 	</entity>
 	<entity name="Enemy30" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
@@ -685,15 +424,6 @@
 				<y>50</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
-		</component>
-		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
-			<zone>
-				<x>65</x>
-				<y>-185</y>
-				<width>50</width>
-				<height>50</height>
-			</zone>
-			<collisionType>enemy</collisionType>
 		</component>
 	</entity>
 	<!--							THIRD ROW	END												-->

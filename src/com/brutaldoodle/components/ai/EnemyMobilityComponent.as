@@ -4,6 +4,7 @@ package com.brutaldoodle.components.ai
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
+	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	import com.pblabs.rendering2D.SpriteRenderer;
 	
 	import flash.geom.Point;
@@ -12,6 +13,7 @@ package com.brutaldoodle.components.ai
 	public class EnemyMobilityComponent extends TickedComponent {
 		public static var moveSpeed:uint;
 		
+		public var sizeProperty:PropertyReference;
 		public var positionProperty:PropertyReference;
 		public var boundingBoxProperty:PropertyReference;
 		
@@ -89,6 +91,7 @@ package com.brutaldoodle.components.ai
 			super.onAdd();
 			_enemies.push(owner);
 			findEdgeEnemies();
+			getCollisionsZone();
 		}
 		
 		override protected function onRemove():void {
@@ -98,6 +101,18 @@ package com.brutaldoodle.components.ai
 			if (!_gameOver) findEdgeEnemies();
 		}
 		
+		private function getCollisionsZone ():void {
+			var size:Point = owner.getProperty(sizeProperty);
+			var position:Point = owner.getProperty(positionProperty);
+			var boundingBox:Rectangle = new Rectangle();
+			
+			boundingBox.left = position.x - size.x/2;
+			boundingBox.right = position.x + size.x/2;
+			boundingBox.top = position.y - size.y/2;
+			boundingBox.bottom = position.y + size.y/2;
+			
+			owner.setProperty(boundingBoxProperty, boundingBox);
+		}
 		
 		private function findEdgeEnemies ():void {
 			_leftEnemy = null;

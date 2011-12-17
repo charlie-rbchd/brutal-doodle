@@ -51,7 +51,7 @@ package com.brutaldoodle.rendering
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 			renderer.scene = PBE.scene;
 			renderer.displayObject = _renderer; // renders the Flint renderer as its displayObject
-			renderer.layerIndex = 3;
+			renderer.layerIndex = 6;
 			renderer.positionProperty = new PropertyReference("@Spatial.position");
 			renderer.sizeProperty = new PropertyReference("@Spatial.size");
 			__this.addComponent(renderer, "Render");

@@ -71,7 +71,7 @@
 	<entity name="platesSpriteSheet">	
 		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="SpriteSheet">
 			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
-				<xCount>9</xCount>
+				<xCount>10</xCount>
 				<yCount>1</yCount>
 			</divider>
 			<image filename="../assets/Images/Plates.png"/>
@@ -133,7 +133,7 @@
 				<y>-64</y>
 			</position>
 			<size type="">
-				<x>71</x>
+				<x>70</x>
 				<y>30</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
@@ -189,7 +189,7 @@
 				<y>97</y>
 			</position>
 			<size type="">
-				<x>71</x>
+				<x>70</x>
 				<y>30</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
@@ -245,7 +245,7 @@
 				<y>1</y>
 			</position>
 			<size type="">
-				<x>71</x>
+				<x>70</x>
 				<y>30</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
@@ -302,7 +302,7 @@
 				<y>-64</y>
 			</position>
 			<size type="">
-				<x>71</x>
+				<x>70</x>
 				<y>30</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
@@ -391,6 +391,10 @@
 		</component>
 	</entity>
 	
+	<entity name="InvisiblePlayer">
+		<component type="com.brutaldoodle.components.basic.HeartComponent" name="Hearts"></component>
+	</entity>
+	
 	<group name="SpriteSheets">
 		<objectReference name="idleShopKeeperSpriteSheet"/>
 		<objectReference name="numbersSpriteSheet"/>
@@ -424,6 +428,7 @@
 		<objectReference name="Curtains"/>
 		<objectReference name="ShopKeeper"/>
 		<objectReference name="Arrow"/>
+		<objectReference name="InvisiblePlayer"/>
 		<groupReference name="SpriteSheets"/>
 		<groupReference name="Upgrades"/>
 		<groupReference name="UpgradeNumbers"/>
