@@ -25,43 +25,47 @@ package com.brutaldoodle.components.ai
 				
 		override protected function think():void
 		{
-			super.think();
-			
-			//make the invader turn white over a 1 second period.
-			var filter:TurnToColorComponent = new TurnToColorComponent();
-			filter.rate = 0.033;
-			filter.color = TurnToColorComponent.COLOR_WHITE;
-			if (owner != null) {
-				owner.addComponent(filter,"TurnColor");
+			if (WarpableComponent.priorityWeights.length) {
+				super.think();
+				
+				//make the invader turn white over a 1 second period.
+				var filter:TurnToColorComponent = new TurnToColorComponent();
+				filter.rate = 0.033;
+				filter.color = TurnToColorComponent.COLOR_WHITE;
+				if (owner != null) {
+					owner.addComponent(filter,"TurnColor");
+				}
+				
+				//start the particle effect.
+				var p:Projectile = new Projectile(WarpRenderer, owner);
+				//create a timer of one second, the time it take for the to animation to be complete
+				
+				PBE.processManager.schedule(1000, this, warpIt);
 			}
-			
-			//start the particle effect.
-			var p:Projectile = new Projectile(WarpRenderer, owner);
-			//create a timer of one second, the time it take for the to animation to be complete
-			
-			PBE.processManager.schedule(1000, this, warpIt);
 		}
 		
 		private function warpIt():void {
-			//use the getRandomValue() method(who consider priority set in the WarpableComponent) to decide wich ennemy to target
-			var warpableUnit:IEntity = WarpableComponent.priorityWeights.getRandomValue();
-			
-			if (warpableUnit && owner) {
-				//get the position and bounding Box where the warper is going to warp to
-				var spatial:SimpleSpatialComponent = warpableUnit.lookupComponentByName("Spatial")as SimpleSpatialComponent;
-				var boundingBox:BoundingBoxComponent = warpableUnit.lookupComponentByName("Collisions")as BoundingBoxComponent;
-				var positionTo:Point = spatial.position;
-				var boundingBoxTo:Rectangle = boundingBox.zone;
+			if (WarpableComponent.priorityWeights.length) {
+				//use the getRandomValue() method(who consider priority set in the WarpableComponent) to decide wich ennemy to target
+				var warpableUnit:IEntity = WarpableComponent.priorityWeights.getRandomValue();
 				
-				//get the current position and bounding Box where the targeted ennemy will be sent
-				var positionFrom:Point = owner.getProperty(positionProperty);
-				var boundingBoxFrom:Rectangle = owner.getProperty(boundingBoxProperty);
-				
-				//actually exchange the position and bounding Box of the two unit 
-				owner.setProperty(positionProperty,positionTo);
-				warpableUnit.setProperty(new PropertyReference("@Spatial.position"),positionFrom);
-				owner.setProperty(boundingBoxProperty,boundingBoxTo);
-				warpableUnit.setProperty(new PropertyReference("@Collisions.zone"),boundingBoxFrom);
+				if (warpableUnit && owner) {
+					//get the position and bounding Box where the warper is going to warp to
+					var spatial:SimpleSpatialComponent = warpableUnit.lookupComponentByName("Spatial")as SimpleSpatialComponent;
+					var boundingBox:BoundingBoxComponent = warpableUnit.lookupComponentByName("Collisions")as BoundingBoxComponent;
+					var positionTo:Point = spatial.position;
+					var boundingBoxTo:Rectangle = boundingBox.zone;
+					
+					//get the current position and bounding Box where the targeted ennemy will be sent
+					var positionFrom:Point = owner.getProperty(positionProperty);
+					var boundingBoxFrom:Rectangle = owner.getProperty(boundingBoxProperty);
+					
+					//actually exchange the position and bounding Box of the two unit 
+					owner.setProperty(positionProperty,positionTo);
+					warpableUnit.setProperty(new PropertyReference("@Spatial.position"),positionFrom);
+					owner.setProperty(boundingBoxProperty,boundingBoxTo);
+					warpableUnit.setProperty(new PropertyReference("@Collisions.zone"),boundingBoxFrom);
+				}
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package com.brutaldoodle.components.basic
 {
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.EntityComponent;
 	import com.pblabs.engine.entity.PropertyReference;
 	

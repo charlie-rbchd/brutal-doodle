@@ -8,7 +8,6 @@ package com.brutaldoodle.components.basic
 	public class WarpableComponent extends EntityComponent
 	{
 		public var priority:int; 
-		private static var _warpableUnits:Vector.<IEntity> = new Vector.<IEntity>;
 		private static var _weights:WeightedArray = new WeightedArray();
 		
 		public function WarpableComponent()
@@ -19,18 +18,13 @@ package com.brutaldoodle.components.basic
 		override protected function onAdd():void
 		{
 			super.onAdd();
-			_warpableUnits.push(this.owner);
-			_weights.add(this.owner, priority);
+			_weights.add(owner, priority);
 		}
 		
 		override protected function onRemove():void
 		{
 			super.onRemove();
-			var index:int = _warpableUnits.indexOf(this.owner);
-			if (index != -1) {
-				_warpableUnits.splice(index, 1);
-				_weights.removeAt(index);
-			}
+			_weights.remove(owner);
 		}
 		
 		public static function get priorityWeights():WeightedArray {

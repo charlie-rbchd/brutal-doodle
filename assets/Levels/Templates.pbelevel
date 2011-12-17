@@ -84,7 +84,7 @@
 			</damageModifier>
 		</component>
 		
-		<component type="com.brutaldoodle.components.ai.NormalShotAI" name="Intelligence">
+		<component type="com.brutaldoodle.components.ai.BasicAIComponent" name="Intelligence">
 			<timeBetweenThinks>
 				<minTime>6000</minTime>
 				<maxTime>12000</maxTime>

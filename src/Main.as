@@ -5,7 +5,7 @@ package
 	import com.brutaldoodle.components.ai.ButterflyAIComponent;
 	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
-	import com.brutaldoodle.components.ai.NormalShotAI;
+	import com.brutaldoodle.components.ai.BasicAIComponent;
 	import com.brutaldoodle.components.ai.WarperAIComponent;
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
 	import com.brutaldoodle.components.animations.CircularMotionComponent;
@@ -61,7 +61,7 @@ package
 			PBE.registerType(com.pblabs.rendering2D.spritesheet.CellCountDivider);
 			PBE.registerType(com.pblabs.rendering2D.ui.PBLabel);
 			
-			PBE.registerType(com.brutaldoodle.components.ai.NormalShotAI);
+			PBE.registerType(com.brutaldoodle.components.ai.BasicAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.CannibalAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
@@ -115,7 +115,7 @@ package
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 5);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 4);
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage

@@ -34,15 +34,17 @@ package com.brutaldoodle.components.collisions
 		
 		public function UpdateStatsOnClick() {
 			super();
-			if (_money == null) {
-				_money = PBE.lookupComponentByName("AmountOfCoins", "Money") as MoneyComponent;
-			}
 		}
 		
 		override protected function onAdd():void {
 			super.onAdd();
 			if (!_statsStatus[upgradedStat]) _statsStatus[upgradedStat] = 0;
 			_renderer = owner.lookupComponentByName("Render") as SpriteSheetRenderer;
+			_money = PBE.lookupComponentByName("AmountOfCoins", "Money") as MoneyComponent;
+			
+			// keep the upgrades between visits
+			_renderer.spriteIndex = _statsStatus[upgradedStat];
+			owner.setProperty(numberIndexProperty, _statsStatus[upgradedStat]);
 		}
 		
 		override protected function onRemove():void {
@@ -92,7 +94,7 @@ package com.brutaldoodle.components.collisions
 					throw new Error();
 			}
 			
-			if (_statsStatus[upgradedStat] >= MAX_UPGRADE_COUNT) {
+			if (_statsStatus[upgradedStat] == MAX_UPGRADE_COUNT) {
 				_displayObject.mouseEnabled = false;
 			}
 			
