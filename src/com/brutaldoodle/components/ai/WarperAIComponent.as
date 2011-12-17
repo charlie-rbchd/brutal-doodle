@@ -65,6 +65,8 @@ package com.brutaldoodle.components.ai
 					warpableUnit.setProperty(new PropertyReference("@Spatial.position"),positionFrom);
 					owner.setProperty(boundingBoxProperty,boundingBoxTo);
 					warpableUnit.setProperty(new PropertyReference("@Collisions.zone"),boundingBoxFrom);
+					
+					EnemyMobilityComponent.findEdgeEnemies();
 				}
 			}
 		}

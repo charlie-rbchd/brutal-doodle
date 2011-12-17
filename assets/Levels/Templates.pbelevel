@@ -90,6 +90,10 @@
 				<maxTime>12000</maxTime>
 			</timeBetweenThinks>
 		</component>
+		
+		<component type="com.brutaldoodle.components.basic.WarpableComponent" name="Warpable">
+			<priority>1</priority>
+		</component>
 	</template>
 	
 	
@@ -123,7 +127,7 @@
 		</component>
 
 		<component type="com.brutaldoodle.components.basic.WarpableComponent" name="Warpable">
-			<priority>4</priority>
+			<priority>3</priority>
 		</component>
 	</template>
 	  
@@ -194,6 +198,10 @@
 				<minTime>6000</minTime>
 				<maxTime>12000</maxTime>
 			</timeBetweenThinks>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.WarpableComponent" name="Warpable">
+			<priority>2</priority>
 		</component>
 	</template>
 	  

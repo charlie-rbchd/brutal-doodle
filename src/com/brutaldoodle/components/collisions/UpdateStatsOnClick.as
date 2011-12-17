@@ -1,6 +1,5 @@
 package com.brutaldoodle.components.collisions
 {
-	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.basic.HeartComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
 	import com.brutaldoodle.components.controllers.CanonController;
@@ -9,7 +8,6 @@ package com.brutaldoodle.components.collisions
 	import com.brutaldoodle.entities.Dialog;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.PropertyReference;
 	import com.pblabs.rendering2D.SpriteSheetRenderer;
 	
@@ -25,7 +23,7 @@ package com.brutaldoodle.components.collisions
 		private static var _statsStatus:Dictionary = new Dictionary();
 		private static var _money:MoneyComponent;
 		private static const UPGRADE_COSTS:Array = new Array(100, 150, 200, 250, 300, 400, 500, 750, 999);
-		private static const MAX_UPGRADE_COUNT:int = 8;
+		private static const MAX_UPGRADE_COUNT:int = 9;
 		
 		public var upgradedStat:String;
 		public var numberIndexProperty:PropertyReference;
@@ -34,6 +32,10 @@ package com.brutaldoodle.components.collisions
 		
 		public function UpdateStatsOnClick() {
 			super();
+		}
+		
+		public static function resetShop():void {
+			_statsStatus = new Dictionary();
 		}
 		
 		override protected function onAdd():void {
@@ -61,7 +63,7 @@ package com.brutaldoodle.components.collisions
 			if (_renderer.bitmapData != null) {
 				_displayObject = _renderer.displayObject as Sprite;
 				with (_displayObject) {
-					mouseEnabled = true;
+					mouseEnabled = _statsStatus[upgradedStat] == MAX_UPGRADE_COUNT ? false : true;
 					addEventListener(MouseEvent.CLICK, updateStats);
 					addEventListener(MouseEvent.MOUSE_OVER, onHover);
 					addEventListener(MouseEvent.MOUSE_OUT, onHover);
@@ -94,7 +96,7 @@ package com.brutaldoodle.components.collisions
 					throw new Error();
 			}
 			
-			if (_statsStatus[upgradedStat] == MAX_UPGRADE_COUNT) {
+			if (_statsStatus[upgradedStat] == MAX_UPGRADE_COUNT - 1) {
 				_displayObject.mouseEnabled = false;
 			}
 			
@@ -102,6 +104,7 @@ package com.brutaldoodle.components.collisions
 			_renderer.spriteIndex = _statsStatus[upgradedStat];
 			owner.setProperty(numberIndexProperty, _statsStatus[upgradedStat]);
 			_money.removeCoins(cost);
+			PBE.soundManager.play("../assets/Sounds/PowerUp.mp3");
 		}
 		
 		private function onHover (event:MouseEvent):void {

@@ -321,7 +321,13 @@
 		</component>
 		
 		<component type="com.brutaldoodle.components.collisions.FadeInDisplayOnCollision" name="FadeIn">
-			<entityName>OptionPanel</entityName>
+			<entityNames>
+				<_>OptionPanel</_>
+				<_>GlobalSoundBar</_>
+				<_>SFXSoundBar</_>
+				<_>GlobalSlider</_>
+				<_>SFXSlider</_>
+			</entityNames>
 			<alphaRate>0.05</alphaRate>
 		</component>
 	</entity>
@@ -348,6 +354,94 @@
 		</component>
 	</entity>
 	
+	<entity name="GlobalSoundBar">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>250</x>
+				<y>30</y>
+			</position>
+			<size type="">
+				<x>189</x>
+				<y>30</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/SoundBar.png</fileName>
+			<layerIndex>5</layerIndex>
+			<alpha>0</alpha>
+		</component>
+	</entity>
+	
+	<entity name="GlobalSlider">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>343</x>
+				<y>29</y>
+			</position>
+			<size type="">
+				<x>6</x>
+				<y>33</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Slider.png</fileName>
+			<layerIndex>5</layerIndex>
+			<alpha>0</alpha>
+		</component>
+	</entity>
+	
+	<entity name="SFXSoundBar">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>250</x>
+				<y>100</y>
+			</position>
+			<size type="">
+				<x>189</x>
+				<y>30</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/SoundBar.png</fileName>
+			<layerIndex>5</layerIndex>
+			<alpha>0</alpha>
+		</component>
+	</entity>
+	
+	<entity name="SFXSlider">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>343</x>
+				<y>99</y>
+			</position>
+			<size type="">
+				<x>6</x>
+				<y>33</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Slider.png</fileName>
+			<layerIndex>5</layerIndex>
+			<alpha>0</alpha>
+		</component>
+	</entity>
+	
 	<group name="SpriteSheets">
 		<objectReference name="idleButtonTutorielSpriteSheet"/>
 		<objectReference name="idleButtonDebuterSpriteSheet"/>
@@ -362,7 +456,10 @@
 	
 	<group name="Options">
 		<objectReference name="OptionPanel"/>
-		
+		<objectReference name="GlobalSoundBar"/>
+		<objectReference name="GlobalSlider"/>
+		<objectReference name="SFXSoundBar"/>
+		<objectReference name="SFXSlider"/>
 	</group>
 	
 	<group name="DayNight">

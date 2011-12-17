@@ -1,11 +1,11 @@
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
+	import com.brutaldoodle.components.ai.BasicAIComponent;
 	import com.brutaldoodle.components.ai.BeamerAIComponent;
 	import com.brutaldoodle.components.ai.ButterflyAIComponent;
 	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
-	import com.brutaldoodle.components.ai.BasicAIComponent;
 	import com.brutaldoodle.components.ai.WarperAIComponent;
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
 	import com.brutaldoodle.components.animations.CircularMotionComponent;
@@ -16,6 +16,7 @@ package
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.components.collisions.ChangeLevelOnArrow;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
+	import com.brutaldoodle.components.collisions.ChangeVolumeOnDrag;
 	import com.brutaldoodle.components.collisions.DestroyOnAllDead;
 	import com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
@@ -33,6 +34,7 @@ package
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.GroupManagerComponent;
 	import com.pblabs.engine.core.LevelManager;
+	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.rendering2D.AnimationController;
 	import com.pblabs.rendering2D.AnimationControllerInfo;
 	import com.pblabs.rendering2D.SpriteSheetRenderer;
@@ -43,12 +45,15 @@ package
 	
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
 	
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
+		public static var gameOver:Boolean;
 		private static var _running:Boolean;
+		
 		
 		public function Main() {
 			// these types need to be registered in order to use them in pbelevel files
@@ -85,6 +90,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.FadeInDisplayOnCollision);
 			PBE.registerType(com.brutaldoodle.components.collisions.UpdateStatsOnClick);
 			PBE.registerType(com.brutaldoodle.components.collisions.DestroyOnAllDead);
+			PBE.registerType(com.brutaldoodle.components.collisions.ChangeVolumeOnDrag);
 			
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.animations.WiggleObjectComponent);
@@ -97,6 +103,7 @@ package
 			// start the factory!
 			PBE.startup(this);
 			_running = true;
+			gameOver = false;
 			
 			// resources are collected directly from the files instead of being embedded in the .swf
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
@@ -113,9 +120,14 @@ package
 			
 			// event handler for pausing the game (must not be handled by the game loop)
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
+			PBE.mainStage.addEventListener(MouseEvent.CLICK, outputCoords);
 			
 			// loads the main menu
-			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 4);
+			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
+		}
+		
+		private function outputCoords(event:MouseEvent):void {
+			Logger.print(this, String(event.stageX + " ,  " + event.stageY));
 		}
 		
 		// A SceneView instance is created with the same dimensions as the stage
@@ -141,6 +153,8 @@ package
 		}
 		
 		public static function resetEverythingAndReloadGame(reload:Boolean=true):void {
+			Main.gameOver = false;
+			UpdateStatsOnClick.resetShop();
 			MoneyComponent.coins = 5000;
 			PlayerController.moveSpeed = 10;
 			EnemyMobilityComponent.moveSpeed = 1;
@@ -158,6 +172,8 @@ package
 
 				LevelManager.instance.loadLevel(0, true);
 			}
+			
+			var countdown:Countdown = new Countdown();
 		}
 		
 		public static function resetEverythingAndLoadLevel(level:int, countdown:Boolean=false):void {

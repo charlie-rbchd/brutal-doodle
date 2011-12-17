@@ -24,7 +24,6 @@ package com.brutaldoodle.components.ai
 		private static var _leftEnemy:IEntity = null;
 		private static var _rightEnemy:IEntity = null;
 		private static var _bottomEnemy:IEntity = null;
-		private static var _gameOver:Boolean = false;
 		private static var _moveDown:Boolean = false;
 		private static var _direction:int = 1;
 		
@@ -39,7 +38,7 @@ package com.brutaldoodle.components.ai
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
-			if (_gameOver) {
+			if (Main.gameOver) {
 				owner.destroy();
 				(PBE.lookupComponentByName("GameOverScreen", "Render") as SpriteRenderer).alpha = 1;
 				return;
@@ -51,19 +50,23 @@ package com.brutaldoodle.components.ai
 					var boundingBox:Rectangle = owner.getProperty(boundingBoxProperty);
 					
 					if (owner === _enemies[0]) {
-						var leftBB:Rectangle = _leftEnemy.getProperty(boundingBoxProperty);
-						var rightBB:Rectangle = _rightEnemy.getProperty(boundingBoxProperty);
-						var bottomBB:Rectangle = _bottomEnemy.getProperty(boundingBoxProperty);
+						var leftPos:Point = _leftEnemy.getProperty(positionProperty);
+						var rightPos:Point = _rightEnemy.getProperty(positionProperty);
+						var bottomPos:Point = _bottomEnemy.getProperty(positionProperty);
 						
-						if ( (_direction ==  1 && rightBB.right + LATERAL_DISPLACEMENT >=  PBE.mainStage.stageWidth/2) ||
-							 (_direction == -1 && leftBB.left   - LATERAL_DISPLACEMENT <= -PBE.mainStage.stageWidth/2) )
+						var leftSize:Point = _leftEnemy.getProperty(sizeProperty);
+						var rightSize:Point = _rightEnemy.getProperty(sizeProperty);
+						var bottomSize:Point = _bottomEnemy.getProperty(sizeProperty);
+						
+						if ( (_direction ==  1 && rightPos.x + rightSize.x/2 + LATERAL_DISPLACEMENT >=  PBE.mainStage.stageWidth/2) ||
+							 (_direction == -1 && leftPos.x - leftSize.x/2   - LATERAL_DISPLACEMENT <= -PBE.mainStage.stageWidth/2) )
 						{
 							_moveDown = true;
 							_direction = -_direction;
 						}
 						
-						if (_moveDown && bottomBB.bottom + VERTICAL_DISPLACEMENT * 2 >= PBE.mainStage.stageHeight/2) {
-							_gameOver = true;
+						if (_moveDown && bottomPos.y + bottomSize.y/2 + VERTICAL_DISPLACEMENT * 3 >= PBE.mainStage.stageHeight/2) {
+							Main.gameOver = true;
 						}
 					}
 					
@@ -98,7 +101,7 @@ package com.brutaldoodle.components.ai
 			super.onRemove();
 			_enemies.splice(_enemies.indexOf(owner), 1);
 			if (_enemies.length % 7 == 0) moveSpeed++;
-			if (!_gameOver) findEdgeEnemies();
+			if (!Main.gameOver) findEdgeEnemies();
 		}
 		
 		private function getCollisionsZone ():void {
@@ -114,7 +117,7 @@ package com.brutaldoodle.components.ai
 			owner.setProperty(boundingBoxProperty, boundingBox);
 		}
 		
-		private function findEdgeEnemies ():void {
+		public static function findEdgeEnemies ():void {
 			_leftEnemy = null;
 			_rightEnemy = null;
 			_bottomEnemy = null;
@@ -126,7 +129,7 @@ package com.brutaldoodle.components.ai
 				var bottomY:int = -1;
 				
 				for each (var currentOwner:IEntity in _enemies) {
-					var position:Point = currentOwner.getProperty(positionProperty);
+					var position:Point = (currentOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position;
 					
 					if (leftX == -1 || position.x < leftX)
 					{

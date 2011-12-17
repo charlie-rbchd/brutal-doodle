@@ -8,7 +8,7 @@ package com.brutaldoodle.entities
 	import com.pblabs.rendering2D.SpriteRenderer;
 	
 	import flash.geom.Point;
-
+	
 	public class Dialog
 	{
 		private var __this:IEntity;
