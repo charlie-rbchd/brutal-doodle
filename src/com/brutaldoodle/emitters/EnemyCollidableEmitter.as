@@ -4,6 +4,7 @@ package com.brutaldoodle.emitters
 	import com.brutaldoodle.collisions.CollisionType;
 	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
+	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.IEntity;
 	
 	import org.flintparticles.common.events.ParticleEvent;
@@ -24,8 +25,12 @@ package com.brutaldoodle.emitters
 				if (health != null) {
 					health.damage(_damageAmount, "normal");
 					
+					
 					if (health.isDead) {
+						PBE.soundManager.play("../assets/Sounds/EnemyDead.mp3");
 						CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);
+					} else {
+						PBE.soundManager.play("../assets/Sounds/EnemyHit.mp3");
 					}
 				}
 			}

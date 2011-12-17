@@ -60,15 +60,15 @@ package com.brutaldoodle.components.controllers
 					}
 					/*
 					if (PBE.isKeyDown(InputKey.Z)) {
-					// ability 1
+						// ability 1
 					}
 					
 					if (PBE.isKeyDown(InputKey.X)) {
-					// ability 2
+						// ability 2
 					}
 					
 					if (PBE.isKeyDown(InputKey.C)) {
-					// ability 3
+						// ability 3
 					}
 					*/
 				}

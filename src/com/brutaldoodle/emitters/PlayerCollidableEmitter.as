@@ -27,6 +27,7 @@ package com.brutaldoodle.emitters
 					
 					if (money != null) {
 						money.addCoins(_damageAmount);
+						PBE.soundManager.play("../assets/Sounds/Coin.mp3");
 					}
 					break;
 				case CollidableEmitter.DEAL_DAMAGE:				

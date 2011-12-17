@@ -55,16 +55,8 @@
 		<group name="ShopData"/>
 	</level>
 	
-	<level index="5">
-		<file filename="../assets/Levels/Interface.pbelevel"/>
-		<group name="InterfaceData"/>
-		
-		<file filename="../assets/Levels/Shop.pbelevel"/>
-		<group name="ShopData"/>
-	</level>
-	
 	<!-- Level 2 -->
-	<level index="6">
+	<level index="5">
 		<file filename="../assets/Levels/Templates.pbelevel"/>
 		<group name="TemplatesData"/>
 		
