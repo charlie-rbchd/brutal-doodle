@@ -1,4 +1,23 @@
-﻿package com.brutaldoodle.ui{
+﻿/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin & Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+package com.brutaldoodle.ui
+{
 	//Importer les classes nécessaires
 	import com.brutaldoodle.ui.chargement.ChargeurMedia;
 	import com.pblabs.engine.PBE;
@@ -7,7 +26,6 @@
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
@@ -17,7 +35,6 @@
 	public class Generique extends MovieClip{
 		[Embed(source="../assets/Images/BackgroundLevel1.jpg")]
 		private var AP:Class;
-		
 		
 		public var _ap:DisplayObject = new AP();
 		public var _txt:Sprite;
