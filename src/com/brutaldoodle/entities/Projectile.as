@@ -23,6 +23,12 @@ package com.brutaldoodle.entities
 	
 	public class Projectile
 	{
+		/*
+		 * Instanciate a new particle renderer from the specified renderer type
+		 * 
+		 * @param RenderClass  The renderer class used to render the emitter
+		 * @param owner  The entity by which the projectile was created
+		 */
 		public function Projectile(RendererClass:Class, owner:IEntity) {
 			var renderer:FlintBitmapRenderer = new RendererClass();
 			renderer.trueOwner = owner;

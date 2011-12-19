@@ -28,10 +28,14 @@ package com.brutaldoodle.components.ai
 			super();
 		}
 		
+		/*
+		 * AI-specific actions are defined here
+		 */
 		override protected function think():void
 		{
-			// TODO Auto Generated method stub
 			super.think();
+			
+			// Shoot a projectile rendered by the HazardousShotRenderer
 			var p:Projectile = new Projectile(HazardousShotRenderer, owner);
 		}
 	}

@@ -18,11 +18,8 @@
 
 package com.brutaldoodle.components.animations
 {
-	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.PropertyReference;
-	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
 	import flash.geom.Point;
 	

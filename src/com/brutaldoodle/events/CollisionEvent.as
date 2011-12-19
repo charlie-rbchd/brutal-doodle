@@ -24,12 +24,21 @@ package com.brutaldoodle.events
 	
 	public class CollisionEvent extends Event
 	{
+		/*
+		 * Constants used in order to easily identify event types
+		 */
 		public static const COLLISION_OCCURED:String = "collisionOccured";
 		public static const COLLISION_ZONE_UNREGISTERED:String = "collisionZoneUnregistered";
 		public static const COLLISION_ZONE_REGISTERED:String = "collisionZoneRegistered";
 		
+		/*
+		 * The zone (bounding box) involved in the event
+		 */
 		private var _zone:Zone2D;
 		
+		/*
+		 * Typical event constructor
+		 */
 		public function CollisionEvent(type:String, zone:Zone2D, bubbles:Boolean=false, cancelable:Boolean=false) {
 			super(type, bubbles, cancelable);
 			_zone = zone;

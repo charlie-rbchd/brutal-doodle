@@ -54,6 +54,27 @@
 			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
 		</component>
 	</template>
+	<!--InvaderInfo-->
+	<template name="invaderInfo">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>60</y>
+			</position>
+			<size type="">
+				<x>281</x>
+				<y>290</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.FadeComponent" name="FadeOut">
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<type>fadeOut</type>
+			<delay>7000</delay>
+			<rate>0.01</rate>
+		</component>
+	</template>
 	
 	
 	<!--Basic Invader-->

@@ -28,9 +28,13 @@ package com.brutaldoodle.components.ai
 			super();
 		}
 		
+		/*
+		 * AI-specific actions are defined here
+		 */
 		override protected function think():void {
 			super.think();
-			// shot a projectile rendered by SimpleShotRenderer
+			
+			// Shoot a projectile rendered by the SpikeRenderer
 			var p:Projectile = new Projectile(SpikeRenderer, owner);
 		}	
 	}

@@ -52,7 +52,6 @@ package
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.GroupManagerComponent;
 	import com.pblabs.engine.core.LevelManager;
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.rendering2D.AnimationController;
 	import com.pblabs.rendering2D.AnimationControllerInfo;
 	import com.pblabs.rendering2D.SpriteSheetRenderer;
@@ -63,18 +62,16 @@ package
 	
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
 	
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
-		public static var gameOver:Boolean;
-		private static var _running:Boolean;
-		
+		public static var gameOver:Boolean = false;
+		private static var _running:Boolean = true;
 		
 		public function Main() {
-			// these types need to be registered in order to use them in pbelevel files
+			// These types need to be registered in order to be used in pbelevel files
 			PBE.registerType(com.pblabs.engine.components.GroupManagerComponent);
 			PBE.registerType(com.pblabs.animation.AnimatorComponent);
 			PBE.registerType(com.pblabs.sound.BackgroundMusicComponent);
@@ -90,7 +87,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.ButterflyAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.WarperAIComponent);
-			
+
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
 			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
@@ -118,37 +115,33 @@ package
 			PBE.registerType(com.brutaldoodle.components.basic.MoneyComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.HeartComponent);
 			
-			// start the factory!
+			// Tell PushButtonEngine that this is the main class
 			PBE.startup(this);
-			_running = true;
-			gameOver = false;
 			
-			// resources are collected directly from the files instead of being embedded in the .swf
+			// Resources are collected directly from the files instead of being embedded in the .swf
 			PBE.resourceManager.onlyLoadEmbeddedResources = false;
 			
-			// default game configs
+			// Default game configs
 			Main.resetEverythingAndReloadGame(false);
 			
-			// creates the scene on which PBE can draw display objects
+			// Creates the scene on which PBE can draw display objects
 			createScene();
 			
-			// singletons are initialized : one for collisions mangement, one for particles management
+			// Singletons are initialized : one for collisions mangement, one for particles management
 			ParticleManager.instance.initialize(stage.stageWidth, stage.stageHeight);
 			CollisionManager.instance.initialize();
 			
-			// event handler for pausing the game (must not be handled by the game loop)
+			// Event handler for pausing the game (must not be handled by the game loop)
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
-			PBE.mainStage.addEventListener(MouseEvent.CLICK, outputCoords);
 			
 			// loads the main menu
 			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
 		}
 		
-		private function outputCoords(event:MouseEvent):void {
-			Logger.print(this, String(event.stageX + " ,  " + event.stageY));
-		}
-		
-		// A SceneView instance is created with the same dimensions as the stage
+		/*
+		 * A SceneView instance is created with the same dimensions as the stage
+		 * This is the scene on which PBE will render all the display objects
+		 */
 		private function createScene():void {
 			var sceneView:SceneView = new SceneView();
 			sceneView.width = stage.stageWidth;
@@ -156,6 +149,10 @@ package
 			PBE.initializeScene(sceneView, "MainScene");
 		}
 		
+		/*
+		 * Pauses the game when the "P" key is pressed once
+		 * Resume the game when it is pressed once again
+		 */
 		private function pauseGame(event:KeyboardEvent):void {
 			if (event.keyCode == Keyboard.P) {
 				if (Main.running) {
@@ -170,10 +167,16 @@ package
 			}
 		}
 		
-		public static function resetEverythingAndReloadGame(reload:Boolean=true):void {
+		/*
+		 * Reset the game stats to their base defaults
+		 *
+		 * @param reload  Reload the main menu and remove all existing display objects
+		 * @param countdown  Show a countdown while loading the level
+		 */
+		public static function resetEverythingAndReloadGame(reload:Boolean=true, countdown:Boolean=false):void {
 			Main.gameOver = false;
 			UpdateStatsOnClick.resetShop();
-			MoneyComponent.coins = 5000;
+			MoneyComponent.coins = 0;
 			PlayerController.moveSpeed = 10;
 			EnemyMobilityComponent.moveSpeed = 1;
 			CanonController.reloadSpeed = 0.2;
@@ -183,7 +186,9 @@ package
 			if (reload) {
 				ParticleManager.instance.removeAllParticles();
 				CollisionManager.instance.reset();
-
+				
+				// Remove all display objects from the stage except for PBE's MainScene,
+				// which is always the first object is the display list
 				while (PBE.mainStage.numChildren > 1) {
 					PBE.mainStage.removeChildAt(PBE.mainStage.numChildren - 1);
 				}
@@ -191,9 +196,15 @@ package
 				LevelManager.instance.loadLevel(0, true);
 			}
 			
-			var countdown:Countdown = new Countdown();
+			if (countdown) var cd:Countdown = new Countdown();
 		}
 		
+		/*
+		 * Load a specific level while removing all existing display objects
+		 *
+		 * @param level  The index of the level that will be loaded
+		 * @param countdown  Show a countdown while loading the level
+		 */
 		public static function resetEverythingAndLoadLevel(level:int, countdown:Boolean=false):void {
 			ParticleManager.instance.removeAllParticles();
 			CollisionManager.instance.reset();

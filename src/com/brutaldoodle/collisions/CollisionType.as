@@ -20,10 +20,11 @@ package com.brutaldoodle.collisions
 {
 	public class CollisionType
 	{
+		/*
+		 * Constants used in order to easily identify collision types
+		 */
 		public static const PLAYER:String = "player";
 		public static const ENEMY:String = "enemy";
-		public static const ALLY:String = "ally";
-		public static const NEUTRAL:String = "neutral";
 		
 		public function CollisionType() {}
 	}

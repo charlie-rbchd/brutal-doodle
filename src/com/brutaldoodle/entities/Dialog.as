@@ -29,19 +29,30 @@ package com.brutaldoodle.entities
 	
 	public class Dialog
 	{
+		/*
+		 * The entity that will be created
+		 */
 		private var __this:IEntity;
 		
-		public function Dialog(filePath:String, size:Point, position:Point=null)
+		/*
+		 * Create a dialog box that slowly fades
+		 *
+		 * @param filePath  The path of the image used for the dialog
+		 * @param size  The size of the image (width, height)
+		 * @param position  The position at which the image will be placed, centered by default
+		 */
+		public function Dialog (filePath:String, size:Point, position:Point=null)
 		{
 			__this = PBE.allocateEntity();
 			
+			// Spatial properties of the dialog box
 			var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 			spatial.position = position || new Point(0, 0);
 			spatial.size = size;
 			spatial.spatialManager = PBE.spatialManager;
 			__this.addComponent(spatial, "Spatial");
 			
-			
+			// Render properties of the dialog box
 			var renderer:SpriteRenderer = new SpriteRenderer();
 			renderer.scene = PBE.scene;
 			renderer.fileName = filePath;
@@ -50,11 +61,12 @@ package com.brutaldoodle.entities
 			renderer.sizeProperty = new PropertyReference("@Spatial.size");
 			__this.addComponent(renderer, "Render");
 			
-			
+			// Add a component which makes the dialog box fade
 			var fadeOut:FadeComponent = new FadeComponent();
 			fadeOut.alphaProperty = new PropertyReference("@Render.alpha");
 			fadeOut.type = FadeComponent.FADE_OUT;
-			fadeOut.rate = 0.01;
+			fadeOut.delay = 2000;
+			fadeOut.rate = 0.1;
 			fadeOut.callback = function():void {
 				__this.destroy();
 			};

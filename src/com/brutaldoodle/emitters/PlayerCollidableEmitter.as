@@ -21,12 +21,8 @@ package com.brutaldoodle.emitters
 	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
-	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.IEntity;
-	import com.pblabs.rendering2D.DisplayObjectRenderer;
-	
-	import flash.text.TextField;
 	
 	import org.flintparticles.common.events.ParticleEvent;
 	
@@ -36,21 +32,28 @@ package com.brutaldoodle.emitters
 			super();
 		}
 		
+		/*
+		 * Emitter-specific actions to be performed on collision
+		 */
 		protected override function onCollide (event:ParticleEvent):void {
 			super.onCollide(event);
 			
 			switch (_actionOnCollision) {
 				case CollidableEmitter.UPDATE_MONEY_COUNT:
+					// Retrieve the money display
 					var money:MoneyComponent = PBE.lookupComponentByName("AmountOfCoins", "Money") as MoneyComponent;
 					
+					// Update money count and play a coin sound effect
 					if (money != null) {
 						money.addCoins(_damageAmount);
 						PBE.soundManager.play("../assets/Sounds/Coin.mp3");
 					}
 					break;
 				case CollidableEmitter.DEAL_DAMAGE:				
+					// Retrieve the player that was hit
 					var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
 					
+					// Damage the player
 					if (owner != null) {
 						var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
 						if (health != null) {

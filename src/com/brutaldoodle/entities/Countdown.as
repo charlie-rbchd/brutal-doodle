@@ -24,11 +24,9 @@ package com.brutaldoodle.entities
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.animation.AnimatorType;
 	import com.pblabs.engine.PBE;
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.engine.entity.PropertyReference;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
-	import com.pblabs.rendering2D.SpriteRenderer;
 	import com.pblabs.rendering2D.SpriteSheetRenderer;
 	import com.pblabs.rendering2D.spritesheet.CellCountDivider;
 	import com.pblabs.rendering2D.spritesheet.SpriteSheetComponent;
@@ -38,20 +36,31 @@ package com.brutaldoodle.entities
 
 	public class Countdown
 	{
+		/*
+		 * The entity that will be created
+		 */
 		private var __this:IEntity;
+		
+		/*
+		 * The animator used to cycle through the spritesheet
+		 */
 		private var _countAnimation:Animator;
 		
+		/*
+		 * Create a countdown that display 3, 2, 1 while locking player controls
+		 */
 		public function Countdown()
 		{
 			__this = PBE.allocateEntity();
 			
+			// Spatial properties of the countdown
 			var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 			spatial.position = new Point(0, 0);
 			spatial.size = new Point(273, 398);
 			spatial.spatialManager = PBE.spatialManager;
 			__this.addComponent(spatial, "Spatial");
 			
-			
+			// Properly load and divide the spritesheet
 			var divider:CellCountDivider = new CellCountDivider();
 			divider.xCount = 3;
 			divider.yCount = 1;
@@ -60,6 +69,7 @@ package com.brutaldoodle.entities
 			spriteSheet.divider = divider;
 			spriteSheet.imageFilename = "../assets/Images/Countdown.png";
 			
+			// Render properties of the dialog box
 			var renderer:SpriteSheetRenderer = new SpriteSheetRenderer();
 			renderer.scene = PBE.scene;
 			renderer.layerIndex = 10;
@@ -69,7 +79,7 @@ package com.brutaldoodle.entities
 			renderer.spriteIndex = 0;
 			__this.addComponent(renderer, "Render");
 			
-			
+			// Cycles through the spritesheet's indexes
 			var _countAnimation:Animator = new Animator();
 			_countAnimation.animationType = AnimatorType.PLAY_ANIMATION_ONCE;
 			_countAnimation.duration = 3;
@@ -87,11 +97,14 @@ package com.brutaldoodle.entities
 			
 			__this.initialize("Countdown");
 			
-			
+			// Lock the player's possibility to fire projectiles
 			CanonController.shootPermission = false;
 			_countAnimation.addEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, onCountComplete);
 		}
 		
+		/*
+		 * Unlock the player's possibility to fire projectiles, remove the countdown from the display list
+		 */
 		private function onCountComplete (event:AnimationEvent):void {
 			PBE.processManager.schedule(50, this, function ():void {
 				CanonController.shootPermission = true;

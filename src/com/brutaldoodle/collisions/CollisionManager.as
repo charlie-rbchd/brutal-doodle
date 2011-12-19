@@ -29,57 +29,70 @@ package com.brutaldoodle.collisions
 
 	public class CollisionManager extends EventDispatcher
 	{
-		// Singleton instance
+		/*
+		 * Singleton instance
+		 */
 		private static var _instance:CollisionManager = new CollisionManager();
 		
-		// Containers for all collidable types
+		/*
+		 * Containers that are to hold references of the bounding box for all collidable types
+		 */
 		private var _players:Vector.<Zone2D>;
 		private var _enemies:Vector.<Zone2D>;
-		private var _allies:Vector.<Zone2D>;
-		private var _neutrals:Vector.<Zone2D>;
 		
-		// Dictionary used for quick reference access to the vectors
+		/*
+		 * Dictionary used for quick reference access to all the above vectors
+		 */
 		private var _zones:Dictionary;
 		
-		public static function get instance ():CollisionManager { return _instance; }
-		
 		public function CollisionManager() {
-			// "Private" constructor
+			// Private constructor
 			if (instance) throw new Error("CollisionManager can only be accessed through CollisionManager.instance");
 		}
 		
+		/*
+		 * Instanciation of the vectors and the dictionary needed by the class
+		 */
 		public function initialize ():void {
 			_players = new Vector.<Zone2D>();
 			_enemies = new Vector.<Zone2D>();
-			_allies = new Vector.<Zone2D>();
-			_neutrals = new Vector.<Zone2D>();
 			
-			// quick access by reference...
+			// Quick access to the vectors via reference
 			_zones = new Dictionary(true);
-			_zones[CollisionType.NEUTRAL] = _neutrals;
 			_zones[CollisionType.PLAYER] = _players;
 			_zones[CollisionType.ENEMY]	= _enemies;
-			_zones[CollisionType.ALLY] = _allies;
 		}
 		
+		/*
+		 * Clear the containers from any collidable objects
+		 */
 		public function reset ():void {
 			initialize(); // hard reset, everything is deleted
 		}
 		
-		// collisions are only calculated for objects that are registered here
+		/*
+		 * Register a bounding box for collision checks
+		 *
+		 * @param zone  The bounding box
+		 * @param type  The type of collision (defined by CollisionType)
+		 */
 		public function registerForCollisions (zone:Zone2D, type:String):void {
 			_zones[type].push(zone);
 			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_REGISTERED, zone));
 		}
 		
-		// when you no longer need an object to collide...
+		/*
+		 * Unregister a bounding box for collision checks
+		 *
+		 * @param zone  The bounding box
+		 * @param type  The type of collision (defined by CollisionType)
+		 */
 		public function stopCollisionsWith (zone:Zone2D, type:String):void {
 			var zones:Vector.<Zone2D> = _zones[type];
 			var index:int = zones.indexOf(zone);
 			
 			if (index != -1) {
-				// Because we all like minus infinity...
-				// (the collision zone is moved away from the canvas until it's garbage collected by flash)
+				// the collision zone is moved away from the canvas until it's garbage collected
 				(zone as BoundingBoxComponent).zone = new Rectangle(-Infinity, -Infinity, -Infinity, -Infinity);
 				zones.splice(index, 1);
 			}
@@ -87,8 +100,14 @@ package com.brutaldoodle.collisions
 			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_UNREGISTERED, zone));
 		}
 		
+		/*
+		 * @param type  The type of collision (defined by CollisionType)
+		 * @return A vector containing all the bounding box that have a type matching the one passed in paramater
+		 */
 		public function getCollidableObjectsByType (type:String):Vector.<Zone2D> {
 			return _zones[type];
 		}
+		
+		public static function get instance ():CollisionManager { return _instance; }
 	}
 }

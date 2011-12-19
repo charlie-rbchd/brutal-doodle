@@ -30,17 +30,37 @@ package com.brutaldoodle.components.controllers
 	
 	import flash.geom.Point;
 	
-	public class CanonController extends TickedComponent {	
+	public class CanonController extends TickedComponent {
+		/*
+		 * The speed at which the canon reloads
+		 */
 		public static var reloadSpeed:Number;
+		
+		/*
+		 * Whether or not the player can shoot projectiles
+		 */
 		public static var shootPermission:Boolean = true;
 		
-		public var canonOffset:PropertyReference;
-		public var positionProperty:PropertyReference;
-		
+		/*
+		 * Constants used in order to easily identify the canon's offset
+		 */
 		public static const NORMAL_OFFSET:Number = -18;
 		public static const ALTERNATE_OFFSET:Number = -62;
 		
+		/*
+		 * References to canon's properties
+		 */
+		public var canonOffset:PropertyReference;
+		public var positionProperty:PropertyReference;
+		
+		/*
+		 * The shoot animation
+		 */
 		private var _shootAnimation:Animator;
+		
+		/*
+		 * The reload animation
+		 */
 		private var _reloadAnimation:Animator;
 		
 		public function CanonController() {
@@ -52,10 +72,11 @@ package com.brutaldoodle.components.controllers
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
+			// Change the canon's offset depending on the player's current state
 			var _offset:Number = PlayerController.state == PlayerController.STATE_NORMAL ? CanonController.NORMAL_OFFSET : CanonController.ALTERNATE_OFFSET;
-			
 			owner.setProperty(canonOffset, new Point(0, _offset));
 			
+			// Update the animations at each tick, otherwise, checks for user input
 			if (_shootAnimation.isAnimating)
 			{
 				_shootAnimation.animate(deltaTime);
@@ -70,31 +91,22 @@ package com.brutaldoodle.components.controllers
 			{
 				if (shootPermission) {
 					if (PBE.isKeyDown(InputKey.SPACE)) {
+						// Shoot a projectile rendered by the CanonShotRenderer
 						var p:Projectile = new Projectile(CanonShotRenderer, owner);
 						
-						// shoot
+						// Start the shoot animation
 						_shootAnimation.start(0, 26, 0.05, AnimatorType.PLAY_ANIMATION_ONCE);
-						_shootAnimation.addEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimation_done);
+						_shootAnimation.addEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimationComplete);
 					}
-					/*
-					if (PBE.isKeyDown(InputKey.Z)) {
-						// ability 1
-					}
-					
-					if (PBE.isKeyDown(InputKey.X)) {
-						// ability 2
-					}
-					
-					if (PBE.isKeyDown(InputKey.C)) {
-						// ability 3
-					}
-					*/
 				}
 			}
 		}
 		
-		private function shootAnimation_done(event:AnimationEvent):void {
-			_shootAnimation.removeEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimation_done);
+		/*
+		 * Start the reload animation once the shoot animation is done
+		 */
+		private function shootAnimationComplete(event:AnimationEvent):void {
+			_shootAnimation.removeEventListener(AnimationEvent.ANIMATION_FINISHED_EVENT, shootAnimationComplete);
 			_reloadAnimation.start(26, 0, CanonController.reloadSpeed, AnimatorType.PLAY_ANIMATION_ONCE);
 		}
 	}

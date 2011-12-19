@@ -358,11 +358,11 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>250</x>
-				<y>30</y>
+				<y>38</y>
 			</position>
 			<size type="">
 				<x>189</x>
-				<y>30</y>
+				<y>33</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
@@ -380,7 +380,7 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>343</x>
-				<y>29</y>
+				<y>42</y>
 			</position>
 			<size type="">
 				<x>6</x>
@@ -396,17 +396,28 @@
 			<layerIndex>5</layerIndex>
 			<alpha>0</alpha>
 		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.ChangeVolumeOnDrag" name="ChageVolumeGlobal">
+			<dragBoundary>
+				<top>26</top>
+				<bottom>26</bottom>
+				<left>170</left>
+				<right>340</right>
+			</dragBoundary>
+			<volumeType>music</volumeType>
+			<soundBarName>GlobalSoundBar</soundBarName>
+		</component>
 	</entity>
 	
 	<entity name="SFXSoundBar">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>250</x>
-				<y>100</y>
+				<y>108</y>
 			</position>
 			<size type="">
 				<x>189</x>
-				<y>30</y>
+				<y>33</y>
 			</size>
 			<spatialManager componentReference="MainScene"/>
 		</component>
@@ -424,7 +435,7 @@
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>343</x>
-				<y>99</y>
+				<y>112</y>
 			</position>
 			<size type="">
 				<x>6</x>
@@ -439,6 +450,17 @@
 			<fileName>../assets/Images/Slider.png</fileName>
 			<layerIndex>5</layerIndex>
 			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.ChangeVolumeOnDrag" name="ChageVolumeSFX">
+			<dragBoundary>
+				<top>96</top>
+				<bottom>96</bottom>
+				<left>170</left>
+				<right>340</right>
+			</dragBoundary>
+			<volumeType>sfx</volumeType>
+			<soundBarName>SFXSoundBar</soundBarName>
 		</component>
 	</entity>
 	

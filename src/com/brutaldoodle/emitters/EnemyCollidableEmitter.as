@@ -33,17 +33,22 @@ package com.brutaldoodle.emitters
 			super();
 		}
 		
+		/*
+		 * Emitter-specific actions to be performed on collision
+		 */
 		protected override function onCollide (event:ParticleEvent):void {
 			super.onCollide(event);
-			
+			// Retrieve the enemy that has been hit
 			var owner:IEntity = (event.otherObject as BoundingBoxComponent).owner;
 			
 			if (owner != null) {
 				var health:HealthComponent = owner.lookupComponentByName("Health") as HealthComponent;
 				if (health != null) {
+					// Damage the enemy
 					health.damage(_damageAmount, "normal");
 					
-					
+					// Unregister the enemy for collisions if its dead and play a death sound effect,
+					// otherwise just play a hit sound effect
 					if (health.isDead) {
 						PBE.soundManager.play("../assets/Sounds/EnemyDead.mp3");
 						CollisionManager.instance.stopCollisionsWith(event.otherObject, CollisionType.ENEMY);

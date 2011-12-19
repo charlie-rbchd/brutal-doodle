@@ -27,11 +27,29 @@ package com.brutaldoodle.components.controllers
 	
 	public class LoadLevelOnKeypress extends TickedComponent
 	{
+		/*
+		 * The level that will be loaded
+		 */
 		public var level:int;
+		
+		/*
+		 * References to the object's properties
+		 */
 		public var alphaProperty:PropertyReference;
 		
+		/*
+		 * Whether or not the delay has been started
+		 */
 		private var _actionDone:Boolean;
+		
+		/*
+		 * Whether or not delay is completed
+		 */
 		private var _delayCompleted:Boolean;
+		
+		/*
+		 * Whether or not the credits are currently playing
+		 */
 		private var _creditsPlaying:Boolean;
 		
 		public function LoadLevelOnKeypress() {
@@ -42,15 +60,19 @@ package com.brutaldoodle.components.controllers
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
+			// Start a 2 seconds delay once the owner becomes visible
 			var alpha:Number = owner.getProperty(alphaProperty);
 			if (alpha == 1 && !_actionDone) {
 				PBE.processManager.schedule(2000, this, function ():void { _delayCompleted = true; });
 				_actionDone = true;
 			}
 			
-			if (_delayCompleted && PBE.isAnyKeyDown()) {
-				// if the last level is completed
-				if (PBE.levelManager.currentLevel == PBE.levelManager.levelCount - 1) {
+			// Wait for the delay to be completed AND for user input
+			if (_delayCompleted && PBE.isAnyKeyDown())
+			{
+				// Show the credits if its the last level, return to the main menu if credits were already playing
+				if (PBE.levelManager.currentLevel == PBE.levelManager.levelCount - 1)
+				{
 					if (!_creditsPlaying) {
 						PBE.mainStage.addChild(new Generique());
 						_creditsPlaying = true;
@@ -58,10 +80,13 @@ package com.brutaldoodle.components.controllers
 						PBE.processManager.schedule(1000, this, function():void {
 							_delayCompleted = true;
 						});
-					} else {
-						Main.resetEverythingAndReloadGame();
 					}
-				} else {
+					else
+						Main.resetEverythingAndReloadGame();
+				}
+				else
+				{
+					// If its not the last level, simply load the appropriate one
 					if (level == -1)
 						Main.resetEverythingAndLoadLevel(PBE.levelManager.currentLevel + 1);
 					else if (level == 0)

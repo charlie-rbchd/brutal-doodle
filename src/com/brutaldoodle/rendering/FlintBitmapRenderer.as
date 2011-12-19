@@ -18,7 +18,6 @@
 
 package com.brutaldoodle.rendering
 {
-	import com.pblabs.engine.debug.Logger;
 	import com.pblabs.engine.entity.IEntity;
 	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
@@ -87,6 +86,9 @@ package com.brutaldoodle.rendering
 				case EmitterEvent.COUNTER_COMPLETE:
 					emitter.removeEventListener(EmitterEvent.COUNTER_COMPLETE, destroyOwner);
 					_counterCompletedEmitters++;
+					break;
+				default:
+					throw new Error();
 			}
 			
 			// when one of the emitters is done emitting

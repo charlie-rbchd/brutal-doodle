@@ -29,18 +29,37 @@ package com.brutaldoodle.components.controllers
 	import flash.geom.Rectangle;
 
 	public class PlayerController extends TickedComponent {
+		/*
+		 * The speed at which the player moves
+		 */
 		public static var moveSpeed:Number;
 		
+		/*
+		 * Constants used in order to easily identify the player's state
+		 */
 		public static const STATE_NORMAL:String = "normalState";
 		public static const STATE_ALTERNATE:String = "alternateState";
 		
+		/*
+		 * References to player's properties
+		 */
 		public var positionProperty:PropertyReference;
 		public var sizeProperty:PropertyReference;
 		public var boundingBoxProperty:PropertyReference;
+		
+		/*
+		 * The name of the player's current animation
+		 */
 		public var currentAnimation:String;
 		
+		/*
+		 * The player's current state (normal or alternate)
+		 */
 		private static var _state:String;
 		
+		/*
+		 * Whether the player is currently idle or moving
+		 */
 		private var _isIdle:Boolean;
 		
 		public function PlayerController() {
@@ -52,12 +71,14 @@ package com.brutaldoodle.components.controllers
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
+			// Retrieve the needed properties from the Entity
 			var _position:Point = owner.getProperty(positionProperty);
 			var _size:Point = owner.getProperty(sizeProperty);
 			var _boundingBox:Rectangle = owner.getProperty(boundingBoxProperty);
 			var _animation:String;
 			
-			// moving animations when LEFT or RIGHT keys are pressed, idle animations when no keys are pressed
+			// Change the player's current animation to "moving" when either the LEFT or RIGHT key is pressed
+			// Revert it back to "idle" when no keys are pressed
 			if (PBE.isKeyDown(InputKey.LEFT) || PBE.isKeyDown(InputKey.RIGHT)) {
 				if (_isIdle) {
 					_animation = _state == PlayerController.STATE_NORMAL ? "Move_Normal" : "Move_Alternate";
@@ -68,7 +89,7 @@ package com.brutaldoodle.components.controllers
 				updateAnimation(_animation, true);
 			}
 			
-			// change to alternate state when UP key is pressed
+			// Change the player's state to alternate when the UP key is pressed
 			if (PBE.isKeyDown(InputKey.UP))
 			{
 				if (!_isIdle || _state != PlayerController.STATE_ALTERNATE) {
@@ -78,7 +99,7 @@ package com.brutaldoodle.components.controllers
 				}
 			}
 			
-			// change to normal state when DOWN key is pressed
+			// Change the player's state to normal when the UP key is pressed
 			if (PBE.isKeyDown(InputKey.DOWN))
 			{
 				if (!_isIdle || _state != PlayerController.STATE_NORMAL) {
@@ -88,17 +109,17 @@ package com.brutaldoodle.components.controllers
 				}
 			}
 			
-			// position update when keys are pressed
+			// Update the position depending on which key is pressed
 			var _speed:Number = _state == PlayerController.STATE_ALTERNATE ? PlayerController.moveSpeed/2 : PlayerController.moveSpeed;
 			if (PBE.isKeyDown(InputKey.LEFT))  _position.x -= _speed;
 			if (PBE.isKeyDown(InputKey.RIGHT)) _position.x += _speed;
 			
-			// collisions with scene boundaries
+			// Check for collisions with scene boundaries
 			var _maxWidth:int = (PBE.mainStage.stageWidth - _size.x)/2;
 			if (_position.x < - _maxWidth) _position.x = - _maxWidth;
 			if (_position.x >   _maxWidth) _position.x =   _maxWidth;
 			
-			// re-position the bounding box used for particle collisions
+			// Reposition the bounding box used for particle collisions
 			_boundingBox.left = _position.x - _size.x/2 + 10;
 			_boundingBox.right = _position.x + _size.x/2 - 10;
 			_boundingBox.top = _position.y - _size.y/2 + 15;
@@ -108,6 +129,13 @@ package com.brutaldoodle.components.controllers
 			owner.setProperty(boundingBoxProperty, _boundingBox);
 		}
 		
+		/*
+		 * Change the player's animation
+		 *
+		 * @animation  The new animation's name
+		 * @idle  Whether the player is idle or moving
+		 * @state  The player's state (normal or alternate)
+		 */
 		private function updateAnimation (animation:String, idle:Boolean, state:String=null):void {
 			currentAnimation = animation;
 			owner.eventDispatcher.dispatchEvent(new TankEvent(TankEvent.UPDATE_ANIMATION));

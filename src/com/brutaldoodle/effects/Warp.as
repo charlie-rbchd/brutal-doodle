@@ -30,25 +30,26 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.initializers.Position;
 	import org.flintparticles.twoD.zones.DiscZone;
 	
+	/*
+	 * Contain the definition of the look and behavior of the Warp particle emitter
+	 */
 	public class Warp extends Emitter2D
 	{		
 		public function Warp()
 		{
 			super();
-			//set the counter to a blast emitter
+			
+			// Fifty particles are instantly emitted
 			counter = new Blast(50);
 			
-			//set the visual
+			// Particle's Appearance
 			addInitializer( new SharedImage( new RadialDot(3, 0xFFFFFFF) ) );
-			
-			//set position in a disc zone
 			addInitializer( new Position( new DiscZone( new Point(0, 0), 40 ) ));
 			
-			//set the lifetime for the particle
+			// Particle's Behavior
 			addInitializer( new Lifetime(1) );
-			
+			addAction( new Move() );
 			addAction( new Age() );
-			addAction( new Move() );	
 		}
 	}
 }

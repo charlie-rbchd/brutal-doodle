@@ -26,12 +26,18 @@ package com.brutaldoodle.rendering
 	
 	public class CoinRenderer extends FlintBitmapRenderer
 	{
+		/*
+		 * The emitter that will be rendered
+		 */
 		private var _coin:Emitter2D;
 		
 		public function CoinRenderer() {
 			super();
 		}
 		
+		/*
+		 * Renderer-specific actions that are needed to properly render the Coin particle emitter
+		 */
 		override public function addEmitters():void {
 			_coin = new Coin();
 			initializeEmitter(_coin);

@@ -21,65 +21,125 @@ package com.brutaldoodle.components.collisions
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.debug.Logger;
+	import com.pblabs.engine.entity.IEntity;
+	import com.pblabs.engine.entity.IEntityComponent;
 	import com.pblabs.rendering2D.SpriteRenderer;
+	import com.pblabs.sound.SoundManager;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 	
 	public class ChangeVolumeOnDrag extends TickedComponent
 	{
 		public var dragBoundary:Rectangle;
 		public var volumeType:String;
+		public var soundBarName:String;
 		
+		private var _soundBarRenderer:SpriteRenderer;
+		private var _soundBarDisplayObject:Sprite;
 		private var _renderer:SpriteRenderer;
 		private var _displayObject:Sprite;
+		private var _displayLoaded:Boolean;
+		private var _originalHeight:Number;
+		private var _currentY:Number;
 		
 		public function ChangeVolumeOnDrag()
 		{
 			super();
+			_displayLoaded = false;
 		}
 		
 		override protected function onAdd():void
 		{
 			super.onAdd();
 			_renderer = owner.lookupComponentByName("Render") as SpriteRenderer;
-			Logger.print(this, String(dragBoundary));
+			_soundBarRenderer = PBE.lookupComponentByName(soundBarName, "Render") as SpriteRenderer;
 		}
 		
 		override protected function onRemove():void
 		{
 			super.onRemove();
-			if (_displayObject != null) {
-				with (_displayObject) {
-					removeEventListener(MouseEvent.MOUSE_DOWN, startDrag);
-					removeEventListener(MouseEvent.MOUSE_UP, stopDrag);
+			if (_displayObject != null && _soundBarDisplayObject != null) {
+				with (_soundBarDisplayObject) {
+					removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+					removeEventListener(MouseEvent.MOUSE_OUT, mouseHandler);
+					removeEventListener(MouseEvent.MOUSE_DOWN, mouseHandler);
 				}
+				
+				PBE.mainStage.removeEventListener(MouseEvent.MOUSE_UP, mouseHandler);
+				PBE.mainStage.removeEventListener(MouseEvent.MOUSE_MOVE, adjustVolume);
 			}
 		}
 		
 		override public function onTick(deltaTime:Number):void
 		{
 			super.onTick(deltaTime);
-			if (_renderer.loaded) {
+			if (!_displayLoaded && _renderer.loaded && _soundBarRenderer.loaded) {
 				_displayObject = _renderer.displayObject as Sprite;
+				_soundBarDisplayObject = _soundBarRenderer.displayObject as Sprite;
+				_originalHeight = _displayObject.height;
 				
-				with (_displayObject) {
+				with (_soundBarDisplayObject) {
+					addEventListener(MouseEvent.MOUSE_DOWN, mouseHandler);
+					addEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+					addEventListener(MouseEvent.MOUSE_OUT, mouseHandler);
 					mouseEnabled = true;
-					addEventListener(MouseEvent.MOUSE_DOWN, startDrag);
-					addEventListener(MouseEvent.MOUSE_UP, stopDrag);
 				}
 				
-				this.registerForTicks = false;
+				_displayLoaded = true;
+			}
+			
+			if (_displayLoaded) {
+				_displayObject.x = dragBoundary.x + dragBoundary.width * PBE.soundManager.getCategoryVolume(volumeType);
 			}
 		}
 		
-		private function startDrag (event:MouseEvent):void {
-			_displayObject.startDrag(false, dragBoundary);
+		
+		private function mouseHandler (event:MouseEvent):void {
+			switch (event.type) {
+				case MouseEvent.MOUSE_DOWN:
+					this.registerForTicks = false;
+					_displayObject.startDrag(true, dragBoundary);
+					Mouse.cursor = MouseCursor.HAND;
+					
+					_displayObject.x = event.stageX - PBE.mainStage.width/2;
+					adjustVolume(null);
+					
+					PBE.mainStage.addEventListener(MouseEvent.MOUSE_MOVE, adjustVolume);
+					PBE.mainStage.addEventListener(MouseEvent.MOUSE_UP, mouseHandler);
+					with (_soundBarDisplayObject) {
+						removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+						removeEventListener(MouseEvent.MOUSE_OUT, mouseHandler);
+					}
+					break;
+				case MouseEvent.MOUSE_OVER:
+					Mouse.cursor = MouseCursor.BUTTON;
+					break;
+				case MouseEvent.MOUSE_UP:
+					if(volumeType == "sfx")
+						PBE.soundManager.play("../assets/Sounds/PowerUp.mp3");
+					this.registerForTicks = true;
+					_displayObject.stopDrag();
+					PBE.mainStage.removeEventListener(MouseEvent.MOUSE_MOVE, adjustVolume);
+					with (_soundBarDisplayObject) {
+						addEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+						addEventListener(MouseEvent.MOUSE_OUT, mouseHandler);
+					}
+				case MouseEvent.MOUSE_OUT:
+					Mouse.cursor = MouseCursor.AUTO;
+					break;
+				default:
+					throw new Error();
+			}
 		}
 		
-		private function stopDrag (event:MouseEvent):void {
-			_displayObject.stopDrag();
+		private function adjustVolume(event:MouseEvent):void{
+			var ratio:Number = (_displayObject.x - dragBoundary.x)/dragBoundary.width;
+			_displayObject.scaleY = Math.min(1, ratio+0.25);
+			PBE.soundManager.setCategoryVolume(volumeType,ratio);
 		}
 	}
 }

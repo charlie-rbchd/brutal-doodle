@@ -23,6 +23,9 @@ package com.brutaldoodle.rendering
 	
 	public class BeamRenderer extends FlintBitmapRenderer
 	{
+		/*
+		 * The emitter that will be rendered
+		 */
 		private var _beam:Emitter2D;
 		
 		public function BeamRenderer()
@@ -30,8 +33,10 @@ package com.brutaldoodle.rendering
 			super();
 		}
 		
+		/*
+		 * Renderer-specific actions that are needed to properly render the Beam particle emitter
+		 */
 		override public function addEmitters():void {
-			//Start an emitter for any shot made by a beamer invader
 			_beam = new Beam();
 			initializeEmitter(_beam);
 			super.addEmitters();

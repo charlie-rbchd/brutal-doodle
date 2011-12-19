@@ -32,30 +32,36 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.initializers.Velocity;
 	import org.flintparticles.twoD.zones.PointZone;
 	
+	/*
+	 * Contain the definition of the look and behavior of the Coin particle emitter
+	 * The particles emitted are to collide with any "player" bounding box registered within the CollisionManager
+	 */
 	public class Coin extends PlayerCollidableEmitter
 	{
-		//embed the image of the particle
 		[Embed(source="assets/Images/Coin.png")]
 		private var CoinAsset:Class;
 		
 		public function Coin() {
 			super();
 			
+			// The amount of damage dealt by each particle emitted
+			// In this case, it represents the amount of money the coin holds
 			_damageAmount = 12;
-			//Tell to the collision manager that this particle is money
+			
+			// The money count will be updated after the collision
 			_actionOnCollision = CollidableEmitter.UPDATE_MONEY_COUNT;
 			
-			//Generate one particle
+			// One particle is instantly emitted
 			counter = new Blast(1);
 			
-			//give the image to the particle
+			// Particle's Appearance
 			var coin:Bitmap = new CoinAsset();
-			
-			//give a radius for the collision with the boundingBox
-			addInitializer( new CollisionRadiusInit(21) );
 			addInitializer( new SharedImage( coin ) );
-			addInitializer( new Velocity( new PointZone( new Point(0, 85) ) ) );
 			addInitializer( new Position( new PointZone( new Point(coin.width/2, 0) ) ) );
+			
+			// Particle's Behavior
+			addInitializer( new CollisionRadiusInit(21) );
+			addInitializer( new Velocity( new PointZone( new Point(0, 85) ) ) );
 			addAction( new Move() );
 		}
 	}

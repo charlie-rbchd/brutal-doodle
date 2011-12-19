@@ -24,7 +24,14 @@ package com.brutaldoodle.components.ai
 	
 	public class SimpleAIComponent extends EntityComponent
 	{
+		/*
+		 * The interval of time between each iteration made by the AI
+		 */
 		public var timeBetweenThinks:Interval;
+		
+		/*
+		 * The current state of the the AI
+		 */
 		public var isThinking:Boolean;
 		
 		public function SimpleAIComponent() {
@@ -35,15 +42,18 @@ package com.brutaldoodle.components.ai
 		override protected function onAdd():void {
 			super.onAdd();
 			
-			// first schedule for AI check
+			// Schedule the first iteration
 			if (isThinking) {
 				PBE.processManager.schedule(timeBetweenThinks.getTime(), owner, think);
 			}
 		}
 		
-		// this function is to be overriden in any child class
-		// (specific AI actions are executed here)
+		/*
+		 * To be overriden...
+		 * This is where AI-specific actions will be specified and executed at each iteration
+		 */
 		protected function think():void {
+			// Schedule the next iteration
 			if (isThinking) {
 				PBE.processManager.schedule(timeBetweenThinks.getTime(), owner, think);
 			}

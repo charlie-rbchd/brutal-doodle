@@ -20,7 +20,14 @@ package com.brutaldoodle.utils
 {
 	public class Interval
 	{
+		/*
+		 * The minimum of the interval
+		 */
 		public var minTime:Number;
+		
+		/*
+		 * The maximum of the interval
+		 */
 		public var maxTime:Number;
 		
 		public function Interval(min:Number=0, max:Number=1000) {
@@ -28,6 +35,9 @@ package com.brutaldoodle.utils
 			maxTime = max;
 		}
 		
+		/*
+		 * @return A number between the minimum and maximum specified at instanciation
+		 */
 		public function getTime ():Number {
 			return minTime + (Math.random() * (maxTime - minTime));
 		}

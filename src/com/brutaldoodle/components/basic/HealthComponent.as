@@ -24,11 +24,29 @@ package com.brutaldoodle.components.basic
 	
 	public class HealthComponent extends EntityComponent
 	{
+		/*
+		 * The maxmimum amount of health
+		 */
 		public var maxHealth:Number;
+		
+		/*
+		 * Whether or not the owner should be destroyed when he dies
+		 */
 		public var destroyOnDeath:Boolean;
+		
+		/*
+		 * The modifiers applied to the damage done
+		 */
 		public var damageModifier:Array;
 		
+		/*
+		 * The current amount of health
+		 */
 		private var _health:Number;
+		
+		/*
+		 * The last source of damage
+		 */
 		private var _lastDamageOriginator:IEntity;
 		
 		public function HealthComponent() {
@@ -41,71 +59,79 @@ package com.brutaldoodle.components.basic
 		override protected function onAdd():void {
 			super.onAdd();
 			_health = maxHealth;
-			// used to process actions of the damaging object
 			_lastDamageOriginator = null;
 		}
 		
-		public function get health ():Number {
-			return _health;
-		}
-		
+		/*
+		 * Dispatch events that represent the status of the owner's health
+		 * 
+		 * @param value  The amount of health
+		 */
 		public function set health (value:Number):void {
-			if (value < 0) value = 0; // negative health would make no sense...
-			if (value > maxHealth) value = maxHealth; // can't go over maxHealth
+			if (value < 0) value = 0; // No negative health
+			if (value > maxHealth) value = maxHealth; // Can't go over the specified maximum health
 			
 			var previousHealth:Number = _health;
 			_health = value;
 			
 			var ev:HealthEvent;
-			if (value < previousHealth) { // Owner was damaged.
+			if (value < previousHealth) { // Owner was damaged
 				ev = new HealthEvent(HealthEvent.DAMAGED, value - previousHealth, value, _lastDamageOriginator);
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
-			if (value == 0) { // Owner just died...
+			if (value == 0) { // Owner just died
 				ev = new HealthEvent(HealthEvent.DIED, value - previousHealth, value, _lastDamageOriginator);
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
-			if (value > previousHealth) { // Owner was healed!
+			if (value > previousHealth) { // Owner was healed
 				ev = new HealthEvent(HealthEvent.HEALED, value - previousHealth, value, _lastDamageOriginator);
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
-			if (previousHealth == 0 && value > 0) { // Owner just resurrected and started its own religion.
+			if (previousHealth == 0 && value > 0) { // Owner was resurrected
 				ev = new HealthEvent(HealthEvent.RESURRECTED, value - previousHealth, value, _lastDamageOriginator);
 				owner.eventDispatcher.dispatchEvent(ev);
 			}
 			
-			// Destruction handling
+			// Destroy the owner if he's dead
 			if (destroyOnDeath && _health == 0) owner.destroy();
 		}
 		
+		/*
+		 * Apply a certain amount of damage to the owner
+		 * 
+		 * @param amount  The amount of damage dealt
+		 * @param damageType  The type of damage
+		 * @param originator  The source of damage
+		 */
 		public function damage (amount:Number, damageType:String=null, originator:IEntity=null):void {
-			// Store a reference of the damage source
 			_lastDamageOriginator = originator;
 			
-			// Apply damage modifiers depending on the damageType param
-			if(damageType && damageModifier.hasOwnProperty(damageType))
+			if (damageType && damageModifier.hasOwnProperty(damageType)) {
 				amount *= damageModifier[damageType];
+			}
 			
-			// Apply the damage.
 			health -= amount;
-			
-			// Clear reference for future garbage collect
 			_lastDamageOriginator = null;
 		}
 		
+		/*
+		 * Heal the owner of a certain amount of damage
+		 *
+		 * @param amount  The amount of damage healed
+		 * @param originator  The source of heal
+		 */
 		public function heal (amount:Number, originator:IEntity=null):void {
-			// Store a reference of the damage source
 			_lastDamageOriginator = originator;
-			
-			// Heal!
 			health += amount;
-			
-			// Clear reference for future garbage collect
 			_lastDamageOriginator = null;
 		}
 		
 		public function get isDead ():Boolean {
 			return _health == 0;
+		}
+		
+		public function get health ():Number {
+			return _health;
 		}
 	}
 }

@@ -40,50 +40,59 @@ package com.brutaldoodle.components.ai
 		{
 			super();
 		}
-				
+		
+		/*
+		 * AI-specific actions are defined here
+		 */
 		override protected function think():void
 		{
+			// Check if there are warpable units that are still alive
 			if (WarpableComponent.priorityWeights.length) {
 				super.think();
 				
-				//make the invader turn white over a 1 second period.
+				// Make the invader turn white over 1 second
 				var filter:TurnToColorComponent = new TurnToColorComponent();
-				filter.rate = 0.033;
 				filter.color = TurnToColorComponent.COLOR_WHITE;
-				if (owner != null) {
-					owner.addComponent(filter,"TurnColor");
-				}
+				filter.rate = 0.033;
+				if (owner != null) owner.addComponent(filter,"TurnColor");
 				
-				//start the particle effect.
+				// Shoot a particule rendered by the WarpRenderer (white particles surrounding the invader)
 				var p:Projectile = new Projectile(WarpRenderer, owner);
-				//create a timer of one second, the time it take for the to animation to be complete
 				
-				PBE.processManager.schedule(1000, this, warpIt);
+				// Wait for the invader to completely turn white (about one second)
+				PBE.processManager.schedule(1000, this, warp);
 			}
 		}
 		
-		private function warpIt():void {
+		/*
+		 * Exchange the position of two units : the warper and another randomly selected unit
+		 */
+		private function warp():void {
+			// Re-Check if there are warpable units that are still alive (some might have died while the invader was turning white)
 			if (WarpableComponent.priorityWeights.length) {
-				//use the getRandomValue() method(who consider priority set in the WarpableComponent) to decide wich ennemy to target
+				// Retrieve a warpable unit that is most likely to be warped
+				// This is done by considering the weight of each unit and a bit of random
 				var warpableUnit:IEntity = WarpableComponent.priorityWeights.getRandomValue();
 				
 				if (warpableUnit && owner) {
-					//get the position and bounding Box where the warper is going to warp to
-					var spatial:SimpleSpatialComponent = warpableUnit.lookupComponentByName("Spatial")as SimpleSpatialComponent;
-					var boundingBox:BoundingBoxComponent = warpableUnit.lookupComponentByName("Collisions")as BoundingBoxComponent;
+					// Retrieve the position and bounding box where the warper is going to warp to
+					var spatial:SimpleSpatialComponent = warpableUnit.lookupComponentByName("Spatial") as SimpleSpatialComponent;
+					var boundingBox:BoundingBoxComponent = warpableUnit.lookupComponentByName("Collisions") as BoundingBoxComponent;
 					var positionTo:Point = spatial.position;
 					var boundingBoxTo:Rectangle = boundingBox.zone;
 					
-					//get the current position and bounding Box where the targeted ennemy will be sent
+					// Retrieve the current position and bounding box where the targeted ennemy will be sent
 					var positionFrom:Point = owner.getProperty(positionProperty);
 					var boundingBoxFrom:Rectangle = owner.getProperty(boundingBoxProperty);
 					
-					//actually exchange the position and bounding Box of the two unit 
-					owner.setProperty(positionProperty,positionTo);
-					warpableUnit.setProperty(new PropertyReference("@Spatial.position"),positionFrom);
-					owner.setProperty(boundingBoxProperty,boundingBoxTo);
-					warpableUnit.setProperty(new PropertyReference("@Collisions.zone"),boundingBoxFrom);
+					// Exchange the position and bounding Box of the two units
+					owner.setProperty(positionProperty, positionTo);
+					warpableUnit.setProperty(new PropertyReference("@Spatial.position"), positionFrom);
 					
+					owner.setProperty(boundingBoxProperty, boundingBoxTo);
+					warpableUnit.setProperty(new PropertyReference("@Collisions.zone"), boundingBoxFrom);
+					
+					// Check for new possible edge ennemies (it might've been the warper or the warped unit)
 					EnemyMobilityComponent.findEdgeEnemies();
 				}
 			}

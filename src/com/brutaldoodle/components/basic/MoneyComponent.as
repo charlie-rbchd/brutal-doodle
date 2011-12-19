@@ -26,7 +26,14 @@ package com.brutaldoodle.components.basic
 	
 	public class MoneyComponent extends EntityComponent
 	{
+		/*
+		 * The amount of coins that the player possess
+		 */
 		public static var coins:int;
+		
+		/*
+		 * References to the object's properties
+		 */
 		public var textProperty:PropertyReference;
 		
 		public function MoneyComponent()
@@ -40,16 +47,29 @@ package com.brutaldoodle.components.basic
 			updateText();
 		}
 		
+		/*
+		 * Add coins to the current amount and update the display
+		 *
+		 * @param amount  The amount of coins
+		 */
 		public function addCoins (amount:int):void {
 			MoneyComponent.coins += amount;
 			updateText();
 		}
 		
+		/*
+		 * Remove coins to the current amount and update the display
+		 *
+		 * @param amount  The amount of coins
+		 */
 		public function removeCoins (amount:int):void {
 			MoneyComponent.coins -= amount;
 			updateText();
 		}
 		
+		/*
+		 * Update the amount of coins displayed on screen
+		 */
 		private function updateText ():void {
 			var coins:TextField = owner.getProperty(textProperty);
 			coins.text = String(MoneyComponent.coins);

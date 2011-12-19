@@ -18,7 +18,8 @@
 
 package com.brutaldoodle.components.collisions
 {
-	import com.brutaldoodle.components.animations.MoveUpAndFadeComponent;
+	import com.brutaldoodle.components.animations.FadeComponent;
+	import com.brutaldoodle.components.animations.MoveComponent;
 	import com.pblabs.components.basic.HealthEvent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.EntityComponent;
@@ -99,11 +100,20 @@ package com.brutaldoodle.components.collisions
 				label.addComponent(render, "Render");
 				
 				// Add a component that make the text literally "Move Up And Fade" over time
-				var tween:MoveUpAndFadeComponent = new MoveUpAndFadeComponent();
+				var tween:MoveComponent = new MoveComponent();
 				tween.positionProperty = new PropertyReference("@Spatial.position");
-				tween.alphaProperty = new PropertyReference("@Render.alpha");
-				if (event.type == HealthEvent.DIED) tween.delta = 0.025;
+				tween.deltaX = 0.5;
+				tween.deltaY = -2;
 				label.addComponent(tween, "Tween");
+				
+				var fadeOut:FadeComponent = new FadeComponent();
+				fadeOut.alphaProperty = new PropertyReference("@Render.alpha");
+				fadeOut.type = FadeComponent.FADE_OUT;
+				fadeOut.callback = function():void {
+					label.destroy();
+				};
+				fadeOut.rate = event.type == HealthEvent.DIED ? 0.025 : 0.05;
+				label.addComponent(fadeOut, "FadeOut");
 				
 				label.initialize();
 			}

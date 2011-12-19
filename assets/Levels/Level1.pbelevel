@@ -26,7 +26,6 @@
 		</component>
 	</entity>
 	
-	
 	<!--							FIRST ROW	START												-->
 	<entity name="Enemy1" template="basicInvader">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">

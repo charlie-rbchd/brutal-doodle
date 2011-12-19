@@ -22,8 +22,14 @@ package com.brutaldoodle.events
 	
 	public class TankEvent extends Event
 	{
+		/*
+		 * Constants used in order to easily identify event types
+		 */
 		public static const UPDATE_ANIMATION:String = "updateAnimation";
 		
+		/*
+		 * Typical event constructor
+		 */
 		public function TankEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) {
 			super(type, bubbles, cancelable);
 		}

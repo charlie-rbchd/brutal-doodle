@@ -24,25 +24,19 @@ package com.brutaldoodle.rendering
 
 	public class BloodDropRenderer extends FlintBitmapRenderer
 	{
+		/*
+		 * The emitter that will be rendered
+		 */
 		private var _blood:Emitter2D;
 		
 		public function BloodDropRenderer() {
 			super();
 		}
 		
+		/*
+		 * Renderer-specific actions that are needed to properly render the Blood particle emitter
+		 */
 		override public function addEmitters():void {
-			//Was there for a nice blur effect but we worked on some class and this cannot work for now
-			//might try to reimplement this later on in the project
-			/*
-			_renderer.addFilter(new ColorMatrixFilter([
-				1, 0, 0, 0, 0, 0,
-				1, 0, 0, 0, 0, 0,
-				1, 0, 0, 0, 0, 0,
-				0.7, 0
-			]));
-			*/
-			
-			//Start an emitter anytime and invader his damaged
 			_blood = new Blood();
 			initializeEmitter(_blood);
 			super.addEmitters();

@@ -27,9 +27,15 @@ package com.brutaldoodle.components.animations
 	import flash.geom.Point;
 	
 	public class ChangeStateOnRaycastWithPlayer extends TickedComponent {
+		/*
+		* References to the owner's properties
+		*/
 		public var positionProperty:PropertyReference;
 		public var sizeProperty:PropertyReference;
 		
+		/*
+		 * Whether or not the owner is currently animating
+		 */
 		private var _isAnimating:Boolean;
 		
 		public function ChangeStateOnRaycastWithPlayer() {
@@ -40,15 +46,16 @@ package com.brutaldoodle.components.animations
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			
+			// Retrieve the components and properties needed to determinate whether or not the owner should animate
 			var tankPosition:Point = (PBE.lookupComponentByName("Player", "Spatial") as SimpleSpatialComponent).position
 			var animator:AnimatorComponent = owner.lookupComponentByName("Animator") as AnimatorComponent;
 			var position:Point = owner.getProperty(positionProperty);
 			var size:Point = owner.getProperty(sizeProperty);
 			
-			// check for positions between the buttons and the player
+			// Check for positions between the buttons and the player
 			if (tankPosition.x >=  position.x - size.x/2 && tankPosition.x <= position.x + size.x/2)
 			{
-				// animate the button if the player is under it
+				// Animate the owner if the player is sitting under it
 				if (!_isAnimating) {
 					animator.play("hover");
 					_isAnimating = true;
@@ -56,7 +63,7 @@ package com.brutaldoodle.components.animations
 			}
 			else
 			{
-				// otherwise, stop the animation
+				// Otherwise, stop the animation
 				if (_isAnimating) {
 					animator.play("idle");
 					_isAnimating = false;

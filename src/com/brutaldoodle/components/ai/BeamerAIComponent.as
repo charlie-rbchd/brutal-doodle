@@ -30,24 +30,23 @@ package com.brutaldoodle.components.ai
 			super();
 		}
 		
+		/*
+		 * AI-specific actions are defined here
+		 */
 		override protected function think():void {
 			super.think();
 			
-			//make the invader turn red
+			// Make the invader gradualy turn red
 			var filter:TurnToColorComponent = new TurnToColorComponent();
 			filter.color = TurnToColorComponent.COLOR_RED;
 			filter.rate = 0.016;
-			if (owner != null) {
-				owner.addComponent(filter, "TurnRed");
-			}
+			if (owner != null) owner.addComponent(filter, "TurnRed");
 			
-			// wait for the invader to turn red (about two seconds)
-			PBE.processManager.schedule(2000, this, createBeam);
+			// Wait for the invader to completely turn red (about two seconds)
+			PBE.processManager.schedule(2000, this, function():void {
+				// Shoot a projectile renderer by the BeamRenderer
+				var p:Projectile = new Projectile(BeamRenderer, owner);
+			});
 		}	
-		
-		private function createBeam():void {
-			// shot a projectile rendered by SimpleShotRenderer
-			var p:Projectile = new Projectile(BeamRenderer, owner);
-		}
 	}
 }

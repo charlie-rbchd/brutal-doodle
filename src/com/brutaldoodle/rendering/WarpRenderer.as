@@ -28,6 +28,9 @@ package com.brutaldoodle.rendering
 	
 	public class WarpRenderer extends FlintBitmapRenderer
 	{
+		/*
+		 * The emitter that will be rendered
+		 */
 		private var _warp:Emitter2D;
 		
 		public function WarpRenderer()
@@ -35,13 +38,16 @@ package com.brutaldoodle.rendering
 			super();
 		}
 		
+		/*
+		 * Renderer-specific actions that are needed to properly render the Warp particle emitter
+		 */
 		override public function addEmitters():void
 		{
-			// Start an emitter for creating an effect when the warper is about to warp
 			if (trueOwner != null) {
 				var _position:Point = (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position
 				
 				_warp = new Warp();
+				// The gravity well needs to be positioned on the invader and thus cannot be added in the emitter definition
 				_warp.addAction( new GravityWell( 400, _position.x, _position.y ) );
 				this.initializeEmitter(_warp);
 				super.addEmitters();

@@ -27,20 +27,27 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.actions.Accelerate;
 	import org.flintparticles.twoD.actions.Move;
 	
+	/*
+	 * Contain the definition of the look and behavior of the SimpleShot particle emitter
+	 * The particles emitted are to collide with any "player" bounding box registered within the CollisionManager
+	 */
 	public class SimpleShot extends PlayerCollidableEmitter
 	{
 		public function SimpleShot() {
 			super();
 			
+			// The amount of damage dealt by each particle emitted
 			_damageAmount = 10;
 			
-			//Generate one particle
+			// One particle is instantly emitted
 			counter = new Blast(1);
 			
-			addInitializer( new SharedImage( new Dot( 3 ) ) );
-			//Give the particle a color between those 2
-			addInitializer( new ColorInit( 0xFFFF00FF, 0xFF00FFFF ) );
-			addAction( new Accelerate( 0, 100 ) );
+			// Particle's Appearance
+			addInitializer( new SharedImage( new Dot(3) ) );
+			addInitializer( new ColorInit(0xFFFF00FF, 0xFF00FFFF) );
+			
+			// Particle's Behavior
+			addAction( new Accelerate(0, 100) );
 			addAction( new Move() );
 		}
 	}

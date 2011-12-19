@@ -31,33 +31,36 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.initializers.Velocity;
 	import org.flintparticles.twoD.zones.PointZone;
 	
+	/*
+	 * Contain the definition of the look and behavior of the Spike particle emitter
+	 * The particles emitted are to collide with any "enemy" bounding box registered within the CollisionManager
+	 */
 	public class Spike extends EnemyCollidableEmitter
 	{
 		[Embed(source="assets/Images/Spike.png")]
 		private var SpikeAsset:Class;
-				
+			
 		public function Spike()
 		{
 			super();
 			
+			// The amount of damage dealt by each particle emitted
 			_damageAmount = 1;
 			
-			//give the image to the particle
-			var spike:Bitmap = new SpikeAsset();
-			addInitializer( new SharedImage( spike ) );
-			
-			//Generate one particle
+			// One particle is instantly emitted
 			counter = new Blast(1);
 			
-			addInitializer( new CollisionRadiusInit(0.01) );
-			
-			//This var is set to a random value of -1 or 1;
+			// The direction in which the particle will move (either left or right)
 			var direction:int = Math.floor(Math.random() * 2) ? 1 : -1;
-			//position and velocity of the particle. 
-			addInitializer( new Velocity( new PointZone( new Point(direction * 10, 0) ) ) );
-			//We want to spawn the particle on the good side to avoid collision with the owner.
+			
+			// Particle's Appearance
+			var spike:Bitmap = new SpikeAsset();
+			addInitializer( new SharedImage( spike ) );
 			addInitializer( new Position( new PointZone( new Point(direction * 30, 0) ) ) );
 			
+			// Particle's Behavior
+			addInitializer( new Velocity( new PointZone( new Point(direction * 10, 0) ) ) );
+			addInitializer( new CollisionRadiusInit(0.01) );
 			addAction( new Move() );
 		}
 	}

@@ -25,7 +25,14 @@ package com.brutaldoodle.components.basic
 	
 	public class WarpableComponent extends EntityComponent
 	{
-		public var priority:int; 
+		/*
+		 * The warp priority of the owner (higher numbers mean higher priority)
+		 */
+		public var priority:int;
+		
+		/*
+		 * Holds the list of all the warpable units, as well as their warp priority
+		 */
 		private static var _weights:WeightedArray = new WeightedArray();
 		
 		public function WarpableComponent()
@@ -36,13 +43,13 @@ package com.brutaldoodle.components.basic
 		override protected function onAdd():void
 		{
 			super.onAdd();
-			_weights.add(owner, priority);
+			_weights.add(owner, priority); // Make the owner warpable
 		}
 		
 		override protected function onRemove():void
 		{
 			super.onRemove();
-			_weights.remove(owner);
+			_weights.remove(owner); // Make the owner un-warpable
 		}
 		
 		public static function get priorityWeights():WeightedArray {

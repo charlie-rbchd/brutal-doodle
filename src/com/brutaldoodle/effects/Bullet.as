@@ -30,6 +30,10 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.initializers.Velocity;
 	import org.flintparticles.twoD.zones.PointZone;
 	
+	/*
+	 * Contain the definition of the look and behavior of the Bullet particle emitter
+	 * The particles emitted are to collide with any "enemy" bounding box registered within the CollisionManager
+	 */
 	public class Bullet extends EnemyCollidableEmitter
 	{
 		public static var damage:Number;
@@ -37,20 +41,20 @@ package com.brutaldoodle.effects
 		public function Bullet() {
 			super();
 			
+			// The amount of damage dealt by each particle emitted
 			_damageAmount = Bullet.damage;
 			
-			//Generate one particle
+			// One particle is instantly emitted
 			counter = new Blast(1);
 			
-			//Make the withe dot in the black dot image for the particle
-			//so it's visible on any background
+			// Particle's Appearance
 			var bullet:Sprite = new Sprite();
 			bullet.addChild( new Dot(3, 0x222222) );
 			bullet.addChild( new Dot(2, 0xDDDDDD) );
-			
 			addInitializer( new SharedImage( bullet ) );
-			addInitializer( new Velocity( new PointZone( new Point(0, -250) ) ) );
 			
+			// Particle's Behavior
+			addInitializer( new Velocity( new PointZone( new Point(0, -250) ) ) );
 			addAction( new Move() );
 		}
 	}

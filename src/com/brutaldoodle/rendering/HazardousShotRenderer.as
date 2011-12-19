@@ -22,14 +22,19 @@ package com.brutaldoodle.rendering
 	
 	public class HazardousShotRenderer extends FlintBitmapRenderer
 	{
+		/*
+		 * The emitter that will be rendered
+		 */
 		private var _hazardousShot:HazardousShot; 
 		
 		public function HazardousShotRenderer() {
 			super();
 		}
 		
+		/*
+		 * Renderer-specific actions that are needed to properly render the HazardousShot particle emitter
+		 */
 		override public function addEmitters():void {
-			//Start an emitter for any shot made by a butterfly (not yet implemented)
 			_hazardousShot = new HazardousShot();
 			initializeEmitter(_hazardousShot);
 			super.addEmitters();

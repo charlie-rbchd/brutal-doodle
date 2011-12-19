@@ -34,25 +34,28 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.zones.PointZone;
 	import org.flintparticles.twoD.zones.RectangleZone;
 	
+	/*
+	 * Contain the definition of the look and behavior of the HazardousShot particle emitter
+	 * The particles emitted are to collide with any "player" bounding box registered within the CollisionManager
+	 */
 	public class HazardousShot extends PlayerCollidableEmitter
 	{
 		public function HazardousShot() {
 			super();
 			
+			// The amount of damage dealt by each particle emitted
 			_damageAmount = 8;
 			
-			//Generate 10 particles instantly
+			// Five particles are instantly emitted
 			counter = new Blast(5);
 			
+			// Particle's Appearance
 			addInitializer( new SharedImage( new Dot(2) ) );
-			
-			//Give the particle a color between those 2
 			addInitializer( new ColorInit(0xFFFF0000, 0xFFFFFF00) );
-			
-			//Generate the particles in at a random point in this rectangle
 			addInitializer( new Position( new RectangleZone(-25, -25, 25, 25) ) );
-			addInitializer( new Velocity( new PointZone( new Point(0, 100) ) ) );
 			
+			// Particle's Behavior
+			addInitializer( new Velocity( new PointZone( new Point(0, 100) ) ) );
 			addAction( new MutualGravity(1, 30) );
 			addAction( new Move() );
 		}

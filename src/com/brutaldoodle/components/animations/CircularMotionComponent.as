@@ -19,19 +19,24 @@
 package com.brutaldoodle.components.animations
 {
 	import com.brutaldoodle.utils.Ellipse;
-	import com.brutaldoodle.utils.Maths;
-	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
-	import com.pblabs.engine.debug.Logger;
-	import com.pblabs.engine.entity.EntityComponent;
 	import com.pblabs.engine.entity.PropertyReference;
-	
-	import flash.geom.Point;
 
-	public class CircularMotionComponent extends EntityComponent
+	public class CircularMotionComponent extends TickedComponent
 	{
+		/*
+		 * References to the owner's properties
+		 */
 		public var positionProperty:PropertyReference;
+		
+		/*
+		 * The amount of time (in hours) to offset the current time by
+		 */
 		public var timeOffset:Number;
+		
+		/*
+		 * The ellipse on which the owner will travel
+		 */
 		public var ellipse:Ellipse;
 		
 		public function CircularMotionComponent()
@@ -39,10 +44,13 @@ package com.brutaldoodle.components.animations
 			super();
 		}
 		
-		override protected function onAdd():void
+		override public function onTick(deltaTime:Number):void
 		{
-			super.onAdd();
-			owner.setProperty(positionProperty, ellipse.getPointAtAngle( (new Date().hours + timeOffset) * 15) );
+			super.onTick(deltaTime);
+			// Retrieve the current time and position the owner of the ellipse depending on what time it is
+			var date:Date = new Date();
+			owner.setProperty(positionProperty, ellipse.getPointAtAngle( (date.hours + (date.minutes + date.seconds/60)/60 + timeOffset) * 15) );
 		}
+		
 	}
 }

@@ -34,25 +34,28 @@ package com.brutaldoodle.effects
 	import org.flintparticles.twoD.initializers.Velocity;
 	import org.flintparticles.twoD.zones.DiscSectorZone;
 	
+	/*
+	 * Contain the definition of the look and behavior of the Warp particle emitter
+	 */
 	public class Smoke extends Emitter2D
 	{
 		public function Smoke() {
-			//emmit one particle each 0.5 second (15 times)
+			super();
+			
+			// Fifteen particles are emitted over 500 miliseconds
 			counter = new TimePeriod(15, 0.5);
 			
-			addInitializer( new Lifetime( 2, 3 ) );
-			
-			//Generate the particle in a discSector (between a minimal angle and a maximal angle)
-			addInitializer( new Velocity( new DiscSectorZone(new Point(0, 0), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7) ) );
+			// Particle's Appearance
 			addInitializer( new SharedImage( new RadialDot(6) ) );
-			
-			//Give the particle a color between those 4
 			addInitializer( new ColorsInit( new Array(0x444444, 0x666666, 0x888888, 0xAAAAAA, 0xCCCCCC) ) );
 			
+			// Particle's Behavior
+			addInitializer( new Lifetime( 2, 3 ) );
+			addInitializer( new Velocity( new DiscSectorZone(new Point(0, 0), 40, 30, -4 * Math.PI / 7, -3 * Math.PI / 7) ) );
 			addAction( new Age(Quadratic.easeOut) );
-			addAction( new Move() );
 			addAction( new Fade(0.25, 0) );
-			//move hazardously instead of moving straight forward
+			addAction( new Move() );
+			// Make the particles move hazardously instead of moving straight forward
 			addAction( new RandomDrift(15, 15) );
 		}
 	}

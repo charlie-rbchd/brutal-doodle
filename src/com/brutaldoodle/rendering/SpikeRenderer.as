@@ -27,6 +27,9 @@ package com.brutaldoodle.rendering
 	
 	public class SpikeRenderer extends FlintBitmapRenderer
 	{
+		/*
+		 * The emitter that will be rendered
+		 */
 		private var _spikeShotCannibal:Emitter2D;
 		
 		public function SpikeRenderer()
@@ -34,8 +37,10 @@ package com.brutaldoodle.rendering
 			super();
 		}
 		
+		/*
+		 * Renderer-specific actions that are needed to properly render the Spike particle emitter
+		 */
 		override public function addEmitters():void {
-			//Start an emitter for any shot made by a cannibal invader
 			_spikeShotCannibal = new Spike();
 			initializeEmitter(_spikeShotCannibal);
 			super.addEmitters();

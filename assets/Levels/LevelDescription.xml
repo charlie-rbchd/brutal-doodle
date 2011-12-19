@@ -70,5 +70,195 @@
 		<group name="Level2Data"/>
 	</level>
 	
+	<!-- Shop -->
+	<level index="6">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
 	
+	<!-- Level 3 -->
+	<level index="7">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level3.pbelevel"/>
+		<group name="Level3Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="8">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 4 -->
+	<level index="9">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level4.pbelevel"/>
+		<group name="Level4Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="10">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 5 -->
+	<level index="11">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level5.pbelevel"/>
+		<group name="Level5Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="12">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 6 -->
+	<level index="13">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level6.pbelevel"/>
+		<group name="Level6Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="14">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 7 -->
+	<level index="15">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level7.pbelevel"/>
+		<group name="Level7Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="16">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 8 -->
+	<level index="17">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level8.pbelevel"/>
+		<group name="Level8Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="18">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 9 -->
+	<level index="19">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level9.pbelevel"/>
+		<group name="Level9Data"/>
+	</level>
+	
+	<!-- Shop -->
+	<level index="20">
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Shop.pbelevel"/>
+		<group name="ShopData"/>
+	</level>
+	
+	<!-- Level 10 -->
+	<level index="21">
+		<file filename="../assets/Levels/Templates.pbelevel"/>
+		<group name="TemplatesData"/>
+		
+		<file filename="../assets/Levels/Player.pbelevel"/>
+		<group name="PlayerData"/>
+		
+		<file filename="../assets/Levels/Interface.pbelevel"/>
+		<group name="InterfaceData"/>
+		
+		<file filename="../assets/Levels/Level10.pbelevel"/>
+		<group name="Level10Data"/>
+	</level>
 </levelDescriptions>

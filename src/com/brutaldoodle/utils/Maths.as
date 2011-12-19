@@ -24,10 +24,22 @@ package com.brutaldoodle.utils
 	{
 		public function Maths() {}
 		
+		/*
+		 * Convert radians into degrees
+		 *
+		 * @param radians  The angle in radians
+		 * @return The angle in degrees
+		 */
 		public static function radiansToDegrees (radians:Number):Number {
 			return radians * 180/Math.PI;
 		}
 		
+		/*
+		 * Convert degrees into radians
+		 *
+		 * @param degrees  The angle in degrees
+		 * @return The angle in radians
+		 */
 		public static function degreesToRadians (degrees:Number):Number {
 			return degrees * Math.PI/180;
 		}
