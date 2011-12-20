@@ -18,11 +18,12 @@
 
 package com.brutaldoodle.components.animations
 {
-	import com.brutaldoodle.utils.Ellipse;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.PropertyReference;
-
-	public class CircularMotionComponent extends TickedComponent
+	
+	import flash.geom.Point;
+	
+	public class WiggleComponent extends TickedComponent
 	{
 		/*
 		 * References to the owner's properties
@@ -30,26 +31,37 @@ package com.brutaldoodle.components.animations
 		public var positionProperty:PropertyReference;
 		
 		/*
-		 * The amount of time (in hours) to offset the current time by
+		 * The speed at which the object wiggles
 		 */
-		public var timeOffset:Number;
+		public var moveSpeed:Number;
 		
 		/*
-		 * The ellipse on which the owner will travel
+		 * The amount of ticks needed to reverse the move speed
 		 */
-		public var ellipse:Ellipse;
+		public var tickRate:Number;
 		
-		public function CircularMotionComponent()
-		{
+		/*
+		 * The current amount of ticks since the component was added
+		 */
+		private var _numTicks:int;
+		
+		public function WiggleComponent() {
 			super();
+			_numTicks = 0;
 		}
 		
-		override public function onTick(deltaTime:Number):void
-		{
+		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
-			// Retrieve the current time and position the owner of the ellipse depending on what time it is
-			var date:Date = new Date();
-			owner.setProperty(positionProperty, ellipse.getPointAtAngle( (date.hours + (date.minutes + date.seconds/60)/60 + timeOffset) * 15) );
+			
+			// Reverse the move speed every tickRate number of ticks
+			if (_numTicks%tickRate == 0) moveSpeed = -moveSpeed;
+			_numTicks++;
+			
+			// Apply the new position to the object
+			var position:Point = owner.getProperty(positionProperty);
+			position.y += moveSpeed;
+			owner.setProperty(positionProperty, position);
+
 		}
 	}
 }

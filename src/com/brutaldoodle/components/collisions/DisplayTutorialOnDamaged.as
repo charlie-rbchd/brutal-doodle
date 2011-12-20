@@ -29,16 +29,49 @@ package com.brutaldoodle.components.collisions
 	import flash.geom.Point;
 	
 	public class DisplayTutorialOnDamaged extends EntityComponent {
+		/*
+		 * The path of the text image file
+		 */
 		public var textFilePath:String;
+		
+		/*
+		 * The path of the arrow image file
+		 */
 		public var arrowFilePath:String;
+		
+		/*
+		 * The position of the tutorial (x, y)
+		 */
 		public var position:Point;
+		
+		/*
+		 * The size of the text (width, height)
+		 */
 		public var textSize:Point;
+		
+		/*
+		 * The size of an arrow (width, height)
+		 */
 		public var arrowSize:Point;
 		
+		/*
+		 * The text entity of the tutorial
+		 */
 		private static var _text:IEntity;
+		
+		/*
+		 * The left arrow entity of the tutorial
+		 */
 		private static var _leftArrow:IEntity;
+		
+		/*
+		 * The right arrow entity of the tutorial
+		 */
 		private static var _rightArrow:IEntity;
-			
+		
+		/*
+		 * Whether or not the elements have been displayed
+		 */
 		private static var _elementsDisplayed:Boolean = false;
 		
 		public function DisplayTutorialOnDamaged() {
@@ -53,18 +86,22 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
+		/*
+		 * Display tutorial elements when the owner is damaged
+		 */
 		private function onDamaged (event:HealthEvent):void {
 			if (!_elementsDisplayed) {
-				// Warning Text
+				// ------- TEXT ------- \\
 				_text = PBE.allocateEntity();
 				
+				// Spatial properties of the text
 				var text_spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 				text_spatial.spatialManager = PBE.spatialManager;
 				text_spatial.position = position;
 				text_spatial.size = textSize;
-				
 				_text.addComponent(text_spatial, "Spatial");
 				
+				// Render properties of the text
 				var text_renderer:SpriteRenderer = new SpriteRenderer();
 				with (text_renderer) {
 					scene = PBE.scene;
@@ -78,16 +115,17 @@ package com.brutaldoodle.components.collisions
 				_text.initialize();
 				
 				
-				// Left Arrow
+				// ------- LEFT ARROW ------- \\
 				_leftArrow = PBE.allocateEntity();
 				
+				// Spatial properties of the left arrow
 				var leftArrow_spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 				leftArrow_spatial.spatialManager = PBE.spatialManager;
 				leftArrow_spatial.position = new Point(position.x - 150, position.y + 70);
 				leftArrow_spatial.size = arrowSize;
-				
 				_leftArrow.addComponent(leftArrow_spatial, "Spatial");
 				
+				// Render properties of the left arrow
 				var leftArrow_renderer:SpriteRenderer = new SpriteRenderer();
 				with (leftArrow_renderer) {
 					scene = PBE.scene;
@@ -101,16 +139,18 @@ package com.brutaldoodle.components.collisions
 				
 				_leftArrow.initialize();
 				
-				// Right Arrow
+				
+				// ------- RIGHT ARROW ------- \\
 				_rightArrow = PBE.allocateEntity();
 				
+				// Spatial properties of the right arrow
 				var rightArrow_spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 				rightArrow_spatial.spatialManager = PBE.spatialManager;
 				rightArrow_spatial.position = new Point(position.x + 150, position.y + 70);
 				rightArrow_spatial.size = arrowSize;
-				
 				_rightArrow.addComponent(rightArrow_spatial, "Spatial");
 				
+				// Render properties of the right arrow
 				var rightArrow_renderer:SpriteRenderer = new SpriteRenderer();
 				with (rightArrow_renderer) {
 					scene = PBE.scene;
@@ -127,10 +167,15 @@ package com.brutaldoodle.components.collisions
 				
 				
 				_elementsDisplayed = true;
+				
+				// Remove the tutorial after three seconds
 				PBE.processManager.schedule(3000, owner, cleanDisplay);
 			}
 		}
 		
+		/*
+		 * Remove all the tutorials elements from the display list
+		 */
 		private function cleanDisplay():void {
 			_text.destroy();
 			_leftArrow.destroy();

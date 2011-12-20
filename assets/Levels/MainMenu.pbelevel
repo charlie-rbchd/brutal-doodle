@@ -18,6 +18,8 @@
 			<fileName>../assets/Images/BackgroundMenu.jpg</fileName>
 			<layerIndex>1</layerIndex>
 		</component>
+		
+		<component type="com.brutaldoodle.components.animations.ChangeEnvironmentComponent" name="DayAndNight"></component>
 	</entity>
 	
 	<entity name="Hill">
@@ -39,6 +41,8 @@
 			<fileName>../assets/Images/Montagnes.png</fileName>
 			<layerIndex>2</layerIndex>
 		</component>
+		
+		<component type="com.brutaldoodle.components.animations.ChangeEnvironmentComponent" name="DayAndNight"></component>
 	</entity>
 	
 	<entity name="Sun">
@@ -212,7 +216,7 @@
 			<level>1</level>
 		</component>
 		
-		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
+		<component type="com.brutaldoodle.components.animations.WiggleComponent" name="Wiggle">
 			<positionProperty>@Spatial.position</positionProperty>
 			<moveSpeed>0.2</moveSpeed>
 			<tickRate>20</tickRate>
@@ -265,7 +269,7 @@
 			<level>3</level>
 		</component>
 		
-		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
+		<component type="com.brutaldoodle.components.animations.WiggleComponent" name="Wiggle">
 			<positionProperty>@Spatial.position</positionProperty>
 			<moveSpeed>0.2</moveSpeed>
 			<tickRate>19</tickRate>
@@ -314,7 +318,7 @@
 			<collisionType>enemy</collisionType>
 		</component>
 		
-		<component type="com.brutaldoodle.components.animations.WiggleObjectComponent" name="Wiggle">
+		<component type="com.brutaldoodle.components.animations.WiggleComponent" name="Wiggle">
 			<positionProperty>@Spatial.position</positionProperty>
 			<moveSpeed>-0.2</moveSpeed>
 			<tickRate>21</tickRate>

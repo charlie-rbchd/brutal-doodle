@@ -45,8 +45,10 @@ package com.brutaldoodle.collisions
 		 */
 		private var _zones:Dictionary;
 		
+		/*
+		 * Private constructor
+		 */
 		public function CollisionManager() {
-			// Private constructor
 			if (instance) throw new Error("CollisionManager can only be accessed through CollisionManager.instance");
 		}
 		

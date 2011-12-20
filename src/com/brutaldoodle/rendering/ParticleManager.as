@@ -34,29 +34,54 @@ package com.brutaldoodle.rendering
 
 	public class ParticleManager
 	{
-		// Singleton instance
+		/*
+		 * Singleton instance
+		 */
 		private static var _instance:ParticleManager = new ParticleManager();
 		
+		/*
+		 * The entity that will hold and render all the particles
+		 */
 		private var __this:IEntity;
+		
+		/*
+		 * The renderer used to render all the particles
+		 */
 		private var _renderer:BitmapRenderer;
+		
+		/*
+		 * The width of the viewport that will render particles
+		 */
 		private var _width:Number;
+		
+		/* 
+		 * The height of the viewport that will render particles
+		 */
 		private var _height:Number;
 		
 		public static function get instance ():ParticleManager { return _instance; }
 		
+		/*
+		 * Private constructor
+		 */
 		public function ParticleManager() {
-			// "Private" constructor
 			if (instance) throw new Error("ParticleManager can only be accessed through ParticleManager.instance");
 		}
 		
+		/*
+		 * Instanciation of entity used to render all the particles
+		 *
+		 * @param width  The width of the viewport that will render particles
+		 * @param height  The height of the viewport that will render particles
+		 */
 		public function initialize (width:Number, height:Number):void {
 			_width = width;
 			_height = height;
 			
-			// the Flint renderer used to display all the particles throughout the game
+			// The Flint renderer used to display all the particles throughout the game
 			_renderer = new BitmapRenderer( new Rectangle(-_width/2, -_height/2, _width, _height) );
 			
-			// the entity that will contain/manage the renderer (much like a Sprite)
+			// The entity that will contain/manage the renderer (much like a Sprite)
 			__this = PBE.allocateEntity();
 			
 			var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
@@ -67,7 +92,7 @@ package com.brutaldoodle.rendering
 			
 			var renderer:DisplayObjectRenderer = new DisplayObjectRenderer();
 			renderer.scene = PBE.scene;
-			renderer.displayObject = _renderer; // renders the Flint renderer as its displayObject
+			renderer.displayObject = _renderer; // Renders the Flint renderer as its displayObject
 			renderer.layerIndex = 6;
 			renderer.positionProperty = new PropertyReference("@Spatial.position");
 			renderer.sizeProperty = new PropertyReference("@Spatial.size");
@@ -76,31 +101,48 @@ package com.brutaldoodle.rendering
 			__this.initialize();
 		}
 		
-		// add an emitter to the renderer so it can be displayed on screen
+		/*
+		 * Add an emitter from the particle manager's renderer
+		 *
+		 * @param emitter The emitter that will be added
+		 */
 		public function registerEmitter(emitter:Emitter2D):void {
 			_renderer.addEmitter(emitter);
 			emitter.start();
 		}
 		
-		// when the emitter is no longer needed...
+		/*
+		 * Remove an emitter from the particle manager's renderer
+		 *
+		 * @param emitter The emitter that will be removed
+		 */
 		public function removeEmitter (emitter:Emitter2D):void {
-			emitter.killAllParticles(); // just in case there's some remaining particles that block garbage collecting
+			emitter.killAllParticles(); // Just in case there are remaining particles that block garbage collecting
 			emitter.stop();
 			_renderer.removeEmitter(emitter);
 		}
 		
+		/*
+		 * Pause all the registered emitters (stop all particles)
+		 */
 		public function pause():void {
 			for (var i:int = 0; i < _renderer.emitters.length; i++) {
 				_renderer.emitters[i].pause();
 			}
 		}
 		
+		/*
+		 * Resume all the registered emitters (make the particles continue their movements)
+		 */
 		public function resume():void {
 			for (var i:int = 0; i < _renderer.emitters.length; i++) {
 				_renderer.emitters[i].resume();
 			}
 		}
 		
+		/*
+		 * Remove all the emitters from renderer
+		 */
 		public function removeAllParticles():void {
 			for (var i:int = 0; i < _renderer.emitters.length; i++) {
 				var emitter:Emitter = _renderer.emitters[i];
@@ -108,6 +150,9 @@ package com.brutaldoodle.rendering
 			}
 		}
 		
+		/*
+		 * @return  The zone where particles are rendered
+		 */
 		public function get sceneBoundaries():RectangleZone {
 			return new RectangleZone(-_width/2, -_height/2, _width, _height);
 		}

@@ -31,12 +31,24 @@ package com.brutaldoodle.rendering
 	
 	public class FlintBitmapRenderer
 	{
-		// contains all the emitters that need to be rendered for this specific effect
+		/*
+		 * Contains all the emitters that need to be rendered for this specific effect
+		 */
 		protected var _emitters:Vector.<Emitter2D>;
 		
+		/*
+		 * The number of emitters that are done emitting all their particles
+		 */
 		private var _counterCompletedEmitters:uint;
+		
+		/*
+		 * The number of emitters that no longer contain any particle
+		 */
 		private var _emptyEmitters:uint;
 		
+		/*
+		 * The entity from which the emitter was created
+		 */
 		public var trueOwner:IEntity;
 		
 		public function FlintBitmapRenderer() {
@@ -46,35 +58,47 @@ package com.brutaldoodle.rendering
 			_emitters = new Vector.<Emitter2D>();
 		}
 		
+		/*
+		 * To be overriden...
+		 * Register all the emitters to the Particle Manager for rendering
+		 */
 		public function addEmitters():void {
 			for (var i:int=0; i < _emitters.length; i++) {
-				ParticleManager.instance.registerEmitter(_emitters[i]); // render it!
+				ParticleManager.instance.registerEmitter(_emitters[i]);
 				
-				// listeners used for cleaning references when the emitters are done emitting particles
+				// Listeners used for cleaning references when the emitters are done emitting particles
 				_emitters[i].addEventListener(EmitterEvent.EMITTER_EMPTY, destroyOwner, false, 0, true);
 				_emitters[i].addEventListener(EmitterEvent.COUNTER_COMPLETE, destroyOwner, false, 0, true);
 				_emitters[i].addEventListener(ParticleEvent.PARTICLE_DEAD, removeParticle, true, 0, true);
 			}
 		}
 		
+		/*
+		 * Add a default position and dead zone to the emitter
+		 *
+		 * @emitter  The emitter that need to be initialized
+		 * @position  The position at which emitter is created
+		 */
 		protected function initializeEmitter(emitter:Emitter2D, position:Zone2D=null):void {
 			var _emitLocation:Zone2D;
 			
-			// the emit location is determined by the position of its owner or by the optional parameter "position" if supplied
+			// The emit location is determined by the position of its owner or by the optional parameter "position" (if supplied)
 			if (position != null)
 				_emitLocation = position;
 			else if (trueOwner != null)
 				_emitLocation = new PointZone( (trueOwner.lookupComponentByName("Spatial") as SimpleSpatialComponent).position );
 			else return;
-			
-			// starting location of the particle
 			emitter.addInitializer( new Position( _emitLocation ));
 			
-			// the particles die as soon as they become off-screen
+			// The particles die as soon as they become off-screen (dead zone)
 			emitter.addAction( new DeathZone(ParticleManager.instance.sceneBoundaries, true) );
 			_emitters.push(emitter);
 		}
 		
+		/*
+		 * Check whether an emitter is empty or whether its done emitting particles
+		 * The emitters are then properly removed from the display list and unreferenced to be garbage collected
+		 */
 		private function destroyOwner(event:EmitterEvent):void {
 			var emitter:Emitter2D = event.target as Emitter2D;
 			
@@ -91,18 +115,21 @@ package com.brutaldoodle.rendering
 					throw new Error();
 			}
 			
-			// when one of the emitters is done emitting
+			// When one of the emitters is done emitting
 			if (emitter.counter.complete && !emitter.particles.length) {
 				ParticleManager.instance.removeEmitter(emitter);
 			}
 			
-			// when all emitters are done emitting
+			// When all emitters are done emitting
 			if (_emptyEmitters == _emitters.length && _counterCompletedEmitters == _emitters.length) {
 				_emitters = new Vector.<Emitter2D>();
 				trueOwner = null;
 			}
 		}
 		
+		/*
+		 * Remove the particle for the factory once it dies
+		 */
 		private function removeParticle(event:ParticleEvent):void {
 			Emitter2D.defaultParticleFactory.disposeParticle(event.particle);
 		}

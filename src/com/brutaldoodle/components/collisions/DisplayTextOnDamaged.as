@@ -33,6 +33,9 @@ package com.brutaldoodle.components.collisions
 	import flash.text.TextFormat;
 	
 	public class DisplayTextOnDamaged extends EntityComponent {
+		/*
+		 * References to the owner's properties
+		 */
 		public var positionProperty:PropertyReference;
 		public var sizeProperty:PropertyReference;
 		
@@ -52,30 +55,32 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DIED, onDamaged);
 		}
 		
-		// once the owner is damaged, text is displayed above it;
-		// it shows the amount of damage taken
+		/*
+		 * Display the amount of damage taken above the owner's head
+		 */
 		private function onDamaged (event:HealthEvent):void {
 			var damageDone:Number = event.delta;
-			// no need to display anything if there's no damage inflicted
+			// Only display text if the damage inflicted is not null
 			if (damageDone == 0) return;
 			
 			if (owner != null) {
 				var position:Point = owner.getProperty(positionProperty);
 				var size:Point = owner.getProperty(sizeProperty);
 				
-				// otherwise, create a label (a simple TextField) and render it above the owner
+				// Create a label (TextField) and render it above the owner
 				var label:IEntity =  PBE.allocateEntity();
 				
-				// Arial is a pretty nice font!
 				var textformat:TextFormat;
 				var text:TextField = new TextField();
 				if (event.type == HealthEvent.DAMAGED) {
+					// White text if its normal damage
 					textformat = new TextFormat("Arial", 12, 0xffffff);
 					text.defaultTextFormat = textformat;
 					text.text = String(damageDone);
 					text.width = 25;
 					text.height = 25;
 				} else {
+					// Red bigger text if the player lost a life
 					textformat = new TextFormat("Arial", 18, 0xff0000, true);
 					text.defaultTextFormat = textformat;
 					text.text = "-1 Vie";
@@ -83,6 +88,7 @@ package com.brutaldoodle.components.collisions
 					text.height = 25;
 				}
 				
+				// Spatial properties of the text
 				var spatial:SimpleSpatialComponent = new SimpleSpatialComponent();
 				spatial.spatialManager = PBE.spatialManager;
 				spatial.position = new Point(position.x + (event.type == HealthEvent.DAMAGED ? size.x/4 : -25),  position.y - size.y);
@@ -90,7 +96,7 @@ package com.brutaldoodle.components.collisions
 				
 				label.addComponent(spatial, "Spatial");
 				
-				
+				// Render properties of the text
 				var render:DisplayObjectRenderer = new DisplayObjectRenderer();
 				render.displayObject = text;
 				render.sizeProperty = new PropertyReference("@Spatial.size");
@@ -99,13 +105,14 @@ package com.brutaldoodle.components.collisions
 				
 				label.addComponent(render, "Render");
 				
-				// Add a component that make the text literally "Move Up And Fade" over time
+				// Make the text move up a bit angled to the right
 				var tween:MoveComponent = new MoveComponent();
 				tween.positionProperty = new PropertyReference("@Spatial.position");
 				tween.deltaX = 0.5;
 				tween.deltaY = -2;
 				label.addComponent(tween, "Tween");
 				
+				// Make the text slowly disappear
 				var fadeOut:FadeComponent = new FadeComponent();
 				fadeOut.alphaProperty = new PropertyReference("@Render.alpha");
 				fadeOut.type = FadeComponent.FADE_OUT;

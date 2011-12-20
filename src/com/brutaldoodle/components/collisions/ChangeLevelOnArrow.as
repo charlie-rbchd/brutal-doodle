@@ -32,20 +32,44 @@ package com.brutaldoodle.components.collisions
 	import flash.ui.MouseCursor;
 	
 	public class ChangeLevelOnArrow extends TickedComponent {
+		/*
+		 * Constants used in order to easily identify possible arrow orientations
+		 */
 		public static const ORIENTATION_RIGHT:String = "right";
 		public static const ORIENTATION_LEFT:String = "left";
 		public static const ORIENTATION_TOP:String = "top";
 		
+		/*
+		 * Holds all the arrows currently on the display list
+		 */
 		private static var _arrows:Vector.<String> = new Vector.<String>();
 		
+		/*
+		 * References to the owner's properties
+		 */
 		public var positionProperty:PropertyReference;
 		public var sizeProperty:PropertyReference;
 		public var alphaProperty:PropertyReference;
 		public var displayObjectProperty:PropertyReference;
+		
+		/*
+		 * The orientation of the owner
+		 */
 		public var orientation:String;
 		
+		/*
+		 * The owner's spatial component
+		 */
 		private var _playerSpatial:SimpleSpatialComponent;
+		
+		/*
+		 * The owner's renderer
+		 */
 		private var _renderer:SpriteRenderer;
+		
+		/*
+		 * The display object used by the owner's renderer
+		 */
 		private var _displayObject:Sprite;
 		
 		public function ChangeLevelOnArrow() {
@@ -57,6 +81,7 @@ package com.brutaldoodle.components.collisions
 			_arrows.push(orientation);
 			_playerSpatial = PBE.lookupComponentByName("Player", "Spatial") as SimpleSpatialComponent;
 			
+			// If there is no player, we need to retrieve the owner's renderer for later use
 			if (_playerSpatial == null) {
 				_renderer = owner.lookupComponentByName("Render") as SpriteRenderer;
 			}
@@ -77,12 +102,14 @@ package com.brutaldoodle.components.collisions
 			super.onTick(deltaTime);
 			
 			if (_playerSpatial != null) {
+				// If there's a player, make the arrow interact with the player's position
 				var tankPosition:Point = _playerSpatial.position;
 				var tankSize:Point = _playerSpatial.size;
 				
 				var position:Point = owner.getProperty(positionProperty);
 				var size:Point = owner.getProperty(sizeProperty);
 				
+				// Check for the player's position and match it with the orientation and position of the arrow
 				switch (orientation) {
 					case ORIENTATION_RIGHT:
 						if (tankPosition.x + tankSize.x >= position.x) {
@@ -103,6 +130,7 @@ package com.brutaldoodle.components.collisions
 						throw new Error("Orientation property value must correspond on of ChangeLevelOnArrow's constant value.");
 				}
 			} else {
+				// If there is no player, we wait for the bitmap data to be loaded and then register the renderer for mouse events
 				if (_renderer.loaded) {
 					_displayObject = _renderer.displayObject as Sprite;
 					with (_displayObject) {
@@ -115,6 +143,9 @@ package com.brutaldoodle.components.collisions
 			}
 		}
 		
+		/*
+		 * Change the mouse's display on hover
+		 */
 		private function onHover(event:MouseEvent):void {
 			switch (event.type) {
 				case MouseEvent.MOUSE_OVER:
@@ -129,14 +160,20 @@ package com.brutaldoodle.components.collisions
 			}
 		}
 		
+		/*
+		 * Remove the arrow from the list of arrows that you can interact with
+		 * The arrows are faded until all the arrows had user interaction, a level is then loaded
+		 */
 		private function removeArrow(event:MouseEvent=null):void {
 			Mouse.cursor = MouseCursor.AUTO;
 			var index:int = _arrows.indexOf(orientation);
 			
+			// If the arrow exists
 			if (index != -1) {
 				owner.setProperty(alphaProperty, 1);
-				
 				_arrows.splice(index, 1);
+				
+				// Load the next level
 				if (!_arrows.length) {
 					Main.resetEverythingAndLoadLevel(LevelManager.instance.currentLevel + 1);
 				}

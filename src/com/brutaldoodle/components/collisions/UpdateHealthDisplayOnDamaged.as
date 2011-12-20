@@ -28,20 +28,31 @@ package com.brutaldoodle.components.collisions
 	
 	public class UpdateHealthDisplayOnDamaged extends EntityComponent
 	{
+		/*
+		 * References to the owner's properties
+		 */
 		public var sizeProperty:PropertyReference;
 		public var positionProperty:PropertyReference;
 		
+		/*
+		 * The start value of the owner's width
+		 */
 		private var _baseSizeX:Number;
+		
+		/*
+		 * The player
+		 */
 		private var _player:IEntity;
 		
 		public function UpdateHealthDisplayOnDamaged() {
 			super();
 		}
 		
-		// listen to the player's damage states
 		override protected function onAdd():void {
 			super.onAdd();
 			_player = PBE.lookup("Player") as IEntity;
+			
+			// Listen to the player's damage states
 			if (_player != null) {
 				_player.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 				_player.eventDispatcher.addEventListener(HealthEvent.RESURRECTED, onResurrected);
@@ -57,29 +68,33 @@ package com.brutaldoodle.components.collisions
 			}
 		}
 		
-		// remove the proper amount of health inflicted to the player from the health bar
+		/*
+		 * Remove the proper amount of health from the health bar when the player is damaged
+		 */
 		private function onDamaged (event:HealthEvent):void {
 			var position:Point = owner.getProperty(positionProperty);
 			var size:Point = owner.getProperty(sizeProperty);
 			
 			var previousSizeX:Number = size.x;
 			size.x = _baseSizeX * event.amount/1000;
-			// the bar need to be repositionned because PBE's register point is at the center of objects
+			// The bar need to be repositionned on its x axis because PBE's register point is at the center of objects
 			position.x -= (previousSizeX - size.x)/2;
 			
 			owner.setProperty(sizeProperty, size);
 			owner.setProperty(positionProperty, position);
 		}
 		
-		// fill up the health bar when the player is resurrected
+		/*
+		 * Fill up the health bar when the player is resurrected
+		 */
 		private function onResurrected (event:HealthEvent):void {
+			// Retrieve the current values
 			var position:Point = owner.getProperty(positionProperty);
 			var size:Point = owner.getProperty(sizeProperty);
 			
-			// revert back to default values...
+			// Revert back to default values
 			size.x = _baseSizeX;
 			position.x += _baseSizeX/2;
-			
 			owner.setProperty(sizeProperty, size);
 			owner.setProperty(positionProperty, position);
 		}

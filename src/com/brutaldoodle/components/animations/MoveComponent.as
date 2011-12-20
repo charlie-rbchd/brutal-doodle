@@ -67,14 +67,14 @@ package com.brutaldoodle.components.animations
 			// Wait until the delay is completed before animating
 			if (startDelay) {
 				this.registerForTicks = false;
-				PBE.processManager.schedule(startDelay, this, function():void {
+				PBE.processManager.schedule(startDelay, this, function start():void {
 					this.registerForTicks = true;
 				});
 			}
 			
 			// Stop animating after the endDelay has been waited
 			if (endDelay) {
-				PBE.processManager.schedule(endDelay, this, function():void {
+				PBE.processManager.schedule(endDelay, this, function end():void {
 					this.registerForTicks = false;
 					if (callback != null) callback();
 				});

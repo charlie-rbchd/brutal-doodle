@@ -39,8 +39,11 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DIED, onDeath);
 		}
 		
-		// drop a coin once the owner is killed, there's not much to it...
+		/*
+		 * Drop a coin once the owner is killed
+		 */
 		private function onDeath (event:HealthEvent):void {
+			// Shoot a projectile renderer by the CoinRenderer
 			var p:Projectile = new Projectile(CoinRenderer, owner);
 		}
 	}

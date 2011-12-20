@@ -39,8 +39,11 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DAMAGED, onDamaged);
 		}
 		
-		// drop blood when the owner is damaged, there's not much to it...
+		/*
+		 * Drop blood when the owner is damaged
+		 */
 		private function onDamaged (event:HealthEvent):void {
+			// Shoot a projectile rendered by the BloodDropRenderer
 			var p:Projectile = new Projectile(BloodDropRenderer, owner);
 		}
 	}

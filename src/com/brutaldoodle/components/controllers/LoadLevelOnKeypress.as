@@ -18,11 +18,9 @@
 
 package com.brutaldoodle.components.controllers
 {
-	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.ui.Generique;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
-	import com.pblabs.engine.core.LevelManager;
 	import com.pblabs.engine.entity.PropertyReference;
 	
 	public class LoadLevelOnKeypress extends TickedComponent

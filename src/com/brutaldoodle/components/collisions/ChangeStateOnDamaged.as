@@ -27,13 +27,27 @@
 	
 	public class ChangeStateOnDamaged extends EntityComponent
 	{
+		/*
+		 * Constants used in order to easily identify damage states
+		 */
 		public static const STATE_NOT_INJURED:String = "notInjured";
 		public static const STATE_BARELY_INJURED:String = "barelyInjured";
 		public static const STATE_INJURED:String = "injured";
 		public static const STATE_BADLY_INJURED:String = "badlyInjured";
 		
+		/*
+		 * The owner's current damage state
+		 */
 		private var __currentState:String;
+		
+		/*
+		 * The owner's currently playing animation
+		 */
 		private var _currentAnimation:Animator;
+		
+		/*
+		 * The owner's animator component
+		 */
 		private var _animator:AnimatorComponent;
 		
 		public function ChangeStateOnDamaged() {
@@ -44,16 +58,17 @@
 			super.onAdd();
 			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 			_animator = owner.lookupComponentByName("Animator") as AnimatorComponent;
-			_currentState = STATE_NOT_INJURED; // default state that is displayed
+			_currentState = STATE_NOT_INJURED; // Default state
 		}
 		
 		private function onDamaged (event:HealthEvent):void {
 			var remainingLife:Number = event.amount;
+			// The owner is still "not injured" when still above 75 health
 			if (remainingLife > 75) return;
 			
 			var startFrame:Number = _currentAnimation.currentValue + 9;
 			
-			// the display of a sprite is modified accordingly to its remaining life
+			// The display of the owner's sprite is modified accordingly to its remaining life
 			if (remainingLife <= 25)
 			{
 				_currentState = STATE_BADLY_INJURED;
@@ -68,12 +83,14 @@
 			}
 			
 			_animator.play(_currentState, startFrame);
-			// the duration is adjusted in order to maintain a fluid transition between animation states
+			// The duration is adjusted in order to maintain a fluid transition between animation states
 			_currentAnimation.duration = (_currentAnimation.duration / 9) * (9 - startFrame % 9);
 			_currentAnimation.addEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 		}
 		
-		// reset the duration so that the next animation plays normally
+		/*
+		 * Reset the animation's duration so that the next animation plays normally
+		 */
 		private function onRepeat(event:AnimationEvent):void {
 			_currentAnimation.removeEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
 			_currentAnimation.start(_currentAnimation.targetValue - 9, _currentAnimation.targetValue, 4, AnimatorType.LOOP_ANIMATION, -1);

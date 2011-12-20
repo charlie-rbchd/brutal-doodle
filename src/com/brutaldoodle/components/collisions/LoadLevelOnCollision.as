@@ -21,12 +21,18 @@ package com.brutaldoodle.components.collisions
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.collisions.CollisionType;
 	import com.brutaldoodle.events.CollisionEvent;
-	import com.pblabs.engine.core.LevelManager;
 	import com.pblabs.engine.entity.EntityComponent;
 	
 	public class LoadLevelOnCollision extends EntityComponent
 	{
+		/*
+		 * The level that will be loaded on collision
+		 */
 		public var level:int = 0;
+		
+		/*
+		 * The owner's bounding box
+		 */
 		private var _collisions:BoundingBoxComponent;
 		
 		public function LoadLevelOnCollision() {
@@ -45,8 +51,10 @@ package com.brutaldoodle.components.collisions
 			CollisionManager.instance.removeEventListener(CollisionEvent.COLLISION_OCCURED, loadLevel);
 		}
 		
-		// load a level once a collision has occured with the owner
-		// used to load a level when an object collide with a menu element
+		/*
+		 * Load a level once a collision has occured with the owner
+		 * This is used to load a level when an object collide with a menu element
+		 */
 		private function loadLevel(event:CollisionEvent):void {
 			if (owner != null) {
 				if (event.zone == _collisions) {

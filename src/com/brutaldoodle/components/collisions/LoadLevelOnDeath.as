@@ -25,7 +25,14 @@ package com.brutaldoodle.components.collisions
 	
 	public class LoadLevelOnDeath extends EntityComponent
 	{
+		/*
+		 * Contains all the units that need to die before loading the level
+		 */
 		private static var units:Vector.<IEntity> = new Vector.<IEntity>();
+		
+		/*
+		 * The level to load once all the units are dead
+		 */
 		public var level:int;
 		
 		public function LoadLevelOnDeath() {
@@ -37,11 +44,13 @@ package com.brutaldoodle.components.collisions
 			units.push(owner);
 		}
 		
-		// load a level once all the units have been killed,
-		// used to load the next stage of the tutorial
+		
 		override protected function onRemove():void {
 			super.onRemove();
 			units.splice(units.indexOf(owner), 1);
+			
+			// load a level once all the units have been killed
+			// This is used to load the next stage of the tutorial
 			if (!units.length) {
 				Main.resetEverythingAndLoadLevel(level, true);
 			}

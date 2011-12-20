@@ -25,9 +25,10 @@ package
 	import com.brutaldoodle.components.ai.CannibalAIComponent;
 	import com.brutaldoodle.components.ai.EnemyMobilityComponent;
 	import com.brutaldoodle.components.ai.WarperAIComponent;
+	import com.brutaldoodle.components.animations.ChangeEnvironmentComponent;
 	import com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer;
 	import com.brutaldoodle.components.animations.CircularMotionComponent;
-	import com.brutaldoodle.components.animations.WiggleObjectComponent;
+	import com.brutaldoodle.components.animations.WiggleComponent;
 	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.brutaldoodle.components.basic.HeartComponent;
 	import com.brutaldoodle.components.basic.MoneyComponent;
@@ -67,7 +68,14 @@ package
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
+		/*
+		 * Whether or not the game is over
+		 */
 		public static var gameOver:Boolean = false;
+		
+		/*
+		 * Whether or not the game is currently running (not paused)
+		 */
 		private static var _running:Boolean = true;
 		
 		public function Main() {
@@ -108,8 +116,9 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.ChangeVolumeOnDrag);
 			
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
-			PBE.registerType(com.brutaldoodle.components.animations.WiggleObjectComponent);
 			PBE.registerType(com.brutaldoodle.components.animations.CircularMotionComponent);
+			PBE.registerType(com.brutaldoodle.components.animations.ChangeEnvironmentComponent);
+			PBE.registerType(com.brutaldoodle.components.animations.WiggleComponent);
 			
 			PBE.registerType(com.brutaldoodle.components.basic.HealthComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.MoneyComponent);
@@ -178,7 +187,7 @@ package
 			UpdateStatsOnClick.resetShop();
 			MoneyComponent.coins = 0;
 			PlayerController.moveSpeed = 10;
-			EnemyMobilityComponent.moveSpeed = 1;
+			EnemyMobilityComponent.reset();
 			CanonController.reloadSpeed = 0.2;
 			HeartComponent.life = 3;
 			Bullet.damage = 25;
@@ -208,6 +217,7 @@ package
 		public static function resetEverythingAndLoadLevel(level:int, countdown:Boolean=false):void {
 			ParticleManager.instance.removeAllParticles();
 			CollisionManager.instance.reset();
+			EnemyMobilityComponent.reset();
 			LevelManager.instance.loadLevel(level, true);
 			if (countdown) var cd:Countdown = new Countdown();
 		}

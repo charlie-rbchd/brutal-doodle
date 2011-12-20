@@ -25,7 +25,14 @@ package com.brutaldoodle.components.collisions
 	
 	public class DestroyOnAllDead extends EntityComponent
 	{
+		/*
+		 * Contains all the units that need to die before they are all destroyed
+		 */
 		private static var _units:Vector.<IEntity> = new Vector.<IEntity>();
+		
+		/*
+		 * The amount of dead units
+		 */
 		private static var _deadCount:int = 0;
 		
 		public function DestroyOnAllDead()
@@ -46,12 +53,16 @@ package com.brutaldoodle.components.collisions
 			owner.eventDispatcher.removeEventListener(HealthEvent.DIED, onDeath);
 		}
 		
+		/*
+		 * Remove all the units from the display list once they're all dead
+		 */
 		private function onDeath (event:HealthEvent):void {
 			if (++_deadCount == _units.length) {
 				while ( _units.length) {
 					_units.shift().destroy();
 				}
 			} else {
+				// The owner is faded until it dies
 				var renderer:SpriteSheetRenderer = owner.lookupComponentByName("Render") as SpriteSheetRenderer;
 				renderer.alpha = 0.5;
 			}

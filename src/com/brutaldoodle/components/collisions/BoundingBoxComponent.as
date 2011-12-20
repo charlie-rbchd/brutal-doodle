@@ -28,17 +28,41 @@ package com.brutaldoodle.components.collisions
 	import org.flintparticles.twoD.zones.Zone2D;
 	
 	public class BoundingBoxComponent extends EntityComponent implements Zone2D {
+		/*
+		 * The left value of the bounding box
+		 */
 		private var _left:Number;
+		
+		/*
+		 * The top value of the bounding box
+		 */
 		private var _top:Number;
+		
+		/*
+		 * The right value of the bounding box
+		 */
 		private var _right:Number;
+		
+		/*
+		 * The bottom value of the bounding box
+		 */
 		private var _bottom:Number;
+		
+		/*
+		 * The type of collision associated with the bounding box
+		 * This is the type used to register this component to the Collision Manager
+		 */
 		private var _collisionType:String;
 		
 		public function BoundingBoxComponent() {
 			super();
 		}
 		
-		// set the position of the bounding box directly from a rectangle
+		/*
+		 * Set the position of the bounding box directly from a rectangle
+		 *
+		 * @param value  The rectangle from which the position are retrieved
+		 */
 		public function set zone (value:Rectangle):void {
 			_top = value.top;
 			_left = value.left;
@@ -50,6 +74,11 @@ package com.brutaldoodle.components.collisions
 			return new Rectangle(_left, _top, _right - _left, _bottom - _top);
 		}
 		
+		/*
+		 * Register the bounding box for collisions when a new type is assigned
+		 * 
+		 * @param type  The type of collision to register the bounding box for
+		 */
 		public function set collisionType (type:String):void {
 			_collisionType = type;
 			CollisionManager.instance.registerForCollisions(this, _collisionType);
@@ -60,7 +89,7 @@ package com.brutaldoodle.components.collisions
 		}
 		
 		// ************************************************************************************************
-		// Zone2D Implementation, this code is for most parts the same as Flint's RectangleZone source code
+		// Zone2D Implementation, this code is, for most parts, the same as Flint's RectangleZone source code
 		// An implementation of Zone2D is provided in order to directly use this component for collisions
 		// ************************************************************************************************
 		public function contains(x:Number, y:Number):Boolean {

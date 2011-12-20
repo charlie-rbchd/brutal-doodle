@@ -20,7 +20,7 @@ package com.brutaldoodle.components.collisions
 {
 	import com.brutaldoodle.collisions.CollisionManager;
 	import com.brutaldoodle.components.animations.FadeComponent;
-	import com.brutaldoodle.components.animations.WiggleObjectComponent;
+	import com.brutaldoodle.components.animations.WiggleComponent;
 	import com.brutaldoodle.events.CollisionEvent;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.entity.EntityComponent;
@@ -29,9 +29,19 @@ package com.brutaldoodle.components.collisions
 	
 	public class FadeInDisplayOnCollision extends EntityComponent
 	{
+		/*
+		 * The names of the entities that need to fade in
+		 */
 		public var entityNames:Array;
+		
+		/*
+		 * The rate at which the entities fade in
+		 */
 		public var alphaRate:Number;
 		
+		/*
+		 * Whether or not the entities are currently displayed
+		 */
 		private var _opened:Boolean;
 		
 		public function FadeInDisplayOnCollision()
@@ -46,22 +56,29 @@ package com.brutaldoodle.components.collisions
 			CollisionManager.instance.addEventListener(CollisionEvent.COLLISION_OCCURED, fadeInOption);
 		}
 		
-		private function fadeInOption(event:CollisionEvent):void{
+		/*
+		 * Make entities fade in when a collision occurs wih the owner
+		 */
+		private function fadeInOption(event:CollisionEvent):void {
 			if (owner != null) {
+				// Check if the collision occured with the owner's bounding box
 				if (event.zone == owner.lookupComponentByName("Collisions")) {
-					var i:int, length:int = entityNames.length, fadeIn:FadeComponent, displayObject:IEntity, wiggler:WiggleObjectComponent;
+					var i:int, length:int = entityNames.length, fadeIn:FadeComponent, displayObject:IEntity, wiggler:WiggleComponent;
 					
+					// Loop through all the entities that need to fade in and make them do so
 					for (i = 0; i < length; ++i) {
 						displayObject = PBE.lookupEntity(entityNames[i]) as IEntity;
-						wiggler = owner.lookupComponentByName("Wiggle") as WiggleObjectComponent;
+						wiggler = owner.lookupComponentByName("Wiggle") as WiggleComponent;
 						
 						if (!_opened) {
+							// Make the entity fade in
 							fadeIn = new FadeComponent();
 							fadeIn.alphaProperty = new PropertyReference("#" + entityNames[i] + ".Render.alpha");
 							fadeIn.rate = alphaRate;
 							fadeIn.type = FadeComponent.FADE_IN;
 							displayObject.addComponent(fadeIn, "FadeIn");
 						} else {
+							// Hide the entity
 							displayObject.setProperty(new PropertyReference("#" + entityNames[i] + ".Render.alpha"), 0);
 							fadeIn = displayObject.lookupComponentByName("FadeIn") as FadeComponent;
 							displayObject.removeComponent(fadeIn);
