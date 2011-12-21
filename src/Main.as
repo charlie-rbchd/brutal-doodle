@@ -63,6 +63,7 @@ package
 	
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
+	import flash.system.System;
 	import flash.ui.Keyboard;
 	
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
@@ -192,16 +193,19 @@ package
 			HeartComponent.life = 3;
 			Bullet.damage = 25;
 			
+			
 			if (reload) {
 				ParticleManager.instance.removeAllParticles();
 				CollisionManager.instance.reset();
+				DestroyOnAllDead.reset();
 				
 				// Remove all display objects from the stage except for PBE's MainScene,
 				// which is always the first object is the display list
 				while (PBE.mainStage.numChildren > 1) {
 					PBE.mainStage.removeChildAt(PBE.mainStage.numChildren - 1);
 				}
-
+				
+				System.gc();
 				LevelManager.instance.loadLevel(0, true);
 			}
 			
@@ -218,6 +222,8 @@ package
 			ParticleManager.instance.removeAllParticles();
 			CollisionManager.instance.reset();
 			EnemyMobilityComponent.reset();
+			DestroyOnAllDead.reset();
+			System.gc();
 			LevelManager.instance.loadLevel(level, true);
 			if (countdown) var cd:Countdown = new Countdown();
 		}

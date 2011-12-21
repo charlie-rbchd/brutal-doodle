@@ -1,0 +1,5 @@
+Comment visionner le projet:
+
+1. Ouvrez le dossier bin-debug
+
+2. Ouvrez le fichier Main.html dans le navigateur de votre choix

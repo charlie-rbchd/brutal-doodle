@@ -58,14 +58,23 @@ package com.brutaldoodle.components.collisions
 		 */
 		private function onDeath (event:HealthEvent):void {
 			if (++_deadCount == _units.length) {
-				while ( _units.length) {
+				while (_units.length) {
 					_units.shift().destroy();
 				}
+				DestroyOnAllDead.reset();
 			} else {
 				// The owner is faded until it dies
 				var renderer:SpriteSheetRenderer = owner.lookupComponentByName("Render") as SpriteSheetRenderer;
 				renderer.alpha = 0.5;
 			}
+		}
+		
+		/*
+		 * Reset the dead count to zero and remove units references 
+		 */
+		public static function reset():void {
+			_units = new Vector.<IEntity>();
+			_deadCount = 0;
 		}
 		
 	}
