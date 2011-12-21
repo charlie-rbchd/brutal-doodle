@@ -1,0 +1,76 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>LoadLevelOnCollision.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin &amp; Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">collisions</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">collisions</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CollisionManager</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">collisions</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CollisionType</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CollisionEvent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">EntityComponent</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">LoadLevelOnCollision</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">EntityComponent</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptComment">/*
+         * The level that will be loaded on collision
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">level</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 0;
+        
+        <span class="ActionScriptComment">/*
+         * The owner's bounding box
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_collisions</span>:<span class="ActionScriptDefault_Text">BoundingBoxComponent</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">LoadLevelOnCollision</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onAdd</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onAdd</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">CollisionManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">instance</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">CollisionEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">COLLISION_OCCURED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">loadLevel</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">_collisions</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Collisions"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">BoundingBoxComponent</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onRemove</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onRemove</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">CollisionManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">instance</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">stopCollisionsWith</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_collisions</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">CollisionType</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ENEMY</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">CollisionManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">instance</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">CollisionEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">COLLISION_OCCURED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">loadLevel</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Load a level once a collision has occured with the owner
+         * This is used to load a level when an object collide with a menu element
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">loadLevel</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">CollisionEvent</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">owner</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">zone</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">_collisions</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptDefault_Text">Main</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">resetEverythingAndLoadLevel</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">level</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

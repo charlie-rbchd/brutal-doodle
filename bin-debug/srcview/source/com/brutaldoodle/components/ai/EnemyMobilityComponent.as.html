@@ -1,0 +1,263 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>EnemyMobilityComponent.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin &amp; Simon Garnier
+* 
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ai</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PBE</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">TickedComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">IEntity</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PropertyReference</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SimpleSpatialComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SpriteRenderer</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">geom</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Point</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">geom</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Rectangle</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">EnemyMobilityComponent</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">TickedComponent</span> <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptComment">/*
+         * The speed at which the invaders are displaced
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">moveSpeed</span>:<span class="ActionScriptDefault_Text">uint</span> <span class="ActionScriptOperator">=</span> 1;
+        
+        <span class="ActionScriptComment">/*
+         * References to the owner's properties
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">sizeProperty</span>:<span class="ActionScriptDefault_Text">PropertyReference</span>;
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">positionProperty</span>:<span class="ActionScriptDefault_Text">PropertyReference</span>;
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">boundingBoxProperty</span>:<span class="ActionScriptDefault_Text">PropertyReference</span>;
+        
+        <span class="ActionScriptComment">/*
+         * Constants used in order to easily access vertical and lateral displacement values
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">LATERAL_DISPLACEMENT</span>:<span class="ActionScriptDefault_Text">uint</span> <span class="ActionScriptOperator">=</span> 30;
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">VERTICAL_DISPLACEMENT</span>:<span class="ActionScriptDefault_Text">uint</span> <span class="ActionScriptOperator">=</span> 60;
+        
+        <span class="ActionScriptComment">/*
+         * Holds references to all the enemies that need to move
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_enemies</span>:<span class="ActionScriptDefault_Text">Vector</span><span class="ActionScriptBracket/Brace">.&lt;</span><span class="ActionScriptDefault_Text">IEntity</span><span class="ActionScriptBracket/Brace">&gt;</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span><span class="ActionScriptBracket/Brace">.&lt;</span><span class="ActionScriptDefault_Text">IEntity</span><span class="ActionScriptBracket/Brace">&gt;</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The left-most enemy (used for collisions checks with scene boundaries)
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_leftEnemy</span>:<span class="ActionScriptDefault_Text">IEntity</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The right-most enemy (used for collisions checks with scene boundaries)
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_rightEnemy</span>:<span class="ActionScriptDefault_Text">IEntity</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The bottom-most enemy (used for collisions checks with scene boundaries)
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_bottomEnemy</span>:<span class="ActionScriptDefault_Text">IEntity</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+        
+        <span class="ActionScriptComment">/*
+         * Whether or not the invaders should move down on their next tick
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_moveDown</span>:<span class="ActionScriptDefault_Text">Boolean</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The direction in which the invaders should move each tick (1 for right, -1 for left)
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_direction</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 1;
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_currentIterationComplete</span>:<span class="ActionScriptDefault_Text">Boolean</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">EnemyMobilityComponent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">_currentIterationComplete</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptDefault_Text">updatePriority</span> <span class="ActionScriptOperator">=</span> 100;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onTick</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">deltaTime</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onTick</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">deltaTime</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Destroy all the enemies and the game over screen when the game is over
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">Main</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">gameOver</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">destroy</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"GameOverScreen"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"Render"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">SpriteRenderer</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">alpha</span> <span class="ActionScriptOperator">=</span> 1;
+                <span class="ActionScriptReserved">return</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// Move the enemies every time the amount of ticks corresponds to the result of an equation based on the move speed
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">Math</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">floor</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">processManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">virtualTime</span><span class="ActionScriptOperator">/</span>1000 <span class="ActionScriptOperator">*</span> <span class="ActionScriptDefault_Text">moveSpeed</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">%</span> 4 <span class="ActionScriptOperator">==</span> 2<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptDefault_Text">_currentIterationComplete</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptComment">// Retrieve the properties that need to be changed
+</span>                    <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">position</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">positionProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">boundingBox</span>:<span class="ActionScriptDefault_Text">Rectangle</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">boundingBoxProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                    
+                    <span class="ActionScriptComment">// Check if the enemies need to change direction or move down, this only need to be done once
+</span>                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">owner</span> <span class="ActionScriptOperator">===</span> <span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptBracket/Brace">[</span>0<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptComment">// Retrieve the positions needed to check for collisions with scene boundaries
+</span>                        <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">leftPos</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_leftEnemy</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">positionProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">rightPos</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_rightEnemy</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">positionProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">bottomPos</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_bottomEnemy</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">positionProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptComment">// Retrieve the sizes needed to check for collisions with scene boundaries
+</span>                        <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">leftSize</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_leftEnemy</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">sizeProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">rightSize</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_rightEnemy</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">sizeProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                        <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">bottomSize</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_bottomEnemy</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">sizeProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+                        
+                        <span class="ActionScriptComment">// Check if the enemies need to move down and change direction
+</span>                        <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_direction</span> <span class="ActionScriptOperator">==</span>  1 <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">rightPos</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rightSize</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span><span class="ActionScriptOperator">/</span>2 <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">LATERAL_DISPLACEMENT</span> <span class="ActionScriptOperator">&gt;=</span>  <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">mainStage</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">stageWidth</span><span class="ActionScriptOperator">/</span>2<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">||</span>
+                             <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_direction</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptOperator">-</span>1 <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">leftPos</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">-</span> <span class="ActionScriptDefault_Text">leftSize</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span><span class="ActionScriptOperator">/</span>2   <span class="ActionScriptOperator">-</span> <span class="ActionScriptDefault_Text">LATERAL_DISPLACEMENT</span> <span class="ActionScriptOperator">&lt;=</span> <span class="ActionScriptOperator">-</span><span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">mainStage</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">stageWidth</span><span class="ActionScriptOperator">/</span>2<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>
+                        <span class="ActionScriptBracket/Brace">{</span>
+                            <span class="ActionScriptDefault_Text">_moveDown</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+                            <span class="ActionScriptDefault_Text">_direction</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptOperator">-</span><span class="ActionScriptDefault_Text">_direction</span>;
+                        <span class="ActionScriptBracket/Brace">}</span>
+                        
+                        <span class="ActionScriptComment">// Check if the enemies are low enough that the next movement will make the game end
+</span>                        <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_moveDown</span> <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">bottomPos</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">bottomSize</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span><span class="ActionScriptOperator">/</span>2 <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">VERTICAL_DISPLACEMENT</span> <span class="ActionScriptOperator">*</span> 3 <span class="ActionScriptOperator">&gt;=</span> <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">mainStage</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">stageHeight</span><span class="ActionScriptOperator">/</span>2<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                            <span class="ActionScriptDefault_Text">Main</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">gameOver</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+                        <span class="ActionScriptBracket/Brace">}</span>
+                    <span class="ActionScriptBracket/Brace">}</span>
+                    
+                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_moveDown</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptComment">// Move the enemy down if they need to do so
+</span>                        <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">VERTICAL_DISPLACEMENT</span>;
+                        <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">top</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">VERTICAL_DISPLACEMENT</span>;
+                        <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">bottom</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">VERTICAL_DISPLACEMENT</span>;
+                        <span class="ActionScriptComment">// Stop moving down after the last enemy moved down
+</span>                        <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">owner</span> <span class="ActionScriptOperator">===</span> <span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span><span class="ActionScriptOperator">-</span>1<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">_moveDown</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+                    <span class="ActionScriptBracket/Brace">}</span> <span class="ActionScriptReserved">else</span> <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptComment">// Otherwise, make them move horizontaly
+</span>                        <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">LATERAL_DISPLACEMENT</span> <span class="ActionScriptOperator">*</span> <span class="ActionScriptDefault_Text">_direction</span>;
+                        <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">left</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">LATERAL_DISPLACEMENT</span> <span class="ActionScriptOperator">*</span> <span class="ActionScriptDefault_Text">_direction</span>;
+                        <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">right</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">LATERAL_DISPLACEMENT</span> <span class="ActionScriptOperator">*</span> <span class="ActionScriptDefault_Text">_direction</span>;
+                    <span class="ActionScriptBracket/Brace">}</span>
+                    
+                    <span class="ActionScriptComment">// Apply the changes
+</span>                    <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">positionProperty</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">boundingBoxProperty</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptDefault_Text">_currentIterationComplete</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+                <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptBracket/Brace">}</span> <span class="ActionScriptReserved">else</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">_currentIterationComplete</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onAdd</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onAdd</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptComment">// Check if it changed the edge enemies
+</span>            <span class="ActionScriptDefault_Text">findEdgeEnemies</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptComment">// Assign a bounding box to the owner
+</span>            <span class="ActionScriptDefault_Text">getCollisionsZone</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onRemove</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onRemove</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>; 
+            <span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">splice</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">indexOf</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">,</span> 1<span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Speed up the enemies every 7 deaths
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">%</span> 7 <span class="ActionScriptOperator">==</span> 0<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">moveSpeed</span><span class="ActionScriptOperator">++</span>;
+            
+            <span class="ActionScriptComment">// Only check for edge enemies if the game is not over
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptDefault_Text">Main</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">gameOver</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">findEdgeEnemies</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Assign a bounding box component to the owner that have the same size and position as him
+         * This is used to dynamically place the bounding box of each enemy instead of writing extensive XML
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">getCollisionsZone</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">size</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">sizeProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">position</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">getProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">positionProperty</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">boundingBox</span>:<span class="ActionScriptDefault_Text">Rectangle</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Rectangle</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">left</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">-</span> <span class="ActionScriptDefault_Text">size</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span><span class="ActionScriptOperator">/</span>2;
+            <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">right</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">size</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span><span class="ActionScriptOperator">/</span>2;
+            <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">top</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">-</span> <span class="ActionScriptDefault_Text">size</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span><span class="ActionScriptOperator">/</span>2;
+            <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">bottom</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">size</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span><span class="ActionScriptOperator">/</span>2;
+            
+            <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">boundingBoxProperty</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">boundingBox</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Find the left-most, right-most and bottom-most enemies
+         * This should be called every time an enemy dies or change places with another unit
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">findEdgeEnemies</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_leftEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptDefault_Text">_rightEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptDefault_Text">_bottomEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">!=</span> 0<span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">leftX</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> -1;
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">rightX</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> -1;
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">bottomY</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> -1;
+                
+                <span class="ActionScriptComment">// Loop through all the enemies and assign it if he has a better spot than any preceeding enemy
+</span>                <span class="ActionScriptReserved">for each</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">currentOwner</span>:<span class="ActionScriptDefault_Text">IEntity</span> <span class="ActionScriptReserved">in</span> <span class="ActionScriptDefault_Text">_enemies</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">position</span>:<span class="ActionScriptDefault_Text">Point</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">currentOwner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Spatial"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">SimpleSpatialComponent</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">position</span>;
+                    
+                    <span class="ActionScriptComment">// Left-most enemy checks
+</span>                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">leftX</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptOperator">-</span>1 <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">&lt;</span> <span class="ActionScriptDefault_Text">leftX</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptDefault_Text">leftX</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span>;
+                        <span class="ActionScriptDefault_Text">_leftEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">currentOwner</span>;
+                    <span class="ActionScriptBracket/Brace">}</span>
+                    
+                    <span class="ActionScriptComment">// Right-most enemy checks
+</span>                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rightX</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptOperator">-</span>1 <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptDefault_Text">rightX</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptDefault_Text">rightX</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span>;
+                        <span class="ActionScriptDefault_Text">_rightEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">currentOwner</span>;
+                    <span class="ActionScriptBracket/Brace">}</span>
+                    
+                    <span class="ActionScriptComment">// Bottom-most enemy checks
+</span>                    <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">bottomY</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptOperator">-</span>1 <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptDefault_Text">bottomY</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptBracket/Brace">{</span>
+                        <span class="ActionScriptDefault_Text">bottomY</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span>;
+                        <span class="ActionScriptDefault_Text">_bottomEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">currentOwner</span>;
+                    <span class="ActionScriptBracket/Brace">}</span>
+                <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptReserved">else</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptComment">// If there are no more enemies, the player completed the level
+</span>                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">victoryScreen</span>:<span class="ActionScriptDefault_Text">SpriteRenderer</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"VictoryScreen"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"Render"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">SpriteRenderer</span>;
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">victoryScreen</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">victoryScreen</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">alpha</span> <span class="ActionScriptOperator">=</span> 1;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Reset all the static variables to their default values
+         * This fonction should be called between every level
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">reset</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_leftEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptDefault_Text">_rightEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptDefault_Text">_bottomEnemy</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptDefault_Text">_moveDown</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptDefault_Text">_direction</span> <span class="ActionScriptOperator">=</span> 1;
+            <span class="ActionScriptDefault_Text">moveSpeed</span> <span class="ActionScriptOperator">=</span> 1;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

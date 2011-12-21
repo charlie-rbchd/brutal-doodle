@@ -1,0 +1,147 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>FlintBitmapRenderer.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin &amp; Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">IEntity</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SimpleSpatialComponent</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">common</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">EmitterEvent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">common</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ParticleEvent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">actions</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">DeathZone</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">emitters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Emitter2D</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">initializers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Position</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">zones</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PointZone</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">zones</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Zone2D</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">FlintBitmapRenderer</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptComment">/*
+         * Contains all the emitters that need to be rendered for this specific effect
+         */</span>
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_emitters</span>:<span class="ActionScriptDefault_Text">Vector</span><span class="ActionScriptBracket/Brace">.&lt;</span><span class="ActionScriptDefault_Text">Emitter2D</span><span class="ActionScriptBracket/Brace">&gt;</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The number of emitters that are done emitting all their particles
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_counterCompletedEmitters</span>:<span class="ActionScriptDefault_Text">uint</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The number of emitters that no longer contain any particle
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_emptyEmitters</span>:<span class="ActionScriptDefault_Text">uint</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The entity from which the emitter was created
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">trueOwner</span>:<span class="ActionScriptDefault_Text">IEntity</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">FlintBitmapRenderer</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">_emptyEmitters</span> <span class="ActionScriptOperator">=</span> 0;
+            <span class="ActionScriptDefault_Text">_counterCompletedEmitters</span> <span class="ActionScriptOperator">=</span> 0;
+            <span class="ActionScriptDefault_Text">_emitters</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span><span class="ActionScriptBracket/Brace">.&lt;</span><span class="ActionScriptDefault_Text">Emitter2D</span><span class="ActionScriptBracket/Brace">&gt;</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * To be overriden...
+         * Register all the emitters to the Particle Manager for rendering
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">addEmitters</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">for</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span>:<span class="ActionScriptDefault_Text">int</span><span class="ActionScriptOperator">=</span>0; <span class="ActionScriptDefault_Text">i</span> <span class="ActionScriptOperator">&lt;</span> <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span>; <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">++</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">ParticleManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">instance</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">registerEmitter</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+                
+                <span class="ActionScriptComment">// Listeners used for cleaning references when the emitters are done emitting particles
+</span>                <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">EMITTER_EMPTY</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">destroyOwner</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">false</span><span class="ActionScriptOperator">,</span> 0<span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">true</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">COUNTER_COMPLETE</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">destroyOwner</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">false</span><span class="ActionScriptOperator">,</span> 0<span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">true</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">ParticleEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PARTICLE_DEAD</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">removeParticle</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">true</span><span class="ActionScriptOperator">,</span> 0<span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">true</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Add a default position and dead zone to the emitter
+         *
+         * @emitter  The emitter that need to be initialized
+         * @position  The position at which emitter is created
+         */</span>
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">initializeEmitter</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">emitter</span>:<span class="ActionScriptDefault_Text">Emitter2D</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">position</span>:<span class="ActionScriptDefault_Text">Zone2D</span><span class="ActionScriptOperator">=</span><span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_emitLocation</span>:<span class="ActionScriptDefault_Text">Zone2D</span>;
+            
+            <span class="ActionScriptComment">// The emit location is determined by the position of its owner or by the optional parameter "position" (if supplied)
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">position</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">_emitLocation</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span>;
+            <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">trueOwner</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">_emitLocation</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">PointZone</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">trueOwner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Spatial"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">SimpleSpatialComponent</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">position</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">return</span>;
+            <span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addInitializer</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Position</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">_emitLocation</span> <span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// The particles die as soon as they become off-screen (dead zone)
+</span>            <span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addAction</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">DeathZone</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">ParticleManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">instance</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">sceneBoundaries</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">true</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Check whether an emitter is empty or whether its done emitting particles
+         * The emitters are then properly removed from the display list and unreferenced to be garbage collected
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">destroyOwner</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">emitter</span>:<span class="ActionScriptDefault_Text">Emitter2D</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">target</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">Emitter2D</span>;
+            
+            <span class="ActionScriptReserved">switch</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">type</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">EMITTER_EMPTY</span>:
+                    <span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">EMITTER_EMPTY</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">destroyOwner</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptDefault_Text">_emptyEmitters</span><span class="ActionScriptOperator">++</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">COUNTER_COMPLETE</span>:
+                    <span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">EmitterEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">COUNTER_COMPLETE</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">destroyOwner</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptDefault_Text">_counterCompletedEmitters</span><span class="ActionScriptOperator">++</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">default</span>:
+                    <span class="ActionScriptReserved">throw</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Error</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// When one of the emitters is done emitting
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">counter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">complete</span> <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptOperator">!</span><span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">particles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">ParticleManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">instance</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">removeEmitter</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">emitter</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// When all emitters are done emitting
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_emptyEmitters</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">_counterCompletedEmitters</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">_emitters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">_emitters</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Vector</span><span class="ActionScriptBracket/Brace">.&lt;</span><span class="ActionScriptDefault_Text">Emitter2D</span><span class="ActionScriptBracket/Brace">&gt;</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">trueOwner</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Remove the particle for the factory once it dies
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">removeParticle</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">ParticleEvent</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">Emitter2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">defaultParticleFactory</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">disposeParticle</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">particle</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

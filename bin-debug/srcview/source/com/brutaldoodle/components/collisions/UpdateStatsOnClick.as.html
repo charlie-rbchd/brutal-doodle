@@ -1,0 +1,196 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>UpdateStatsOnClick.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin &amp; Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">collisions</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">basic</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">HeartComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">basic</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MoneyComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">controllers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CanonController</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">controllers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PlayerController</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">effects</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Bullet</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entities</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Dialog</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PBE</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">TickedComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PropertyReference</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SpriteSheetRenderer</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">display</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Sprite</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MouseEvent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">geom</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Point</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ui</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Mouse</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ui</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MouseCursor</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">utils</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Dictionary</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">UpdateStatsOnClick</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">TickedComponent</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptComment">/*
+         * Holds all the current values of all the upgradable stats
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_statsStatus</span>:<span class="ActionScriptDefault_Text">Dictionary</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Dictionary</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The money visual display
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_money</span>:<span class="ActionScriptDefault_Text">MoneyComponent</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The costs of all the upgrades at each stage
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">UPGRADE_COSTS</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Array</span><span class="ActionScriptBracket/Brace">(</span>100<span class="ActionScriptOperator">,</span> 150<span class="ActionScriptOperator">,</span> 200<span class="ActionScriptOperator">,</span> 250<span class="ActionScriptOperator">,</span> 300<span class="ActionScriptOperator">,</span> 400<span class="ActionScriptOperator">,</span> 500<span class="ActionScriptOperator">,</span> 750<span class="ActionScriptOperator">,</span> 999<span class="ActionScriptBracket/Brace">)</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The maximum num of upgrade one can buy
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">MAX_UPGRADE_COUNT</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 9;
+        
+        <span class="ActionScriptComment">/*
+         * The name of the stat that will be upgraded
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">upgradedStat</span>:<span class="ActionScriptDefault_Text">String</span>;
+        
+        <span class="ActionScriptComment">/*
+         * Reference to the owner's property (current index on the spritesheet)
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">numberIndexProperty</span>:<span class="ActionScriptDefault_Text">PropertyReference</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The display object used by the owner's renderer
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_displayObject</span>:<span class="ActionScriptDefault_Text">Sprite</span>;
+        
+        <span class="ActionScriptComment">/*
+         * The owner's renderer
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_renderer</span>:<span class="ActionScriptDefault_Text">SpriteSheetRenderer</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">UpdateStatsOnClick</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Reset all the purshased upgrades to zero
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">resetShop</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_statsStatus</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Dictionary</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onAdd</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onAdd</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">=</span> 0;
+            <span class="ActionScriptDefault_Text">_renderer</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Render"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">SpriteSheetRenderer</span>;
+            <span class="ActionScriptDefault_Text">_money</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">lookupComponentByName</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"AmountOfCoins"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"Money"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">MoneyComponent</span>;
+            
+            <span class="ActionScriptComment">// Keep the purshased upgrades between visits
+</span>            <span class="ActionScriptDefault_Text">_renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">spriteIndex</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span>;
+            <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">numberIndexProperty</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onRemove</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onRemove</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">with</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_displayObject</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CLICK</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">updateStats</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MOUSE_OVER</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">onHover</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">removeEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MOUSE_OUT</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">onHover</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onTick</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">deltaTime</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">onTick</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">deltaTime</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptComment">// Register the owner's renderer for click events once the bitmap data is completely loaded
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">bitmapData</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">_displayObject</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">displayObject</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">Sprite</span>;
+                <span class="ActionScriptReserved">with</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_displayObject</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptDefault_Text">mouseEnabled</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">MAX_UPGRADE_COUNT</span> <span class="ActionScriptOperator">?</span> <span class="ActionScriptReserved">false</span> : <span class="ActionScriptReserved">true</span>;
+                    <span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CLICK</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">updateStats</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MOUSE_OVER</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">onHover</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MOUSE_OUT</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">onHover</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptBracket/Brace">}</span>
+                <span class="ActionScriptReserved">this</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">registerForTicks</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Increment the owner's associated stat by one if the player has enough money to buy it
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">updateStats</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">cost</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">UPGRADE_COSTS</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">]</span>;
+            
+            <span class="ActionScriptComment">// Check if the player has enough money
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">MoneyComponent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">coins</span> <span class="ActionScriptOperator">-</span> <span class="ActionScriptDefault_Text">cost</span> <span class="ActionScriptOperator">&lt;</span> 0<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">dialog</span>:<span class="ActionScriptDefault_Text">Dialog</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Dialog</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"../assets/Images/NotEnoughMoney.png"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptBracket/Brace">(</span>118<span class="ActionScriptOperator">,</span> 155<span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptBracket/Brace">(</span>360<span class="ActionScriptOperator">,</span> 110<span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptReserved">return</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// Increment the upgrade associated with the owner
+</span>            <span class="ActionScriptReserved">switch</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptString">"speed"</span>:
+                    <span class="ActionScriptDefault_Text">PlayerController</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">moveSpeed</span> <span class="ActionScriptOperator">+=</span> 1; <span class="ActionScriptComment">// 19 move speed at max level
+</span>                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptString">"damage"</span>:
+                    <span class="ActionScriptDefault_Text">Bullet</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">damage</span> <span class="ActionScriptOperator">+=</span> 6.25; <span class="ActionScriptComment">// 81 damage at max level
+</span>                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptString">"life"</span>:
+                    <span class="ActionScriptDefault_Text">HeartComponent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addHeart</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>; <span class="ActionScriptComment">// 9-12 life at max level
+</span>                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptString">"firerate"</span>:
+                    <span class="ActionScriptDefault_Text">CanonController</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">reloadSpeed</span> <span class="ActionScriptOperator">-=</span> 0.01; <span class="ActionScriptComment">// 0.1 reload speed at max level
+</span>                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">default</span>:
+                    <span class="ActionScriptReserved">throw</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Error</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// Make the owner unclickable once he purshased the last upgrade
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptDefault_Text">MAX_UPGRADE_COUNT</span> <span class="ActionScriptOperator">-</span> 1<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">_displayObject</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">mouseEnabled</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// Apply changes and remove the proper amount of money
+</span>            <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">+=</span> 1;
+            <span class="ActionScriptDefault_Text">_renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">spriteIndex</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span>;
+            <span class="ActionScriptDefault_Text">owner</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setProperty</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">numberIndexProperty</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">_statsStatus</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">upgradedStat</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">_money</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">removeCoins</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">cost</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">soundManager</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">play</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"../assets/Sounds/PowerUp.mp3"</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">/*
+         * Change the mouse's appearance when the owner's is hovered
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onHover</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span>:<span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">switch</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">type</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MOUSE_OVER</span>:
+                    <span class="ActionScriptDefault_Text">Mouse</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">cursor</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">MouseCursor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">BUTTON</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">case</span> <span class="ActionScriptDefault_Text">MouseEvent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">MOUSE_OUT</span>:
+                    <span class="ActionScriptDefault_Text">Mouse</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">cursor</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">MouseCursor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">AUTO</span>;
+                    <span class="ActionScriptReserved">break</span>;
+                <span class="ActionScriptReserved">default</span>:
+                    <span class="ActionScriptReserved">throw</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Error</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

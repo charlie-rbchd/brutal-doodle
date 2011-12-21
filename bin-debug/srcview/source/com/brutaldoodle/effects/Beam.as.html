@@ -1,0 +1,73 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Beam.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin &amp; Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">effects</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">emitters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PlayerCollidableEmitter</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">geom</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Point</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">common</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">counters</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">TimePeriod</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">common</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">displayObjects</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">RadialDot</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">common</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">initializers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SharedImage</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">actions</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Accelerate</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">actions</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Move</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">initializers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Position</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">initializers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ScaleAllInit</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">initializers</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Velocity</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">zones</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PointZone</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">org</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">flintparticles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">twoD</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">zones</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">RectangleZone</span>;
+    
+    <span class="ActionScriptComment">/*
+     * Contain the definition of the look and behavior of the Beam particle emitter
+     * The particles emitted are to collide with any "player" bounding box registered within the CollisionManager
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">Beam</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">PlayerCollidableEmitter</span>
+    <span class="ActionScriptBracket/Brace">{</span>        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">Beam</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// The amount of damage dealt by each particle emitted
+</span>            <span class="ActionScriptDefault_Text">_damageAmount</span> <span class="ActionScriptOperator">=</span> 10;
+            
+            <span class="ActionScriptComment">// A hundred particles are emitted over 500 miliseconds
+</span>            <span class="ActionScriptDefault_Text">counter</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">TimePeriod</span><span class="ActionScriptBracket/Brace">(</span>100<span class="ActionScriptOperator">,</span> 0.5<span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Particle's appearance
+</span>            <span class="ActionScriptDefault_Text">addInitializer</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">SharedImage</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">RadialDot</span><span class="ActionScriptBracket/Brace">(</span>20<span class="ActionScriptOperator">,</span> 0xf2797c<span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"screen"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addInitializer</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Position</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">RectangleZone</span><span class="ActionScriptBracket/Brace">(</span>10<span class="ActionScriptOperator">,</span> 10<span class="ActionScriptOperator">,</span> <span class="ActionScriptOperator">-</span>10<span class="ActionScriptOperator">,</span> 10<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addInitializer</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">ScaleAllInit</span><span class="ActionScriptBracket/Brace">(</span>0.6<span class="ActionScriptOperator">,</span> 1.4<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Particle's behavior
+</span>            <span class="ActionScriptDefault_Text">addInitializer</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Velocity</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">PointZone</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptBracket/Brace">(</span>0<span class="ActionScriptOperator">,</span> 400<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addAction</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Accelerate</span><span class="ActionScriptBracket/Brace">(</span>0<span class="ActionScriptOperator">,</span> 100<span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addAction</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Move</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

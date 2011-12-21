@@ -1,0 +1,89 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Dialog.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptComment">/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin &amp; Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+*/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entities</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">brutaldoodle</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">components</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">animations</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">FadeComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PBE</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">IEntity</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">engine</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">entity</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PropertyReference</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SimpleSpatialComponent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">pblabs</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rendering2D</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SpriteRenderer</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">geom</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Point</span>;
+    
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">Dialog</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptComment">/*
+         * The entity that will be created
+         */</span>
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">__this</span>:<span class="ActionScriptDefault_Text">IEntity</span>;
+        
+        <span class="ActionScriptComment">/*
+         * Create a dialog box that slowly fades
+         *
+         * @param filePath  The path of the image used for the dialog
+         * @param size  The size of the image (width, height)
+         * @param position  The position at which the image will be placed, centered by default
+         */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">Dialog</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">filePath</span>:<span class="ActionScriptDefault_Text">String</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">size</span>:<span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">position</span>:<span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptOperator">=</span><span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">__this</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">allocateEntity</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Spatial properties of the dialog box
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">spatial</span>:<span class="ActionScriptDefault_Text">SimpleSpatialComponent</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">SimpleSpatialComponent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">spatial</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">position</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">position</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Point</span><span class="ActionScriptBracket/Brace">(</span>0<span class="ActionScriptOperator">,</span> 0<span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">spatial</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">size</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">size</span>;
+            <span class="ActionScriptDefault_Text">spatial</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">spatialManager</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">spatialManager</span>;
+            <span class="ActionScriptDefault_Text">__this</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addComponent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">spatial</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"Spatial"</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Render properties of the dialog box
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">renderer</span>:<span class="ActionScriptDefault_Text">SpriteRenderer</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">SpriteRenderer</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">scene</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">PBE</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">scene</span>;
+            <span class="ActionScriptDefault_Text">renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">fileName</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">filePath</span>;
+            <span class="ActionScriptDefault_Text">renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">layerIndex</span> <span class="ActionScriptOperator">=</span> 10;
+            <span class="ActionScriptDefault_Text">renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">positionProperty</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">PropertyReference</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"@Spatial.position"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">renderer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">sizeProperty</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">PropertyReference</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"@Spatial.size"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">__this</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addComponent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">renderer</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"Render"</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">// Add a component which makes the dialog box fade
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">fadeOut</span>:<span class="ActionScriptDefault_Text">FadeComponent</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">FadeComponent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">fadeOut</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">alphaProperty</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">PropertyReference</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"@Render.alpha"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">fadeOut</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">type</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">FadeComponent</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">FADE_OUT</span>;
+            <span class="ActionScriptDefault_Text">fadeOut</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">delay</span> <span class="ActionScriptOperator">=</span> 2000;
+            <span class="ActionScriptDefault_Text">fadeOut</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rate</span> <span class="ActionScriptOperator">=</span> 0.1;
+            <span class="ActionScriptDefault_Text">fadeOut</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">callback</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptfunction">function</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">__this</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">destroy</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>;
+            <span class="ActionScriptDefault_Text">__this</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addComponent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">fadeOut</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"FadeOut"</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            
+            <span class="ActionScriptDefault_Text">__this</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">initialize</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

@@ -1,0 +1,383 @@
+<things version="1">
+	<entity name="BackgroundInterface">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>315</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/BackgroundInterface.png</fileName>
+			<layerIndex>10</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="HealthContainer">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-360</x>
+				<y>325</y>
+			</position>
+			<size type="">
+				<x>222</x>
+				<y>17</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/HealthContainer.png</fileName>
+			<layerIndex>10</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="HealthBar">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-360</x>
+				<y>325</y>
+			</position>
+			<size type="">
+				<x>217</x>
+				<y>11</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<fileName>../assets/Images/HealthBar.png</fileName>
+			<layerIndex>11</layerIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged" name="HealthBarUpdater">
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+		</component>
+	</entity>
+	
+	<template name="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Heart.png</fileName>
+			<layerIndex>11</layerIndex>
+		</component>
+	</template>
+	
+	<entity name="Heart1" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-460</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart2" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-435</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart3" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-410</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart4" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-385</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart5" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-360</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart6" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-335</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart7" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-310</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart8" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-285</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart9" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-260</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart10" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-235</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart11" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-210</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Heart12" template="HeartTemplate">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-185</x>
+				<y>305</y>
+			</position>
+			<size type="">
+				<x>20</x>
+				<y>15</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	
+	<entity name="Coin">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>380</x>
+				<y>325</y>
+			</position>
+			<size type="">
+				<x>21</x>
+				<y>21</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<fileName>../assets/Images/Coin.png</fileName>
+			<layerIndex>11</layerIndex>
+		</component>
+	</entity>
+	
+	<entity name="AmountOfCoins">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>400</x>
+				<y>312</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>25</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>18</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>200</width>
+				<height>25</height>
+			</displayObject>
+			<layerIndex>11</layerIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.MoneyComponent" name="Money">
+			<textProperty>@Render.displayObject</textProperty>
+		</component>
+	</entity>
+	
+	<entity name="GameOverScreen">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/GameOver.png</fileName>
+			<layerIndex>20</layerIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.LoadLevelOnKeypress" name="LoadLevel">
+			<level>0</level>
+			<alphaProperty>@Render.alpha</alphaProperty>
+		</component>
+	</entity>
+	
+	<entity name="VictoryScreen">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Victory.png</fileName>
+			<layerIndex>20</layerIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.LoadLevelOnKeypress" name="LoadLevel">
+			<level>-1</level>
+			<alphaProperty>@Render.alpha</alphaProperty>
+		</component>
+	</entity>
+	
+	<group name="Hearts">
+		<objectReference name="Heart1"/>
+		<objectReference name="Heart2"/>
+		<objectReference name="Heart3"/>
+		<objectReference name="Heart4"/>
+		<objectReference name="Heart5"/>
+		<objectReference name="Heart6"/>
+		<objectReference name="Heart7"/>
+		<objectReference name="Heart8"/>
+		<objectReference name="Heart9"/>
+		<objectReference name="Heart10"/>
+		<objectReference name="Heart11"/>
+		<objectReference name="Heart12"/>
+	</group>
+	
+	<group name="InterfaceData">
+		<objectReference name="BackgroundInterface"/>
+		<objectReference name="HealthContainer"/>
+		<objectReference name="HealthBar"/>
+		<objectReference name="Coin"/>
+		<objectReference name="AmountOfCoins"/>
+		<objectReference name="GameOverScreen"/>
+		<objectReference name="VictoryScreen"/>
+		<groupReference name="Hearts"/>
+	</group>
+</things>

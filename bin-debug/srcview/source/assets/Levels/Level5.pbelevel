@@ -1,0 +1,624 @@
+<things version="1">
+	<entity name="Background">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/BackgroundLevel1.jpg</fileName>
+			<zIndex>-1</zIndex>
+		</component>
+	</entity>
+	
+	<entity name="BackgroundMusic">
+		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
+			<musicUrl>../assets/Sounds/stage1.mp3</musicUrl>
+		</component>
+	</entity>
+	
+	<entity name="InvaderInfo" template="invaderInfo">
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/TutoBeamer.png</fileName>
+			<zIndex>10</zIndex>
+			<alpha>1</alpha>
+		</component>
+	</entity>
+	
+	
+	<!--							FIRST ROW	START												-->
+	<entity name="Enemy1" template="cyborgInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-450</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy2" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-390</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy3" template="cannibalInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-330</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy4" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-270</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy5" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-210</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy6" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-150</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy7" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-90</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy8" template="cannibalInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-30</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy9" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>30</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy10" template="cyborgInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>90</x>
+				<y>-305</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<!--							FIRST ROW	END												-->
+	
+	
+	<!--							SECOND ROW	START												-->
+	<entity name="Enemy11" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-450</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy12" template="cannibalInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-390</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy13" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-330</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy14" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-270</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy15" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-210</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy16" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-150</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy17" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-90</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy18" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-30</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy19" template="cannibalInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>30</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy20" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>90</x>
+				<y>-245</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<!--							SECOND ROW	END												-->
+	
+	
+	<!--							THIRD ROW	START												-->
+	<entity name="Enemy21" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-450</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy22" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-390</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy23" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-330</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy24" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-270</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy25" template="cannibalInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-210</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy26" template="cannibalInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-150</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>	
+	<entity name="Enemy27" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-90</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy28" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-30</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy29" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>30</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy30" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>90</x>
+				<y>-185</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<!--							THIRD ROW	END												-->
+	
+	
+	<!--							FOURTH ROW	START												-->
+	<entity name="Enemy31" template="beamerInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-450</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy32" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-390</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy33" template="beamerInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-330</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy34" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-270</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy35" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-210</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy36" template="juggernautInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-150</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy37" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-90</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy38" template="beamerInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-30</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy39" template="basicInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>30</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<entity name="Enemy40" template="beamerInvader">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>90</x>
+				<y>-125</y>
+			</position>
+			<size type="">
+				<x>50</x>
+				<y>50</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+	</entity>
+	<!--							FOURTH ROW	END												-->
+	
+	<group name="Enemies">
+		<objectReference name="Enemy1"/>
+		<objectReference name="Enemy2"/>
+		<objectReference name="Enemy3"/>
+		<objectReference name="Enemy4"/>
+		<objectReference name="Enemy5"/>
+		<objectReference name="Enemy6"/>
+		<objectReference name="Enemy7"/>
+		<objectReference name="Enemy8"/>
+		<objectReference name="Enemy9"/>
+		<objectReference name="Enemy10"/>
+		<objectReference name="Enemy11"/>
+		<objectReference name="Enemy12"/>		
+		<objectReference name="Enemy13"/>		
+		<objectReference name="Enemy14"/>		
+		<objectReference name="Enemy15"/>		
+		<objectReference name="Enemy16"/>		
+		<objectReference name="Enemy17"/>		
+		<objectReference name="Enemy18"/>		
+		<objectReference name="Enemy19"/>		
+		<objectReference name="Enemy20"/>		
+		<objectReference name="Enemy21"/>		
+		<objectReference name="Enemy22"/>		
+		<objectReference name="Enemy23"/>		
+		<objectReference name="Enemy24"/>		
+		<objectReference name="Enemy25"/>		
+		<objectReference name="Enemy26"/>		
+		<objectReference name="Enemy27"/>		
+		<objectReference name="Enemy28"/>		
+		<objectReference name="Enemy29"/>		
+		<objectReference name="Enemy30"/>		
+		<objectReference name="Enemy31"/>		
+		<objectReference name="Enemy32"/>		
+		<objectReference name="Enemy33"/>		
+		<objectReference name="Enemy34"/>		
+		<objectReference name="Enemy35"/>		
+		<objectReference name="Enemy36"/>		
+		<objectReference name="Enemy37"/>		
+		<objectReference name="Enemy38"/>
+		<objectReference name="Enemy39"/>
+		<objectReference name="Enemy40"/>
+	</group>
+	
+	<group name="Level5Data">
+		<objectReference name="Background"/>
+		<objectReference name="BackgroundMusic"/>
+		<objectReference name="InvaderInfo"/>
+		<groupReference name="Enemies"/>	
+	</group>
+</things>

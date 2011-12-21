@@ -1,0 +1,131 @@
+<things version="1">
+	<entity name="normalSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="normalSpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>8</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/TankNormal.png"/>
+		</component>
+	</entity>
+	
+	<entity name="alternateSpriteSheet">
+		<component type="com.pblabs.rendering2D.spritesheet.SpriteSheetComponent" name="alternateSpriteSheet">
+			<divider type="com.pblabs.rendering2D.spritesheet.CellCountDivider">
+				<xCount>8</xCount>
+				<yCount>1</yCount>
+			</divider>
+			<image filename="../assets/Images/TankAlternate.png"/>
+		</component>
+	</entity>
+	
+	<entity name="Player">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position>
+				<x>0</x>
+				<y>240</y>
+			</position>
+			<size>
+				<x>100</x>
+				<y>55</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.collisions.BoundingBoxComponent" name="Collisions">
+			<collisionType>player</collisionType>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteSheetRenderer" name="Render">
+			<positionProperty>@Spatial.position</positionProperty>
+			<spriteSheet componentReference="normalSpriteSheet"/>
+			<spriteIndex>0</spriteIndex>
+			<layerIndex>6</layerIndex>
+			<scene componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.AnimationController" name="Animator">
+			<spriteSheetReference>@Render.spriteSheet</spriteSheetReference>
+			<currentFrameReference>@Render.spriteIndex</currentFrameReference>
+			<changeAnimationEvent>updateAnimation</changeAnimationEvent>
+			<currentAnimationReference>@Input.currentAnimation</currentAnimationReference>
+			<animations childType="com.pblabs.rendering2D.AnimationControllerInfo">
+				<Idle_Normal>
+					<frameRate>0</frameRate>
+					<loop>false</loop>
+					<spriteSheet componentReference="normalSpriteSheet"/>
+				</Idle_Normal>
+				
+				<Idle_Alternate>
+					<frameRate>0</frameRate>
+					<loop>false</loop>
+					<spriteSheet componentReference="alternateSpriteSheet"/>
+				</Idle_Alternate>
+				
+				<Move_Normal>
+					<frameRate>20</frameRate>
+					<loop>true</loop>
+					<spriteSheet componentReference="normalSpriteSheet"/>
+				</Move_Normal>
+				
+				<Move_Alternate>
+					<frameRate>20</frameRate>
+					<loop>true</loop>
+					<spriteSheet componentReference="alternateSpriteSheet"/>
+				</Move_Alternate>
+			</animations>
+			<defaultAnimation>Idle_Normal</defaultAnimation>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
+			<destroyOnDeath>false</destroyOnDeath>
+			<maxHealth>1000</maxHealth>
+		</component>
+		
+		<component type="com.brutaldoodle.components.basic.HeartComponent" name="Hearts"></component>
+		
+		<component type="com.brutaldoodle.components.collisions.DisplayTextOnDamaged" name="DamageText">
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.PlayerController" name="Input">
+			<positionProperty>@Spatial.position</positionProperty>
+			<sizeProperty>@Spatial.size</sizeProperty>
+			<boundingBoxProperty>@Collisions.zone</boundingBoxProperty>
+		</component>
+	</entity>
+	
+	<entity name="Canon">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<size>
+				<x>8</x>
+				<y>26</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<fileName>../assets/Images/Canon.png</fileName>
+			<layerIndex>5</layerIndex>
+			<positionProperty>#Player.Spatial.position</positionProperty>
+			<positionOffset>
+				<x>0</x>
+				<y>-18</y>
+			</positionOffset>
+			<scene componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.CanonController" name="Input">
+			<canonOffset>@Render.positionOffset</canonOffset>
+			<positionProperty>@Render.position</positionProperty>
+		</component>
+	</entity>
+	
+	<group name="PlayerData">
+		<objectReference name="normalSpriteSheet"/>
+		<objectReference name="alternateSpriteSheet"/>
+		<objectReference name="Player"/>
+		<objectReference name="Canon"/>
+	</group>
+</things>
