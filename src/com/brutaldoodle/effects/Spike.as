@@ -19,8 +19,9 @@
 package com.brutaldoodle.effects
 {
 	import com.brutaldoodle.emitters.EnemyCollidableEmitter;
+	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.resource.ImageResource;
 	
-	import flash.display.Bitmap;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.Blast;
@@ -37,9 +38,6 @@ package com.brutaldoodle.effects
 	 */
 	public class Spike extends EnemyCollidableEmitter
 	{
-		[Embed(source="assets/Images/Spike.png")]
-		private var SpikeAsset:Class;
-			
 		public function Spike()
 		{
 			super();
@@ -54,8 +52,8 @@ package com.brutaldoodle.effects
 			var direction:int = Math.floor(Math.random() * 2) ? 1 : -1;
 			
 			// Particle's Appearance
-			var spike:Bitmap = new SpikeAsset();
-			addInitializer( new SharedImage( spike ) );
+			var spike:ImageResource = PBE.resourceManager.load("../assets/Images/Spike.png", ImageResource) as ImageResource;
+			addInitializer( new SharedImage( spike.image ) );
 			addInitializer( new Position( new PointZone( new Point(direction * 30, 0) ) ) );
 			
 			// Particle's Behavior

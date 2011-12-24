@@ -44,7 +44,7 @@ package com.brutaldoodle.effects
 			super();
 			
 			// The amount of damage dealt by each particle emitted
-			_damageAmount = 10;
+			_damageAmount = 5;
 			
 			// A hundred particles are emitted over 500 miliseconds
 			counter = new TimePeriod(100, 0.5);

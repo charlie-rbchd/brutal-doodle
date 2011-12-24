@@ -18,14 +18,14 @@
 
 	package com.brutaldoodle.components.collisions
 {
+	import com.brutaldoodle.components.basic.HealthComponent;
 	import com.pblabs.animation.AnimationEvent;
 	import com.pblabs.animation.Animator;
 	import com.pblabs.animation.AnimatorComponent;
 	import com.pblabs.animation.AnimatorType;
-	import com.pblabs.components.basic.HealthEvent;
-	import com.pblabs.engine.entity.EntityComponent;
+	import com.pblabs.engine.components.TickedComponent;
 	
-	public class ChangeStateOnDamaged extends EntityComponent
+	public class ChangeStateOnDamaged extends TickedComponent
 	{
 		/*
 		 * Constants used in order to easily identify damage states
@@ -50,42 +50,58 @@
 		 */
 		private var _animator:AnimatorComponent;
 		
+		/*
+		 * The owner's health component
+		 */
+		private var _health:HealthComponent;
+		
 		public function ChangeStateOnDamaged() {
 			super();
 		}
 		
 		override protected function onAdd():void {
 			super.onAdd();
-			owner.eventDispatcher.addEventListener(HealthEvent.DAMAGED, onDamaged);
 			_animator = owner.lookupComponentByName("Animator") as AnimatorComponent;
+			_health = owner.lookupComponentByName("Health") as HealthComponent;
 			_currentState = STATE_NOT_INJURED; // Default state
 		}
 		
-		private function onDamaged (event:HealthEvent):void {
-			var remainingLife:Number = event.amount;
+		override public function onTick(deltaTime:Number):void
+		{
+			super.onTick(deltaTime);
+			
+			var remainingLife:Number = _health.health;
+			
 			// The owner is still "not injured" when still above 75 health
 			if (remainingLife > 75) return;
 			
-			var startFrame:Number = _currentAnimation.currentValue + 9;
-			
 			// The display of the owner's sprite is modified accordingly to its remaining life
+			var state:String;
 			if (remainingLife <= 25)
 			{
-				_currentState = STATE_BADLY_INJURED;
+				state = STATE_BADLY_INJURED;
 			}
 			else if (remainingLife <= 50)
 			{
-				_currentState = STATE_INJURED;
+				state = STATE_INJURED;
 			}
 			else if (remainingLife <= 75)
 			{
-				_currentState = STATE_BARELY_INJURED;
+				state = STATE_BARELY_INJURED;
 			}
 			
-			_animator.play(_currentState, startFrame);
-			// The duration is adjusted in order to maintain a fluid transition between animation states
-			_currentAnimation.duration = (_currentAnimation.duration / 9) * (9 - startFrame % 9);
-			_currentAnimation.addEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
+			// Apply the changes only if the state has changed
+			if (state != _currentState) {
+				// Keep track of where the animation was before it changed position on the spritesheet
+				var startFrame:Number = _currentAnimation.currentValue + 9;
+				
+				_currentState = state; // Change the state
+				
+				_animator.play(_currentState, startFrame);
+				// The duration is adjusted in order to maintain a fluid transition between animation states
+				_currentAnimation.duration = (_currentAnimation.duration / 9) * (9 - startFrame % 9);
+				_currentAnimation.addEventListener(AnimationEvent.ANIMATION_REPEATED_EVENT, onRepeat);
+			}
 		}
 		
 		/*

@@ -1,21 +1,3 @@
-/*
- * Brutal Doodle
- * Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin & Simon Garnier
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
-
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
@@ -35,17 +17,17 @@ package
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.components.collisions.ChangeLevelOnArrow;
 	import com.brutaldoodle.components.collisions.ChangeStateOnDamaged;
-	import com.brutaldoodle.components.collisions.ChangeVolumeOnDrag;
 	import com.brutaldoodle.components.collisions.DestroyOnAllDead;
 	import com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged;
 	import com.brutaldoodle.components.collisions.DropBloodOnDamaged;
 	import com.brutaldoodle.components.collisions.DropCoinOnDeath;
 	import com.brutaldoodle.components.collisions.FadeInDisplayOnCollision;
 	import com.brutaldoodle.components.collisions.UpdateHealthDisplayOnDamaged;
-	import com.brutaldoodle.components.collisions.UpdateStatsOnClick;
 	import com.brutaldoodle.components.controllers.CanonController;
+	import com.brutaldoodle.components.controllers.ChangeVolumeOnDrag;
 	import com.brutaldoodle.components.controllers.LoadLevelOnKeypress;
 	import com.brutaldoodle.components.controllers.PlayerController;
+	import com.brutaldoodle.components.controllers.UpdateStatsOnClick;
 	import com.brutaldoodle.effects.Bullet;
 	import com.brutaldoodle.entities.Countdown;
 	import com.brutaldoodle.rendering.ParticleManager;
@@ -63,7 +45,6 @@ package
 	
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
-	import flash.system.System;
 	import flash.ui.Keyboard;
 	
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
@@ -96,7 +77,7 @@ package
 			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.ButterflyAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.WarperAIComponent);
-
+			
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
 			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
@@ -112,9 +93,9 @@ package
 			PBE.registerType(com.brutaldoodle.components.collisions.DisplayTutorialOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnDeath);
 			PBE.registerType(com.brutaldoodle.components.collisions.FadeInDisplayOnCollision);
-			PBE.registerType(com.brutaldoodle.components.collisions.UpdateStatsOnClick);
+			PBE.registerType(com.brutaldoodle.components.controllers.UpdateStatsOnClick);
 			PBE.registerType(com.brutaldoodle.components.collisions.DestroyOnAllDead);
-			PBE.registerType(com.brutaldoodle.components.collisions.ChangeVolumeOnDrag);
+			PBE.registerType(com.brutaldoodle.components.controllers.ChangeVolumeOnDrag);
 			
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.animations.CircularMotionComponent);
@@ -127,9 +108,10 @@ package
 			
 			// Tell PushButtonEngine that this is the main class
 			PBE.startup(this);
+			PBE.addResources(new Resources());
 			
-			// Resources are collected directly from the files instead of being embedded in the .swf
-			PBE.resourceManager.onlyLoadEmbeddedResources = false;
+			// Resources can only be loaded if they were properly embedded into the main swf file
+			PBE.resourceManager.onlyLoadEmbeddedResources = true;
 			
 			// Default game configs
 			Main.resetEverythingAndReloadGame(false);
@@ -160,9 +142,9 @@ package
 		}
 		
 		/*
-		 * Pauses the game when the "P" key is pressed once
-		 * Resume the game when it is pressed once again
-		 */
+		* Pauses the game when the "P" key is pressed once
+		* Resume the game when it is pressed once again
+		*/
 		private function pauseGame(event:KeyboardEvent):void {
 			if (event.keyCode == Keyboard.P) {
 				if (Main.running) {
@@ -178,11 +160,11 @@ package
 		}
 		
 		/*
-		 * Reset the game stats to their base defaults
-		 *
-		 * @param reload  Reload the main menu and remove all existing display objects
-		 * @param countdown  Show a countdown while loading the level
-		 */
+		* Reset the game stats to their base defaults
+		*
+		* @param reload  Reload the main menu and remove all existing display objects
+		* @param countdown  Show a countdown while loading the level
+		*/
 		public static function resetEverythingAndReloadGame(reload:Boolean=true, countdown:Boolean=false):void {
 			Main.gameOver = false;
 			UpdateStatsOnClick.resetShop();
@@ -199,13 +181,6 @@ package
 				CollisionManager.instance.reset();
 				DestroyOnAllDead.reset();
 				
-				// Remove all display objects from the stage except for PBE's MainScene,
-				// which is always the first object is the display list
-				while (PBE.mainStage.numChildren > 1) {
-					PBE.mainStage.removeChildAt(PBE.mainStage.numChildren - 1);
-				}
-				
-				System.gc();
 				LevelManager.instance.loadLevel(0, true);
 			}
 			
@@ -213,17 +188,17 @@ package
 		}
 		
 		/*
-		 * Load a specific level while removing all existing display objects
-		 *
-		 * @param level  The index of the level that will be loaded
-		 * @param countdown  Show a countdown while loading the level
-		 */
+		* Load a specific level while removing all existing display objects
+		*
+		* @param level  The index of the level that will be loaded
+		* @param countdown  Show a countdown while loading the level
+		*/
 		public static function resetEverythingAndLoadLevel(level:int, countdown:Boolean=false):void {
 			ParticleManager.instance.removeAllParticles();
 			CollisionManager.instance.reset();
 			EnemyMobilityComponent.reset();
 			DestroyOnAllDead.reset();
-			System.gc();
+			
 			LevelManager.instance.loadLevel(level, true);
 			if (countdown) var cd:Countdown = new Countdown();
 		}

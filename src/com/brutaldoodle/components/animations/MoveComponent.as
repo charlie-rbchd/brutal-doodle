@@ -18,7 +18,6 @@
 
 package com.brutaldoodle.components.animations
 {
-	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.PropertyReference;
 	
@@ -37,56 +36,30 @@ package com.brutaldoodle.components.animations
 		public var deltaX:Number;
 		
 		/*
-		* The amount by which the y coordinate will be moved each tick
-		*/
+		 * The amount by which the y coordinate will be moved each tick
+		 */
 		public var deltaY:Number;
 		
 		/*
-		 * The amount of time before it starts animating
+		 * The value of the x coordinate at which the owner will stop moving
 		 */
-		public var startDelay:Number;
+		public var targetX:Number;
 		
 		/*
-		 * The amount of time after which it stop animating
+		 * The value of the y coordinate at which the owner will stop moving
 		 */
-		public var endDelay:Number;
-		
-		/*
-		 * A callback function that is executed once the fade is completed
-		 */
-		public var callback:Function;
+		public var targetY:Number;
 		
 		public function MoveComponent() {
 			super();
-			startDelay = endDelay = 0;
-		}
-		
-		override protected function onAdd():void
-		{
-			super.onAdd();
-			// Wait until the delay is completed before animating
-			if (startDelay) {
-				this.registerForTicks = false;
-				PBE.processManager.schedule(startDelay, this, function start():void {
-					this.registerForTicks = true;
-				});
-			}
-			
-			// Stop animating after the endDelay has been waited
-			if (endDelay) {
-				PBE.processManager.schedule(endDelay, this, function end():void {
-					this.registerForTicks = false;
-					if (callback != null) callback();
-				});
-			}
 		}
 		
 		override public function onTick(deltaTime:Number):void {
 			super.onTick(deltaTime);
 			// Modifiy the owner's position each tick, making it tween
 			var position:Point = owner.getProperty(positionProperty);
-			position.x += deltaX;
-			position.y += deltaY;
+			if (position.x != targetX) position.x += deltaX;
+			if (position.y != targetY) position.y += deltaY;
 			owner.setProperty(positionProperty, position);	
 		}
 	}

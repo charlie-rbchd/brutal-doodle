@@ -22,7 +22,9 @@
 	
 	<entity name="BackgroundMusic">
 		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
-			<musicUrl>../assets/Sounds/boss.mp3</musicUrl>
+			<music>
+				<filename>../assets/Sounds/Boss.mp3</filename>
+			</music>
 		</component>
 	</entity>
 	

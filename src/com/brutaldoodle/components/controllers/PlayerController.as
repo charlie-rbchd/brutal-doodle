@@ -19,7 +19,6 @@
 package com.brutaldoodle.components.controllers
 {
 	import com.brutaldoodle.events.TankEvent;
-	import com.brutaldoodle.rendering.ParticleManager;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.core.InputKey;

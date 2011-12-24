@@ -43,7 +43,9 @@
 	
 	<entity name="BackgroundMusic">
 		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
-			<musicUrl>../assets/Sounds/shop.mp3</musicUrl>
+			<music>
+				<filename>../assets/Sounds/Shop.mp3</filename>
+			</music>
 		</component>
 	</entity>
 	
@@ -139,7 +141,7 @@
 			<spatialManager componentReference="MainScene"/>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+		<component type="com.brutaldoodle.components.controllers.UpdateStatsOnClick" name="UpdateStats">
 			<upgradedStat>speed</upgradedStat>
 			<numberIndexProperty>#SpeedUpgradeNumber.Render.spriteIndex</numberIndexProperty>
 		</component>
@@ -195,7 +197,7 @@
 			<spatialManager componentReference="MainScene"/>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+		<component type="com.brutaldoodle.components.controllers.UpdateStatsOnClick" name="UpdateStats">
 			<upgradedStat>damage</upgradedStat>
 			<numberIndexProperty>#DamageUpgradeNumber.Render.spriteIndex</numberIndexProperty>
 		</component>
@@ -251,7 +253,7 @@
 			<spatialManager componentReference="MainScene"/>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+		<component type="com.brutaldoodle.components.controllers.UpdateStatsOnClick" name="UpdateStats">
 			<upgradedStat>life</upgradedStat>
 			<numberIndexProperty>#LifeUpgradeNumber.Render.spriteIndex</numberIndexProperty>
 		</component>
@@ -308,7 +310,7 @@
 			<spatialManager componentReference="MainScene"/>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.UpdateStatsOnClick" name="UpdateStats">
+		<component type="com.brutaldoodle.components.controllers.UpdateStatsOnClick" name="UpdateStats">
 			<upgradedStat>firerate</upgradedStat>
 			<numberIndexProperty>#FireRateUpgradeNumber.Render.spriteIndex</numberIndexProperty>
 		</component>

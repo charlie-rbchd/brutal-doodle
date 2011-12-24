@@ -82,7 +82,6 @@ package com.brutaldoodle.components.ai
 		public function EnemyMobilityComponent() {
 			super();
 			_currentIterationComplete = false;
-			updatePriority = 100;
 		}
 		
 		override public function onTick(deltaTime:Number):void {

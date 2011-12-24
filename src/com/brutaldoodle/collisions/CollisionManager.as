@@ -20,6 +20,7 @@ package com.brutaldoodle.collisions
 {
 	import com.brutaldoodle.components.collisions.BoundingBoxComponent;
 	import com.brutaldoodle.events.CollisionEvent;
+	import com.pblabs.engine.debug.Logger;
 	
 	import flash.events.EventDispatcher;
 	import flash.geom.Rectangle;
@@ -92,6 +93,7 @@ package com.brutaldoodle.collisions
 		public function stopCollisionsWith (zone:Zone2D, type:String):void {
 			var zones:Vector.<Zone2D> = _zones[type];
 			var index:int = zones.indexOf(zone);
+			var boundingBox:BoundingBoxComponent = zone as BoundingBoxComponent;
 			
 			if (index != -1) {
 				// the collision zone is moved away from the canvas until it's garbage collected
@@ -99,7 +101,7 @@ package com.brutaldoodle.collisions
 				zones.splice(index, 1);
 			}
 			
-			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_UNREGISTERED, zone));
+			dispatchEvent(new CollisionEvent(CollisionEvent.COLLISION_ZONE_UNREGISTERED, null));
 		}
 		
 		/*

@@ -18,8 +18,6 @@
 
 package com.brutaldoodle.utils
 {
-	import flash.geom.Point;
-
 	public class Maths
 	{
 		public function Maths() {}

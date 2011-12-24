@@ -79,7 +79,7 @@
 		
 		<component type="com.brutaldoodle.components.basic.HealthComponent" name="Health">
 			<destroyOnDeath>false</destroyOnDeath>
-			<maxHealth>1000</maxHealth>
+			<maxHealth>500</maxHealth>
 		</component>
 		
 		<component type="com.brutaldoodle.components.basic.HeartComponent" name="Hearts"></component>

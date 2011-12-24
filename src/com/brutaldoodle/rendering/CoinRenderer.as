@@ -19,10 +19,8 @@
 package com.brutaldoodle.rendering
 {
 	import com.brutaldoodle.effects.Coin;
-	import com.pblabs.rendering2D.SimpleSpatialComponent;
 	
 	import org.flintparticles.twoD.emitters.Emitter2D;
-	import org.flintparticles.twoD.zones.PointZone;
 	
 	public class CoinRenderer extends FlintBitmapRenderer
 	{

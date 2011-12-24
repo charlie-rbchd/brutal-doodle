@@ -2,7 +2,6 @@ package com.brutaldoodle.components.animations
 {
 	import com.pblabs.engine.entity.EntityComponent;
 	import com.pblabs.rendering2D.SpriteRenderer;
-	import com.pblabs.rendering2D.SpriteSheetRenderer;
 	import com.pblabs.rendering2D.modifier.ColorizeModifier;
 	
 	public class ChangeEnvironmentComponent extends EntityComponent

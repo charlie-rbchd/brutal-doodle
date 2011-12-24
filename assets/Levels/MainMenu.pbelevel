@@ -38,7 +38,7 @@
 		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
-			<fileName>../assets/Images/Montagnes.png</fileName>
+			<fileName>../assets/Images/Hills.png</fileName>
 			<layerIndex>2</layerIndex>
 		</component>
 		
@@ -112,10 +112,12 @@
 			<timeOffset>18</timeOffset>
 		</component>
 	</entity>
-		
+	
 	<entity name="BackgroundMusic">
 		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
-			<musicUrl>../assets/Sounds/menu.mp3</musicUrl>
+			<music>
+				<filename>../assets/Sounds/Menu.mp3</filename>
+			</music>
 		</component>
 	</entity>
 	
@@ -380,39 +382,6 @@
 		</component>
 	</entity>
 	
-	<entity name="GlobalSlider">
-		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
-			<position type="">
-				<x>343</x>
-				<y>42</y>
-			</position>
-			<size type="">
-				<x>6</x>
-				<y>33</y>
-			</size>
-			<spatialManager componentReference="MainScene"/>
-		</component>
-		
-		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
-			<scene componentReference="MainScene"/>
-			<positionProperty>@Spatial.position</positionProperty>
-			<fileName>../assets/Images/Slider.png</fileName>
-			<layerIndex>5</layerIndex>
-			<alpha>0</alpha>
-		</component>
-		
-		<component type="com.brutaldoodle.components.collisions.ChangeVolumeOnDrag" name="ChageVolumeGlobal">
-			<dragBoundary>
-				<top>26</top>
-				<bottom>26</bottom>
-				<left>170</left>
-				<right>340</right>
-			</dragBoundary>
-			<volumeType>music</volumeType>
-			<soundBarName>GlobalSoundBar</soundBarName>
-		</component>
-	</entity>
-	
 	<entity name="SFXSoundBar">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
@@ -435,11 +404,11 @@
 		</component>
 	</entity>
 	
-	<entity name="SFXSlider">
+	<entity name="GlobalSlider">
 		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
 			<position type="">
 				<x>343</x>
-				<y>112</y>
+				<y>37</y>
 			</position>
 			<size type="">
 				<x>6</x>
@@ -452,11 +421,44 @@
 			<scene componentReference="MainScene"/>
 			<positionProperty>@Spatial.position</positionProperty>
 			<fileName>../assets/Images/Slider.png</fileName>
-			<layerIndex>5</layerIndex>
+			<layerIndex>6</layerIndex>
 			<alpha>0</alpha>
 		</component>
 		
-		<component type="com.brutaldoodle.components.collisions.ChangeVolumeOnDrag" name="ChageVolumeSFX">
+		<component type="com.brutaldoodle.components.controllers.ChangeVolumeOnDrag" name="ChageVolumeGlobal">
+			<dragBoundary>
+				<top>26</top>
+				<bottom>26</bottom>
+				<left>170</left>
+				<right>340</right>
+			</dragBoundary>
+			<volumeType>music</volumeType>
+			<soundBarName>GlobalSoundBar</soundBarName>
+		</component>
+	</entity>
+	
+	<entity name="SFXSlider">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>343</x>
+				<y>107</y>
+			</position>
+			<size type="">
+				<x>6</x>
+				<y>33</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Slider.png</fileName>
+			<layerIndex>6</layerIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.ChangeVolumeOnDrag" name="ChageVolumeSFX">
 			<dragBoundary>
 				<top>96</top>
 				<bottom>96</bottom>

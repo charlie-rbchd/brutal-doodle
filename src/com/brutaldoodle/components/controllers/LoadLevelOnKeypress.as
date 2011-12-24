@@ -18,7 +18,6 @@
 
 package com.brutaldoodle.components.controllers
 {
-	import com.brutaldoodle.ui.Generique;
 	import com.pblabs.engine.PBE;
 	import com.pblabs.engine.components.TickedComponent;
 	import com.pblabs.engine.entity.PropertyReference;
@@ -45,14 +44,9 @@ package com.brutaldoodle.components.controllers
 		 */
 		private var _delayCompleted:Boolean;
 		
-		/*
-		 * Whether or not the credits are currently playing
-		 */
-		private var _creditsPlaying:Boolean;
-		
 		public function LoadLevelOnKeypress() {
 			super();
-			_actionDone = _delayCompleted = _creditsPlaying = false;
+			_actionDone = _delayCompleted = false;
 		}
 		
 		override public function onTick(deltaTime:Number):void {
@@ -69,18 +63,9 @@ package com.brutaldoodle.components.controllers
 			if (_delayCompleted && PBE.isAnyKeyDown())
 			{
 				// Show the credits if its the last level, return to the main menu if credits were already playing
-				if (PBE.levelManager.currentLevel == PBE.levelManager.levelCount - 1)
+				if (PBE.levelManager.currentLevel == PBE.levelManager.levelCount - 2)
 				{
-					if (!_creditsPlaying) {
-						PBE.mainStage.addChild(new Generique());
-						_creditsPlaying = true;
-						_delayCompleted = false;
-						PBE.processManager.schedule(1000, this, function():void {
-							_delayCompleted = true;
-						});
-					}
-					else
-						Main.resetEverythingAndReloadGame();
+					Main.resetEverythingAndLoadLevel(PBE.levelManager.levelCount - 1);
 				}
 				else
 				{

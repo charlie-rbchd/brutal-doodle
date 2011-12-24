@@ -18,8 +18,6 @@
 
 package com.brutaldoodle.components.collisions
 {
-	import com.brutaldoodle.collisions.CollisionManager;
-	import com.pblabs.engine.core.LevelManager;
 	import com.pblabs.engine.entity.EntityComponent;
 	import com.pblabs.engine.entity.IEntity;
 	

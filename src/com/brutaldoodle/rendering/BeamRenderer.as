@@ -19,6 +19,7 @@
 package com.brutaldoodle.rendering
 {
 	import com.brutaldoodle.effects.Beam;
+	
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	
 	public class BeamRenderer extends FlintBitmapRenderer

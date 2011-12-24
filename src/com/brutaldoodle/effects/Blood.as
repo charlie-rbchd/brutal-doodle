@@ -19,8 +19,9 @@
 package com.brutaldoodle.effects
 {
 	import com.brutaldoodle.emitters.PlayerCollidableEmitter;
+	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.resource.ImageResource;
 	
-	import flash.display.Bitmap;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.Blast;
@@ -40,9 +41,6 @@ package com.brutaldoodle.effects
 	 */
 	public class Blood extends PlayerCollidableEmitter
 	{
-		[Embed(source="assets/Images/Blood.png")]
-		private var BloodAsset:Class;
-		
 		public function Blood() {
 			super();
 			
@@ -53,8 +51,8 @@ package com.brutaldoodle.effects
 			counter = new Blast(5);
 			
 			// Particle's Appearance
-			var blood:Bitmap = new BloodAsset();
-			addInitializer( new SharedImage( blood ) );
+			var blood:ImageResource = PBE.resourceManager.load("../assets/Images/Blood.png", ImageResource) as ImageResource;
+			addInitializer( new SharedImage( blood.image ) );
 			addInitializer( new ColorInit(0xff00ff00, 0xff038203) );
 			addInitializer( new ScaleAllInit(0.5, 1.5) );
 			addInitializer( new Position( new RectangleZone(-20, 10, 20, 30 ) ) );

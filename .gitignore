@@ -1,2 +1,6 @@
 Thumbs.db
 bin-debug/
+bin-release/
+.settings/
+.actionScriptProperties
+.project

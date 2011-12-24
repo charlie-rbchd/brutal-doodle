@@ -261,4 +261,10 @@
 		<file filename="../assets/Levels/Level10.pbelevel"/>
 		<group name="Level10Data"/>
 	</level>
+	
+	<!-- Credits -->
+	<level index="22">
+		<file filename="../assets/Levels/Credits.pbelevel"/>
+		<group name="CreditsData"/>
+	</level>
 </levelDescriptions>

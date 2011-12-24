@@ -19,9 +19,6 @@
 package com.brutaldoodle.rendering
 {
 	import com.brutaldoodle.effects.Spike;
-	import com.pblabs.rendering2D.SimpleSpatialComponent;
-	
-	import flash.geom.Point;
 	
 	import org.flintparticles.twoD.emitters.Emitter2D;
 	

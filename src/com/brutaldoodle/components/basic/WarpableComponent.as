@@ -19,7 +19,6 @@
 package com.brutaldoodle.components.basic
 {
 	import com.pblabs.engine.entity.EntityComponent;
-	import com.pblabs.engine.entity.IEntity;
 	
 	import org.flintparticles.common.utils.WeightedArray;
 	

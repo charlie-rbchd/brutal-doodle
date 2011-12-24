@@ -20,8 +20,9 @@ package com.brutaldoodle.effects
 {
 	import com.brutaldoodle.emitters.CollidableEmitter;
 	import com.brutaldoodle.emitters.PlayerCollidableEmitter;
+	import com.pblabs.engine.PBE;
+	import com.pblabs.engine.resource.ImageResource;
 	
-	import flash.display.Bitmap;
 	import flash.geom.Point;
 	
 	import org.flintparticles.common.counters.Blast;
@@ -38,9 +39,6 @@ package com.brutaldoodle.effects
 	 */
 	public class Coin extends PlayerCollidableEmitter
 	{
-		[Embed(source="assets/Images/Coin.png")]
-		private var CoinAsset:Class;
-		
 		public function Coin() {
 			super();
 			
@@ -55,9 +53,9 @@ package com.brutaldoodle.effects
 			counter = new Blast(1);
 			
 			// Particle's Appearance
-			var coin:Bitmap = new CoinAsset();
-			addInitializer( new SharedImage( coin ) );
-			addInitializer( new Position( new PointZone( new Point(coin.width/2, 0) ) ) );
+			var coin:ImageResource = PBE.resourceManager.load("../assets/Images/Coin.png", ImageResource) as ImageResource;
+			addInitializer( new SharedImage( coin.image ) );
+			addInitializer( new Position( new PointZone( new Point(10, 0) ) ) );
 			
 			// Particle's Behavior
 			addInitializer( new CollisionRadiusInit(21) );
