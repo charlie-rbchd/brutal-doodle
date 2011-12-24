@@ -1,0 +1,595 @@
+<things version="1">
+	<entity name="Background">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>0</x>
+				<y>0</y>
+			</position>
+			<size type="">
+				<x>960</x>
+				<y>680</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/BackgroundLevel1.jpg</fileName>
+			<zIndex>-1</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.controllers.LoadLevelOnKeypress" name="LoadLevel">
+			<level>0</level>
+			<alphaProperty>@Render.alpha</alphaProperty>
+		</component>
+	</entity>
+	
+	<entity name="BackgroundMusic">
+		<component type="com.pblabs.sound.BackgroundMusicComponent" name="Sound">
+			<music>
+				<filename>../assets/Sounds/Boss.mp3</filename>
+			</music>
+		</component>
+	</entity>
+	
+	<!-- Portraits -->
+	<entity name="PortraitBasque">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-380</x>
+				<y>-265</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Basque.png</fileName>
+			<zIndex>3</zIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.FadeComponent" name="Fade">
+			<type>fadeIn</type>
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<rate>0.1</rate>
+			<delay>4000</delay>
+		</component>
+	</entity>
+	
+	<entity name="PortraitRaph">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-380</x>
+				<y>-140</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Raph.png</fileName>
+			<zIndex>3</zIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.FadeComponent" name="Fade">
+			<type>fadeIn</type>
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<rate>0.1</rate>
+			<delay>4000</delay>
+		</component>
+	</entity>
+	
+	<entity name="PortraitSimon">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-380</x>
+				<y>-15</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Simon.png</fileName>
+			<zIndex>3</zIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.FadeComponent" name="Fade">
+			<type>fadeIn</type>
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<rate>0.1</rate>
+			<delay>4000</delay>
+		</component>
+	</entity>
+	
+	<entity name="PortraitJoel">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-380</x>
+				<y>110</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Joel.png</fileName>
+			<zIndex>3</zIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.FadeComponent" name="Fade">
+			<type>fadeIn</type>
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<rate>0.1</rate>
+			<delay>4000</delay>
+		</component>
+	</entity>
+	
+	<entity name="PortraitMax">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-380</x>
+				<y>235</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.SpriteRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<fileName>../assets/Images/Max.png</fileName>
+			<zIndex>3</zIndex>
+			<alpha>0</alpha>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.FadeComponent" name="Fade">
+			<type>fadeIn</type>
+			<alphaProperty>@Render.alpha</alphaProperty>
+			<rate>0.1</rate>
+			<delay>4000</delay>
+		</component>
+	</entity>
+	
+	<!-- Titles -->
+	<entity name="TitleBasque">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>375</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>35</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Bro / Directeur en Utilisabilité</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>-300</targetY>
+		</component>
+	</entity>
+	
+	<entity name="TitleRaph">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>500</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>35</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Directrice Artistique</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>-175</targetY>
+		</component>
+	</entity>
+	
+	<entity name="TitleSimon">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>625</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>35</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Assistant à la Programmation</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>-50</targetY>
+		</component>
+	</entity>
+	
+	<entity name="TitleJoel">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>750</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>35</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Directeur Technique</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>75</targetY>
+		</component>
+	</entity>
+	
+	<entity name="TitleMax">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>875</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>35</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>610</width>
+				<height>50</height>
+				<text>Chargé de Projet / Homme à Tout Faire</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>200</targetY>
+		</component>
+	</entity>
+	
+	<!-- Names -->
+	<entity name="NameBasque">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>415</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>25</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Maxime Basque</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>-260</targetY>
+		</component>
+	</entity>
+	
+	<entity name="NameRaph">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>540</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>25</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Raphaëlle Cantin</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>-135</targetY>
+		</component>
+	</entity>
+	
+	<entity name="NameSimon">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>665</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>25</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Simon Garnier</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>-10</targetY>
+		</component>
+	</entity>
+	
+	<entity name="NameJoel">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>790</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>25</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>600</width>
+				<height>50</height>
+				<text>Joël Robichaud</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>115</targetY>
+		</component>
+	</entity>
+	
+	<entity name="NameMax">
+		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
+			<position type="">
+				<x>-280</x>
+				<y>915</y>
+			</position>
+			<size type="">
+				<x>200</x>
+				<y>200</y>
+			</size>
+			<spatialManager componentReference="MainScene"/>
+		</component>
+		
+		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
+			<scene componentReference="MainScene"/>
+			<positionProperty>@Spatial.position</positionProperty>
+			<displayObject type="flash.text.TextField">
+				<defaultTextFormat>
+					<font>Arial</font>
+					<size>25</size>
+					<color>0xffffff</color>
+				</defaultTextFormat>
+				<width>610</width>
+				<height>50</height>
+				<text>Maxime St-Louis-Fortier</text>
+			</displayObject>
+			<zIndex>3</zIndex>
+		</component>
+		
+		<component type="com.brutaldoodle.components.animations.MoveComponent" name="Move">
+			<positionProperty>@Spatial.position</positionProperty>
+			<deltaX>0</deltaX>
+			<deltaY>-5</deltaY>
+			<targetX>-280</targetX>
+			<targetY>240</targetY>
+		</component>
+	</entity>
+	
+	<group name="Portraits">
+		<objectReference name="PortraitBasque"/>
+		<objectReference name="PortraitRaph"/>
+		<objectReference name="PortraitSimon"/>
+		<objectReference name="PortraitJoel"/>
+		<objectReference name="PortraitMax"/>
+	</group>
+	
+	<group name="Titles">
+		<objectReference name="TitleBasque"/>
+		<objectReference name="TitleRaph"/>
+		<objectReference name="TitleSimon"/>
+		<objectReference name="TitleJoel"/>
+		<objectReference name="TitleMax"/>
+	</group>
+	
+	<group name="Names">
+		<objectReference name="NameBasque"/>
+		<objectReference name="NameRaph"/>
+		<objectReference name="NameSimon"/>
+		<objectReference name="NameJoel"/>
+		<objectReference name="NameMax"/>
+	</group>
+	
+	<group name="CreditsData">
+		<objectReference name="Background"/>
+		<objectReference name="BackgroundMusic"/>
+		<groupReference name="Portraits"/>
+		<groupReference name="Titles"/>
+		<groupReference name="Names"/>
+	</group>
+</things>
