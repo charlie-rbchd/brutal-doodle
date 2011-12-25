@@ -29,6 +29,7 @@ package com.brutaldoodle.components.animations
 		 */
 		public static const FADE_IN:String = "fadeIn";
 		public static const FADE_OUT:String = "fadeOut";
+		public static const FLASHING:String = "flashing";
 		
 		/*
 		 * References to the owner's properties
@@ -55,6 +56,11 @@ package com.brutaldoodle.components.animations
 		 */
 		public var delay:Number;
 		
+		/*
+		 * Used for back and forth animations between fade ins and fade outs
+		 */
+		private var _currentType:String;
+		
 		public function FadeComponent()
 		{
 			super();
@@ -65,6 +71,7 @@ package com.brutaldoodle.components.animations
 		{
 			super.onAdd();
 			// Wait until the delay is completed before animating
+			if (type == FLASHING) _currentType = FADE_OUT;
 			if (delay) {
 				this.registerForTicks = false;
 				PBE.processManager.schedule(delay, this, function():void {
@@ -79,16 +86,6 @@ package com.brutaldoodle.components.animations
 			var alpha:Number = owner.getProperty(alphaProperty);
 			
 			switch (type) {
-				case FADE_IN:
-					if (alpha <= 1) {
-						// Increment the alpha until it's at 1
-						owner.setProperty(alphaProperty, alpha += rate);	
-					} else {
-						// The fade is completed, call the callback if necessary
-						this.registerForTicks = false;
-						if (callback != null) callback();
-					}
-					break;
 				case FADE_OUT:
 					if (alpha > 0) {
 						// Decrement the alpha until it's at 0
@@ -99,10 +96,41 @@ package com.brutaldoodle.components.animations
 						if (callback != null) callback();
 					}
 					break;
+				case FADE_IN:
+					if (alpha <= 1) {
+						// Increment the alpha until it's at 1
+						owner.setProperty(alphaProperty, alpha += rate);	
+					} else {
+						// The fade is completed, call the callback if necessary
+						this.registerForTicks = false;
+						if (callback != null) callback();
+					}
+					break;
+				case FLASHING:
+					if (_currentType == FADE_OUT)
+					{
+						if (alpha > 0) {
+							// Decrement the alpha until it's at 0
+							owner.setProperty(alphaProperty, alpha -= rate);
+						} else {
+							// The fade is completed, revert it
+							_currentType = FADE_IN;
+						}
+					}
+					else
+					{
+						if (alpha <= 1) {
+							// Increment the alpha until it's at 1
+							owner.setProperty(alphaProperty, alpha += rate);	
+						} else {
+							// The fade is completed, revert it
+							_currentType = FADE_OUT;
+						}
+					}
+					break;
 				default:
 					throw new Error();
 			}
-		
 		}
 	}
 }

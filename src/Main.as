@@ -124,7 +124,7 @@ package
 			CollisionManager.instance.initialize();
 			
 			// Event handler for pausing the game (must not be handled by the game loop)
-			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, pauseGame);
+			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, handleKeys);
 			
 			// loads the main menu
 			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
@@ -144,8 +144,9 @@ package
 		/*
 		* Pauses the game when the "P" key is pressed once
 		* Resume the game when it is pressed once again
+		* Return to the main menu when the user press escape
 		*/
-		private function pauseGame(event:KeyboardEvent):void {
+		private function handleKeys(event:KeyboardEvent):void {
 			if (event.keyCode == Keyboard.P) {
 				if (Main.running) {
 					PBE.processManager.stop();
@@ -156,6 +157,8 @@ package
 					ParticleManager.instance.resume();
 					_running = true;
 				}
+			} else if (event.keyCode == Keyboard.ESCAPE) {
+				Main.resetEverythingAndReloadGame(true, true);
 			}
 		}
 		
