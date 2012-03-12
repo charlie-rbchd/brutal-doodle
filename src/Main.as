@@ -178,7 +178,6 @@ package
 			HeartComponent.life = 3;
 			Bullet.damage = 25;
 			
-			
 			if (reload) {
 				ParticleManager.instance.removeAllParticles();
 				CollisionManager.instance.reset();

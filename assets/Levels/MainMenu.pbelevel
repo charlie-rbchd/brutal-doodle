@@ -470,42 +470,6 @@
 		</component>
 	</entity>
 	
-	<entity name="Infos">
-		<component type="com.pblabs.rendering2D.SimpleSpatialComponent" name="Spatial">
-			<position type="">
-				<x>-200</x>
-				<y>300</y>
-			</position>
-			<size type="">
-				<x>960</x>
-				<y>30</y>
-			</size>
-			<spatialManager componentReference="MainScene"/>
-		</component>
-		
-		<component type="com.pblabs.rendering2D.DisplayObjectRenderer" name="Render">
-			<scene componentReference="MainScene"/>
-			<positionProperty>@Spatial.position</positionProperty>
-			<displayObject type="flash.text.TextField">
-				<defaultTextFormat>
-					<font>Arial</font>
-					<size>16</size>
-					<color>0x000000</color>
-				</defaultTextFormat>
-				<width>960</width>
-				<height>30</height>
-				<text>Déplacez-vous et appuyez sur espace pour faire un choix...</text>
-			</displayObject>
-			<layerIndex>10</layerIndex>
-		</component>
-		
-		<component type="com.brutaldoodle.components.animations.FadeComponent" name="Fade">
-			<type>flashing</type>
-			<alphaProperty>@Render.alpha</alphaProperty>
-			<rate>0.05</rate>
-		</component>
-	</entity>
-	
 	<group name="SpriteSheets">
 		<objectReference name="idleButtonTutorielSpriteSheet"/>
 		<objectReference name="idleButtonDebuterSpriteSheet"/>
@@ -536,7 +500,6 @@
 		<objectReference name="Background"/>
 		<objectReference name="BackgroundMusic"/>
 		<objectReference name="Logo"/>
-		<objectReference name="Infos"/>
 		<groupReference name="SpriteSheets"/>
 		<groupReference name="Buttons"/>	
 		<groupReference name="Options"/>

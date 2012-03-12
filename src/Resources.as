@@ -181,17 +181,17 @@ package
 		[Embed(source="../assets/Images/Basque.png")]
 		public var Basque:Class;
 		
-		[Embed(source="../assets/Images/Raph.png")]
-		public var Raph:Class;
-		
-		[Embed(source="../assets/Images/Simon.png")]
-		public var Simon:Class;
-		
 		[Embed(source="../assets/Images/Joel.png")]
 		public var Joel:Class;
 		
+		[Embed(source="../assets/Images/Raph.png")]
+		public var Raph:Class;
+		
 		[Embed(source="../assets/Images/Max.png")]
-		public var Max:Class;
+		public var Nax:Class;
+		
+		[Embed(source="../assets/Images/Simon.png")]
+		public var Simon:Class;
 		
 		
 		
