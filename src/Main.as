@@ -1,3 +1,21 @@
+/*
+* Brutal Doodle
+* Copyright (C) 2011  Joel Robichaud, Maxime Basque, Maxime St-Louis-Fortier, Raphaelle Cantin & Simon Garnier
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package
 {
 	import com.brutaldoodle.collisions.CollisionManager;
@@ -42,11 +60,11 @@ package
 	import com.pblabs.rendering2D.ui.PBLabel;
 	import com.pblabs.rendering2D.ui.SceneView;
 	import com.pblabs.sound.BackgroundMusicComponent;
-	
+
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
-	
+
 	[SWF(width="960", height="680", frameRate="30", backgroundColor="0x000000")]
 	public class Main extends Sprite
 	{
@@ -54,12 +72,12 @@ package
 		 * Whether or not the game is over
 		 */
 		public static var gameOver:Boolean = false;
-		
+
 		/*
 		 * Whether or not the game is currently running (not paused)
 		 */
 		private static var _running:Boolean = true;
-		
+
 		public function Main() {
 			// These types need to be registered in order to be used in pbelevel files
 			PBE.registerType(com.pblabs.engine.components.GroupManagerComponent);
@@ -70,18 +88,18 @@ package
 			PBE.registerType(com.pblabs.rendering2D.AnimationControllerInfo);
 			PBE.registerType(com.pblabs.rendering2D.spritesheet.CellCountDivider);
 			PBE.registerType(com.pblabs.rendering2D.ui.PBLabel);
-			
+
 			PBE.registerType(com.brutaldoodle.components.ai.BasicAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.CannibalAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.EnemyMobilityComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.BeamerAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.ButterflyAIComponent);
 			PBE.registerType(com.brutaldoodle.components.ai.WarperAIComponent);
-			
+
 			PBE.registerType(com.brutaldoodle.components.controllers.CanonController);
 			PBE.registerType(com.brutaldoodle.components.controllers.PlayerController);
 			PBE.registerType(com.brutaldoodle.components.controllers.LoadLevelOnKeypress);
-			
+
 			PBE.registerType(com.brutaldoodle.components.collisions.BoundingBoxComponent);
 			PBE.registerType(com.brutaldoodle.components.collisions.ChangeStateOnDamaged);
 			PBE.registerType(com.brutaldoodle.components.collisions.LoadLevelOnCollision);
@@ -96,40 +114,40 @@ package
 			PBE.registerType(com.brutaldoodle.components.controllers.UpdateStatsOnClick);
 			PBE.registerType(com.brutaldoodle.components.collisions.DestroyOnAllDead);
 			PBE.registerType(com.brutaldoodle.components.controllers.ChangeVolumeOnDrag);
-			
+
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeStateOnRaycastWithPlayer);
 			PBE.registerType(com.brutaldoodle.components.animations.CircularMotionComponent);
 			PBE.registerType(com.brutaldoodle.components.animations.ChangeEnvironmentComponent);
 			PBE.registerType(com.brutaldoodle.components.animations.WiggleComponent);
-			
+
 			PBE.registerType(com.brutaldoodle.components.basic.HealthComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.MoneyComponent);
 			PBE.registerType(com.brutaldoodle.components.basic.HeartComponent);
-			
+
 			// Tell PushButtonEngine that this is the main class
 			PBE.startup(this);
 			PBE.addResources(new Resources());
-			
+
 			// Resources can only be loaded if they were properly embedded into the main swf file
 			PBE.resourceManager.onlyLoadEmbeddedResources = true;
-			
+
 			// Default game configs
 			Main.resetEverythingAndReloadGame(false);
-			
+
 			// Creates the scene on which PBE can draw display objects
 			createScene();
-			
+
 			// Singletons are initialized : one for collisions mangement, one for particles management
 			ParticleManager.instance.initialize(stage.stageWidth, stage.stageHeight);
 			CollisionManager.instance.initialize();
-			
+
 			// Event handler for pausing the game (must not be handled by the game loop)
 			PBE.mainStage.addEventListener(KeyboardEvent.KEY_UP, handleKeys);
-			
+
 			// loads the main menu
 			LevelManager.instance.load("../assets/Levels/LevelDescription.xml", 0);
 		}
-		
+
 		/*
 		 * A SceneView instance is created with the same dimensions as the stage
 		 * This is the scene on which PBE will render all the display objects
@@ -140,7 +158,7 @@ package
 			sceneView.height = stage.stageHeight;
 			PBE.initializeScene(sceneView, "MainScene");
 		}
-		
+
 		/*
 		* Pauses the game when the "P" key is pressed once
 		* Resume the game when it is pressed once again
@@ -161,7 +179,7 @@ package
 				Main.resetEverythingAndReloadGame(true, true);
 			}
 		}
-		
+
 		/*
 		* Reset the game stats to their base defaults
 		*
@@ -177,18 +195,18 @@ package
 			CanonController.reloadSpeed = 0.2;
 			HeartComponent.life = 3;
 			Bullet.damage = 25;
-			
+
 			if (reload) {
 				ParticleManager.instance.removeAllParticles();
 				CollisionManager.instance.reset();
 				DestroyOnAllDead.reset();
-				
+
 				LevelManager.instance.loadLevel(0, true);
 			}
-			
+
 			if (countdown) var cd:Countdown = new Countdown();
 		}
-		
+
 		/*
 		* Load a specific level while removing all existing display objects
 		*
@@ -200,11 +218,11 @@ package
 			CollisionManager.instance.reset();
 			EnemyMobilityComponent.reset();
 			DestroyOnAllDead.reset();
-			
+
 			LevelManager.instance.loadLevel(level, true);
 			if (countdown) var cd:Countdown = new Countdown();
 		}
-		
+
 		public static function get running():Boolean { return _running; }
 	}
 }
